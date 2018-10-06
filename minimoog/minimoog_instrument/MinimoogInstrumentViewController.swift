@@ -9,7 +9,7 @@
 import UIKit
 import CoreAudioKit
 
-public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
+public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFactory {
     // MARK: Outlets
     @IBOutlet weak var osc1RangeSlider     : UISlider!
     @IBOutlet weak var osc1WaveformSlider  : UISlider!
@@ -100,6 +100,9 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
     @IBAction func mixNoiseVolumeChanged(_ sender: Any) {
         mixNoiseVolumeParameter!.value = mixNoiseVolumeSlider.value
     }
+    // MARK: Private constants
+    let rangeStrings = ["LO", "32'", "16'", "8'", "4'", "2'"]
+    let waveformStrings = ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]
     
     // MARK: Private variables
     var parameterObserverToken  : AUParameterObserverToken?
@@ -171,15 +174,15 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
     }
     
     func osc1RangeUpdate() {
-        osc1RangeLabel.text = osc1RangeParameter!.string(fromValue: nil)
+        osc1RangeLabel.text = rangeStrings[Int(osc1RangeParameter!.value)]
         osc1RangeSlider.value = osc1RangeParameter!.value
     }
     func osc1WaveformUpdate() {
-        osc1WaveformLabel.text = osc1WaveformParameter!.string(fromValue: nil)
+        osc1WaveformLabel.text = waveformStrings[Int(osc1WaveformParameter!.value)]
         osc1WaveformSlider.value = osc1WaveformParameter!.value
     }
     func osc2RangeUpdate() {
-        osc2RangeLabel.text = osc2RangeParameter!.string(fromValue: nil)
+        osc2RangeLabel.text = rangeStrings[Int(osc2RangeParameter!.value)]
         osc2RangeSlider.value = osc2RangeParameter!.value
     }
     func osc2DetuneUpdate() {
@@ -187,7 +190,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
         osc2DetuneSlider.value = osc2DetuneParameter!.value
     }
     func osc2WaveformUpdate() {
-        osc2WaveformLabel.text = osc2WaveformParameter!.string(fromValue: nil)
+        osc2WaveformLabel.text = waveformStrings[Int(osc2WaveformParameter!.value)]
         osc2WaveformSlider.value = osc2WaveformParameter!.value
     }
     func mixOsc1VolumeUpdate() {

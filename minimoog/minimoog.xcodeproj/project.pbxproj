@@ -13,7 +13,7 @@
 		930F396421679E1100BAB7F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930F396321679E1100BAB7F3 /* Assets.xcassets */; };
 		930F396721679E1100BAB7F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F396521679E1100BAB7F3 /* LaunchScreen.storyboard */; };
 		930F397621691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 930F397521691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.m */; };
-		930F397821691B2F00BAB7F3 /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* AudioUnitViewController.swift */; };
+		930F397821691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */; };
 		930F397B21691B2F00BAB7F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F397921691B2F00BAB7F3 /* MainInterface.storyboard */; };
 		930F398021691B2F00BAB7F3 /* minimoog_instrument.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -53,7 +53,7 @@
 		930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = minimoog_instrument.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		930F397421691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = minimoog_instrumentAudioUnit.h; sourceTree = "<group>"; };
 		930F397521691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = minimoog_instrumentAudioUnit.m; sourceTree = "<group>"; };
-		930F397721691B2F00BAB7F3 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
+		930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentViewController.swift; sourceTree = "<group>"; };
 		930F397A21691B2F00BAB7F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		930F397C21691B2F00BAB7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		930F397D21691B2F00BAB7F3 /* minimoog_instrument-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "minimoog_instrument-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 			children = (
 				930F397421691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.h */,
 				930F397521691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.m */,
-				930F397721691B2F00BAB7F3 /* AudioUnitViewController.swift */,
+				930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */,
 				930F397921691B2F00BAB7F3 /* MainInterface.storyboard */,
 				930F397C21691B2F00BAB7F3 /* Info.plist */,
 				930F397D21691B2F00BAB7F3 /* minimoog_instrument-Bridging-Header.h */,
@@ -243,7 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				930F397621691B2F00BAB7F3 /* minimoog_instrumentAudioUnit.m in Sources */,
-				930F397821691B2F00BAB7F3 /* AudioUnitViewController.swift in Sources */,
+				930F397821691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
