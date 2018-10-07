@@ -11,9 +11,21 @@
 #import <AVFoundation/AVFoundation.h>
 
 // Define parameter addresses.
+enum {
+    osc1RangeParamId = 0,
+    osc1WaveformParamId,
+    osc2RangeParamId,
+    osc2DetuneParamId,
+    osc2WaveformParamId,
+    mixOsc1VolumeParamId,
+    mixOsc2VolumeParamId,
+    mixNoiseVolumeParamId,
+    lastParamId = -1
+};
+
 
 typedef struct {
-    AudioUnitParameterID addr;
+    AudioUnitParameterID paramId;
     const char *identifier;
     const char *name;
     float min;
@@ -23,25 +35,31 @@ typedef struct {
     const char *commaSeparatedIndexedNames;
 } ParameterDef;
 
+
 const ParameterDef paramDef[] = {
-    {0, "osc1Range"     , "Oscillator 1 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "LO,32',16',8',4',2'" },
-    {1, "osc1Waveform"  , "Oscillator 1 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
-    {2, "osc2Range"     , "Oscillator 2 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Octaves, "LO,32',16',8',4',2'" },
-    {3, "osc2Detune"    , "Oscillator 2 Detune"      , -8,  8,  0, kAudioUnitParameterUnit_Cents  , "" },
-    {4, "osc2Waveform"  , "Oscillator 2 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed,  "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
-    {5, "mixOsc1Volume" , "Mixer Oscillator 1 Volume",  0, 10, 10, kAudioUnitParameterUnit_CustomUnit, "" },
-    {6, "mixOsc2Volume" , "Mixer Oscillator 2 Volume",  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
-    {7, "mixNoiseVolume", "Mixer Noise Volume"       ,  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
-    {-1}
+    {osc1RangeParamId     , "osc1Range"     , "Oscillator 1 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "LO,32',16',8',4',2'" },
+    {osc1WaveformParamId  , "osc1Waveform"  , "Oscillator 1 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
+    {osc2RangeParamId     , "osc2Range"     , "Oscillator 2 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Octaves, "LO,32',16',8',4',2'" },
+    {osc2DetuneParamId    , "osc2Detune"    , "Oscillator 2 Detune"      , -8,  8,  0, kAudioUnitParameterUnit_Cents  , "" },
+    {osc2WaveformParamId  , "osc2Waveform"  , "Oscillator 2 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed,  "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
+    {mixOsc1VolumeParamId , "mixOsc1Volume" , "Mixer Oscillator 1 Volume",  0, 10, 10, kAudioUnitParameterUnit_CustomUnit, "" },
+    {mixOsc2VolumeParamId , "mixOsc2Volume" , "Mixer Oscillator 2 Volume",  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
+    {mixNoiseVolumeParamId, "mixNoiseVolume", "Mixer Noise Volume"       ,  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
+    {lastParamId}
 };
 
+
 @interface minimoog_instrumentAudioUnit ()
+    @property AUAudioUnitBus *outputBus;
+    @property AUAudioUnitBusArray *outputBusArray;
     @property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @end
 
 
 @implementation minimoog_instrumentAudioUnit
-@synthesize parameterTree = _parameterTree;
+    @synthesize outputBus;
+    @synthesize outputBusArray;
+    @synthesize parameterTree;
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
@@ -52,13 +70,13 @@ const ParameterDef paramDef[] = {
     
     // Create parameter objects.
     NSMutableArray *params = [NSMutableArray array];
-    int i;
-    while (paramDef[i].addr != -1) {
+    int i = 0;
+    while (paramDef[i].paramId != lastParamId) {
         AUParameter *param =
             [AUParameterTree
              createParameterWithIdentifier:[NSString stringWithUTF8String:paramDef[i].identifier]
              name:[NSString stringWithUTF8String:paramDef[i].name]
-             address:paramDef[i].addr
+             address:paramDef[i].paramId
              min:paramDef[i].min
              max:paramDef[i].max
              unit:paramDef[i].unit
@@ -77,23 +95,59 @@ const ParameterDef paramDef[] = {
     
     
     
-    // Create the parameter tree.
-    _parameterTree = [AUParameterTree createTreeWithChildren:params];
     
-    // Create the input and output busses (AUAudioUnitBus).
-    // Create the input and output bus arrays (AUAudioUnitBusArray).
+    _kernel.setParameter(InstrumentParamAttack, attackParam.value);
+    _kernel.setParameter(InstrumentParamRelease, releaseParam.value);
+    
+    
+    
+    
+    // Create the parameter tree.
+    self.parameterTree = [AUParameterTree createTreeWithChildren:params];
+    
+    
+    
+    
+    // Create the output bus.
+    AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100. channels:2];
+    self.outputBusBuffer.init(defaultFormat, 2);
+    self.outputBus = self.outputBusBuffer.bus;
+    
+    // Create the input and output bus arrays.
+    outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
+                                                            busType:AUAudioUnitBusTypeOutput
+                                                             busses: @[outputBus]];
+    
+    // Make a local pointer to the kernel to avoid capturing self.
+    __block InstrumentDSPKernel *instrumentKernel = &_kernel;
+    
+    // implementorValueObserver is called when a parameter changes value.
+    _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
+        instrumentKernel->setParameter(param.address, value);
+    };
+    
+    // implementorValueProvider is called when the value needs to be refreshed.
+    _parameterTree.implementorValueProvider = ^(AUParameter *param) {
+        return instrumentKernel->getParameter(param.address);
+    };
     
     // A function to provide string representations of parameter values.
     _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
         AUValue value = valuePtr == nil ? param.value : *valuePtr;
         
         switch (param.address) {
-            case myParam1:
-                return [NSString stringWithFormat:@"%.f", value];
+            case InstrumentParamAttack:
+            case InstrumentParamRelease:
+                return [NSString stringWithFormat:@"%.3f", value];
+                
             default:
                 return @"?";
         }
     };
+    
+    
+    
+    
     
     self.maximumFramesToRender = 512;
     
