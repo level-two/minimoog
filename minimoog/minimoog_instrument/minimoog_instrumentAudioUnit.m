@@ -11,12 +11,32 @@
 #import <AVFoundation/AVFoundation.h>
 
 // Define parameter addresses.
-const AudioUnitParameterID myParam1 = 0;
+
+typedef struct {
+    AudioUnitParameterID addr;
+    const char *identifier;
+    const char *name;
+    float min;
+    float max;
+    float initVal;
+    AudioUnitParameterUnit unit;
+    const char *commaSeparatedIndexedNames;
+} ParameterDef;
+
+const ParameterDef paramDef[] = {
+    {0, "osc1Range"     , "Oscillator 1 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "LO,32',16',8',4',2'" },
+    {1, "osc1Waveform"  , "Oscillator 1 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
+    {2, "osc2Range"     , "Oscillator 2 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Octaves, "LO,32',16',8',4',2'" },
+    {3, "osc2Detune"    , "Oscillator 2 Detune"      , -8,  8,  0, kAudioUnitParameterUnit_Cents  , "" },
+    {4, "osc2Waveform"  , "Oscillator 2 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed,  "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
+    {5, "mixOsc1Volume" , "Mixer Oscillator 1 Volume",  0, 10, 10, kAudioUnitParameterUnit_CustomUnit, "" },
+    {6, "mixOsc2Volume" , "Mixer Oscillator 2 Volume",  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
+    {7, "mixNoiseVolume", "Mixer Noise Volume"       ,  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
+    {-1}
+};
 
 @interface minimoog_instrumentAudioUnit ()
-
-@property (nonatomic, readwrite) AUParameterTree *parameterTree;
-
+    @property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @end
 
 
@@ -31,13 +51,34 @@ const AudioUnitParameterID myParam1 = 0;
     }
     
     // Create parameter objects.
-    AUParameter *param1 = [AUParameterTree createParameterWithIdentifier:@"param1" name:@"Parameter 1" address:myParam1 min:0 max:100 unit:kAudioUnitParameterUnit_Percent unitName:nil flags:0 valueStrings:nil dependentParameters:nil];
+    NSMutableArray *params = [NSMutableArray array];
+    int i;
+    while (paramDef[i].addr != -1) {
+        AUParameter *param =
+            [AUParameterTree
+             createParameterWithIdentifier:[NSString stringWithUTF8String:paramDef[i].identifier]
+             name:[NSString stringWithUTF8String:paramDef[i].name]
+             address:paramDef[i].addr
+             min:paramDef[i].min
+             max:paramDef[i].max
+             unit:paramDef[i].unit
+             unitName:nil
+             flags:0
+             valueStrings:[[NSString stringWithUTF8String:paramDef[i].commaSeparatedIndexedNames] componentsSeparatedByString:@","]
+             dependentParameters:nil];
+        
+        // Initialize the parameter values.
+        param.value = paramDef[i].initVal;
+        
+        [params addObject:param];
+        
+        i++;
+    }
     
-    // Initialize the parameter values.
-    param1.value = 0.5;
+    
     
     // Create the parameter tree.
-    _parameterTree = [AUParameterTree createTreeWithChildren:@[ param1 ]];
+    _parameterTree = [AUParameterTree createTreeWithChildren:params];
     
     // Create the input and output busses (AUAudioUnitBus).
     // Create the input and output bus arrays (AUAudioUnitBusArray).
@@ -60,6 +101,19 @@ const AudioUnitParameterID myParam1 = 0;
 }
 
 #pragma mark - AUAudioUnit Overrides
+
+/*
+ Overriding AUAudioUnit Properties and Methods
+ You must override the following properties in your AUAudioUnit subclass:
+ Override the inputBusses getter method to return the app extension’s audio input connection points.
+ Override the outputBusses getter method to return the app extension’s audio output connection points.
+ Override the internalRenderBlock getter method to return the block that implements the app extension’s audio rendering loop.
+ Also override the allocateRenderResourcesAndReturnError: method, which the host app calls before it starts to render audio, and override the deallocateRenderResources method, which the host app calls after it has finished rendering audio. Within each override, call the AUAudioUnit superclass implementation.
+ */
+
+
+
+
 
 // If an audio unit has input, an audio unit's audio input connection points.
 // Subclassers must override this property getter and should return the same object every time.

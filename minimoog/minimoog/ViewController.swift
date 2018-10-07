@@ -8,6 +8,7 @@
 
 import UIKit
 import AudioToolbox
+import MinimoogInstrumentViewController
 
 class ViewController: UIViewController {
 
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
         embedPlugInView()
         
         // Create an audio file playback engine.
-        playEngine = SimplePlayEngine(componentType: kAudioUnitType_Effect)
+        playEngine = SimplePlayEngine(componentType: kAudioUnitType_Generator)
         
         /*
          Register the AU in-process for development/debugging.
@@ -37,9 +38,9 @@ class ViewController: UIViewController {
         // MARK: AudioComponentDescription Important!
         // Ensure that you update the AudioComponentDescription for your AudioUnit type, manufacturer and creator type.
         var componentDescription = AudioComponentDescription()
-        componentDescription.componentType = kAudioUnitType_Effect
-        componentDescription.componentSubType = 0x666c7472 /*'fltr'*/
-        componentDescription.componentManufacturer = 0x44656d6f /*'Demo'*/
+        componentDescription.componentType = kAudioUnitType_MusicDevice
+        componentDescription.componentSubType = 0x6d6f6f67 /*'moog'*/
+        componentDescription.componentManufacturer = 0x594c5943 /*'YLYC'*/
         componentDescription.componentFlags = 0
         componentDescription.componentFlagsMask = 0
         
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
          
          Note that this registration is local to this process.
          */
-        AUAudioUnit.registerSubclass(AUv3FilterDemo.self, as: componentDescription, name:"Demo: Local FilterDemo", version: UInt32.max)
+        AUAudioUnit.registerSubclass(MinimoogInstrumentViewController.self, as: componentDescription, name:"Minimoog emulation demo", version: UInt32.max)
         
         // Instantiate and insert our audio unit effect into the chain.
         playEngine.selectAudioUnitWithComponentDescription(componentDescription) {
@@ -66,22 +67,20 @@ class ViewController: UIViewController {
          `FilterDemoViewController` from that.
          */
         let builtInPlugInsURL = Bundle.main.builtInPlugInsURL!
-        let pluginURL = builtInPlugInsURL.appendingPathComponent("FilterDemoAppExtension.appex")
+        let pluginURL = builtInPlugInsURL.appendingPathComponent("minimoog_instrument.appex")
         let appExtensionBundle = Bundle(url: pluginURL)
         
         let storyboard = UIStoryboard(name: "MainInterface", bundle: appExtensionBundle)
-        filterDemoViewController = storyboard.instantiateInitialViewController() as! FilterDemoViewController
+        minimoogInstrumentViewController = storyboard.instantiateInitialViewController() as! MinimoogInstrumentViewController
         
         // Present the view controller's view.
-        if let view = filterDemoViewController.view {
-            addChildViewController(filterDemoViewController)
+        if let view = minimoogInstrumentViewController.view {
+            addChildViewController(minimoogInstrumentViewController)
             view.frame = auContainerView.bounds
             
             auContainerView.addSubview(view)
-            filterDemoViewController.didMove(toParentViewController: self)
+            minimoogInstrumentViewController.didMove(toParentViewController: self)
         }
     }
-    
-    
 }
 

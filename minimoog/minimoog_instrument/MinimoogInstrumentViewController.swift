@@ -100,6 +100,7 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     @IBAction func mixNoiseVolumeChanged(_ sender: Any) {
         mixNoiseVolumeParameter!.value = mixNoiseVolumeSlider.value
     }
+    
     // MARK: Private constants
     let rangeStrings = ["LO", "32'", "16'", "8'", "4'", "2'"]
     let waveformStrings = ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]
