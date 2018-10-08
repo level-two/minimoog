@@ -1,0 +1,223 @@
+//
+//  MinimoogInstrumentAudioUnit.m
+//
+//  Created by Yauheni Lychkouski on 10/6/18.
+//  Copyright © 2018 Yauheni Lychkouski. All rights reserved.
+//
+
+#import "MinimoogInstrumentAudioUnit.h"
+#include "MinimoogInstrument.hpp"
+
+#import <AVFoundation/AVFoundation.h>
+
+// Define parameter addresses.
+enum {
+    osc1RangeParamAddr = 0,
+    osc1WaveformParamAddr,
+    osc2RangeParamAddr,
+    osc2DetuneParamAddr,
+    osc2WaveformParamAddr,
+    mixOsc1VolumeParamAddr,
+    mixOsc2VolumeParamAddr,
+    mixNoiseVolumeParamAddr,
+    lastParamAddr
+};
+
+
+typedef struct {
+    AudioUnitParameterID paramAddr;
+    const char *identifier;
+    const char *name;
+    float min;
+    float max;
+    float initVal;
+    AudioUnitParameterUnit unit;
+    const char *commaSeparatedIndexedNames;
+} ParameterDef;
+
+
+const ParameterDef paramDef[] = {
+    {osc1RangeParamAddr     , "osc1Range"     , "Oscillator 1 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "LO,32',16',8',4',2'" },
+    {osc1WaveformParamAddr  , "osc1Waveform"  , "Oscillator 1 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
+    {osc2RangeParamAddr     , "osc2Range"     , "Oscillator 2 Range"       ,  0,  5,  0, kAudioUnitParameterUnit_Indexed, "LO,32',16',8',4',2'" },
+    {osc2DetuneParamAddr    , "osc2Detune"    , "Oscillator 2 Detune"      , -8,  8,  0, kAudioUnitParameterUnit_Cents  , "" },
+    {osc2WaveformParamAddr  , "osc2Waveform"  , "Oscillator 2 Waveform"    ,  0,  5,  0, kAudioUnitParameterUnit_Indexed,  "Triangle,Ramp,Sawtooth,Square,Pulse1,Pulse2" },
+    {mixOsc1VolumeParamAddr , "mixOsc1Volume" , "Mixer Oscillator 1 Volume",  0, 10, 10, kAudioUnitParameterUnit_CustomUnit, "" },
+    {mixOsc2VolumeParamAddr , "mixOsc2Volume" , "Mixer Oscillator 2 Volume",  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
+    {mixNoiseVolumeParamAddr, "mixNoiseVolume", "Mixer Noise Volume"       ,  0, 10,  0, kAudioUnitParameterUnit_CustomUnit, "" },
+    {lastParamAddr}
+};
+
+
+@interface MinimoogInstrumentAudioUnit () {
+    AUHostMusicalContextBlock _musicalContext;
+    AUMIDIOutputEventBlock _outputEventBlock;
+    AUHostTransportStateBlock _transportStateBlock;
+    
+    AUAudioUnitBus *_inputBus;
+    AUAudioUnitBus *_outputBus;
+    AUAudioUnitBusArray *_inputBusArray;
+    AUAudioUnitBusArray *_outputBusArray;
+    AUParameterTree *_parameterTree;
+    
+    MinimoogInstrument _minimoogInstrument;
+}
+@end
+
+
+@implementation MinimoogInstrumentAudioUnit
+
+- (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
+    self = [super initWithComponentDescription:componentDescription options:options error:outError];
+    
+    if (self == nil) {
+        return nil;
+    }
+    
+    // Create parameter objects.
+    NSMutableArray *params = [NSMutableArray array];
+    int i = 0;
+    while (paramDef[i].paramAddr < lastParamAddr) {
+        AUParameter *param =
+            [AUParameterTree
+             createParameterWithIdentifier:[NSString stringWithUTF8String:paramDef[i].identifier]
+             name:[NSString stringWithUTF8String:paramDef[i].name]
+             address:paramDef[i].paramAddr
+             min:paramDef[i].min
+             max:paramDef[i].max
+             unit:paramDef[i].unit
+             unitName:nil
+             flags:0
+             valueStrings:[[NSString stringWithUTF8String:paramDef[i].commaSeparatedIndexedNames] componentsSeparatedByString:@","]
+             dependentParameters:nil];
+        
+        // Initialize the parameter values.
+        param.value = paramDef[i].initVal;
+        [params addObject:param];
+        
+        _minimoogInstrument.setParameter(paramDef[i].paramAddr, paramDef[i].initVal);
+        
+        i++;
+    }
+    
+    // Create the parameter tree.
+    _parameterTree = [AUParameterTree createTreeWithChildren:params];
+    
+    // A function to provide string representations of parameter values.
+    _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
+        AUValue value = valuePtr == nil ? param.value : *valuePtr;
+        if (param.address >= lastParamAddr) {
+            return @"?";
+        }
+        else if (paramDef[param.address].unit == kAudioUnitParameterUnit_Indexed) {
+            return param.valueStrings[(UInt32)param.value];
+        }
+        else {
+            return [NSString stringWithFormat:@"%.2f", value];
+        }
+    };
+    
+    
+    // Create the output bus.
+    AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100. channels:2];
+    
+    //_audioStreamBasicDescription = *defaultFormat.streamDescription;
+    
+    // create the busses with this asbd.
+    _inputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
+    _outputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
+    
+    // Create the input and output bus arrays.
+    _inputBusArray  = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
+                                                             busType:AUAudioUnitBusTypeInput busses: @[_inputBus]];
+    
+    _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
+                                                             busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
+    
+    // Make a local pointer to the kernel to avoid capturing self.
+    __block MinimoogInstrument *minimoogInstrument = &_minimoogInstrument;
+    
+    // implementorValueObserver is called when a parameter changes value.
+    _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
+        minimoogInstrument->setParameter(param.address, value);
+    };
+    
+    // implementorValueProvider is called when the value needs to be refreshed.
+    _parameterTree.implementorValueProvider = ^(AUParameter * _Nonnull param) {
+        return minimoogInstrument->getParameter(param.address);
+    };
+    
+    self.maximumFramesToRender = 512;
+    
+    return self;
+}
+
+#pragma mark - AUAudioUnit Overrides
+- (AUAudioUnitBusArray *)inputBusses {
+    return _inputBusArray;
+}
+
+- (AUAudioUnitBusArray *)outputBusses {
+    return _outputBusArray;
+}
+
+- (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError {
+    if (![super allocateRenderResourcesAndReturnError:outError]) {
+        return NO;
+    }
+    
+    // Validate that the bus formats are compatible.
+    // Allocate your resources.
+    if (self.musicalContextBlock) {
+        _musicalContext = self.musicalContextBlock;
+    } else {
+        _musicalContext = nil;
+    }
+    
+    if (self.MIDIOutputEventBlock) {
+        _outputEventBlock = self.MIDIOutputEventBlock;
+    } else {
+        _outputEventBlock = nil;
+    }
+    
+    if (self.musicalContextBlock) {
+        _transportStateBlock = self.transportStateBlock;
+    } else {
+        _transportStateBlock = nil;
+    }
+    
+    return YES;
+}
+
+- (void)deallocateRenderResources {
+    [super deallocateRenderResources];
+}
+
+#pragma mark - AUAudioUnit (AUAudioUnitImplementation)
+- (AUInternalRenderBlock)internalRenderBlock {
+    // Capture in locals to avoid Obj-C member lookups. If "self" is captured in render, we're doing it wrong. See sample code.
+
+    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
+            // Do event handling and signal processing here.
+            AURenderEvent const* event = realtimeEventListHead;
+            while (event != NULL) {
+                switch (event->head.eventType) {
+                    case AURenderEventParameter:
+                        break;
+                    case AURenderEventParameterRamp:
+                        break;
+                        
+                    case AURenderEventMIDI:
+                        // frobnosticate the MIDI data here
+                        break;
+                        
+                    case AURenderEventMIDISysEx:
+                        break;
+                }
+                event = event->head.next;
+            }
+        return noErr;
+    };
+}
+
+@end

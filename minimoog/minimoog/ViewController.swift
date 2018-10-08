@@ -14,8 +14,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var minimoogInstrumentAUContainerView: UIView!
     
-    
-    
     var playEngine: SimplePlayEngine!
     var parameterObserverToken: AUParameterObserverToken!
     var minimoogInstrumentViewController: MinimoogInstrumentViewController!
