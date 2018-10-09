@@ -27,8 +27,8 @@ public:
 	virtual void  process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) = 0;
 	virtual void  startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
 	virtual void  handleMIDIEvent(AUMIDIEvent const& midiEvent) {}
-    virtual void  setParameter(long int address, float value) {}
-    virtual float getParameter(long int address) { return 0; }
+    virtual void  setParameter(AUParameterAddress address, AUValue value) {}
+    virtual AUValue getParameter(AUParameterAddress address) { return 0; }
 	
 	void processWithEvents(AudioTimeStamp const* timestamp, AUAudioFrameCount frameCount, AURenderEvent const* events);
 

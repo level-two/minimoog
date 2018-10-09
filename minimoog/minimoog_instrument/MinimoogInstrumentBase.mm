@@ -11,18 +11,19 @@
 
 void MinimoogInstrumentBase::handleOneEvent(AURenderEvent const *event) {
 	switch (event->head.eventType) {
-		case AURenderEventParameter:
+        case AURenderEventParameter: {
+            AUParameterEvent const& paramEvent = event->parameter;
+            setParameter(paramEvent.parameterAddress, paramEvent.value);
+            break;
+        }
 		case AURenderEventParameterRamp: {
 			AUParameterEvent const& paramEvent = event->parameter;
-			
 			startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames);
 			break;
 		}
-			
 		case AURenderEventMIDI:
 			handleMIDIEvent(event->MIDI);
 			break;
-		
 		default:
 			break;
 	}
@@ -31,10 +32,8 @@ void MinimoogInstrumentBase::handleOneEvent(AURenderEvent const *event) {
 void MinimoogInstrumentBase::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *&event) {
 	do {
 		handleOneEvent(event);
-
 		// Go to next event.
 		event = event->head.next;
-		
 		// While event is not null and is simultaneous (or late).
 	} while (event && event->head.eventSampleTime <= now);
 }
