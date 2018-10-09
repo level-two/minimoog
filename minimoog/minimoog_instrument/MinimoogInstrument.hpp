@@ -62,6 +62,10 @@ public:
     virtual AUValue getParameter(AUParameterAddress address);
 
 private:
+    void updateOsc1State();
+    void updateOsc2State();
+    
+    // Parameters
     AUValue m_osc1Range;
     AUValue m_osc1Waveform;
     AUValue m_osc2Range;
@@ -70,6 +74,30 @@ private:
     AUValue m_mixOsc1Volume;
     AUValue m_mixOsc2Volume;
     AUValue m_mixNoiseVolume;
+    
+    // OSC Common
+    int m_current_note;
+    
+    // OSC1
+    float m_osc1_ampl;
+    float m_osc1_freq;
+    float m_osc1_freq_multiplier;
+    float m_osc1_phase;
+    
+    // OSC2
+    float m_osc2_ampl;
+    float m_osc2_freq;
+    float m_osc2_freq_multiplier;
+    float m_osc2_freq_detune;
+    float m_osc2_phase;
+    
+    // NOISE
+    float m_noise_ampl;
+    
+    // MIX
+    float m_mix_osc1_ampl_multiplier;
+    float m_mix_osc2_ampl_multiplier;
+    float m_mix_noise_ampl_multiplier;
 };
 
 #endif /* MinimoogInstrument_hpp */
