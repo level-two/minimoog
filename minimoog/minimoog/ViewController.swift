@@ -8,7 +8,6 @@
 
 import UIKit
 import AudioToolbox
-import MinimoogInstrumentViewController
 
 class ViewController: UIViewController {
 

@@ -9,15 +9,20 @@
 #ifndef MinimoogInstrument_hpp
 #define MinimoogInstrument_hpp
 
-#include <stdio.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import <algorithm>
+#import "MinimoogInstrumentBase.hpp"
 
-class MinimoogInstrument {
+class MinimoogInstrument : public MinimoogInstrumentBase {
 public:
     MinimoogInstrument();
-    ~MinimoogInstrument();
+    virtual ~MinimoogInstrument();
     
-    void  setParameter(long int address, float value);
-    float getParameter(long int address);
+    virtual void  process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset);
+    virtual void  startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration);
+    virtual void  handleMIDIEvent(AUMIDIEvent const& midiEvent);
+    virtual void  setParameter(long int address, float value);
+    virtual float getParameter(long int address);
 private:
 };
 
