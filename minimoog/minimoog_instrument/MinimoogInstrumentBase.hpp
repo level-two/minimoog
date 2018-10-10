@@ -24,12 +24,15 @@ public:
     virtual ~MinimoogInstrumentBase();
     
     // Pure virtual methods
-    virtual void setParameter(AUParameterAddress address, AUValue value)                          = 0;
-	virtual void startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
-    virtual void handleMIDIEvent(AUMIDIEvent const& midiEvent)                                    = 0;
-    virtual void doRender(float *outL, float *outR)                                               = 0;
+    virtual void    setParameter   (AUParameterAddress address, AUValue value)                             = 0;
+    virtual AUValue getParameter   (AUParameterAddress address)                                            = 0;
+	virtual void    startRamp      (AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
+    virtual void    handleMIDIEvent(AUMIDIEvent const& midiEvent)                                          = 0;
+    virtual void    doRender       (float *outL, float *outR)                                              = 0;
 	
     // Public methods
+    void setSampleRate(float sr) { m_sampleRate = sr; };
+    
     void render(AudioUnitRenderActionFlags* actionFlags          ,
                 const AudioTimeStamp*       timestamp            ,
                 AUAudioFrameCount           frameCount           ,
@@ -47,7 +50,7 @@ private:
                              AUAudioFrameCount const bufferOffset);
     
     // Private variables
-    float m_sampleRate = 44100.0;
+    float m_sampleRate;
 };
 
 #endif /* MinimoogInstrumentBase_h */

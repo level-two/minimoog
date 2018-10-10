@@ -65,6 +65,31 @@ void MinimoogInstrument::setParameter(AUParameterAddress address, AUValue value)
     }
 }
 
+
+AUValue MinimoogInstrument::getParameter(AUParameterAddress address) {
+    AUValue val = 0;
+    switch (address) {
+        case osc1RangeParamAddr:
+            val = m_osc1Range;
+        case osc1WaveformParamAddr:
+            val = m_osc1Waveform;
+        case osc2RangeParamAddr:
+            val = m_osc2Range;
+        case osc2DetuneParamAddr:
+            val = m_osc2Detune;
+        case osc2WaveformParamAddr:
+            val = m_osc2Waveform;
+        case mixOsc1VolumeParamAddr:
+            val = m_mixOsc1Volume;
+        case mixOsc2VolumeParamAddr:
+            val = m_mixOsc2Volume;
+        case mixNoiseVolumeParamAddr:
+            val = m_mixNoiseVolume;
+    }
+    return val;
+}
+
+
 void MinimoogInstrument::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) {
     setParameter(address, value);
 }

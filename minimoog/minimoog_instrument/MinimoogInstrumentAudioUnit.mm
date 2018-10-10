@@ -5,24 +5,20 @@
 //  Copyright © 2018 Yauheni Lychkouski. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "MinimoogInstrumentAudioUnit.h"
 #include "MinimoogInstrument.hpp"
 
-#import <AVFoundation/AVFoundation.h>
-
-
 @interface MinimoogInstrumentAudioUnit () {
     AUHostMusicalContextBlock _musicalContext;
-    AUMIDIOutputEventBlock _outputEventBlock;
+    AUMIDIOutputEventBlock    _outputEventBlock;
     AUHostTransportStateBlock _transportStateBlock;
-    
-    AUAudioUnitBus *_inputBus;
-    AUAudioUnitBus *_outputBus;
-    AUAudioUnitBusArray *_inputBusArray;
-    AUAudioUnitBusArray *_outputBusArray;
-    AUParameterTree *_parameterTree;
-    
-    MinimoogInstrument _minimoogInstrument;
+    AUAudioUnitBus           *_inputBus;
+    AUAudioUnitBus           *_outputBus;
+    AUAudioUnitBusArray      *_inputBusArray;
+    AUAudioUnitBusArray      *_outputBusArray;
+    AUParameterTree          *_parameterTree;
+    MinimoogInstrument        _minimoogInstrument;
 }
 @end
 
@@ -79,34 +75,25 @@
         }
     };
     
-    
     // Create the output bus.
     AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100. channels:2];
+    _minimoogInstrument->setSampleRate(defaultFormat.sampleRate);
     
     //_audioStreamBasicDescription = *defaultFormat.streamDescription;
-    
     // create the busses with this asbd.
-    _inputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
-    _outputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
-    
-    // Create the input and output bus arrays.
+    _inputBus       = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
+    _outputBus      = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
     _inputBusArray  = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
                                                              busType:AUAudioUnitBusTypeInput busses: @[_inputBus]];
-    
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
                                                              busType:AUAudioUnitBusTypeOutput busses: @[_outputBus]];
     
-    // Make a local pointer to the kernel to avoid capturing self.
-    __block MinimoogInstrument *minimoogInstrument = &_minimoogInstrument;
-    
-    // implementorValueObserver is called when a parameter changes value.
+    __block MinimoogInstrument *instr = &_minimoogInstrument;
     _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
-        minimoogInstrument->setParameter(param.address, value);
+        instr->setParameter(param.address, value);
     };
-    
-    // implementorValueProvider is called when the value needs to be refreshed.
     _parameterTree.implementorValueProvider = ^(AUParameter * _Nonnull param) {
-        return minimoogInstrument->getParameter(param.address);
+        return instr->getParameter(param.address);
     };
     
     self.maximumFramesToRender = 512;
@@ -163,14 +150,15 @@
      */
     __block MinimoogInstrument *instr = &_minimoogInstrument;
     
-    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags,
-                              const AudioTimeStamp       *timestamp,
-                              AVAudioFrameCount           frameCount,
-                              NSInteger                   outputBusNumber,
-                              AudioBufferList            *outputData,
-                              const AURenderEvent        *realtimeEventListHead,
-                              AURenderPullInputBlock      pullInputBlock) {
-        instr->doRender(actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBlock);
+    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags* actionFlags           ,
+                              const AudioTimeStamp*       timestamp             ,
+                              AVAudioFrameCount           frameCount            ,
+                              NSInteger                   outputBusNumber       ,
+                              AudioBufferList*            outputData            ,
+                              const AURenderEvent*        realtimeEventListHead ,
+                              AURenderPullInputBlock      pullInputBlock        ) {
+        instr->render(actionFlags, timestamp, frameCount, outputBusNumber,
+                      outputData, realtimeEventListHead, pullInputBlock);
         return noErr;
     };
 }
