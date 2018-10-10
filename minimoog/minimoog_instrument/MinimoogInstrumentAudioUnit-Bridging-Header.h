@@ -6,4 +6,5 @@
 //  Copyright © 2018 Yauheni Lychkouski. All rights reserved.
 //
 
+//#import "MinimoogInstrument.hpp"
 #import "MinimoogInstrumentAudioUnit.h"

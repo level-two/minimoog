@@ -6,9 +6,8 @@
 //  Copyright © 2018 Yauheni Lychkouski. All rights reserved.
 //
 
-
-#ifndef MinimoogInstrumentBase_h
-#define MinimoogInstrumentBase_h
+#ifndef MinimoogInstrumentBase_hpp
+#define MinimoogInstrumentBase_hpp
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <algorithm>
@@ -49,8 +48,9 @@ private:
                              AudioBufferList*  outputData        ,
                              AUAudioFrameCount const bufferOffset);
     
-    // Private variables
+    // Protected variables
+protected:
     float m_sampleRate;
 };
 
-#endif /* MinimoogInstrumentBase_h */
+#endif /* MinimoogInstrumentBase_hpp */

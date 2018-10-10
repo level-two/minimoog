@@ -10,7 +10,6 @@
 #define MinimoogInstrument_hpp
 
 #import <AudioToolbox/AudioToolbox.h>
-#import <algorithm>
 #import "MinimoogInstrumentBase.hpp"
 
 // Define parameter addresses.
@@ -27,7 +26,7 @@ enum {
 };
 
 typedef struct {
-    AudioUnitParameterID paramAddr;
+    AUParameterAddress paramAddr;
     const char *identifier;
     const char *name;
     AUValue min;

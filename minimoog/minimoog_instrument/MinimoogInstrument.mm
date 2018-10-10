@@ -155,7 +155,7 @@ void MinimoogInstrument::doRender(float *outL, float *outR) {
     // OSC1
     m_osc1Phase += M_2_PI * m_osc1Freq * m_osc1FreqMultiplier / m_sampleRate;
     if (m_osc1Phase > M_2_PI) m_osc1Phase -= M_2_PI;
-    float osc1Smp = m_osc1_ampl * sin(m_osc1Phase);
+    float osc1Smp = m_osc1Ampl * sin(m_osc1Phase);
     
     // OSC2
     m_osc2Phase += M_2_PI * m_osc2Freq * m_osc2FreqMultiplier / m_sampleRate;

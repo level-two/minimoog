@@ -77,7 +77,7 @@
     
     // Create the output bus.
     AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100. channels:2];
-    _minimoogInstrument->setSampleRate(defaultFormat.sampleRate);
+    _minimoogInstrument.setSampleRate(defaultFormat.sampleRate);
     
     //_audioStreamBasicDescription = *defaultFormat.streamDescription;
     // create the busses with this asbd.

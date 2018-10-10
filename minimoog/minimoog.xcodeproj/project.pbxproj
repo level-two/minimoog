@@ -462,6 +462,7 @@
 		930F398221691B2F00BAB7F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = minimoog_instrument/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -472,7 +473,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "yauheni.lychkouski.minimoog.minimoog-instrument";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/minimoog_instrument-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/MinimoogInstrumentAudioUnit-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -481,6 +482,7 @@
 		930F398321691B2F00BAB7F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = minimoog_instrument/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -491,7 +493,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "yauheni.lychkouski.minimoog.minimoog-instrument";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/minimoog_instrument-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/MinimoogInstrumentAudioUnit-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
