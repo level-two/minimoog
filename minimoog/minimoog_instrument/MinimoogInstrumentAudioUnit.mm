@@ -157,27 +157,20 @@
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
 - (AUInternalRenderBlock)internalRenderBlock {
-    // Capture in locals to avoid Obj-C member lookups. If "self" is captured in render, we're doing it wrong. See sample code.
-
-    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
-            // Do event handling and signal processing here.
-            AURenderEvent const* event = realtimeEventListHead;
-            while (event != NULL) {
-                switch (event->head.eventType) {
-                    case AURenderEventParameter:
-                        break;
-                    case AURenderEventParameterRamp:
-                        break;
-                        
-                    case AURenderEventMIDI:
-                        // frobnosticate the MIDI data here
-                        break;
-                        
-                    case AURenderEventMIDISysEx:
-                        break;
-                }
-                event = event->head.next;
-            }
+    /*
+     Capture in locals to avoid ObjC member lookups. If "self" is captured in
+     render, we're doing it wrong.
+     */
+    __block MinimoogInstrument *instr = &_minimoogInstrument;
+    
+    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags,
+                              const AudioTimeStamp       *timestamp,
+                              AVAudioFrameCount           frameCount,
+                              NSInteger                   outputBusNumber,
+                              AudioBufferList            *outputData,
+                              const AURenderEvent        *realtimeEventListHead,
+                              AURenderPullInputBlock      pullInputBlock) {
+        instr->doRender(actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBlock);
         return noErr;
     };
 }

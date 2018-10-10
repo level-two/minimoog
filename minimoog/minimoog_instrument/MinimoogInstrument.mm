@@ -50,44 +50,20 @@ void MinimoogInstrument::setParameter(AUParameterAddress address, AUValue value)
             break;
         case mixOsc1VolumeParamAddr:
             m_mixOsc1Volume = value;
-            m_mix_osc1_ampl_multiplier = value / 10;
+            m_mixOsc1AmplMultiplier = value / 10;
             break;
         case mixOsc2VolumeParamAddr:
             m_mixOsc2Volume = value;
-            m_mix_osc2_ampl_multiplier = value / 10;
+            m_mixOsc2AmplMultiplier = value / 10;
             break;
         case mixNoiseVolumeParamAddr:
             m_mixNoiseVolume = value;
-            m_mix_noise_ampl_multiplier = value / 10;
+            m_mixNoiseAmplMultiplier = value / 10;
             break;
         default:
             break;
     }
 }
-
-AUValue MinimoogInstrument::getParameter(AUParameterAddress address) {
-    AUValue val = 0;
-    switch (address) {
-        case osc1RangeParamAddr:
-            val = m_osc1Range;
-        case osc1WaveformParamAddr:
-            val = m_osc1Waveform;
-        case osc2RangeParamAddr:
-            val = m_osc2Range;
-        case osc2DetuneParamAddr:
-            val = m_osc2Detune;
-        case osc2WaveformParamAddr:
-            val = m_osc2Waveform;
-        case mixOsc1VolumeParamAddr:
-            val = m_mixOsc1Volume;
-        case mixOsc2VolumeParamAddr:
-            val = m_mixOsc2Volume;
-        case mixNoiseVolumeParamAddr:
-            val = m_mixNoiseVolume;
-    }
-    return val;
-}
-
 
 void MinimoogInstrument::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) {
     setParameter(address, value);
@@ -109,18 +85,18 @@ void MinimoogInstrument::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case 0x80 : { // note off
             uint8_t note = midiEvent.data[1];
             uint8_t vel  = midiEvent.data[2];
-            m_osc1_ampl  = 0;
-            m_osc2_ampl  = 0;
-            m_noise_ampl = 0;
+            m_osc1Ampl  = 0;
+            m_osc2Ampl  = 0;
+            m_noiseAmpl = 0;
             break;
         }
         case 0x90 : { // note on
             uint8_t note = midiEvent.data[1];
-            m_current_note = note;
+            m_currentNote = note;
             uint8_t vel  = midiEvent.data[2];
-            m_osc1_ampl  = vel / 127;
-            m_osc2_ampl  = vel / 127;
-            m_noise_ampl = vel / 127;
+            m_osc1Ampl  = vel / 127;
+            m_osc2Ampl  = vel / 127;
+            m_noiseAmpl = vel / 127;
             updateOsc1State();
             updateOsc2State();
             break;
@@ -128,49 +104,48 @@ void MinimoogInstrument::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case 0xb0 : { // control change
             uint8_t cc_num = midiEvent.data[1];
             if (cc_num == 0x7b) { // all notes off
-                m_osc1_ampl  = 0;
-                m_osc2_ampl  = 0;
-                m_noise_ampl = 0;
+                m_osc1Ampl  = 0;
+                m_osc2Ampl  = 0;
+                m_noiseAmpl = 0;
             }
             break;
         }
     }
 }
 
-void MinimoogInstrument::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) {
-    
-}
-
 
 void MinimoogInstrument::updateOsc1State() {
-    m_osc1_freq = noteToHz(m_current_note);
-    m_osc1_freq_multiplier = (m_osc1Range == 0) ? 1.0/(1<<7) : 1 << ((int)m_osc1Range - 2);
+    m_osc1Freq = noteToHz(m_currentNote);
+    m_osc1FreqMultiplier = (m_osc1Range == 0) ? 1.0/(1<<7) : 1 << ((int)m_osc1Range - 2);
 }
 
 
 void MinimoogInstrument::updateOsc2State() {
-    m_osc2_freq = detunedNoteToHz(m_current_note, m_osc2Detune);
-    m_osc2_freq_multiplier = (m_osc2Range == 0) ? 1.0/(1<<7) : 1 << ((int)m_osc2Range - 2);
+    m_osc2Freq = detunedNoteToHz(m_currentNote, m_osc2Detune);
+    m_osc2FreqMultiplier = (m_osc2Range == 0) ? 1.0/(1<<7) : 1 << ((int)m_osc2Range - 2);
 }
 
 
-void MinimoogInstrument::generateSample() {
+void MinimoogInstrument::doRender(float *outL, float *outR) {
     // OSC1
-    m_osc1_phase += M_2_PI * m_osc1_freq * m_osc1_freq_multiplier / sample_rate;
-    if (m_osc1_phase > M_2_PI) m_osc1_phase -= M_2_PI;
-    float osc1_smp = m_osc1_ampl * sin(m_osc1_phase);
+    m_osc1Phase += M_2_PI * m_osc1Freq * m_osc1FreqMultiplier / m_sampleRate;
+    if (m_osc1Phase > M_2_PI) m_osc1Phase -= M_2_PI;
+    float osc1Smp = m_osc1_ampl * sin(m_osc1Phase);
     
     // OSC2
-    m_osc2_phase += M_2_PI * m_osc2_freq * m_osc2_freq_multiplier / sample_rate;
-    if (m_osc2_phase > M_2_PI) m_osc2_phase -= M_2_PI;
-    float osc2_smp = m_osc2_ampl * sin(m_osc2_phase);
+    m_osc2Phase += M_2_PI * m_osc2Freq * m_osc2FreqMultiplier / m_sampleRate;
+    if (m_osc2Phase > M_2_PI) m_osc2Phase -= M_2_PI;
+    float osc2Smp = m_osc2Ampl * sin(m_osc2Phase);
     
     // NOISE
-    float noise_smp = (float)drand48();
+    float noiseSmp = (float)drand48();
     // MIX
     
-    float mix_smp =
-        osc1_smp  * m_mix_osc1_ampl_multiplier +
-        osc2_smp  * m_mix_osc2_ampl_multiplier +
-        noise_smp * m_mix_noise_ampl_multiplier;
+    float mixSmp =
+        osc1Smp  * m_mixOsc1AmplMultiplier +
+        osc2Smp  * m_mixOsc2AmplMultiplier +
+        noiseSmp * m_mixNoiseAmplMultiplier;
+    
+    *outL = mixSmp;
+    *outR = mixSmp;
 }

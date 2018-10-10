@@ -55,11 +55,11 @@ public:
     MinimoogInstrument();
     virtual ~MinimoogInstrument();
     
+    // Overrides
+    virtual void setParameter(AUParameterAddress address, AUValue value);
     virtual void startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration);
     virtual void handleMIDIEvent(AUMIDIEvent const& midiEvent);
-    virtual void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset);
-    virtual void setParameter(AUParameterAddress address, AUValue value);
-    virtual AUValue getParameter(AUParameterAddress address);
+    virtual void doRender(float *outL, float *outR);
 
 private:
     void updateOsc1State();
@@ -76,28 +76,28 @@ private:
     AUValue m_mixNoiseVolume;
     
     // OSC Common
-    int m_current_note;
+    int m_currentNote;
     
     // OSC1
-    float m_osc1_ampl;
-    float m_osc1_freq;
-    float m_osc1_freq_multiplier;
-    float m_osc1_phase;
+    float m_osc1Ampl;
+    float m_osc1Freq;
+    float m_osc1FreqMultiplier;
+    float m_osc1Phase;
     
     // OSC2
-    float m_osc2_ampl;
-    float m_osc2_freq;
-    float m_osc2_freq_multiplier;
-    float m_osc2_freq_detune;
-    float m_osc2_phase;
+    float m_osc2Ampl;
+    float m_osc2Freq;
+    float m_osc2FreqMultiplier;
+    float m_osc2FreqDetune;
+    float m_osc2Phase;
     
     // NOISE
-    float m_noise_ampl;
+    float m_noiseAmpl;
     
     // MIX
-    float m_mix_osc1_ampl_multiplier;
-    float m_mix_osc2_ampl_multiplier;
-    float m_mix_noise_ampl_multiplier;
+    float m_mixOsc1AmplMultiplier;
+    float m_mixOsc2AmplMultiplier;
+    float m_mixNoiseAmplMultiplier;
 };
 
 #endif /* MinimoogInstrument_hpp */
