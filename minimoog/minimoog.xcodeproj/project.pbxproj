@@ -10,6 +10,10 @@
 		930E79A02175518A00568351 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E799E2175518900568351 /* SimplePlayEngine.swift */; };
 		930E79A12175518A00568351 /* drumLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 930E799F2175518A00568351 /* drumLoop.caf */; };
 		930E79A32175545100568351 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E79A22175545100568351 /* AVFoundation.framework */; };
+		930E79A52176925E00568351 /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */; };
+		930E79A62176926200568351 /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */; };
+		930E79A72176926500568351 /* MinimoogInstrumentAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */; };
+		930E79A82176926900568351 /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */; };
 		930F395D21679E0F00BAB7F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F395C21679E0F00BAB7F3 /* AppDelegate.swift */; };
 		930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F395E21679E0F00BAB7F3 /* ViewController.swift */; };
 		930F396221679E0F00BAB7F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F396021679E0F00BAB7F3 /* Main.storyboard */; };
@@ -20,11 +24,7 @@
 		930F397B21691B2F00BAB7F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F397921691B2F00BAB7F3 /* MainInterface.storyboard */; };
 		930F398021691B2F00BAB7F3 /* minimoog_instrument.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		930F398A216C090C00BAB7F3 /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */; };
-		930F398B216CB93F00BAB7F3 /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */; };
-		930F398C216CB94400BAB7F3 /* MinimoogInstrumentAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */; };
-		930F398D216CB94700BAB7F3 /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */; };
 		930F398E216CB96300BAB7F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F397921691B2F00BAB7F3 /* MainInterface.storyboard */; };
-		930F3991216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */; };
 		930F3992216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */; };
 /* End PBXBuildFile section */
 
@@ -262,12 +262,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				930F398C216CB94400BAB7F3 /* MinimoogInstrumentAudioUnit.mm in Sources */,
+				930E79A52176925E00568351 /* MinimoogInstrumentBase.mm in Sources */,
 				930E79A02175518A00568351 /* SimplePlayEngine.swift in Sources */,
+				930E79A72176926500568351 /* MinimoogInstrumentAudioUnit.mm in Sources */,
+				930E79A62176926200568351 /* MinimoogInstrument.mm in Sources */,
 				930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */,
-				930F3991216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm in Sources */,
-				930F398D216CB94700BAB7F3 /* MinimoogInstrumentViewController.swift in Sources */,
-				930F398B216CB93F00BAB7F3 /* MinimoogInstrument.mm in Sources */,
+				930E79A82176926900568351 /* MinimoogInstrumentViewController.swift in Sources */,
 				930F395D21679E0F00BAB7F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

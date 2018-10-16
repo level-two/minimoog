@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         embedPlugInView()
         
         // Create an audio file playback engine.
-        playEngine = SimplePlayEngine(componentType: kAudioUnitType_Generator)
+        playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice)
         
         /*
          Register the AU in-process for development/debugging.
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
          
          Note that this registration is local to this process.
          */
-        AUAudioUnit.registerSubclass(MinimoogInstrumentViewController.self, as: componentDescription, name:"Minimoog emulation demo", version: UInt32.max)
+        AUAudioUnit.registerSubclass(MinimoogInstrumentAudioUnit.self, as: componentDescription, name:"Minimoog emulation demo", version: UInt32.max)
         
         // Instantiate and insert our audio unit effect into the chain.
         playEngine.selectAudioUnitWithComponentDescription(componentDescription) {
@@ -82,7 +82,8 @@ class ViewController: UIViewController {
     }
     
     func connectParametersToControls() {
-        
+        minimoogInstrumentViewController.audioUnit = playEngine.testAudioUnit
+        //guard let parameterTree = playEngine.testAudioUnit?.parameterTree else { return }
     }
     
     /// Handles Play/Stop button touches.

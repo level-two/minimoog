@@ -155,7 +155,7 @@ public class SimplePlayEngine : NSObject {
 			updateAudioUnitList()
 			
 			// Sign up for a notification when the list of available components changes.
-			NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kAudioComponentRegistrationsChangedNotification as String as String), object: nil, queue: nil) { [weak self] _ in
+			NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kAudioComponentRegistrationsChangedNotification as String), object: nil, queue: nil) { [weak self] _ in
 				self?.updateAudioUnitList()
 			}
 		}

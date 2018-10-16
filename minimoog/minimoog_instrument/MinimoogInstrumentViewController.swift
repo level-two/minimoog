@@ -78,18 +78,15 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     // MARK: Actions
     @IBAction func osc1RangeChanged(_ sender: Any) {
-        osc1RangeSlider.value = round(osc1RangeSlider.value)
-        setParameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue, value: osc1RangeSlider.value)
+        setParameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue, value: round(osc1RangeSlider.value))
     }
     
     @IBAction func osc1WaveformChanged(_ sender: Any) {
-        osc1WaveformSlider.value = round(osc1WaveformSlider.value)
-        setParameter(withAddress: ParamAddr.osc1WaveformParamAddr.rawValue, value: osc1WaveformSlider.value)
+        setParameter(withAddress: ParamAddr.osc1WaveformParamAddr.rawValue, value: round(osc1WaveformSlider.value))
     }
     
     @IBAction func osc2RangeChanged(_ sender: Any) {
-        osc2RangeSlider.value = round(osc2RangeSlider.value)
-        setParameter(withAddress: ParamAddr.osc2RangeParamAddr.rawValue, value: osc2RangeSlider.value)
+        setParameter(withAddress: ParamAddr.osc2RangeParamAddr.rawValue, value: round(osc2RangeSlider.value))
     }
     
     @IBAction func osc2DetuneChanged(_ sender: Any) {
@@ -97,8 +94,7 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     }
     
     @IBAction func osc2WaveformChanged(_ sender: Any) {
-        osc2WaveformSlider.value = round(osc2WaveformSlider.value)
-        setParameter(withAddress: ParamAddr.osc2WaveformParamAddr.rawValue, value: osc2WaveformSlider.value)
+        setParameter(withAddress: ParamAddr.osc2WaveformParamAddr.rawValue, value: round(osc2WaveformSlider.value))
     }
     
     @IBAction func mixOsc1VolumeChanged(_ sender: Any) {

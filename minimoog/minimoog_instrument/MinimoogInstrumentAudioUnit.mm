@@ -17,13 +17,14 @@
     AUAudioUnitBus           *_outputBus;
     AUAudioUnitBusArray      *_inputBusArray;
     AUAudioUnitBusArray      *_outputBusArray;
-    AUParameterTree          *_parameterTree;
     MinimoogInstrument        _minimoogInstrument;
 }
+@property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @end
 
 
 @implementation MinimoogInstrumentAudioUnit
+    @synthesize parameterTree = _parameterTree;
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
