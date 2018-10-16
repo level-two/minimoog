@@ -12,6 +12,7 @@ import AudioToolbox
 class ViewController: UIViewController {
 
     @IBOutlet weak var minimoogInstrumentAUContainerView: UIView!
+    @IBOutlet weak var playButton: UIButton!
     
     var playEngine: SimplePlayEngine!
     var parameterObserverToken: AUParameterObserverToken!
@@ -68,16 +69,27 @@ class ViewController: UIViewController {
         let appExtensionBundle = Bundle(url: pluginURL)
         
         let storyboard = UIStoryboard(name: "MainInterface", bundle: appExtensionBundle)
-        minimoogInstrumentViewController = storyboard.instantiateInitialViewController() as! MinimoogInstrumentViewController
+        minimoogInstrumentViewController = storyboard.instantiateInitialViewController() as? MinimoogInstrumentViewController
         
         // Present the view controller's view.
         if let view = minimoogInstrumentViewController.view {
-            addChildViewController(minimoogInstrumentViewController)
-            view.frame = auContainerView.bounds
+            addChild(minimoogInstrumentViewController)
+            view.frame = minimoogInstrumentAUContainerView.bounds
             
-            auContainerView.addSubview(view)
-            minimoogInstrumentViewController.didMove(toParentViewController: self)
+            minimoogInstrumentAUContainerView.addSubview(view)
+            minimoogInstrumentViewController.didMove(toParent: self)
         }
+    }
+    
+    func connectParametersToControls() {
+        
+    }
+    
+    /// Handles Play/Stop button touches.
+    @IBAction func togglePlay(_ sender: AnyObject?) {
+        let isPlaying = playEngine.togglePlay()
+        let titleText = isPlaying ? "Stop" : "Play"
+        playButton.setTitle(titleText, for: .normal)
     }
 }
 

@@ -30,7 +30,7 @@
 					<key>description</key>
 					<string>minimoog_instrument</string>
 					<key>factoryFunction</key>
-					<string>$(PRODUCT_MODULE_NAME).AudioUnitViewController</string>
+					<string>$(PRODUCT_MODULE_NAME).MinimoogInstrumentViewController</string>
 					<key>manufacturer</key>
 					<string>YLYC</string>
 					<key>name</key>

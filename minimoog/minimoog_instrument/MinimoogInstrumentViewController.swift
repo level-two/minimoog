@@ -125,31 +125,30 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     func connectViewWithAU() {
         guard let paramTree = audioUnit?.parameterTree else { return }
         parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self, weak paramTree] address, value in
-            guard let strongSelf = self else { return }
+            guard let strongSelf = self                        else { return }
+            guard let paramAddr  = ParamAddr(rawValue:address) else { return }
             DispatchQueue.main.async {
-                switch address {
-                case ParamAddr.osc1RangeParamAddr.rawValue:
+                switch paramAddr {
+                case .osc1RangeParamAddr:
                     strongSelf.osc1RangeLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc1RangeSlider.value = value
-                case ParamAddr.osc1WaveformParamAddr.rawValue:
+                case .osc1WaveformParamAddr:
                     strongSelf.osc1WaveformLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc1WaveformSlider.value = value
-                case ParamAddr.osc2RangeParamAddr.rawValue:
+                case .osc2RangeParamAddr:
                     strongSelf.osc2RangeLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc2RangeSlider.value = value
-                case ParamAddr.osc2DetuneParamAddr.rawValue:
+                case .osc2DetuneParamAddr:
                     strongSelf.osc2DetuneSlider.value = value
-                case ParamAddr.osc2WaveformParamAddr.rawValue:
+                case .osc2WaveformParamAddr:
                     strongSelf.osc2WaveformLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc2WaveformSlider.value = value
-                case ParamAddr.mixOsc1VolumeParamAddr.rawValue:
+                case .mixOsc1VolumeParamAddr:
                     strongSelf.mixOsc1VolumeSlider.value = value
-                case ParamAddr.mixOsc2VolumeParamAddr.rawValue:
+                case .mixOsc2VolumeParamAddr:
                     strongSelf.mixOsc2VolumeSlider.value = value
-                case ParamAddr.mixNoiseVolumeParamAddr.rawValue:
+                case .mixNoiseVolumeParamAddr:
                     strongSelf.mixNoiseVolumeSlider.value = value
-                default:
-                    print("Unknown parameter address");
                 }
             }
         })

@@ -9,6 +9,14 @@
 
 #import "MinimoogInstrumentBase.hpp"
 
+MinimoogInstrumentBase::MinimoogInstrumentBase() {
+    
+}
+
+MinimoogInstrumentBase::~MinimoogInstrumentBase() {
+    
+}
+
 void MinimoogInstrumentBase::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *&event) {
 	do {
         switch (event->head.eventType) {
