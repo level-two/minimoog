@@ -63,8 +63,10 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     // MARK: Overrides
     public override func viewDidLoad() {
         super.viewDidLoad()
+        osc1RangeSlider.value = 5
         
         guard audioUnit != nil else { return }
+        
         
         // Get the parameter tree and add observers for any parameters that the UI needs to keep in sync with the AudioUnit
         connectViewWithAU()
@@ -120,24 +122,24 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     func connectViewWithAU() {
         guard let paramTree = audioUnit?.parameterTree else { return }
-        parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self, weak paramTree] address, value in
+        parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] address, value in
             guard let strongSelf = self                        else { return }
             guard let paramAddr  = ParamAddr(rawValue:address) else { return }
             DispatchQueue.main.async {
                 switch paramAddr {
                 case .osc1RangeParamAddr:
-                    strongSelf.osc1RangeLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
+                    strongSelf.osc1RangeLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc1RangeSlider.value = value
                 case .osc1WaveformParamAddr:
-                    strongSelf.osc1WaveformLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
+                    strongSelf.osc1WaveformLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc1WaveformSlider.value = value
                 case .osc2RangeParamAddr:
-                    strongSelf.osc2RangeLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
+                    strongSelf.osc2RangeLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc2RangeSlider.value = value
                 case .osc2DetuneParamAddr:
                     strongSelf.osc2DetuneSlider.value = value
                 case .osc2WaveformParamAddr:
-                    strongSelf.osc2WaveformLabel.text = paramTree?.parameter(withAddress: address)?.valueStrings![Int(value)]
+                    strongSelf.osc2WaveformLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
                     strongSelf.osc2WaveformSlider.value = value
                 case .mixOsc1VolumeParamAddr:
                     strongSelf.mixOsc1VolumeSlider.value = value
