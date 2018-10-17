@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import UIKit.UIGestureRecognizerSubclass
 
-public class MinimoogInstrumentKnob: UIControl,  {
+public class MinimoogInstrumentKnob: UIControl, UIPanGestureRecognizer {
 
     // MARK: Outlets
     @IBOutlet weak var knobImageView: UIImageView!
@@ -71,5 +72,32 @@ public class MinimoogInstrumentKnob: UIControl,  {
         CATransaction.commit()
     }
 
-    // MARK: Actions
+    // MARK: UIPanGestureRecognizer implementation
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesBegan(touches, with: event)
+        guard 
+            let touch = touches.first,
+            let view  = view
+        else {
+            return
+        }
+        _lastTouchPoint = touch.location(in: view)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
+        guard 
+            let touch = touches.first,
+            let view  = view
+        else {
+            return
+        }
+        let touchPoint  = touch.location(in: view)
+        // y axis grows down, so delta should be defined as yLast-yNew
+        let delta       = _lastTouchPoint.y - touchPoint.y
+        let newValue    = self.value + delta*(maxValue-minValue)/(view.bounds.height*2)
+        setValue(newValue, animated:false)
+        _lastTouchPoint = touchPoint
+    }
 }
+
