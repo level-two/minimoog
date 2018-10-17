@@ -63,11 +63,7 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     // MARK: Overrides
     public override func viewDidLoad() {
         super.viewDidLoad()
-        osc1RangeSlider.value = 5
-        
         guard audioUnit != nil else { return }
-        
-        
         // Get the parameter tree and add observers for any parameters that the UI needs to keep in sync with the AudioUnit
         connectViewWithAU()
     }
@@ -80,75 +76,103 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     // MARK: Actions
     @IBAction func osc1RangeChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue, value: round(osc1RangeSlider.value))
+        let value = roundf(osc1RangeSlider.value)
+        osc1RangeSlider.value = value
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue) else { return }
+        if parameter.value != value {
+            parameter.setValue(value, originator: parameterObserverToken)
+            osc1RangeLabel.text = parameter.valueStrings![Int(value)]
+        }
     }
     
     @IBAction func osc1WaveformChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.osc1WaveformParamAddr.rawValue, value: round(osc1WaveformSlider.value))
+        let value = roundf(osc1WaveformSlider.value)
+        osc1WaveformSlider.value = value
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc1WaveformParamAddr.rawValue) else { return }
+        if parameter.value != value {
+            parameter.setValue(value, originator: parameterObserverToken)
+            osc1WaveformLabel.text = parameter.valueStrings![Int(value)]
+        }
     }
     
     @IBAction func osc2RangeChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.osc2RangeParamAddr.rawValue, value: round(osc2RangeSlider.value))
+        let value = roundf(osc2RangeSlider.value)
+        osc2RangeSlider.value = value
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc2RangeParamAddr.rawValue) else { return }
+        if parameter.value != value {
+            parameter.setValue(value, originator: parameterObserverToken)
+            osc2RangeLabel.text = parameter.valueStrings![Int(value)]
+        }
     }
     
     @IBAction func osc2DetuneChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.osc2DetuneParamAddr.rawValue, value: osc2DetuneSlider.value)
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc2DetuneParamAddr.rawValue) else { return }
+        parameter.setValue(osc2DetuneSlider.value, originator: parameterObserverToken)
     }
     
     @IBAction func osc2WaveformChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.osc2WaveformParamAddr.rawValue, value: round(osc2WaveformSlider.value))
+        let value = roundf(osc2WaveformSlider.value)
+        osc2WaveformSlider.value = value
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc2WaveformParamAddr.rawValue) else { return }
+        if parameter.value != value {
+            parameter.setValue(value, originator: parameterObserverToken)
+            osc2WaveformLabel.text = parameter.valueStrings![Int(value)]
+        }
     }
     
     @IBAction func mixOsc1VolumeChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.mixOsc1VolumeParamAddr.rawValue, value: mixOsc1VolumeSlider.value)
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.mixOsc1VolumeParamAddr.rawValue) else { return }
+        parameter.setValue(mixOsc1VolumeSlider.value, originator: parameterObserverToken)
     }
     
     @IBAction func mixOsc2VolumeChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.mixOsc2VolumeParamAddr.rawValue, value: mixOsc2VolumeSlider.value)
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.mixOsc2VolumeParamAddr.rawValue) else { return }
+        parameter.setValue(mixOsc2VolumeSlider.value, originator: parameterObserverToken)
     }
     
     @IBAction func mixNoiseVolumeChanged(_ sender: Any) {
-        setParameter(withAddress: ParamAddr.mixNoiseVolumeParamAddr.rawValue, value: mixNoiseVolumeSlider.value)
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.mixNoiseVolumeParamAddr.rawValue) else { return }
+        parameter.setValue(mixNoiseVolumeSlider.value, originator: parameterObserverToken)
     }
     
     // MARK: Private variables
     var parameterObserverToken  : AUParameterObserverToken?
     
-    // MARK: Private methods
-    func setParameter(withAddress address:AUParameterAddress, value:AUValue) {
-        guard let paramTree = audioUnit?.parameterTree else { return }
-        paramTree.parameter(withAddress: address)?.value = value
-    }
-    
     func connectViewWithAU() {
         guard let paramTree = audioUnit?.parameterTree else { return }
-        parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] address, value in
-            guard let strongSelf = self                        else { return }
-            guard let paramAddr  = ParamAddr(rawValue:address) else { return }
+        parameterObserverToken = paramTree.token(byAddingParameterObserver: { [unowned self] address, value in
             DispatchQueue.main.async {
-                switch paramAddr {
-                case .osc1RangeParamAddr:
-                    strongSelf.osc1RangeLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
-                    strongSelf.osc1RangeSlider.value = value
-                case .osc1WaveformParamAddr:
-                    strongSelf.osc1WaveformLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
-                    strongSelf.osc1WaveformSlider.value = value
-                case .osc2RangeParamAddr:
-                    strongSelf.osc2RangeLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
-                    strongSelf.osc2RangeSlider.value = value
-                case .osc2DetuneParamAddr:
-                    strongSelf.osc2DetuneSlider.value = value
-                case .osc2WaveformParamAddr:
-                    strongSelf.osc2WaveformLabel.text = paramTree.parameter(withAddress: address)?.valueStrings![Int(value)]
-                    strongSelf.osc2WaveformSlider.value = value
-                case .mixOsc1VolumeParamAddr:
-                    strongSelf.mixOsc1VolumeSlider.value = value
-                case .mixOsc2VolumeParamAddr:
-                    strongSelf.mixOsc2VolumeSlider.value = value
-                case .mixNoiseVolumeParamAddr:
-                    strongSelf.mixNoiseVolumeSlider.value = value
-                }
+                self.updateUI(withAddress:address, value:value)
             }
         })
+    }
+    
+    func updateUI(withAddress address:AUParameterAddress, value:AUValue) {
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: address) else { return }
+        
+        switch address {
+        case ParamAddr.osc1RangeParamAddr.rawValue:
+            osc1RangeLabel.text = parameter.valueStrings![Int(value)]
+            osc1RangeSlider.value = value
+        case ParamAddr.osc1WaveformParamAddr.rawValue:
+            osc1WaveformLabel.text = parameter.valueStrings![Int(value)]
+            osc1WaveformSlider.value = value
+        case ParamAddr.osc2RangeParamAddr.rawValue:
+            osc2RangeLabel.text = parameter.valueStrings![Int(value)]
+            osc2RangeSlider.value = value
+        case ParamAddr.osc2DetuneParamAddr.rawValue:
+            osc2DetuneSlider.value = value
+        case ParamAddr.osc2WaveformParamAddr.rawValue:
+            osc2WaveformLabel.text = parameter.valueStrings![Int(value)]
+            osc2WaveformSlider.value = value
+        case ParamAddr.mixOsc1VolumeParamAddr.rawValue:
+            mixOsc1VolumeSlider.value = value
+        case ParamAddr.mixOsc2VolumeParamAddr.rawValue:
+            mixOsc2VolumeSlider.value = value
+        case ParamAddr.mixNoiseVolumeParamAddr.rawValue:
+            mixNoiseVolumeSlider.value = value
+        default:
+            print("Unknown address")
+        }
     }
 }
