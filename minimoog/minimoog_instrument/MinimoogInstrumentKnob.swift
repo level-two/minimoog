@@ -81,7 +81,7 @@ public class MinimoogInstrumentKnob: UIControl {
     private func rotateKnob(from curAngle:Float, to newAngle:Float, animated:Bool) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(newAngle))
+        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(-newAngle))
         if (animated) {
             let midAngle              = (newAngle + curAngle) / 2
             let animation             = CAKeyframeAnimation(keyPath: "transform.rotation.z")
