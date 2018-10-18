@@ -225,6 +225,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4mk-Ib-tgY" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                <rect key="frame" x="47" y="461" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="knob.png" translatesAutoresizingMaskIntoConstraints="NO" id="iAI-n4-qXT">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <connections>
+                                    <outlet property="knobImageView" destination="iAI-n4-qXT" id="r6X-eR-ssW"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -245,10 +262,15 @@
                         <outlet property="osc2RangeSlider" destination="tEi-Rw-Qqb" id="UcV-Ra-HCn"/>
                         <outlet property="osc2WaveformLabel" destination="o2J-lw-yak" id="YkL-Yn-iIo"/>
                         <outlet property="osc2WaveformSlider" destination="IXp-UB-Edx" id="StK-Cq-aRK"/>
+                        <outlet property="testKnob" destination="4mk-Ib-tgY" id="9JO-YD-LLZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="knob.png" width="93" height="84"/>
+    </resources>
 </document>

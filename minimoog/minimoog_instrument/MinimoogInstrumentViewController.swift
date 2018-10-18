@@ -41,6 +41,8 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     @IBOutlet weak var mixOsc2VolumeLabel : UILabel!
     @IBOutlet weak var mixNoiseVolumeLabel: UILabel!
     
+    @IBOutlet weak var testKnob: MinimoogInstrumentKnob!
+    
     // MARK: Public variables
     public var audioUnit: AUAudioUnit? {
         didSet {
@@ -63,6 +65,7 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     // MARK: Overrides
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
         guard audioUnit != nil else { return }
         // Get the parameter tree and add observers for any parameters that the UI needs to keep in sync with the AudioUnit
         connectViewWithAU()

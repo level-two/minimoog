@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import UIKit.UIGestureRecognizerSubclass
+import Foundation
+import AVFoundation
 
-public class MinimoogInstrumentKnob: UIControl, UIPanGestureRecognizer {
-
+public class MinimoogInstrumentKnob: UIControl {
+    
     // MARK: Outlets
     @IBOutlet weak var knobImageView: UIImageView!
     
@@ -18,86 +19,97 @@ public class MinimoogInstrumentKnob: UIControl, UIPanGestureRecognizer {
     var minValue : Float = 0
     var maxValue : Float = 1
     var initValue: Float = 0.5
-    var value    : Float = 0 {
-        get { return _value }
-        set { setValue(newValue, animated:true) }
+    var value    : Float {
+        get {
+            return _value
+        }
+        set {
+            if _isValueLockedByUI == false {
+                setValue(newValue, animated:true)
+            }
+        }
     }
     //var isContinuous = true
-    var minAngle : Float = -3*Double.pi/4
-    var maxAngle : Float =  3*Double.pi/4
-
+    var minAngle : Float = -3*Float.pi/4
+    var maxAngle : Float =  3*Float.pi/4
+    
     // MARK: Public functions
     func setValue(_ newValue: Float, animated: Bool = false) {
-        var prevAngle = _curAngle
-        _value        = min(maxValue, max(minalue, newValue))
-        _curAngle     = _value*(maxAngle-minAngle)/(maxValue-minValue)
-        rotateKnob(from:prevAngle to:_curAngle animated:animated)
+        let prevAngle = _curAngle
+        _value        = min(maxValue, max(minValue, newValue))
+        _curAngle     = minAngle + (_value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
+        rotateKnob(from:prevAngle, to:_curAngle, animated:animated)
     }
-
+    
     // MARK: Private variables
-    private var _value   : Float = 0
-    private var _curAngle: Float = 0
+    private var _isViewLoaded         : Bool = false
+    private var _value                : Float = 0
+    private var _curAngle             : Float = 0
+    private var _isValueLockedByUI    : Bool = false
+    private var _panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer()
+    private var _prevOffset           : Float = 0
     
     // MARK: Overrides
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-
+    
     private func commonInit() {
-        backgroundColor = .blue
-        // TODO:load image
-        setValue(initValue, animated:false)
+        _panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
+        self.addGestureRecognizer(_panGestureRecognizer)
+        self.isUserInteractionEnabled = true
+        self.backgroundColor = .blue
+    }
+    
+    override public func layoutSubviews() {
+        if _isViewLoaded == false {
+            _isViewLoaded = true
+            knobImageView.backgroundColor = .green
+            
+            _value = initValue
+            _curAngle = minAngle + (maxAngle-minAngle)*(initValue-minValue)/(maxValue-minValue)
+            rotateKnob(from: 0, to: _curAngle, animated: false)
+        }
     }
     
     private func rotateKnob(from curAngle:Float, to newAngle:Float, animated:Bool) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        knobImageView.transform = CATransform3DMakeRotation(newAngle, 0, 0, 1)
-
+        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(newAngle))
         if (animated) {
             let midAngle              = (newAngle + curAngle) / 2
             let animation             = CAKeyframeAnimation(keyPath: "transform.rotation.z")
             animation.values          = [curAngle, midAngle, newAngle]
             animation.keyTimes        = [0.0, 0.5, 1.0]
-            animation.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)]
+            animation.timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)]
             knobImageView.layer.add(animation, forKey: "transform.rotation.z")
         }
-
         CATransaction.commit()
     }
-
-    // MARK: UIPanGestureRecognizer implementation
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesBegan(touches, with: event)
-        guard 
-            let touch = touches.first,
-            let view  = view
-        else {
-            return
+    
+    // MARK: UIPanGestureRecognizer delegate
+    @objc private func handlePan(recognizer:UIPanGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            _isValueLockedByUI    = true
+            _prevOffset           = 0
+        case .changed:
+            _isValueLockedByUI    = true
+            let curOffset         = Float(recognizer.translation(in: self).y)
+            let delta             = curOffset - _prevOffset
+            _prevOffset           = curOffset
+            let newValue          = self.value + (maxValue-minValue)*delta/Float(self.bounds.height)
+            setValue(newValue, animated:false)
+        default:
+            _isValueLockedByUI    = false
+            _prevOffset           = 0
         }
-        _lastTouchPoint = touch.location(in: view)
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesMoved(touches, with: event)
-        guard 
-            let touch = touches.first,
-            let view  = view
-        else {
-            return
-        }
-        let touchPoint  = touch.location(in: view)
-        // y axis grows down, so delta should be defined as yLast-yNew
-        let delta       = _lastTouchPoint.y - touchPoint.y
-        let newValue    = self.value + delta*(maxValue-minValue)/(view.bounds.height*2)
-        setValue(newValue, animated:false)
-        _lastTouchPoint = touchPoint
     }
 }
 
