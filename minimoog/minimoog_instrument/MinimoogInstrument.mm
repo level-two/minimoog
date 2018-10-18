@@ -11,12 +11,12 @@
 
 static inline double noteToHz(int noteNumber)
 {
-    return 440. * exp2((noteNumber - 69)/12.);
+    return 440. * exp2((noteNumber - 69.)/12.);
 }
 
 static inline double detunedNoteToHz(int noteNumber, float cents)
 {
-    return 440. * exp2((noteNumber + cents/8 - 69)/12.);
+    return 440. * exp2((noteNumber + cents/8. - 69.)/12.);
 }
 
 
@@ -50,15 +50,15 @@ void MinimoogInstrument::setParameter(AUParameterAddress address, AUValue value)
             break;
         case mixOsc1VolumeParamAddr:
             m_mixOsc1Volume = value;
-            m_mixOsc1AmplMultiplier = value / 10.0f;
+            m_mixOsc1AmplMultiplier = value / 10.;
             break;
         case mixOsc2VolumeParamAddr:
             m_mixOsc2Volume = value;
-            m_mixOsc2AmplMultiplier = value / 10.0f;
+            m_mixOsc2AmplMultiplier = value / 10.;
             break;
         case mixNoiseVolumeParamAddr:
             m_mixNoiseVolume = value;
-            m_mixNoiseAmplMultiplier = value / 10.0f;
+            m_mixNoiseAmplMultiplier = value / 10.;
             break;
         default:
             break;
@@ -119,9 +119,9 @@ void MinimoogInstrument::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             uint8_t note = midiEvent.data[1];
             m_currentNote = note;
             uint8_t vel  = midiEvent.data[2];
-            m_osc1Ampl  = vel / 127.0f;
-            m_osc2Ampl  = vel / 127.0f;
-            m_noiseAmpl = vel / 127.0f;
+            m_osc1Ampl  = vel / 127.;
+            m_osc2Ampl  = vel / 127.;
+            m_noiseAmpl = vel / 127.;
             updateOsc1State();
             updateOsc2State();
             break;
@@ -141,29 +141,29 @@ void MinimoogInstrument::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 
 void MinimoogInstrument::updateOsc1State() {
     m_osc1Freq = noteToHz(m_currentNote);
-    m_osc1FreqMultiplier = (m_osc1Range == 0) ? 1.0f/128.0f : exp2f(m_osc1Range - 2.0f);
+    m_osc1FreqMultiplier = (m_osc1Range == 0) ? 1./128. : exp2f(m_osc1Range - 2.);
 }
 
 
 void MinimoogInstrument::updateOsc2State() {
     m_osc2Freq = detunedNoteToHz(m_currentNote, m_osc2Detune);
-    m_osc2FreqMultiplier = (m_osc2Range == 0) ? 1.0f/128.0f : exp2f(m_osc2Range - 2.0f);
+    m_osc2FreqMultiplier = (m_osc2Range == 0) ? 1./128. : exp2f(m_osc2Range - 2.);
 }
 
 
 void MinimoogInstrument::doRender(float *outL, float *outR) {
     // OSC1
-    m_osc1Phase += M_2_PI * m_osc1Freq * m_osc1FreqMultiplier / m_sampleRate;
-    if (m_osc1Phase > M_2_PI) m_osc1Phase -= M_2_PI;
+    m_osc1Phase += 2.*M_PI * m_osc1Freq * m_osc1FreqMultiplier / m_sampleRate;
+    if (m_osc1Phase > 2.*M_PI) m_osc1Phase -= 2.*M_PI;
     float osc1Smp = m_osc1Ampl * sin(m_osc1Phase);
     
     // OSC2
-    m_osc2Phase += M_2_PI * m_osc2Freq * m_osc2FreqMultiplier / m_sampleRate;
-    if (m_osc2Phase > M_2_PI) m_osc2Phase -= M_2_PI;
+    m_osc2Phase += 2.*M_PI * m_osc2Freq * m_osc2FreqMultiplier / m_sampleRate;
+    if (m_osc2Phase > 2.*M_PI) m_osc2Phase -= 2.*M_PI;
     float osc2Smp = m_osc2Ampl * sin(m_osc2Phase);
     
     // NOISE
-    float noiseSmp = (float)drand48() * 2.0f - 1.0f;
+    float noiseSmp = (float)drand48() * 2. - 1.;
     // MIX
     
     float mixSmp =
