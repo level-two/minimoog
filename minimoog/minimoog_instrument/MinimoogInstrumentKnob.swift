@@ -16,9 +16,9 @@ public class MinimoogInstrumentKnob: UIControl {
     @IBOutlet weak var knobImageView: UIImageView!
     
     // MARK: Public variables
-    var minValue : Float = 0
-    var maxValue : Float = 1
-    var initValue: Float = 0.5
+    @IBInspectable var minValue : Float = 0
+    @IBInspectable var maxValue : Float = 1
+    @IBInspectable var initValue: Float = 0.5
     var value    : Float {
         get {
             return _value
@@ -30,8 +30,8 @@ public class MinimoogInstrumentKnob: UIControl {
         }
     }
     //var isContinuous = true
-    var minAngle : Float = -3*Float.pi/4
-    var maxAngle : Float =  3*Float.pi/4
+    @IBInspectable var minAngle : Float = -270
+    @IBInspectable var maxAngle : Float =  270
     
     // MARK: Public functions
     func setValue(_ newValue: Float, animated: Bool = false) {
@@ -64,14 +64,12 @@ public class MinimoogInstrumentKnob: UIControl {
         _panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
         self.addGestureRecognizer(_panGestureRecognizer)
         self.isUserInteractionEnabled = true
-        self.backgroundColor = .blue
     }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
         if _isViewLoaded == false {
             _isViewLoaded = true
-            knobImageView.backgroundColor = .green
             
             _value = initValue
             _curAngle = minAngle + (maxAngle-minAngle)*(initValue-minValue)/(maxValue-minValue)
@@ -79,14 +77,16 @@ public class MinimoogInstrumentKnob: UIControl {
         }
     }
     
-    private func rotateKnob(from curAngle:Float, to newAngle:Float, animated:Bool) {
+    private func rotateKnob(from curAngleDeg:Float, to newAngleDeg:Float, animated:Bool) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(-newAngle))
+        let curAngleRad = curAngleDeg*Float.pi/180
+        let newAngleRad = newAngleDeg*Float.pi/180
+        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(-newAngleRad))
         if (animated) {
-            let midAngle              = (newAngle + curAngle) / 2
+            let midAngleRad           = (newAngleRad + curAngleRad) / 2
             let animation             = CAKeyframeAnimation(keyPath: "transform.rotation.z")
-            animation.values          = [curAngle, midAngle, newAngle]
+            animation.values          = [curAngleRad, midAngleRad, newAngleRad]
             animation.keyTimes        = [0.0, 0.5, 1.0]
             animation.timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)]
             knobImageView.layer.add(animation, forKey: "transform.rotation.z")
@@ -107,6 +107,7 @@ public class MinimoogInstrumentKnob: UIControl {
             _prevOffset           = curOffset
             let newValue          = self.value + (maxValue-minValue)*delta/Float(self.bounds.height)
             setValue(newValue, animated:false)
+            sendActions(for: .valueChanged)
         default:
             _isValueLockedByUI    = false
             _prevOffset           = 0

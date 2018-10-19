@@ -20,29 +20,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmB-RR-ikx">
-                                <rect key="frame" x="49" y="49" width="42" height="21"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UQf-Hd-lyb" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4mk-Ib-tgY" userLabel="Osc1 Range Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                <rect key="frame" x="7" y="44" width="128" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWF-dx-OlV">
-                                <rect key="frame" x="46" y="115" width="49" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="cww-Dq-hPV">
-                                <rect key="frame" x="23" y="78" width="94" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="minimumTrackTintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <color key="maximumTrackTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="knob_range.png" translatesAutoresizingMaskIntoConstraints="NO" id="iAI-n4-qXT">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="knob_pointer.png" translatesAutoresizingMaskIntoConstraints="NO" id="xCU-Mf-L1w">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                        <real key="value" value="-60"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                        <real key="value" value="60"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="5u0-5p-QyA"/>
+                                    <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="FSn-QN-IMd"/>
+                                    <outlet property="knobImageView" destination="xCU-Mf-L1w" id="Oht-jN-uNy"/>
                                 </connections>
-                            </slider>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J46-KK-q1I">
                                 <rect key="frame" x="276" y="49" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -225,23 +246,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4mk-Ib-tgY" customClass="MinimoogInstrumentKnob" customModule="minimoog">
-                                <rect key="frame" x="27" y="406" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="knob.png" translatesAutoresizingMaskIntoConstraints="NO" id="iAI-n4-qXT">
-                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                </accessibility>
-                                <connections>
-                                    <outlet property="knobImageView" destination="iAI-n4-qXT" id="r6X-eR-ssW"/>
-                                </connections>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -252,8 +256,7 @@
                         <outlet property="mixOsc1VolumeSlider" destination="tPT-QX-qxW" id="uAd-My-fQG"/>
                         <outlet property="mixOsc2VolumeLabel" destination="Hrk-uD-DWn" id="s7F-c6-fdK"/>
                         <outlet property="mixOsc2VolumeSlider" destination="1aA-WT-pay" id="gHh-CF-nt9"/>
-                        <outlet property="osc1RangeLabel" destination="vmB-RR-ikx" id="LBr-bd-pCu"/>
-                        <outlet property="osc1RangeSlider" destination="cww-Dq-hPV" id="ZTU-C7-CbR"/>
+                        <outlet property="osc1RangeKnob" destination="4mk-Ib-tgY" id="BAj-f9-fME"/>
                         <outlet property="osc1WaveformLabel" destination="J46-KK-q1I" id="VPd-Qh-pWD"/>
                         <outlet property="osc1WaveformSlider" destination="Vso-Fc-bbt" id="gge-oQ-FDY"/>
                         <outlet property="osc2DetuneLabel" destination="yQz-DU-Eq1" id="Yir-Pk-hND"/>
@@ -262,7 +265,6 @@
                         <outlet property="osc2RangeSlider" destination="tEi-Rw-Qqb" id="UcV-Ra-HCn"/>
                         <outlet property="osc2WaveformLabel" destination="o2J-lw-yak" id="YkL-Yn-iIo"/>
                         <outlet property="osc2WaveformSlider" destination="IXp-UB-Edx" id="StK-Cq-aRK"/>
-                        <outlet property="testKnob" destination="4mk-Ib-tgY" id="9JO-YD-LLZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -271,6 +273,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="knob.png" width="93" height="84"/>
+        <image name="knob_pointer.png" width="640" height="480"/>
+        <image name="knob_range.png" width="640" height="480"/>
     </resources>
 </document>

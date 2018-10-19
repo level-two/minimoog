@@ -23,7 +23,7 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     }
     
     // MARK: Outlets
-    @IBOutlet weak var osc1RangeSlider     : UISlider!
+    @IBOutlet weak var osc1RangeKnob: MinimoogInstrumentKnob!
     @IBOutlet weak var osc1WaveformSlider  : UISlider!
     @IBOutlet weak var osc2RangeSlider     : UISlider!
     @IBOutlet weak var osc2DetuneSlider    : UISlider!
@@ -32,7 +32,6 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     @IBOutlet weak var mixOsc2VolumeSlider : UISlider!
     @IBOutlet weak var mixNoiseVolumeSlider: UISlider!
     
-    @IBOutlet weak var osc1RangeLabel     : UILabel!
     @IBOutlet weak var osc1WaveformLabel  : UILabel!
     @IBOutlet weak var osc2RangeLabel     : UILabel!
     @IBOutlet weak var osc2DetuneLabel    : UILabel!
@@ -79,12 +78,11 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     // MARK: Actions
     @IBAction func osc1RangeChanged(_ sender: Any) {
-        let value = roundf(osc1RangeSlider.value)
-        osc1RangeSlider.value = value
+        let value = roundf(osc1RangeKnob.value)
+        osc1RangeKnob.value = value
         guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue) else { return }
         if parameter.value != value {
             parameter.setValue(value, originator: parameterObserverToken)
-            osc1RangeLabel.text = parameter.valueStrings![Int(value)]
         }
     }
     
@@ -155,8 +153,7 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
         
         switch address {
         case ParamAddr.osc1RangeParamAddr.rawValue:
-            osc1RangeLabel.text = parameter.valueStrings![Int(value)]
-            osc1RangeSlider.value = value
+            osc1RangeKnob.value = value
         case ParamAddr.osc1WaveformParamAddr.rawValue:
             osc1WaveformLabel.text = parameter.valueStrings![Int(value)]
             osc1WaveformSlider.value = value

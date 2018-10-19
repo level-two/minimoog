@@ -14,8 +14,6 @@
 		930E79A62176926200568351 /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */; };
 		930E79A72176926500568351 /* MinimoogInstrumentAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */; };
 		930E79A82176926900568351 /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */; };
-		930E79AE2178C73B00568351 /* knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E79AD2178C73B00568351 /* knob.png */; };
-		930E79AF2178C73B00568351 /* knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 930E79AD2178C73B00568351 /* knob.png */; };
 		930F395D21679E0F00BAB7F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F395C21679E0F00BAB7F3 /* AppDelegate.swift */; };
 		930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F395E21679E0F00BAB7F3 /* ViewController.swift */; };
 		930F396221679E0F00BAB7F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F396021679E0F00BAB7F3 /* Main.storyboard */; };
@@ -30,6 +28,18 @@
 		930F3992216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */; };
 		9336F2EE217923780006EE25 /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */; };
 		9336F2EF217923780006EE25 /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */; };
+		9336F2F7217A94990006EE25 /* knob_range.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F1217A94990006EE25 /* knob_range.png */; };
+		9336F2F8217A94990006EE25 /* knob_range.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F1217A94990006EE25 /* knob_range.png */; };
+		9336F2F9217A94990006EE25 /* knob_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F2217A94990006EE25 /* knob_volume.png */; };
+		9336F2FA217A94990006EE25 /* knob_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F2217A94990006EE25 /* knob_volume.png */; };
+		9336F2FB217A94990006EE25 /* knob_detune.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F3217A94990006EE25 /* knob_detune.png */; };
+		9336F2FC217A94990006EE25 /* knob_detune.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F3217A94990006EE25 /* knob_detune.png */; };
+		9336F2FD217A94990006EE25 /* knob_waveform.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F4217A94990006EE25 /* knob_waveform.png */; };
+		9336F2FE217A94990006EE25 /* knob_waveform.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F4217A94990006EE25 /* knob_waveform.png */; };
+		9336F2FF217A94990006EE25 /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F5217A94990006EE25 /* knob_pointer.png */; };
+		9336F300217A94990006EE25 /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F5217A94990006EE25 /* knob_pointer.png */; };
+		9336F301217A94990006EE25 /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F6217A94990006EE25 /* knob_bg.png */; };
+		9336F302217A94990006EE25 /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F6217A94990006EE25 /* knob_bg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +71,6 @@
 		930E799F2175518A00568351 /* drumLoop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drumLoop.caf; sourceTree = "<group>"; };
 		930E79A22175545100568351 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		930E79A4217554DF00568351 /* minimoog-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "minimoog-Bridging-Header.h"; sourceTree = "<group>"; };
-		930E79AD2178C73B00568351 /* knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob.png; sourceTree = "<group>"; };
 		930F395921679E0F00BAB7F3 /* minimoog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = minimoog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		930F395C21679E0F00BAB7F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		930F395E21679E0F00BAB7F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +91,12 @@
 		930F398F216CBE7600BAB7F3 /* MinimoogInstrumentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MinimoogInstrumentBase.hpp; sourceTree = "<group>"; };
 		930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrumentBase.mm; sourceTree = "<group>"; };
 		9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
+		9336F2F1217A94990006EE25 /* knob_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_range.png; sourceTree = "<group>"; };
+		9336F2F2217A94990006EE25 /* knob_volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_volume.png; sourceTree = "<group>"; };
+		9336F2F3217A94990006EE25 /* knob_detune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_detune.png; sourceTree = "<group>"; };
+		9336F2F4217A94990006EE25 /* knob_waveform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_waveform.png; sourceTree = "<group>"; };
+		9336F2F5217A94990006EE25 /* knob_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_pointer.png; sourceTree = "<group>"; };
+		9336F2F6217A94990006EE25 /* knob_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_bg.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +156,7 @@
 		930F397321691B2F00BAB7F3 /* minimoog_instrument */ = {
 			isa = PBXGroup;
 			children = (
+				9336F2F0217A94990006EE25 /* Assets */,
 				930F398F216CBE7600BAB7F3 /* MinimoogInstrumentBase.hpp */,
 				930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */,
 				930F3989216C090C00BAB7F3 /* MinimoogInstrument.hpp */,
@@ -152,7 +168,6 @@
 				930F397D21691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit-Bridging-Header.h */,
 				930F397921691B2F00BAB7F3 /* MainInterface.storyboard */,
 				930F397C21691B2F00BAB7F3 /* Info.plist */,
-				930E79AD2178C73B00568351 /* knob.png */,
 			);
 			path = minimoog_instrument;
 			sourceTree = "<group>";
@@ -164,6 +179,19 @@
 				930F398621691B6B00BAB7F3 /* AudioUnit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9336F2F0217A94990006EE25 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9336F2F1217A94990006EE25 /* knob_range.png */,
+				9336F2F2217A94990006EE25 /* knob_volume.png */,
+				9336F2F3217A94990006EE25 /* knob_detune.png */,
+				9336F2F4217A94990006EE25 /* knob_waveform.png */,
+				9336F2F5217A94990006EE25 /* knob_pointer.png */,
+				9336F2F6217A94990006EE25 /* knob_bg.png */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,11 +276,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				930F396721679E1100BAB7F3 /* LaunchScreen.storyboard in Resources */,
+				9336F2FB217A94990006EE25 /* knob_detune.png in Resources */,
 				930E79A12175518A00568351 /* drumLoop.caf in Resources */,
 				930F398E216CB96300BAB7F3 /* MainInterface.storyboard in Resources */,
+				9336F301217A94990006EE25 /* knob_bg.png in Resources */,
+				9336F2F9217A94990006EE25 /* knob_volume.png in Resources */,
 				930F396421679E1100BAB7F3 /* Assets.xcassets in Resources */,
+				9336F2FF217A94990006EE25 /* knob_pointer.png in Resources */,
 				930F396221679E0F00BAB7F3 /* Main.storyboard in Resources */,
-				930E79AE2178C73B00568351 /* knob.png in Resources */,
+				9336F2F7217A94990006EE25 /* knob_range.png in Resources */,
+				9336F2FD217A94990006EE25 /* knob_waveform.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,8 +293,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9336F302217A94990006EE25 /* knob_bg.png in Resources */,
+				9336F2FE217A94990006EE25 /* knob_waveform.png in Resources */,
 				930F397B21691B2F00BAB7F3 /* MainInterface.storyboard in Resources */,
-				930E79AF2178C73B00568351 /* knob.png in Resources */,
+				9336F2FC217A94990006EE25 /* knob_detune.png in Resources */,
+				9336F300217A94990006EE25 /* knob_pointer.png in Resources */,
+				9336F2F8217A94990006EE25 /* knob_range.png in Resources */,
+				9336F2FA217A94990006EE25 /* knob_volume.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
