@@ -68,6 +68,7 @@ public class MinimoogInstrumentKnob: UIControl {
     }
     
     override public func layoutSubviews() {
+        super.layoutSubviews()
         if _isViewLoaded == false {
             _isViewLoaded = true
             knobImageView.backgroundColor = .green

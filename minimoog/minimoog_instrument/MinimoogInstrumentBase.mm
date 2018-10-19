@@ -88,8 +88,8 @@ void MinimoogInstrumentBase::renderSegmentFrames(AUAudioFrameCount       frameCo
                                                  AUAudioFrameCount const bufferOffset)
 {
     for (int i = 0; i < frameCount; i++) {
-        float* outL = (float*)outputData->mBuffers[0].mData + bufferOffset;
-        float* outR = (float*)outputData->mBuffers[1].mData + bufferOffset;
+        float* outL = (float*)outputData->mBuffers[0].mData + bufferOffset + i;
+        float* outR = (float*)outputData->mBuffers[1].mData + bufferOffset + i;
         doRender(outL, outR);
     }
 }
