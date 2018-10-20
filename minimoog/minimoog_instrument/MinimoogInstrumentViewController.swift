@@ -78,12 +78,9 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     // MARK: Actions
     @IBAction func osc1RangeChanged(_ sender: Any) {
-        let value = roundf(osc1RangeKnob.value)
-        osc1RangeKnob.value = value
         guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue) else { return }
-        if parameter.value != value {
-            parameter.setValue(value, originator: parameterObserverToken)
-        }
+        let value = osc1RangeKnob.value
+        parameter.setValue(value, originator: parameterObserverToken)
     }
     
     @IBAction func osc1WaveformChanged(_ sender: Any) {

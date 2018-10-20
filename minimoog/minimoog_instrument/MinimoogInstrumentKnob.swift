@@ -87,7 +87,7 @@ public class MinimoogInstrumentKnob: UIControl {
         CATransaction.setDisableActions(true)
         let curAngleRad = curAngleDeg*Float.pi/180
         let newAngleRad = newAngleDeg*Float.pi/180
-        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(-newAngleRad))
+        knobImageView.transform = CGAffineTransform.init(rotationAngle: CGFloat(newAngleRad))
         if (animated) {
             let midAngleRad           = (newAngleRad + curAngleRad) / 2
             let animation             = CAKeyframeAnimation(keyPath: "transform.rotation.z")
@@ -107,7 +107,7 @@ public class MinimoogInstrumentKnob: UIControl {
             _prevOffset           = 0
         case .changed:
             _isValueLockedByUI    = true
-            let curOffset         = Float(recognizer.translation(in: self).y)
+            let curOffset         = -Float(recognizer.translation(in: self).y)
             let delta             = curOffset - _prevOffset
             _prevOffset           = curOffset
             let newValue          = _value + (maxValue-minValue)*delta/Float(self.bounds.height)
