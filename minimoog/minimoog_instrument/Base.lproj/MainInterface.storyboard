@@ -58,6 +58,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
                                         <real key="value" value="60"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="FSn-QN-IMd"/>

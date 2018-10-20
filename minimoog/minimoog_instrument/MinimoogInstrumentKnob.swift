@@ -11,17 +11,21 @@ import Foundation
 import AVFoundation
 
 public class MinimoogInstrumentKnob: UIControl {
-    
+
     // MARK: Outlets
     @IBOutlet weak var knobImageView: UIImageView!
     
     // MARK: Public variables
     @IBInspectable var minValue : Float = 0
     @IBInspectable var maxValue : Float = 1
+    @IBInspectable var stepSize : Float = 0
     @IBInspectable var initValue: Float = 0.5
-    var value    : Float {
+    @IBInspectable var minAngle : Float = -270
+    @IBInspectable var maxAngle : Float =  270
+    
+    var value : Float {
         get {
-            return _value
+            return (stepSize != 0) ? getSnappedValue() : _value
         }
         set {
             if _isValueLockedByUI == false {
@@ -29,25 +33,6 @@ public class MinimoogInstrumentKnob: UIControl {
             }
         }
     }
-    //var isContinuous = true
-    @IBInspectable var minAngle : Float = -270
-    @IBInspectable var maxAngle : Float =  270
-    
-    // MARK: Public functions
-    func setValue(_ newValue: Float, animated: Bool = false) {
-        let prevAngle = _curAngle
-        _value        = min(maxValue, max(minValue, newValue))
-        _curAngle     = minAngle + (_value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
-        rotateKnob(from:prevAngle, to:_curAngle, animated:animated)
-    }
-    
-    // MARK: Private variables
-    private var _isViewLoaded         : Bool = false
-    private var _value                : Float = 0
-    private var _curAngle             : Float = 0
-    private var _isValueLockedByUI    : Bool = false
-    private var _panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer()
-    private var _prevOffset           : Float = 0
     
     // MARK: Overrides
     override init(frame: CGRect) {
@@ -60,6 +45,22 @@ public class MinimoogInstrumentKnob: UIControl {
         commonInit()
     }
     
+    // MARK: Public functions
+    public func setValue(_ newValue: Float, animated: Bool = false) {
+        let prevAngle = _curAngle
+        _value        = min(maxValue, max(minValue, newValue))
+        _curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
+        rotateKnob(from:prevAngle, to:_curAngle, animated:animated)
+    }
+    
+    // MARK: Private variables
+    private var _isViewLoaded         : Bool = false
+    private var _value                : Float = 0
+    private var _curAngle             : Float = 0
+    private var _isValueLockedByUI    : Bool = false
+    private var _panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer()
+    private var _prevOffset           : Float = 0
+    
     private func commonInit() {
         _panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
         self.addGestureRecognizer(_panGestureRecognizer)
@@ -70,11 +71,15 @@ public class MinimoogInstrumentKnob: UIControl {
         super.layoutSubviews()
         if _isViewLoaded == false {
             _isViewLoaded = true
-            
-            _value = initValue
-            _curAngle = minAngle + (maxAngle-minAngle)*(initValue-minValue)/(maxValue-minValue)
+            _value        = initValue
+            _curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
             rotateKnob(from: 0, to: _curAngle, animated: false)
         }
+    }
+    
+    private func getSnappedValue() -> Float {
+        let snappedVal = minValue + roundf((_value-minValue)/stepSize)*stepSize
+        return min(maxValue, max(minValue, snappedVal))
     }
     
     private func rotateKnob(from curAngleDeg:Float, to newAngleDeg:Float, animated:Bool) {
@@ -105,7 +110,7 @@ public class MinimoogInstrumentKnob: UIControl {
             let curOffset         = Float(recognizer.translation(in: self).y)
             let delta             = curOffset - _prevOffset
             _prevOffset           = curOffset
-            let newValue          = self.value + (maxValue-minValue)*delta/Float(self.bounds.height)
+            let newValue          = _value + (maxValue-minValue)*delta/Float(self.bounds.height)
             setValue(newValue, animated:false)
             sendActions(for: .valueChanged)
         default:
