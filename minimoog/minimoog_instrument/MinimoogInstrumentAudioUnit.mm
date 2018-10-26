@@ -10,21 +10,77 @@
 #include "MinimoogInstrument.hpp"
 
 @interface MinimoogInstrumentAudioUnit () {
+    // Context
     AUHostMusicalContextBlock _musicalContext;
     AUMIDIOutputEventBlock    _outputEventBlock;
     AUHostTransportStateBlock _transportStateBlock;
+
+    // Buses
     AUAudioUnitBus           *_inputBus;
     AUAudioUnitBus           *_outputBus;
     AUAudioUnitBusArray      *_inputBusArray;
     AUAudioUnitBusArray      *_outputBusArray;
+
+    // Presets
+    AUAudioUnitPreset *_currentPreset;
+    NSInteger _currentFactoryPresetIndex;
+    NSArray<AUAudioUnitPreset *> *_presets;
+
+    // Instrument core - C++ class instance
     MinimoogInstrument        _minimoogInstrument;
 }
-@property (nonatomic, readwrite) AUParameterTree *parameterTree;
+
+    @property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @end
 
 
+
+    // Presets
+    static const UInt8 kNumberOfPresets = 12;
+    static const NSInteger kDefaultFactoryPreset = 0;
+
+    typedef struct FactoryPresetParameters {
+        AUValue intervalValue;
+    } FactoryPresetParameters;
+
+    static const FactoryPresetParameters presetParameters[kNumberOfPresets] = {
+        { 1 },
+        { 2 },
+        { 3 },
+        { 4 },
+        { 5 },
+        { 6 },
+        { 7 },
+        { 8 },
+        { 9 },
+        { 10 },
+        { 11 },
+        { 12 },
+    };
+
+
+
+
 @implementation MinimoogInstrumentAudioUnit
-    @synthesize parameterTree = _parameterTree;
+
+
+
+
+
+
+
+
+
+
+    @synthesize parameterTree  = _parameterTree;
+    @synthesize factoryPresets = _presets;
+
+
+
+
+
+
+
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
@@ -144,6 +200,130 @@
 }
 
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
+
+// ---------------------------------------------
+- (void) setupFactoryPresets {
+    _currentFactoryPresetIndex = kDefaultFactoryPreset;
+    _presets = @[
+        [self createPreset:0 name:@"Minor Second"],
+        [self createPreset:1 name:@"Major Second"],
+        [self createPreset:2 name:@"Minor Third"],
+        [self createPreset:3 name:@"Major Third"],
+        [self createPreset:4 name:@"Fourth"],
+        [self createPreset:5 name:@"Tritone"],
+        [self createPreset:6 name:@"Fifth"],
+        [self createPreset:7 name:@"Minor Sixth"],
+        [self createPreset:8 name:@"Major Sixth"],
+        [self createPreset:9 name:@"Minor Seventh"],
+        [self createPreset:10 name:@"Major Seventh"],
+        [self createPreset:11 name:@"Octave"]
+    ];
+    _currentPreset = self.factoryPresets[_currentFactoryPresetIndex];
+}
+
+- (AUAudioUnitPreset*)createPreset:(NSInteger)number name:(NSString*)name {
+    AUAudioUnitPreset* newPreset = [AUAudioUnitPreset new];
+    newPreset.number = number;
+    newPreset.name = name;
+    return newPreset;
+}
+
+- (AUAudioUnitPreset *)currentPreset {
+    if (_currentPreset.number >= 0) {
+        NSLog(@"Returning Current Factory Preset: %ld\n", (long)_currentFactoryPresetIndex);
+        return [_presets objectAtIndex:_currentFactoryPresetIndex];
+    } else {
+        NSLog(@"Returning Current Custom Preset: %ld, %@\n", (long)_currentPreset.number, _currentPreset.name);
+        return _currentPreset;
+    }
+}
+
+- (void)setCurrentPreset:(AUAudioUnitPreset *)currentPreset {
+    if (nil == currentPreset) {
+        NSLog(@"nil passed to setCurrentPreset!");
+        return;
+    }
+    
+    if (currentPreset.number >= 0) {
+        // factory preset
+        for (AUAudioUnitPreset *factoryPreset in _presets) {
+            if (currentPreset.number == factoryPreset.number) {
+                AUParameter *cutoffParameter    = [self.parameterTree valueForKey: @"cutoff"];
+                AUParameter *resonanceParameter = [self.parameterTree valueForKey: @"resonance"];
+                
+                cutoffParameter.value    = presetParameters[factoryPreset.number].cutoffValue;
+                resonanceParameter.value = presetParameters[factoryPreset.number].resonanceValue;
+                
+                // set factory preset as current
+                _currentPreset             = currentPreset;
+                _currentFactoryPresetIndex = factoryPreset.number;
+                NSLog(@"currentPreset Factory: %ld, %@\n", (long)_currentFactoryPresetIndex, factoryPreset.name);
+                
+                break;
+            }
+        }
+    } else if (nil != currentPreset.name) {
+        // set custom preset as current
+        _currentPreset = currentPreset;
+        NSLog(@"currentPreset Custom: %ld, %@\n", (long)_currentPreset.number, _currentPreset.name);
+    } else {
+        NSLog(@"setCurrentPreset not set! - invalid AUAudioUnitPreset\n");
+    }
+}
+
+- (NSDictionary<NSString *,id> *)fullState {
+    NSLog(@"calling: %s", __PRETTY_FUNCTION__ );
+    NSMutableDictionary *state = [[NSMutableDictionary alloc] initWithDictionary: super.fullState];
+
+    // you can do just a setObject:forKey on state, but in real life you will probably have many parameters.
+    // so, add a param dictionary to fullState.
+    NSDictionary<NSString*, id> *params = @{
+                                            @"intervalParameter": [NSNumber numberWithInt: intervalParam.value],
+                                            };
+
+    state[@"fullStateParams"] = [NSKeyedArchiver archivedDataWithRootObject: params];
+    return state;
+}
+
+- (void)setFullState:(NSDictionary<NSString *,id> *)fullState {
+    NSLog(@"calling: %s", __PRETTY_FUNCTION__ );
+    NSData *data         = (NSData *)fullState[@"fullStateParams"];
+    NSDictionary *params = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    intervalParam.value  = [(NSNumber *)params[@"intervalParameter"] intValue];
+}
+
+
+
+-(NSString*)saveFilePath {
+    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *pathString = [[pathArray objectAtIndex:0] stringByAppendingPathComponent:@"data"];
+    //NSString *pathString = [[NSBundle mainBundle]pathForResource:@"Profile" ofType:@"plist"];
+    return pathString;
+}
+
+-(void)saveProfile  {
+    SeccionItem *data = [[SeccionItem alloc]init]
+    data.title        = @"title";
+    data.texto        = @"fdgdf";
+    data.images       = [NSArray arrayWithObjects:@"dfds", nil];
+
+    NSMutableData   *pData    = [[NSMutableData alloc]init];
+    NSString        *path     = [self saveFilePath];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:pData];
+    [data encodeWithCoder:archiver];
+    [archiver finishEncoding];
+    [pData writeToFile:path atomically:YES];
+}
+
+-(void)loadData {
+    NSString          *path       = [self saveFilePath];
+    NSMutableData     *pData      = [[NSMutableData alloc]initWithContentsOfFile:path];
+    NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:pData];
+    data                          = [[SeccionItem alloc]initWithCoder:unArchiver];
+    [unArchiver finishDecoding];
+}
+// ---------------------------------------------
+
 - (AUInternalRenderBlock)internalRenderBlock {
     /*
      Capture in locals to avoid ObjC member lookups. If "self" is captured in
