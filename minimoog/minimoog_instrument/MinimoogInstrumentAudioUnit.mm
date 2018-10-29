@@ -33,8 +33,6 @@
     @property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @end
 
-
-
     // Presets
     static const UInt8 kNumberOfPresets = 12;
     static const NSInteger kDefaultFactoryPreset = 0;
@@ -42,6 +40,7 @@
     typedef struct FactoryPresetParameters {
         AUValue intervalValue;
     } FactoryPresetParameters;
+
 
     static const FactoryPresetParameters presetParameters[kNumberOfPresets] = {
         { 1 },
@@ -59,28 +58,9 @@
     };
 
 
-
-
 @implementation MinimoogInstrumentAudioUnit
-
-
-
-
-
-
-
-
-
-
     @synthesize parameterTree  = _parameterTree;
     @synthesize factoryPresets = _presets;
-
-
-
-
-
-
-
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
@@ -202,24 +182,84 @@
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
 
 // ---------------------------------------------
-- (void) setupFactoryPresets {
+-(NSString*)factoryPresetFilePath {
+    NSString *pathString = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"plist"];
+    return pathString;
+}
+
+-(NSString*)userPresetFilePath {
+    NSArray  *pathArray  = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *pathString = [[pathArray objectAtIndex:0] stringByAppendingPathComponent:@"data"];
+    return pathString;
+}
+
+-()loadFactoryPresets {
+    NSString          *path       = [self factoryPresetFilePath];
+    NSMutableData     *pData      = [[NSMutableData alloc] initWithContentsOfFile:path];
+    NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:pData];
+    NSDictionary<NSString*, id> *factoryPresetsDic = [[NSDictionary alloc] initWithCoder:unArchiver];
+    [unArchiver finishDecoding];
+    
+    int presetsNumber = [[factoryPresetsDic valueForKey:@"presetsNumber"] integerValue];
+    int defaultPresetIndex = [[factoryPresetsDic valueForKey:@"defaultPresetIndex"] integerValue];
+    
+    
+    
+    
+    
+    state[@"fullStateParams"] = [NSKeyedArchiver archivedDataWithRootObject: params];
+    
+    
+    NSDictionary<NSString*, id> *params = @{
+                                            @"intervalParameter": [NSNumber numberWithInt: intervalParam.value],
+                                            };
+    
+    AUParameter *cutoffParameter    = [self.parameterTree valueForKey: @"cutoff"];
+    cutoffParameter.value    = presetParameters[factoryPreset.number].cutoffValue;
+    
+    
+    
+    
+    
+    
+    
+    
     _currentFactoryPresetIndex = kDefaultFactoryPreset;
     _presets = @[
-        [self createPreset:0 name:@"Minor Second"],
-        [self createPreset:1 name:@"Major Second"],
-        [self createPreset:2 name:@"Minor Third"],
-        [self createPreset:3 name:@"Major Third"],
-        [self createPreset:4 name:@"Fourth"],
-        [self createPreset:5 name:@"Tritone"],
-        [self createPreset:6 name:@"Fifth"],
-        [self createPreset:7 name:@"Minor Sixth"],
-        [self createPreset:8 name:@"Major Sixth"],
-        [self createPreset:9 name:@"Minor Seventh"],
-        [self createPreset:10 name:@"Major Seventh"],
-        [self createPreset:11 name:@"Octave"]
-    ];
+                 [self createPreset:0 name:@"Minor Second"],
+                 [self createPreset:1 name:@"Major Second"],
+                 [self createPreset:2 name:@"Minor Third"],
+                 [self createPreset:3 name:@"Major Third"],
+                 [self createPreset:4 name:@"Fourth"],
+                 [self createPreset:5 name:@"Tritone"],
+                 [self createPreset:6 name:@"Fifth"],
+                 [self createPreset:7 name:@"Minor Sixth"],
+                 [self createPreset:8 name:@"Major Sixth"],
+                 [self createPreset:9 name:@"Minor Seventh"],
+                 [self createPreset:10 name:@"Major Seventh"],
+                 [self createPreset:11 name:@"Octave"]
+                 ];
     _currentPreset = self.factoryPresets[_currentFactoryPresetIndex];
 }
+
+
+-(void)saveProfile  {
+    SeccionItem *data = [[SeccionItem alloc]init]
+    data.title        = @"title";
+    data.texto        = @"fdgdf";
+    data.images       = [NSArray arrayWithObjects:@"dfds", nil];
+    
+    NSMutableData   *pData    = [[NSMutableData alloc]init];
+    NSString        *path     = [self saveFilePath];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:pData];
+    [data encodeWithCoder:archiver];
+    [archiver finishEncoding];
+    [pData writeToFile:path atomically:YES];
+}
+
+
+
+
 
 - (AUAudioUnitPreset*)createPreset:(NSInteger)number name:(NSString*)name {
     AUAudioUnitPreset* newPreset = [AUAudioUnitPreset new];
@@ -280,8 +320,10 @@
     NSDictionary<NSString*, id> *params = @{
                                             @"intervalParameter": [NSNumber numberWithInt: intervalParam.value],
                                             };
+    
 
     state[@"fullStateParams"] = [NSKeyedArchiver archivedDataWithRootObject: params];
+    
     return state;
 }
 
@@ -292,36 +334,6 @@
     intervalParam.value  = [(NSNumber *)params[@"intervalParameter"] intValue];
 }
 
-
-
--(NSString*)saveFilePath {
-    NSArray *pathArray = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *pathString = [[pathArray objectAtIndex:0] stringByAppendingPathComponent:@"data"];
-    //NSString *pathString = [[NSBundle mainBundle]pathForResource:@"Profile" ofType:@"plist"];
-    return pathString;
-}
-
--(void)saveProfile  {
-    SeccionItem *data = [[SeccionItem alloc]init]
-    data.title        = @"title";
-    data.texto        = @"fdgdf";
-    data.images       = [NSArray arrayWithObjects:@"dfds", nil];
-
-    NSMutableData   *pData    = [[NSMutableData alloc]init];
-    NSString        *path     = [self saveFilePath];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:pData];
-    [data encodeWithCoder:archiver];
-    [archiver finishEncoding];
-    [pData writeToFile:path atomically:YES];
-}
-
--(void)loadData {
-    NSString          *path       = [self saveFilePath];
-    NSMutableData     *pData      = [[NSMutableData alloc]initWithContentsOfFile:path];
-    NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc]initForReadingWithData:pData];
-    data                          = [[SeccionItem alloc]initWithCoder:unArchiver];
-    [unArchiver finishDecoding];
-}
 // ---------------------------------------------
 
 - (AUInternalRenderBlock)internalRenderBlock {
