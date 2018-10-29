@@ -55,6 +55,8 @@ public:
     virtual ~MinimoogInstrument();
     
     // Overrides
+    virtual bool    allocateRenderResources();
+    virtual void    deallocateRenderResources();
     virtual void    setParameter   (AUParameterAddress address, AUValue value);
     virtual AUValue getParameter   (AUParameterAddress address);
     virtual void    startRamp      (AUParameterAddress address, AUValue value, AUAudioFrameCount duration);

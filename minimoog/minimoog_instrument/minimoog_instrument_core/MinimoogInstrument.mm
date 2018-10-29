@@ -28,6 +28,15 @@ MinimoogInstrument::~MinimoogInstrument() {
     
 }
 
+
+bool MinimoogInstrument::allocateRenderResources() {
+    return true;
+}
+
+void MinimoogInstrument::deallocateRenderResources() {
+    
+}
+
 void MinimoogInstrument::setParameter(AUParameterAddress address, AUValue value) {
     switch (address) {
         case osc1RangeParamAddr:

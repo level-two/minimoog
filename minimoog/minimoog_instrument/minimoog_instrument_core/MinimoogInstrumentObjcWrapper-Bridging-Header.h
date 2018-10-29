@@ -1,5 +1,5 @@
 //
-//  minimoog_instrument-Bridging-Header.h
+//  MinimoogInstrumentObjcWrapper-Bridging-Header.h
 //  minimoog_instrument
 //
 //  Created by Yauheni Lychkouski on 10/6/18.

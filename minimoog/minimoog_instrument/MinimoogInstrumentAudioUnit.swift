@@ -9,20 +9,19 @@ import AVFoundation
 
 public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     // Context
-    var musicalContext: AUHostMusicalContextBlock
-    var outputEventBlock: AUMIDIOutputEventBlock
-    var transportStateBlock: AUHostTransportStateBlock
+    var musicalContext: AUHostMusicalContextBlock?
+    var outputEventBlock: AUMIDIOutputEventBlock?
+    var transportStateBlock: AUHostTransportStateBlock?
 
     // Presets
-    var currentPreset: AUAudioUnitPreset
-    var currentFactoryPresetIndex: NSInteger
+    var currentPreset: AUAudioUnitPreset?
+    var currentFactoryPresetIndex: Integer = 0
     var presets: [AUAudioUnitPreset]
 
     // Instrument core
-    var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper 
+    var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper?
 
-
-    override func init(componentDescription: AudioComponentDescription, 
+    override init(componentDescription: AudioComponentDescription,
             options: AudioComponentInstantiationOptions = []) throws {
         super.init(componentDescription:componentDescription, options:options)
         

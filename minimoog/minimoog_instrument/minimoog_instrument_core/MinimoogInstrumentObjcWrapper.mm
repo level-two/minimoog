@@ -32,19 +32,19 @@
     //self.musicalContextBlock
     //self.MIDIOutputEventBlock
     //self.transportStateBlock
-    return _minimoogInstrument->allocateRenderResources();
+    return _minimoogInstrument.allocateRenderResources();
 }
 
 - (void)deallocateRenderResources {
-    _minimoogInstrument->deallocateRenderResources();
+    _minimoogInstrument.deallocateRenderResources();
 }
 
 - (void)setParameter:(AUParameterAddress) address value:(AUValue) value {
-    _minimoogInstrument->setParameter(param.address, value);
+    _minimoogInstrument.setParameter(address, value);
 }
 
 - (AUValue)getParameter:(AUParameterAddress) address {
-    return _minimoogInstrument->getParameter(param.address);
+    return _minimoogInstrument.getParameter(address);
 }
 
 - (AUInternalRenderBlock)internalRenderBlock {

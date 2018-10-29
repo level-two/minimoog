@@ -23,6 +23,8 @@ public:
     virtual ~MinimoogInstrumentBase();
     
     // Pure virtual methods
+    virtual bool    allocateRenderResources()   = 0;
+    virtual void    deallocateRenderResources() = 0;
     virtual void    setParameter   (AUParameterAddress address, AUValue value)                             = 0;
     virtual AUValue getParameter   (AUParameterAddress address)                                            = 0;
 	virtual void    startRamp      (AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;

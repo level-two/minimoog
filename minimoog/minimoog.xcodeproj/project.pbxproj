@@ -10,38 +10,44 @@
 		930E79A02175518A00568351 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E799E2175518900568351 /* SimplePlayEngine.swift */; };
 		930E79A12175518A00568351 /* drumLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 930E799F2175518A00568351 /* drumLoop.caf */; };
 		930E79A32175545100568351 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930E79A22175545100568351 /* AVFoundation.framework */; };
-		930E79A52176925E00568351 /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */; };
-		930E79A62176926200568351 /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */; };
-		930E79A72176926500568351 /* MinimoogInstrumentAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */; };
-		930E79A82176926900568351 /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */; };
 		930F395D21679E0F00BAB7F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F395C21679E0F00BAB7F3 /* AppDelegate.swift */; };
 		930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F395E21679E0F00BAB7F3 /* ViewController.swift */; };
 		930F396221679E0F00BAB7F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F396021679E0F00BAB7F3 /* Main.storyboard */; };
 		930F396421679E1100BAB7F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930F396321679E1100BAB7F3 /* Assets.xcassets */; };
 		930F396721679E1100BAB7F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F396521679E1100BAB7F3 /* LaunchScreen.storyboard */; };
-		930F397621691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */; };
-		930F397821691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */; };
-		930F397B21691B2F00BAB7F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F397921691B2F00BAB7F3 /* MainInterface.storyboard */; };
 		930F398021691B2F00BAB7F3 /* minimoog_instrument.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		930F398A216C090C00BAB7F3 /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */; };
-		930F398E216CB96300BAB7F3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F397921691B2F00BAB7F3 /* MainInterface.storyboard */; };
-		930F3992216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */; };
-		9336F2EE217923780006EE25 /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */; };
-		9336F2EF217923780006EE25 /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */; };
-		9336F2F7217A94990006EE25 /* knob_range.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F1217A94990006EE25 /* knob_range.png */; };
-		9336F2F8217A94990006EE25 /* knob_range.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F1217A94990006EE25 /* knob_range.png */; };
-		9336F2F9217A94990006EE25 /* knob_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F2217A94990006EE25 /* knob_volume.png */; };
-		9336F2FA217A94990006EE25 /* knob_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F2217A94990006EE25 /* knob_volume.png */; };
-		9336F2FB217A94990006EE25 /* knob_detune.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F3217A94990006EE25 /* knob_detune.png */; };
-		9336F2FC217A94990006EE25 /* knob_detune.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F3217A94990006EE25 /* knob_detune.png */; };
-		9336F2FD217A94990006EE25 /* knob_waveform.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F4217A94990006EE25 /* knob_waveform.png */; };
-		9336F2FE217A94990006EE25 /* knob_waveform.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F4217A94990006EE25 /* knob_waveform.png */; };
-		9336F2FF217A94990006EE25 /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F5217A94990006EE25 /* knob_pointer.png */; };
-		9336F300217A94990006EE25 /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F5217A94990006EE25 /* knob_pointer.png */; };
-		9336F301217A94990006EE25 /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F6217A94990006EE25 /* knob_bg.png */; };
-		9336F302217A94990006EE25 /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 9336F2F6217A94990006EE25 /* knob_bg.png */; };
-		937044262185F63E00CB96C4 /* MinimoogInstrumentPreset.m in Sources */ = {isa = PBXBuildFile; fileRef = 937044252185F63E00CB96C4 /* MinimoogInstrumentPreset.m */; };
-		937044272185F63E00CB96C4 /* MinimoogInstrumentPreset.m in Sources */ = {isa = PBXBuildFile; fileRef = 937044252185F63E00CB96C4 /* MinimoogInstrumentPreset.m */; };
+		93BAFB5C21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
+		93BAFB5D21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
+		93BAFB5E21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
+		93BAFB5F21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
+		93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */; };
+		93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */; };
+		93BAFB6221875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */; };
+		93BAFB6321875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */; };
+		93BAFB6421875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */; };
+		93BAFB6521875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */; };
+		93BAFB6621875C3B004C0D7C /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */; };
+		93BAFB6721875C3B004C0D7C /* MinimoogInstrumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */; };
+		93BAFB6821875C3B004C0D7C /* knob_range.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4D21875C3A004C0D7C /* knob_range.png */; };
+		93BAFB6921875C3B004C0D7C /* knob_range.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4D21875C3A004C0D7C /* knob_range.png */; };
+		93BAFB6A21875C3B004C0D7C /* knob_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4E21875C3A004C0D7C /* knob_volume.png */; };
+		93BAFB6B21875C3B004C0D7C /* knob_volume.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4E21875C3A004C0D7C /* knob_volume.png */; };
+		93BAFB6C21875C3B004C0D7C /* knob_detune.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4F21875C3A004C0D7C /* knob_detune.png */; };
+		93BAFB6D21875C3B004C0D7C /* knob_detune.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4F21875C3A004C0D7C /* knob_detune.png */; };
+		93BAFB6E21875C3B004C0D7C /* knob_waveform.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5021875C3A004C0D7C /* knob_waveform.png */; };
+		93BAFB6F21875C3B004C0D7C /* knob_waveform.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5021875C3A004C0D7C /* knob_waveform.png */; };
+		93BAFB7021875C3B004C0D7C /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5121875C3A004C0D7C /* knob_pointer.png */; };
+		93BAFB7121875C3B004C0D7C /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5121875C3A004C0D7C /* knob_pointer.png */; };
+		93BAFB7221875C3B004C0D7C /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5221875C3A004C0D7C /* knob_bg.png */; };
+		93BAFB7321875C3B004C0D7C /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5221875C3A004C0D7C /* knob_bg.png */; };
+		93BAFB7421875C3B004C0D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5321875C3A004C0D7C /* Info.plist */; };
+		93BAFB7521875C3B004C0D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5321875C3A004C0D7C /* Info.plist */; };
+		93BAFB7621875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */; };
+		93BAFB7721875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */; };
+		93BAFB7821875C3B004C0D7C /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */; };
+		93BAFB7921875C3B004C0D7C /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */; };
+		93BAFB7A21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5B21875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.mm */; };
+		93BAFB7B21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5B21875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,26 +87,27 @@
 		930F396621679E1100BAB7F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		930F396821679E1100BAB7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = minimoog_instrument.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		930F397421691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinimoogInstrumentAudioUnit.h; sourceTree = "<group>"; };
-		930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrumentAudioUnit.mm; sourceTree = "<group>"; };
-		930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentViewController.swift; sourceTree = "<group>"; };
-		930F397A21691B2F00BAB7F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		930F397C21691B2F00BAB7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		930F397D21691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MinimoogInstrumentAudioUnit-Bridging-Header.h"; sourceTree = "<group>"; };
 		930F398621691B6B00BAB7F3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrument.mm; sourceTree = "<group>"; };
-		930F3989216C090C00BAB7F3 /* MinimoogInstrument.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MinimoogInstrument.hpp; sourceTree = "<group>"; };
-		930F398F216CBE7600BAB7F3 /* MinimoogInstrumentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MinimoogInstrumentBase.hpp; sourceTree = "<group>"; };
-		930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrumentBase.mm; sourceTree = "<group>"; };
-		9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
-		9336F2F1217A94990006EE25 /* knob_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_range.png; sourceTree = "<group>"; };
-		9336F2F2217A94990006EE25 /* knob_volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_volume.png; sourceTree = "<group>"; };
-		9336F2F3217A94990006EE25 /* knob_detune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_detune.png; sourceTree = "<group>"; };
-		9336F2F4217A94990006EE25 /* knob_waveform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_waveform.png; sourceTree = "<group>"; };
-		9336F2F5217A94990006EE25 /* knob_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_pointer.png; sourceTree = "<group>"; };
-		9336F2F6217A94990006EE25 /* knob_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_bg.png; sourceTree = "<group>"; };
-		937044242185F62300CB96C4 /* MinimoogInstrumentPreset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinimoogInstrumentPreset.h; sourceTree = "<group>"; };
-		937044252185F63E00CB96C4 /* MinimoogInstrumentPreset.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinimoogInstrumentPreset.m; sourceTree = "<group>"; };
+		93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
+		93BAFB4721875C3A004C0D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentFactoryPresets.swift; sourceTree = "<group>"; };
+		93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentPreset.swift; sourceTree = "<group>"; };
+		93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentAudioUnit.swift; sourceTree = "<group>"; };
+		93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentViewController.swift; sourceTree = "<group>"; };
+		93BAFB4D21875C3A004C0D7C /* knob_range.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_range.png; sourceTree = "<group>"; };
+		93BAFB4E21875C3A004C0D7C /* knob_volume.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_volume.png; sourceTree = "<group>"; };
+		93BAFB4F21875C3A004C0D7C /* knob_detune.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_detune.png; sourceTree = "<group>"; };
+		93BAFB5021875C3A004C0D7C /* knob_waveform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_waveform.png; sourceTree = "<group>"; };
+		93BAFB5121875C3A004C0D7C /* knob_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_pointer.png; sourceTree = "<group>"; };
+		93BAFB5221875C3A004C0D7C /* knob_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob_bg.png; sourceTree = "<group>"; };
+		93BAFB5321875C3A004C0D7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93BAFB5521875C3A004C0D7C /* MinimoogInstrumentBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MinimoogInstrumentBase.hpp; sourceTree = "<group>"; };
+		93BAFB5621875C3A004C0D7C /* MinimoogInstrumentObjcWrapper-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MinimoogInstrumentObjcWrapper-Bridging-Header.h"; sourceTree = "<group>"; };
+		93BAFB5721875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimoogInstrumentObjcWrapper.h; sourceTree = "<group>"; };
+		93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrumentBase.mm; sourceTree = "<group>"; };
+		93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrument.mm; sourceTree = "<group>"; };
+		93BAFB5A21875C3A004C0D7C /* MinimoogInstrument.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MinimoogInstrument.hpp; sourceTree = "<group>"; };
+		93BAFB5B21875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogInstrumentObjcWrapper.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +132,8 @@
 		930F395021679E0F00BAB7F3 = {
 			isa = PBXGroup;
 			children = (
+				93BAFB4421875C3A004C0D7C /* minimoog_instrument */,
 				930F395B21679E0F00BAB7F3 /* minimoog */,
-				930F397321691B2F00BAB7F3 /* minimoog_instrument */,
 				930F395A21679E0F00BAB7F3 /* Products */,
 				930F398521691B6A00BAB7F3 /* Frameworks */,
 			);
@@ -157,27 +164,6 @@
 			path = minimoog;
 			sourceTree = "<group>";
 		};
-		930F397321691B2F00BAB7F3 /* minimoog_instrument */ = {
-			isa = PBXGroup;
-			children = (
-				937044242185F62300CB96C4 /* MinimoogInstrumentPreset.h */,
-				937044252185F63E00CB96C4 /* MinimoogInstrumentPreset.m */,
-				9336F2F0217A94990006EE25 /* Assets */,
-				930F398F216CBE7600BAB7F3 /* MinimoogInstrumentBase.hpp */,
-				930F3990216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm */,
-				930F3989216C090C00BAB7F3 /* MinimoogInstrument.hpp */,
-				930F3988216C090C00BAB7F3 /* MinimoogInstrument.mm */,
-				9336F2ED217923780006EE25 /* MinimoogInstrumentKnob.swift */,
-				930F397421691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.h */,
-				930F397521691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm */,
-				930F397721691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift */,
-				930F397D21691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit-Bridging-Header.h */,
-				930F397921691B2F00BAB7F3 /* MainInterface.storyboard */,
-				930F397C21691B2F00BAB7F3 /* Info.plist */,
-			);
-			path = minimoog_instrument;
-			sourceTree = "<group>";
-		};
 		930F398521691B6A00BAB7F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,17 +173,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9336F2F0217A94990006EE25 /* Assets */ = {
+		93BAFB4421875C3A004C0D7C /* minimoog_instrument */ = {
 			isa = PBXGroup;
 			children = (
-				9336F2F1217A94990006EE25 /* knob_range.png */,
-				9336F2F2217A94990006EE25 /* knob_volume.png */,
-				9336F2F3217A94990006EE25 /* knob_detune.png */,
-				9336F2F4217A94990006EE25 /* knob_waveform.png */,
-				9336F2F5217A94990006EE25 /* knob_pointer.png */,
-				9336F2F6217A94990006EE25 /* knob_bg.png */,
+				93BAFB4C21875C3A004C0D7C /* Assets */,
+				93BAFB5421875C3A004C0D7C /* minimoog_instrument_core */,
+				93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */,
+				93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */,
+				93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */,
+				93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */,
+				93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */,
+				93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */,
+				93BAFB5321875C3A004C0D7C /* Info.plist */,
+			);
+			path = minimoog_instrument;
+			sourceTree = "<group>";
+		};
+		93BAFB4C21875C3A004C0D7C /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				93BAFB4D21875C3A004C0D7C /* knob_range.png */,
+				93BAFB4E21875C3A004C0D7C /* knob_volume.png */,
+				93BAFB4F21875C3A004C0D7C /* knob_detune.png */,
+				93BAFB5021875C3A004C0D7C /* knob_waveform.png */,
+				93BAFB5121875C3A004C0D7C /* knob_pointer.png */,
+				93BAFB5221875C3A004C0D7C /* knob_bg.png */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		93BAFB5421875C3A004C0D7C /* minimoog_instrument_core */ = {
+			isa = PBXGroup;
+			children = (
+				93BAFB5521875C3A004C0D7C /* MinimoogInstrumentBase.hpp */,
+				93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */,
+				93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */,
+				93BAFB5A21875C3A004C0D7C /* MinimoogInstrument.hpp */,
+				93BAFB5721875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.h */,
+				93BAFB5B21875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.mm */,
+				93BAFB5621875C3A004C0D7C /* MinimoogInstrumentObjcWrapper-Bridging-Header.h */,
+			);
+			path = minimoog_instrument_core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,17 +297,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93BAFB6E21875C3B004C0D7C /* knob_waveform.png in Resources */,
+				93BAFB6C21875C3B004C0D7C /* knob_detune.png in Resources */,
+				93BAFB7221875C3B004C0D7C /* knob_bg.png in Resources */,
 				930F396721679E1100BAB7F3 /* LaunchScreen.storyboard in Resources */,
-				9336F2FB217A94990006EE25 /* knob_detune.png in Resources */,
+				93BAFB7021875C3B004C0D7C /* knob_pointer.png in Resources */,
+				93BAFB5E21875C3B004C0D7C /* MainInterface.storyboard in Resources */,
 				930E79A12175518A00568351 /* drumLoop.caf in Resources */,
-				930F398E216CB96300BAB7F3 /* MainInterface.storyboard in Resources */,
-				9336F301217A94990006EE25 /* knob_bg.png in Resources */,
-				9336F2F9217A94990006EE25 /* knob_volume.png in Resources */,
+				93BAFB6A21875C3B004C0D7C /* knob_volume.png in Resources */,
+				93BAFB7421875C3B004C0D7C /* Info.plist in Resources */,
 				930F396421679E1100BAB7F3 /* Assets.xcassets in Resources */,
-				9336F2FF217A94990006EE25 /* knob_pointer.png in Resources */,
 				930F396221679E0F00BAB7F3 /* Main.storyboard in Resources */,
-				9336F2F7217A94990006EE25 /* knob_range.png in Resources */,
-				9336F2FD217A94990006EE25 /* knob_waveform.png in Resources */,
+				93BAFB6821875C3B004C0D7C /* knob_range.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,13 +316,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9336F302217A94990006EE25 /* knob_bg.png in Resources */,
-				9336F2FE217A94990006EE25 /* knob_waveform.png in Resources */,
-				930F397B21691B2F00BAB7F3 /* MainInterface.storyboard in Resources */,
-				9336F2FC217A94990006EE25 /* knob_detune.png in Resources */,
-				9336F300217A94990006EE25 /* knob_pointer.png in Resources */,
-				9336F2F8217A94990006EE25 /* knob_range.png in Resources */,
-				9336F2FA217A94990006EE25 /* knob_volume.png in Resources */,
+				93BAFB7521875C3B004C0D7C /* Info.plist in Resources */,
+				93BAFB7321875C3B004C0D7C /* knob_bg.png in Resources */,
+				93BAFB6D21875C3B004C0D7C /* knob_detune.png in Resources */,
+				93BAFB7121875C3B004C0D7C /* knob_pointer.png in Resources */,
+				93BAFB6B21875C3B004C0D7C /* knob_volume.png in Resources */,
+				93BAFB5F21875C3B004C0D7C /* MainInterface.storyboard in Resources */,
+				93BAFB6F21875C3B004C0D7C /* knob_waveform.png in Resources */,
+				93BAFB6921875C3B004C0D7C /* knob_range.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,14 +334,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				930E79A52176925E00568351 /* MinimoogInstrumentBase.mm in Sources */,
-				9336F2EE217923780006EE25 /* MinimoogInstrumentKnob.swift in Sources */,
+				93BAFB7621875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */,
+				93BAFB6621875C3B004C0D7C /* MinimoogInstrumentViewController.swift in Sources */,
+				93BAFB6221875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */,
 				930E79A02175518A00568351 /* SimplePlayEngine.swift in Sources */,
-				937044262185F63E00CB96C4 /* MinimoogInstrumentPreset.m in Sources */,
-				930E79A72176926500568351 /* MinimoogInstrumentAudioUnit.mm in Sources */,
-				930E79A62176926200568351 /* MinimoogInstrument.mm in Sources */,
+				93BAFB7A21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */,
+				93BAFB5C21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */,
 				930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */,
-				930E79A82176926900568351 /* MinimoogInstrumentViewController.swift in Sources */,
+				93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */,
+				93BAFB7821875C3B004C0D7C /* MinimoogInstrument.mm in Sources */,
+				93BAFB6421875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */,
 				930F395D21679E0F00BAB7F3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,12 +352,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				937044272185F63E00CB96C4 /* MinimoogInstrumentPreset.m in Sources */,
-				930F397621691B2F00BAB7F3 /* MinimoogInstrumentAudioUnit.mm in Sources */,
-				930F398A216C090C00BAB7F3 /* MinimoogInstrument.mm in Sources */,
-				930F3992216CBE7600BAB7F3 /* MinimoogInstrumentBase.mm in Sources */,
-				9336F2EF217923780006EE25 /* MinimoogInstrumentKnob.swift in Sources */,
-				930F397821691B2F00BAB7F3 /* MinimoogInstrumentViewController.swift in Sources */,
+				93BAFB7721875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */,
+				93BAFB6321875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */,
+				93BAFB5D21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */,
+				93BAFB7921875C3B004C0D7C /* MinimoogInstrument.mm in Sources */,
+				93BAFB6721875C3B004C0D7C /* MinimoogInstrumentViewController.swift in Sources */,
+				93BAFB6521875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */,
+				93BAFB7B21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */,
+				93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,10 +390,10 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		930F397921691B2F00BAB7F3 /* MainInterface.storyboard */ = {
+		93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				930F397A21691B2F00BAB7F3 /* Base */,
+				93BAFB4721875C3A004C0D7C /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -549,7 +571,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "yauheni.lychkouski.minimoog.minimoog-instrument";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/MinimoogInstrumentAudioUnit-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/minimoog_instrument_core/MinimoogInstrumentObjcWrapper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -569,7 +591,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "yauheni.lychkouski.minimoog.minimoog-instrument";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/MinimoogInstrumentAudioUnit-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "minimoog_instrument/minimoog_instrument_core/MinimoogInstrumentObjcWrapper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
