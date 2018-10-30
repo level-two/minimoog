@@ -8,70 +8,50 @@
 import AVFoundation
 
 public class MinimoogInstrumentAudioUnit : AUAudioUnit {
-    // Context
-    var musicalContext: AUHostMusicalContextBlock?
-    var outputEventBlock: AUMIDIOutputEventBlock?
-    var transportStateBlock: AUHostTransportStateBlock?
-
-    // Presets
-    var currentPreset: AUAudioUnitPreset?
-    var currentFactoryPresetIndex: Integer = 0
-    var presets: [AUAudioUnitPreset]
+    enum ParamAddr : AUParameterAddress {
+        case osc1RangeParamAddr = 0
+        case osc1WaveformParamAddr
+        case osc2RangeParamAddr
+        case osc2DetuneParamAddr
+        case osc2WaveformParamAddr
+        case mixOsc1VolumeParamAddr
+        case mixOsc2VolumeParamAddr
+        case mixNoiseVolumeParamAddr
+    }
 
     // Instrument core
     var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper?
 
-    override init(componentDescription: AudioComponentDescription,
-            options: AudioComponentInstantiationOptions = []) throws {
+    override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         super.init(componentDescription:componentDescription, options:options)
         
-        // Create parameter objects.
-        /*
-        var params = [NSMutableArray array]
-        int i = 0
-        while (paramDef[i].paramAddr < lastParamAddr) {
-            AUParameter *param =
-                [AUParameterTree
-                 createParameterWithIdentifier:[NSString stringWithUTF8String:paramDef[i].identifier]
-                 name:[NSString stringWithUTF8String:paramDef[i].name]
-                 address:paramDef[i].paramAddr
-                 min:paramDef[i].min
-                 max:paramDef[i].max
-                 unit:paramDef[i].unit
-                 unitName:nil
-                 flags:0
-                 valueStrings:[[NSString stringWithUTF8String:paramDef[i].commaSeparatedIndexedNames] componentsSeparatedByString:@","]
-                 dependentParameters:nil]
-            
-            // Initialize the parameter values.
-            param.value = paramDef[i].initVal
-            [params addObject:param]
-            
-            _minimoogInstrument.setParameter(paramDef[i].paramAddr, paramDef[i].initVal)
-            
-            i++
-        }
-        */
-        let params = [AUParameter]
+        var flags = AudioUnitParameterOptions.flag_IsWritable | AudioUnitParameterOptions.flag_IsReadable; 
+
+        // Create parameter objects
+        var params = [
+            AUParameterTree.createParameter(withIdentifier:"osc1Range"     , name:"Oscillator 1 Range"       , address:osc1RangeParamAddr     , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:["LO","32'","16'","8'","4'","2'"])
+            AUParameterTree.createParameter(withIdentifier:"osc1Waveform"  , name:"Oscillator 1 Waveform"    , address:osc1WaveformParamAddr  , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"])
+            AUParameterTree.createParameter(withIdentifier:"osc2Range"     , name:"Oscillator 2 Range"       , address:osc2RangeParamAddr     , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:"LO,32',16',8',4',2'"])
+            AUParameterTree.createParameter(withIdentifier:"osc2Detune"    , name:"Oscillator 2 Detune"      , address:osc2DetuneParamAddr    , min:-8, max: 8, unit:.cents     , unitName:nil, flags:flags, valueStrings:nil)
+            AUParameterTree.createParameter(withIdentifier:"osc2Waveform"  , name:"Oscillator 2 Waveform"    , address:osc2WaveformParamAddr  , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"])
+            AUParameterTree.createParameter(withIdentifier:"mixOsc1Volume" , name:"Mixer Oscillator 1 Volume", address:mixOsc1VolumeParamAddr , min: 0, max:10, unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil)
+            AUParameterTree.createParameter(withIdentifier:"mixOsc2Volume" , name:"Mixer Oscillator 2 Volume", address:mixOsc2VolumeParamAddr , min: 0, max:10, unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil)
+            AUParameterTree.createParameter(withIdentifier:"mixNoiseVolume", name:"Mixer Noise Volume"       , address:mixNoiseVolumeParamAddr, min: 0, max:10, unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil) ]
+
         
         // Create the parameter tree.
-        _parameterTree = AUParameterTree.createTreeWithChildren(params)
-        
-        /*
+        self.parameterTree = AUParameterTree.createTree(params)
+
         // A function to provide string representations of parameter values.
-        _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
-            AUValue value = valuePtr == nil ? param.value : *valuePtr
-            if (param.address >= lastParamAddr) {
-                return @"?"
-            }
-            else if (paramDef[param.address].unit == kAudioUnitParameterUnit_Indexed) {
-                return param.valueStrings[(UInt32)param.value]
+        self.parameterTree.implementorStringFromValueCallback = { param, valuePtr in 
+            AUValue value = (valuePtr == nil ? param.value : valuePtr.pointee)
+            if (param.unit == .indexed) {
+                return param.valueStrings[(UInt32)value]
             }
             else {
                 return [NSString stringWithFormat:@"%.2f", value]
             }
         }
-        */
         
         // Create the output bus.
         let defaultFormat = AVAudioFormat(standardFormatWithSampleRate:44100.0, channels:2)
@@ -84,15 +64,16 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         self.inputBues  = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeInput, busses: @[inputBus])
         self.outputBues = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeOutput, busses: @[outputBus])
         
-        /*
-        __block MinimoogInstrument *instr = &_minimoogInstrument
-        _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
-            instr->setParameter(param.address, value)
+        // observe parameters change and update synth core
+        self.parameterTree.implementorValueObserver = { [weak self] param, value in
+            guard let strongSelf = self else { return }
+            strongSelf.minimoogInstrumentWrapper.setParameter(param.address, value)
         }
-        _parameterTree.implementorValueProvider = ^(AUParameter * _Nonnull param) {
-            return instr->getParameter(param.address)
+
+        self.parameterTree.implementorValueProvider = { [weak self] param in
+            guard let strongSelf = self else { return }
+            return strongSelf.minimoogInstrumentWrapper.getParameter(param.address)
         }
-        */
         
         self.maximumFramesToRender = 512
     }
@@ -255,7 +236,7 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     */
 
     // ---------------------------------------------
-    func internalRenderBlock -> AUInternalRenderBlock {
+    func internalRenderBlock() -> AUInternalRenderBlock {
         return minimoogInstrument.internalRenderBlock
     }
 }

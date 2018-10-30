@@ -11,17 +11,6 @@ import CoreAudioKit
 import AudioToolbox
 
 public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFactory {
-    enum ParamAddr : AUParameterAddress {
-        case osc1RangeParamAddr = 0
-        case osc1WaveformParamAddr
-        case osc2RangeParamAddr
-        case osc2DetuneParamAddr
-        case osc2WaveformParamAddr
-        case mixOsc1VolumeParamAddr
-        case mixOsc2VolumeParamAddr
-        case mixNoiseVolumeParamAddr
-    }
-    
     // MARK: Outlets
     @IBOutlet weak var osc1RangeKnob     : MinimoogInstrumentKnob!
     @IBOutlet weak var osc1WaveformKnob  : MinimoogInstrumentKnob!
