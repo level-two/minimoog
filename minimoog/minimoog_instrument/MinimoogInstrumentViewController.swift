@@ -57,42 +57,42 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     // MARK: Actions
     @IBAction func osc1RangeChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc1RangeParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.osc1RangeParamAddr.rawValue) else { return }
         parameter.setValue(osc1RangeKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func osc1WaveformChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc1WaveformParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.osc1WaveformParamAddr.rawValue) else { return }
         parameter.setValue(osc1WaveformKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func osc2RangeChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc2RangeParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.osc2RangeParamAddr.rawValue) else { return }
         parameter.setValue(osc2RangeKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func osc2DetuneChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc2DetuneParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.osc2DetuneParamAddr.rawValue) else { return }
         parameter.setValue(osc2DetuneKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func osc2WaveformChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.osc2WaveformParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.osc2WaveformParamAddr.rawValue) else { return }
         parameter.setValue(osc2WaveformKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func mixOsc1VolumeChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.mixOsc1VolumeParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.mixOsc1VolumeParamAddr.rawValue) else { return }
         parameter.setValue(mixOsc1VolumeKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func mixOsc2VolumeChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.mixOsc2VolumeParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.mixOsc2VolumeParamAddr.rawValue) else { return }
         parameter.setValue(mixOsc2VolumeKnob.value, originator: parameterObserverToken)
     }
     
     @IBAction func mixNoiseVolumeChanged(_ sender: Any) {
-        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: ParamAddr.mixNoiseVolumeParamAddr.rawValue) else { return }
+        guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: MinimoogInstrumentAudioUnit.ParamAddr.mixNoiseVolumeParamAddr.rawValue) else { return }
         parameter.setValue(mixNoiseVolumeKnob.value, originator: parameterObserverToken)
     }
     

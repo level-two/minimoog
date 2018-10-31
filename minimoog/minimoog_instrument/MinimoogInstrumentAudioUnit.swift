@@ -20,57 +20,84 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     }
 
     // Instrument core
-    var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper?
+    var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper
 
+    
+    
+    
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
-        super.init(componentDescription:componentDescription, options:options)
+        minimoogInstrumentWrapper = MinimoogInstrumentObjcWrapper()
         
-        var flags = AudioUnitParameterOptions.flag_IsWritable | AudioUnitParameterOptions.flag_IsReadable; 
+        try super.init(componentDescription:componentDescription, options:options)
+        
+        
+        
+        func createParam(_ identifier: String,
+                         _ name: String,
+                         _ address: ParamAddr,
+                         _ min: Float,
+                         _ max: Float,
+                         _ unit: AudioUnitParameterUnit,
+                         _ valueStrings: [String]? = nil) -> AUParameter {
+            let flags = AudioUnitParameterOptions(rawValue: AudioUnitParameterOptions.flag_IsWritable.rawValue | AudioUnitParameterOptions.flag_IsReadable.rawValue)
+            
+            return AUParameterTree.createParameter(withIdentifier:identifier,
+                                                  name: name,
+                                                  address: address.rawValue,
+                                                  min: AUValue(min),
+                                                  max: AUValue(max),
+                                                  unit: unit,
+                                                  unitName: nil,
+                                                  flags: flags,
+                                                  valueStrings: valueStrings,
+                                                  dependentParameters: nil)
+        }
+        
+        let flags = AudioUnitParameterOptions(rawValue: AudioUnitParameterOptions.flag_IsWritable.rawValue | AudioUnitParameterOptions.flag_IsReadable.rawValue)
 
         // Create parameter objects
         var params = [
-            AUParameterTree.createParameter(withIdentifier:"osc1Range"     , name:"Oscillator 1 Range"       , address:osc1RangeParamAddr     , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:["LO","32'","16'","8'","4'","2'"])
-            AUParameterTree.createParameter(withIdentifier:"osc1Waveform"  , name:"Oscillator 1 Waveform"    , address:osc1WaveformParamAddr  , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"])
-            AUParameterTree.createParameter(withIdentifier:"osc2Range"     , name:"Oscillator 2 Range"       , address:osc2RangeParamAddr     , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:"LO,32',16',8',4',2'"])
-            AUParameterTree.createParameter(withIdentifier:"osc2Detune"    , name:"Oscillator 2 Detune"      , address:osc2DetuneParamAddr    , min:-8, max: 8, unit:.cents     , unitName:nil, flags:flags, valueStrings:nil)
-            AUParameterTree.createParameter(withIdentifier:"osc2Waveform"  , name:"Oscillator 2 Waveform"    , address:osc2WaveformParamAddr  , min: 0, max: 5, unit:.indexed   , unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"])
-            AUParameterTree.createParameter(withIdentifier:"mixOsc1Volume" , name:"Mixer Oscillator 1 Volume", address:mixOsc1VolumeParamAddr , min: 0, max:10, unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil)
-            AUParameterTree.createParameter(withIdentifier:"mixOsc2Volume" , name:"Mixer Oscillator 2 Volume", address:mixOsc2VolumeParamAddr , min: 0, max:10, unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil)
-            AUParameterTree.createParameter(withIdentifier:"mixNoiseVolume", name:"Mixer Noise Volume"       , address:mixNoiseVolumeParamAddr, min: 0, max:10, unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil) ]
-
+                AUParameterTree.createParameter(withIdentifier:"osc1Range", name:"Oscillator 1 Range", address:.osc1RangeParamAddr.rawValue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:Array<String>?("LO","32'","16'","8'","4'","2'"), dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"osc1Waveform", name:"Oscillator 1 Waveform", address:.osc1WaveformParamAddr.rawValue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"], dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"osc2Range", name:"Oscillator 2 Range", address:.osc2RangeParamAddr.rawalue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:["LO","32'","16'","8'","4'","2'"], dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"osc2Detune", name:"Oscillator 2 Detune", address:.osc2DetuneParamAddr.rawValue, min:AUValue(-8), max: AUValue(8), unit:.cents, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"osc2Waveform", name:"Oscillator 2 Waveform", address:.osc2WaveformParamAddr.rawValue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"], dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"mixOsc1Volume", name:"Mixer Oscillator 1 Volume", address:.mixOsc1VolumeParamAddr.rawValue, min: AUValue(0), max:AUValue(10), unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"mixOsc2Volume", name:"Mixer Oscillator 2 Volume", address:.mixOsc2VolumeParamAddr.rawValue, min: AUValue(0), max:AUValue(10), unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil),
+                AUParameterTree.createParameter(withIdentifier:"mixNoiseVolume", name:"Mixer Noise Volume"       , address:.mixNoiseVolumeParamAddr.rawValue, min: AUValue(0), max:AUValue(10), unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil)]
         
         // Create the parameter tree.
         self.parameterTree = AUParameterTree.createTree(params)
 
         // A function to provide string representations of parameter values.
-        self.parameterTree.implementorStringFromValueCallback = { param, valuePtr in 
-            AUValue value = (valuePtr == nil ? param.value : valuePtr.pointee)
+        self.parameterTree!.implementorStringFromValueCallback = { param, valuePtr in
+            var value = (valuePtr == nil ? param.value : valuePtr!.pointee)
             if (param.unit == .indexed) {
-                return param.valueStrings[(UInt32)value]
+                return param.valueStrings![Int(value)]
             }
             else {
-                return [NSString stringWithFormat:@"%.2f", value]
+                return String(format:".2", value)
             }
         }
         
         // Create the output bus.
         let defaultFormat = AVAudioFormat(standardFormatWithSampleRate:44100.0, channels:2)
-        self.minimoogInstrument.setSampleRate(defaultFormat.sampleRate)
+        self.minimoogInstrumentWrapper.setSampleRate(defaultFormat.sampleRate)
         
         //_audioStreamBasicDescription = *defaultFormat.streamDescription
         // create the busses with this asbd.
         var inputBus    = AUAudioUnitBus(format:defaultFormat, error:nil)
         var outputBus   = AUAudioUnitBus(format:defaultFormat, error:nil)
-        self.inputBues  = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeInput, busses: @[inputBus])
-        self.outputBues = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeOutput, busses: @[outputBus])
+        self.inputBues  = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeInput, busses: [inputBus])
+        self.outputBues = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeOutput, busses: [outputBus])
         
         // observe parameters change and update synth core
-        self.parameterTree.implementorValueObserver = { [weak self] param, value in
+        self.parameterTree!.implementorValueObserver = { [weak self] param, value in
             guard let strongSelf = self else { return }
             strongSelf.minimoogInstrumentWrapper.setParameter(param.address, value)
         }
 
-        self.parameterTree.implementorValueProvider = { [weak self] param in
+        self.parameterTree!.implementorValueProvider = { [weak self] param in
             guard let strongSelf = self else { return }
             return strongSelf.minimoogInstrumentWrapper.getParameter(param.address)
         }
@@ -81,7 +108,10 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     // MARK: - AUAudioUnit Overrides
     override func allocateRenderResources() throws {
         super.allocateRenderResources()
-        minimoogInstrumentWrapper.allocateRenderResources()
+        var result = self.allocateRenderResourcesWithMusicalContext(self.musicalContext,
+                                                                            outputEventBlock:self.outputEventBlock,
+                                                                            transportStateBlock:self.transportStateBlock)
+        guard result else { throw Error() }
     }
 
     override func deallocateRenderResources() {
@@ -91,8 +121,7 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
 
     // MARK: - AUAudioUnit (AUAudioUnitImplementation)
     func getFactoryPresetFilePath() -> String {
-        NSString *pathString = [[NSBundle mainBundle] pathForResource:@"Profile" ofType:@"plist"]
-        return pathString
+        return Bundle.main.path(forResource:"Profile", ofType:"plist")
     }
 
     func loadFactoryPresets() {

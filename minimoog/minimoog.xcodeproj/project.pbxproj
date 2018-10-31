@@ -40,8 +40,6 @@
 		93BAFB7121875C3B004C0D7C /* knob_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5121875C3A004C0D7C /* knob_pointer.png */; };
 		93BAFB7221875C3B004C0D7C /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5221875C3A004C0D7C /* knob_bg.png */; };
 		93BAFB7321875C3B004C0D7C /* knob_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5221875C3A004C0D7C /* knob_bg.png */; };
-		93BAFB7421875C3B004C0D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5321875C3A004C0D7C /* Info.plist */; };
-		93BAFB7521875C3B004C0D7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB5321875C3A004C0D7C /* Info.plist */; };
 		93BAFB7621875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */; };
 		93BAFB7721875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */; };
 		93BAFB7821875C3B004C0D7C /* MinimoogInstrument.mm in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */; };
@@ -305,7 +303,6 @@
 				93BAFB5E21875C3B004C0D7C /* MainInterface.storyboard in Resources */,
 				930E79A12175518A00568351 /* drumLoop.caf in Resources */,
 				93BAFB6A21875C3B004C0D7C /* knob_volume.png in Resources */,
-				93BAFB7421875C3B004C0D7C /* Info.plist in Resources */,
 				930F396421679E1100BAB7F3 /* Assets.xcassets in Resources */,
 				930F396221679E0F00BAB7F3 /* Main.storyboard in Resources */,
 				93BAFB6821875C3B004C0D7C /* knob_range.png in Resources */,
@@ -316,7 +313,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93BAFB7521875C3B004C0D7C /* Info.plist in Resources */,
 				93BAFB7321875C3B004C0D7C /* knob_bg.png in Resources */,
 				93BAFB6D21875C3B004C0D7C /* knob_detune.png in Resources */,
 				93BAFB7121875C3B004C0D7C /* knob_pointer.png in Resources */,

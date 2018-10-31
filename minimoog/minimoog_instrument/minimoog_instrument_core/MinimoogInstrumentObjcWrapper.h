@@ -11,13 +11,10 @@
 @interface MinimoogInstrumentObjcWrapper : NSObject {
 }
 
-@property (nonatomic, retain) AUHostMusicalContextBlock *musicalContext;
-@property (nonatomic, retain) AUMIDIOutputEventBlock    *outputEventBlock;
-@property (nonatomic, retain) AUHostTransportStateBlock *transportStateBlock;
-
-
 - (id)init;
-- (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError;
+- (BOOL)allocateRenderResourcesWithMusicalContext:(AUHostMusicalContextBlock) musicalContext
+                                 outputEventBlock:(AUMIDIOutputEventBlock)    outputEventBlock
+                              transportStateBlock:(AUHostTransportStateBlock) transportStateBlock;
 - (void)deallocateRenderResources;
 - (void)setParameter:(AUParameterAddress) address value:(AUValue) value;
 - (AUValue)getParameter:(AUParameterAddress) address;
