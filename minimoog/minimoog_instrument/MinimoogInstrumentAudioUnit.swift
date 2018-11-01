@@ -22,7 +22,20 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     // Instrument core
     var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper
 
-    
+
+    private func createParam(
+          _   identifier: String,
+          _         name: String,
+          _      address: ParamAddr,
+          _          min: Float,
+          _          max: Float,
+          _         unit: AudioUnitParameterUnit,
+          _ valueStrings: [String] = []) -> AUParameter {
+        return AUParameterTree.createParameter(withIdentifier:identifier, name:name,
+            address:address.rawValue, min:AUValue(min), max:AUValue(max), unit:unit,
+            unitName:nil, flags:[.flag_IsWritable, .flag_IsReadable],
+            valueStrings:(valueStrings.isEmpty ? nil : valueStrings), dependentParameters:nil)
+    }
     
     
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
@@ -30,41 +43,16 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         
         try super.init(componentDescription:componentDescription, options:options)
         
-        
-        
-        func createParam(_ identifier: String,
-                         _ name: String,
-                         _ address: ParamAddr,
-                         _ min: Float,
-                         _ max: Float,
-                         _ unit: AudioUnitParameterUnit,
-                         _ valueStrings: [String]? = nil) -> AUParameter {
-            let flags = AudioUnitParameterOptions(rawValue: AudioUnitParameterOptions.flag_IsWritable.rawValue | AudioUnitParameterOptions.flag_IsReadable.rawValue)
-            
-            return AUParameterTree.createParameter(withIdentifier:identifier,
-                                                  name: name,
-                                                  address: address.rawValue,
-                                                  min: AUValue(min),
-                                                  max: AUValue(max),
-                                                  unit: unit,
-                                                  unitName: nil,
-                                                  flags: flags,
-                                                  valueStrings: valueStrings,
-                                                  dependentParameters: nil)
-        }
-        
-        let flags = AudioUnitParameterOptions(rawValue: AudioUnitParameterOptions.flag_IsWritable.rawValue | AudioUnitParameterOptions.flag_IsReadable.rawValue)
-
         // Create parameter objects
-        var params = [
-                AUParameterTree.createParameter(withIdentifier:"osc1Range", name:"Oscillator 1 Range", address:.osc1RangeParamAddr.rawValue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:Array<String>?("LO","32'","16'","8'","4'","2'"), dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"osc1Waveform", name:"Oscillator 1 Waveform", address:.osc1WaveformParamAddr.rawValue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"], dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"osc2Range", name:"Oscillator 2 Range", address:.osc2RangeParamAddr.rawalue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:["LO","32'","16'","8'","4'","2'"], dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"osc2Detune", name:"Oscillator 2 Detune", address:.osc2DetuneParamAddr.rawValue, min:AUValue(-8), max: AUValue(8), unit:.cents, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"osc2Waveform", name:"Oscillator 2 Waveform", address:.osc2WaveformParamAddr.rawValue, min: AUValue(0), max: AUValue(5), unit:.indexed, unitName:nil, flags:flags, valueStrings:["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"], dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"mixOsc1Volume", name:"Mixer Oscillator 1 Volume", address:.mixOsc1VolumeParamAddr.rawValue, min: AUValue(0), max:AUValue(10), unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"mixOsc2Volume", name:"Mixer Oscillator 2 Volume", address:.mixOsc2VolumeParamAddr.rawValue, min: AUValue(0), max:AUValue(10), unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil),
-                AUParameterTree.createParameter(withIdentifier:"mixNoiseVolume", name:"Mixer Noise Volume"       , address:.mixNoiseVolumeParamAddr.rawValue, min: AUValue(0), max:AUValue(10), unit:.customUnit, unitName:nil, flags:flags, valueStrings:nil, dependentParameters:nil)]
+        let params = [
+            createParam("osc1Range"     ,"Oscillator 1 Range"       , .osc1RangeParamAddr     ,  0,  5, .indexed, ["LO","32'","16'","8'","4'","2'"]),
+            createParam("osc1Waveform"  ,"Oscillator 1 Waveform"    , .osc1WaveformParamAddr  ,  0,  5, .indexed, ["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"]),
+            createParam("osc2Range"     ,"Oscillator 2 Range"       , .osc2RangeParamAddr     ,  0,  5, .indexed, ["LO","32'","16'","8'","4'","2'"]),
+            createParam("osc2Detune"    ,"Oscillator 2 Detune"      , .osc2DetuneParamAddr    , -8,  8, .cents),
+            createParam("osc2Waveform"  ,"Oscillator 2 Waveform"    , .osc2WaveformParamAddr  ,  0,  5, .indexed, ["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"]),
+            createParam("mixOsc1Volume" ,"Mixer Oscillator 1 Volume", .mixOsc1VolumeParamAddr ,  0, 10, .customUnit),
+            createParam("mixOsc2Volume" ,"Mixer Oscillator 2 Volume", .mixOsc2VolumeParamAddr ,  0, 10, .customUnit),
+            createParam("mixNoiseVolume","Mixer Noise Volume"       , .mixNoiseVolumeParamAddr,  0, 10, .customUnit)]
         
         // Create the parameter tree.
         self.parameterTree = AUParameterTree.createTree(params)
