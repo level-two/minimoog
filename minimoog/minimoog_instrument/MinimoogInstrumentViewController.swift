@@ -109,22 +109,23 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     }
     
     func updateUI(withAddress address:AUParameterAddress, value:AUValue) {
-        switch address {
-        case ParamAddr.osc1RangeParamAddr.rawValue:
+        let addr = MinimoogInstrumentAudioUnit.ParamAddr(rawValue: UInt64(value))
+        switch addr {
+        case .osc1RangeParamAddr?:
             osc1RangeKnob.value = value
-        case ParamAddr.osc1WaveformParamAddr.rawValue:
+        case .osc1WaveformParamAddr?:
             osc1WaveformKnob.value = value
-        case ParamAddr.osc2RangeParamAddr.rawValue:
+        case .osc2RangeParamAddr?:
             osc2RangeKnob.value = value
-        case ParamAddr.osc2DetuneParamAddr.rawValue:
+        case .osc2DetuneParamAddr?:
             osc2DetuneKnob.value = value
-        case ParamAddr.osc2WaveformParamAddr.rawValue:
+        case .osc2WaveformParamAddr?:
             osc2WaveformKnob.value = value
-        case ParamAddr.mixOsc1VolumeParamAddr.rawValue:
+        case .mixOsc1VolumeParamAddr?:
             mixOsc1VolumeKnob.value = value
-        case ParamAddr.mixOsc2VolumeParamAddr.rawValue:
+        case .mixOsc2VolumeParamAddr?:
             mixOsc2VolumeKnob.value = value
-        case ParamAddr.mixNoiseVolumeParamAddr.rawValue:
+        case .mixNoiseVolumeParamAddr?:
             mixNoiseVolumeKnob.value = value
         default:
             print("Unknown address")

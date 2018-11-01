@@ -6,6 +6,7 @@
 //  Copyright © 2018 Yauheni Lychkouski. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface MinimoogInstrumentObjcWrapper : NSObject {
@@ -18,6 +19,7 @@
 - (void)deallocateRenderResources;
 - (void)setParameter:(AUParameterAddress) address value:(AUValue) value;
 - (AUValue)getParameter:(AUParameterAddress) address;
+- (void)setSampleRate:(double)sampleRate;
 - (AUInternalRenderBlock)internalRenderBlock;
 
 @end

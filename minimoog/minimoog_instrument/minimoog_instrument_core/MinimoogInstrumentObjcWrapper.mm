@@ -51,6 +51,10 @@
     return _minimoogInstrument.getParameter(address);
 }
 
+- (void)setSampleRate:(double)sampleRate {
+    return _minimoogInstrument.setSampleRate(sampleRate);
+}
+
 - (AUInternalRenderBlock)internalRenderBlock {
     /*
      Capture in locals to avoid ObjC member lookups. If "self" is captured in

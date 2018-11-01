@@ -7,6 +7,8 @@
 
 import AVFoundation
 
+extension String : Error { }
+
 public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     enum ParamAddr : AUParameterAddress {
         case osc1RangeParamAddr = 0
@@ -20,9 +22,30 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     }
 
     // Instrument core
-    var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper
-
-
+    private var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper
+    private var curParameterTree: AUParameterTree?
+    private var curInputBusses : AUAudioUnitBusArray?
+    private var curOutputBusses : AUAudioUnitBusArray?
+    
+    override public var parameterTree: AUParameterTree? {
+        get { return self.curParameterTree }
+        set { self.curParameterTree = newValue }
+    }
+    
+    override public var inputBusses : AUAudioUnitBusArray {
+        get { return self.curInputBusses! }
+        set { self.curInputBusses = newValue }
+    }
+    
+    override public var outputBusses : AUAudioUnitBusArray {
+        get { return self.curOutputBusses! }
+        set { self.curOutputBusses = newValue }
+    }
+    
+    override public var internalRenderBlock : AUInternalRenderBlock {
+        get { return self.minimoogInstrumentWrapper.internalRenderBlock() }
+    }
+    
     private func createParam(
           _   identifier: String,
           _         name: String,
@@ -31,12 +54,18 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
           _          max: Float,
           _         unit: AudioUnitParameterUnit,
           _ valueStrings: [String] = []) -> AUParameter {
-        return AUParameterTree.createParameter(withIdentifier:identifier, name:name,
-            address:address.rawValue, min:AUValue(min), max:AUValue(max), unit:unit,
-            unitName:nil, flags:[.flag_IsWritable, .flag_IsReadable],
-            valueStrings:(valueStrings.isEmpty ? nil : valueStrings), dependentParameters:nil)
+        return AUParameterTree.createParameter(
+            withIdentifier:identifier,
+            name:name,
+            address:address.rawValue,
+            min:AUValue(min),
+            max:AUValue(max),
+            unit:unit,
+            unitName:nil,
+            flags:[.flag_IsWritable, .flag_IsReadable],
+            valueStrings:(valueStrings.isEmpty ? nil : valueStrings),
+            dependentParameters:nil)
     }
-    
     
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         minimoogInstrumentWrapper = MinimoogInstrumentObjcWrapper()
@@ -55,11 +84,11 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
             createParam("mixNoiseVolume","Mixer Noise Volume"       , .mixNoiseVolumeParamAddr,  0, 10, .customUnit)]
         
         // Create the parameter tree.
-        self.parameterTree = AUParameterTree.createTree(params)
+        self.parameterTree = AUParameterTree.createTree(withChildren: params)
 
         // A function to provide string representations of parameter values.
         self.parameterTree!.implementorStringFromValueCallback = { param, valuePtr in
-            var value = (valuePtr == nil ? param.value : valuePtr!.pointee)
+            let value = (valuePtr == nil ? param.value : valuePtr!.pointee)
             if (param.unit == .indexed) {
                 return param.valueStrings![Int(value)]
             }
@@ -70,23 +99,23 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         
         // Create the output bus.
         let defaultFormat = AVAudioFormat(standardFormatWithSampleRate:44100.0, channels:2)
-        self.minimoogInstrumentWrapper.setSampleRate(defaultFormat.sampleRate)
+        self.minimoogInstrumentWrapper.setSampleRate(defaultFormat!.sampleRate)
         
         //_audioStreamBasicDescription = *defaultFormat.streamDescription
         // create the busses with this asbd.
-        var inputBus    = AUAudioUnitBus(format:defaultFormat, error:nil)
-        var outputBus   = AUAudioUnitBus(format:defaultFormat, error:nil)
-        self.inputBues  = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeInput, busses: [inputBus])
-        self.outputBues = AUAudioUnitBusArray(audioUnit:self, busType:AUAudioUnitBusTypeOutput, busses: [outputBus])
+        let inputBus      = try AUAudioUnitBus(format:defaultFormat!)
+        let outputBus     = try AUAudioUnitBus(format:defaultFormat!)
+        self.inputBusses  = AUAudioUnitBusArray(audioUnit:self, busType:.input, busses: [inputBus])
+        self.outputBusses = AUAudioUnitBusArray(audioUnit:self, busType:.output, busses: [outputBus])
         
         // observe parameters change and update synth core
         self.parameterTree!.implementorValueObserver = { [weak self] param, value in
             guard let strongSelf = self else { return }
-            strongSelf.minimoogInstrumentWrapper.setParameter(param.address, value)
+            strongSelf.minimoogInstrumentWrapper.setParameter(param.address, value:value)
         }
 
         self.parameterTree!.implementorValueProvider = { [weak self] param in
-            guard let strongSelf = self else { return }
+            guard let strongSelf = self else { return AUValue(0) }
             return strongSelf.minimoogInstrumentWrapper.getParameter(param.address)
         }
         
@@ -94,21 +123,21 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     }
 
     // MARK: - AUAudioUnit Overrides
-    override func allocateRenderResources() throws {
-        super.allocateRenderResources()
-        var result = self.allocateRenderResourcesWithMusicalContext(self.musicalContext,
-                                                                            outputEventBlock:self.outputEventBlock,
+    override public func allocateRenderResources() throws {
+        try super.allocateRenderResources()
+        let result = self.minimoogInstrumentWrapper.allocateRenderResources(musicalContext: self.musicalContextBlock,
+                                                                            outputEventBlock:self.midiOutputEventBlock,
                                                                             transportStateBlock:self.transportStateBlock)
-        guard result else { throw Error() }
+        guard result else { throw "Failed to allocate render resources" }
     }
 
-    override func deallocateRenderResources() {
+    override public func deallocateRenderResources() {
         super.deallocateRenderResources()
-        minimoogInstrumentWrapper.allocateRenderResources()
+        minimoogInstrumentWrapper.deallocateRenderResources()
     }
 
     // MARK: - AUAudioUnit (AUAudioUnitImplementation)
-    func getFactoryPresetFilePath() -> String {
+    func getFactoryPresetFilePath() -> String? {
         return Bundle.main.path(forResource:"Profile", ofType:"plist")
     }
 
@@ -252,9 +281,5 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     }
     */
 
-    // ---------------------------------------------
-    func internalRenderBlock() -> AUInternalRenderBlock {
-        return minimoogInstrument.internalRenderBlock
-    }
 }
 
