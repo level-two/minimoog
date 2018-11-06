@@ -24,8 +24,61 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     // Instrument core
     private var minimoogInstrumentWrapper: MinimoogInstrumentObjcWrapper
     private var curParameterTree: AUParameterTree?
-    private var curInputBusses : AUAudioUnitBusArray?
-    private var curOutputBusses : AUAudioUnitBusArray?
+    private var curInputBusses: AUAudioUnitBusArray?
+    private var curOutputBusses: AUAudioUnitBusArray?
+    private var factoryPresetsManager: MinimoogInstrumentFactoryPresetsManager
+    
+    private var curPresetIndex: Int = 0 // Positive - factory, negative - user
+    private var curPresetName: String = ""
+    
+    override public var currentPreset: AUAudioUnitPreset? {
+        get {
+            if curPresetIndex >= 0 {
+                return factoryPresetsManager.getPreset(withIndex: curPresetIndex)?.getAuPreset()
+            }
+            else {
+                let userPreset = AUAudioUnitPreset()
+                userPreset.number = curPresetIndex
+                userPreset.name   = curPresetName
+                return userPreset
+            }
+        }
+        
+        set {
+            if newValue == nil {
+                return
+            }
+            else if newValue!.number >= 0 {
+                guard let factoryPreset = factoryPresetsManager.getPreset(withIndex: newValue!.number)?.getAuPreset() else { return }
+                curPresetIndex = factoryPreset.number
+                curPresetName  = factoryPreset.name
+                fillParametersFromFactoryPreset(withIndex: curPresetIndex)
+            }
+            else {
+                curPresetIndex = newValue!.number
+                curPresetName  = newValue!.name
+                // Parameters will be updated using fullState
+            }
+        }
+    }
+    
+    override public var factoryPresets: [AUAudioUnitPreset]? {
+        get {
+            return factoryPresetsManager.getAuPresets()
+        }
+    }
+    
+    override public var fullState: [String : Any]? {
+        get {
+            let preset = MinimoogInstrumentPreset(presetIndex: curPresetIndex, presetName: curPresetName, parameters: parameterTree?.allParameters)
+            return preset.getFullState()
+        }
+        
+        set {
+            let preset = MinimoogInstrumentPreset(fromFullState: newValue)
+            preset.fillParametersFromPreset(parameterTree?.allParameters)
+        }
+    }
     
     override public var parameterTree: AUParameterTree? {
         get { return self.curParameterTree }
@@ -69,6 +122,7 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         minimoogInstrumentWrapper = MinimoogInstrumentObjcWrapper()
+        factoryPresetsManager = MinimoogInstrumentFactoryPresetsManager()
         
         try super.init(componentDescription:componentDescription, options:options)
         
@@ -120,6 +174,9 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         }
         
         self.maximumFramesToRender = 512
+        
+        // load presets and set default values
+        
     }
 
     // MARK: - AUAudioUnit Overrides
@@ -136,77 +193,12 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         minimoogInstrumentWrapper.deallocateRenderResources()
     }
 
-    // MARK: - AUAudioUnit (AUAudioUnitImplementation)
-    func getFactoryPresetFilePath() -> String? {
-        return Bundle.main.path(forResource:"Profile", ofType:"plist")
+    private func fillParametersFromFactoryPreset(withIndex index:Int) {
+        factoryPresetsManager.getPreset(withIndex: index)?.fillParametersFromPreset(parameterTree?.allParameters)
     }
-
-    func loadFactoryPresets() {
-        /*
-        NSString          *path       = [self factoryPresetFilePath]
-        NSMutableData     *pData      = [[NSMutableData alloc] initWithContentsOfFile:path]
-        NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:pData]
-        NSDictionary<NSString*, id> *factoryPresetsDic = [[NSDictionary alloc] initWithCoder:unArchiver]
-        [unArchiver finishDecoding]
-        
-        int presetsNumber = [[factoryPresetsDic valueForKey:@"presetsNumber"] integerValue]
-        int defaultPresetIndex = [[factoryPresetsDic valueForKey:@"defaultPresetIndex"] integerValue]
-        
-        
-        
-        
-        
-        state[@"fullStateParams"] = [NSKeyedArchiver archivedDataWithRootObject: params]
-        
-        
-        NSDictionary<NSString*, id> *params = @{
-                                                @"intervalParameter": [NSNumber numberWithInt: intervalParam.value],
-                                                }
-        
-        AUParameter *cutoffParameter    = [self.parameterTree valueForKey: @"cutoff"]
-        cutoffParameter.value    = presetParameters[factoryPreset.number].cutoffValue
-        
-        
-        _currentFactoryPresetIndex = kDefaultFactoryPreset
-        _presets = @[
-                     [self createPreset:0 name:@"Minor Second"],
-                     [self createPreset:1 name:@"Major Second"],
-                     [self createPreset:2 name:@"Minor Third"],
-                     [self createPreset:3 name:@"Major Third"],
-                     [self createPreset:4 name:@"Fourth"],
-                     [self createPreset:5 name:@"Tritone"],
-                     [self createPreset:6 name:@"Fifth"],
-                     [self createPreset:7 name:@"Minor Sixth"],
-                     [self createPreset:8 name:@"Major Sixth"],
-                     [self createPreset:9 name:@"Minor Seventh"],
-                     [self createPreset:10 name:@"Major Seventh"],
-                     [self createPreset:11 name:@"Octave"]
-                     ]
-        _currentPreset = self.factoryPresets[_currentFactoryPresetIndex]
-        */
-    }
-
-
-    func saveProfile() {
-        /*
-        SeccionItem *data = [[SeccionItem alloc]init]
-        data.title        = @"title"
-        data.texto        = @"fdgdf"
-        data.images       = [NSArray arrayWithObjects:@"dfds", nil]
-        
-        NSMutableData   *pData    = [[NSMutableData alloc]init]
-        NSString        *path     = [self saveFilePath]
-        NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc]initForWritingWithMutableData:pData]
-        [data encodeWithCoder:archiver]
-        [archiver finishEncoding]
-        [pData writeToFile:path atomically:YES]
-        */
-    }
-
-
-
-
-
+    
+    
+    
     /*
     func createPreset((NSInteger)number name:(NSString*)name -> AUAudioUnitPreset{
         AUAudioUnitPreset* newPreset = [AUAudioUnitPreset new]

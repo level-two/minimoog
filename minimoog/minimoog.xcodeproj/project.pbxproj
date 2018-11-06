@@ -20,8 +20,8 @@
 		93BAFB5D21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
 		93BAFB5E21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
 		93BAFB5F21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
-		93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */; };
-		93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */; };
+		93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */; };
+		93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */; };
 		93BAFB6221875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */; };
 		93BAFB6321875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */; };
 		93BAFB6421875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */; };
@@ -87,7 +87,7 @@
 		930F398621691B6B00BAB7F3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
 		93BAFB4721875C3A004C0D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentFactoryPresets.swift; sourceTree = "<group>"; };
+		93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentFactoryPresetsManager.swift; sourceTree = "<group>"; };
 		93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentPreset.swift; sourceTree = "<group>"; };
 		93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentAudioUnit.swift; sourceTree = "<group>"; };
 		93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentViewController.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 				93BAFB5421875C3A004C0D7C /* minimoog_instrument_core */,
 				93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */,
 				93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */,
-				93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresets.swift */,
+				93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */,
 				93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */,
 				93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */,
 				93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */,
@@ -335,7 +335,7 @@
 				93BAFB7A21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */,
 				93BAFB5C21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */,
 				930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */,
-				93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */,
+				93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */,
 				93BAFB7821875C3B004C0D7C /* MinimoogInstrument.mm in Sources */,
 				93BAFB6421875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */,
 				930F395D21679E0F00BAB7F3 /* AppDelegate.swift in Sources */,
@@ -353,7 +353,7 @@
 				93BAFB6721875C3B004C0D7C /* MinimoogInstrumentViewController.swift in Sources */,
 				93BAFB6521875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */,
 				93BAFB7B21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */,
-				93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresets.swift in Sources */,
+				93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
