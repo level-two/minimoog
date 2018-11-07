@@ -30,12 +30,12 @@ public:
     virtual ~MinimoogInstrument();
     
     // Overrides
-    virtual bool    allocateRenderResources();
-    virtual void    deallocateRenderResources();
     virtual void    setParameter   (AUParameterAddress address, AUValue value);
     virtual AUValue getParameter   (AUParameterAddress address);
     virtual void    startRamp      (AUParameterAddress address, AUValue value, AUAudioFrameCount duration);
     virtual void    handleMIDIEvent(AUMIDIEvent const& midiEvent);
+    virtual bool    doAllocateRenderResources();
+    virtual void    doDeallocateRenderResources();
     virtual void    doRender       (float *outL, float *outR);
 
 private:

@@ -10,36 +10,21 @@
 #import "MinimoogInstrumentBase.hpp"
 
 MinimoogInstrumentBase::MinimoogInstrumentBase() {
-    
+    m_audioBufferList = nullptr;
 }
 
 MinimoogInstrumentBase::~MinimoogInstrumentBase() {
-    
 }
 
-void MinimoogInstrumentBase::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *&event) {
-	do {
-        switch (event->head.eventType) {
-            case AURenderEventParameter: {
-                AUParameterEvent const& paramEvent = event->parameter;
-                setParameter(paramEvent.parameterAddress, paramEvent.value);
-                break;
-            }
-            case AURenderEventParameterRamp: {
-                AUParameterEvent const& paramEvent = event->parameter;
-                startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames);
-                break;
-            }
-            case AURenderEventMIDI:
-                handleMIDIEvent(event->MIDI);
-                break;
-            default:
-                break;
-        }
-		event = event->head.next;
-	} while (event && event->head.eventSampleTime <= now);
+bool MinimoogInstrumentBase::allocateRenderResources(const AudioBufferList* audioBufferList) {
+    m_audioBufferList = audioBufferList;
+    return doAllocateRenderResources();
 }
 
+void MinimoogInstrumentBase::deallocateRenderResources() {
+    m_audioBufferList = nullptr;
+    doDeallocateRenderResources();
+}
 
 void MinimoogInstrumentBase::render(AudioUnitRenderActionFlags* actionFlags          ,
                                     const AudioTimeStamp*       timestamp            ,
@@ -49,9 +34,11 @@ void MinimoogInstrumentBase::render(AudioUnitRenderActionFlags* actionFlags     
                                     const AURenderEvent*        realtimeEventListHead,
                                     AURenderPullInputBlock      pullInputBlock       )
 {
-    AUEventSampleTime now = AUEventSampleTime(timestamp->mSampleTime);
+    prepareOutputBufferList(outputData, frameCount, true);
+    
+    AUEventSampleTime now             = AUEventSampleTime(timestamp->mSampleTime);
     AUAudioFrameCount framesRemaining = frameCount;
-    AURenderEvent const *event = realtimeEventListHead;
+    AURenderEvent const *event        = realtimeEventListHead;
     
     while (framesRemaining > 0) {
         // If there are no more events, we can process the entire remaining segment and exit
@@ -82,6 +69,22 @@ void MinimoogInstrumentBase::render(AudioUnitRenderActionFlags* actionFlags     
     }
 }
 
+void MinimoogInstrumentBase::prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill) {
+    UInt32 byteSize = frameCount * sizeof(float);
+    
+    for (UInt32 i = 0; i < outBufferList->mNumberBuffers; ++i) {
+        outBufferList->mBuffers[i].mNumberChannels = m_audioBufferList->mBuffers[i].mNumberChannels;
+        outBufferList->mBuffers[i].mDataByteSize = byteSize;
+        
+        if (outBufferList->mBuffers[i].mData == nullptr) {
+            outBufferList->mBuffers[i].mData = m_audioBufferList->mBuffers[i].mData;
+        }
+        
+        if (zeroFill) {
+            memset(outBufferList->mBuffers[i].mData, 0, byteSize);
+        }
+    }
+}
 
 void MinimoogInstrumentBase::renderSegmentFrames(AUAudioFrameCount       frameCount  ,
                                                  AudioBufferList*        outputData  ,
@@ -92,4 +95,27 @@ void MinimoogInstrumentBase::renderSegmentFrames(AUAudioFrameCount       frameCo
         float* outR = (float*)outputData->mBuffers[1].mData + bufferOffset + i;
         doRender(outL, outR);
     }
+}
+
+void MinimoogInstrumentBase::performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const *&event) {
+    do {
+        switch (event->head.eventType) {
+            case AURenderEventParameter: {
+                AUParameterEvent const& paramEvent = event->parameter;
+                setParameter(paramEvent.parameterAddress, paramEvent.value);
+                break;
+            }
+            case AURenderEventParameterRamp: {
+                AUParameterEvent const& paramEvent = event->parameter;
+                startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames);
+                break;
+            }
+            case AURenderEventMIDI:
+                handleMIDIEvent(event->MIDI);
+                break;
+            default:
+                break;
+        }
+        event = event->head.next;
+    } while (event && event->head.eventSampleTime <= now);
 }

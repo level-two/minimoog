@@ -203,8 +203,8 @@
 			children = (
 				93BAFB5521875C3A004C0D7C /* MinimoogInstrumentBase.hpp */,
 				93BAFB5821875C3A004C0D7C /* MinimoogInstrumentBase.mm */,
-				93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */,
 				93BAFB5A21875C3A004C0D7C /* MinimoogInstrument.hpp */,
+				93BAFB5921875C3A004C0D7C /* MinimoogInstrument.mm */,
 				93BAFB5721875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.h */,
 				93BAFB5B21875C3A004C0D7C /* MinimoogInstrumentObjcWrapper.mm */,
 				93BAFB5621875C3A004C0D7C /* MinimoogInstrumentObjcWrapper-Bridging-Header.h */,

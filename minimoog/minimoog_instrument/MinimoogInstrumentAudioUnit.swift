@@ -182,10 +182,11 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     // MARK: - AUAudioUnit Overrides
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
-        let result = self.minimoogInstrumentWrapper.allocateRenderResources(musicalContext: self.musicalContextBlock,
-                                                                            outputEventBlock:self.midiOutputEventBlock,
-                                                                            transportStateBlock:self.transportStateBlock)
-        guard result else { throw "Failed to allocate render resources" }
+        guard self.minimoogInstrumentWrapper.allocateRenderResources(musicalContext: self.musicalContextBlock ,
+                                                                   outputEventBlock: self.midiOutputEventBlock,
+                                                                transportStateBlock: self.transportStateBlock ,
+                                                                          maxFrames: self.maximumFramesToRender)
+        else { throw "Failed to allocate render resources" }
     }
 
     override public func deallocateRenderResources() {

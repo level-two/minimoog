@@ -11,35 +11,61 @@
 
 @interface MinimoogInstrumentObjcWrapper () {
     // Instrument core - C++ class instance
-    AUHostMusicalContextBlock _musicalContext;
-    AUMIDIOutputEventBlock    _outputEventBlock;
-    AUHostTransportStateBlock _transportStateBlock;
     MinimoogInstrument        _minimoogInstrument;
 }
+
+    @property (nonatomic, copy) AUHostMusicalContextBlock musicalContext;
+    @property (nonatomic, copy) AUMIDIOutputEventBlock    outputEventBlock;
+    @property (nonatomic, copy) AUHostTransportStateBlock transportStateBlock;
+
+    @property (nonatomic) AVAudioFormat*         audioFormat;
+    @property (nonatomic) AVAudioChannelCount    maxChannels;
+
+    @property (nonatomic) AVAudioPCMBuffer*      pcmBuffer;
+    @property (nonatomic) const AudioBufferList* audioBufferList;
 @end
 
 @implementation MinimoogInstrumentObjcWrapper
+    @synthesize musicalContext;
+    @synthesize outputEventBlock;
+    @synthesize transportStateBlock;
+    @synthesize audioFormat;
+    @synthesize maxChannels;
+    @synthesize pcmBuffer;
+    @synthesize audioBufferList;
+
 - (id)init {
+    return [self initWithAudioFormat:[[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2]
+                         maxChannels:2];
+}
+
+- (id)initWithAudioFormat:(AVAudioFormat*)audioFormat maxChannels:(AVAudioChannelCount) maxChannels;
+{
     if (self = [super init]) {
-        return self;
+        self.audioFormat = audioFormat;
+        self.maxChannels = maxChannels;
     }
     return self;
 }
 
-
 - (BOOL)allocateRenderResourcesWithMusicalContext:(AUHostMusicalContextBlock) musicalContext
                                  outputEventBlock:(AUMIDIOutputEventBlock)    outputEventBlock
-                              transportStateBlock:(AUHostTransportStateBlock) transportStateBlock {
-    _musicalContext      = musicalContext;
-    _outputEventBlock    = outputEventBlock;
-    _transportStateBlock = transportStateBlock;
-    return _minimoogInstrument.allocateRenderResources();
+                              transportStateBlock:(AUHostTransportStateBlock) transportStateBlock
+                                        maxFrames:(AVAudioFrameCount)         maxFrames {
+    self.musicalContext      = musicalContext;
+    self.outputEventBlock    = outputEventBlock;
+    self.transportStateBlock = transportStateBlock;
+    self.pcmBuffer           = [[AVAudioPCMBuffer alloc] initWithPCMFormat:audioFormat frameCapacity:maxFrames];
+    self.audioBufferList     = pcmBuffer.audioBufferList;
+    return _minimoogInstrument.allocateRenderResources(audioBufferList);
 }
 
 - (void)deallocateRenderResources {
-    _musicalContext      = nil;
-    _outputEventBlock    = nil;
-    _transportStateBlock = nil;
+    musicalContext      = nil;
+    outputEventBlock    = nil;
+    transportStateBlock = nil;
+    pcmBuffer           = nil;
+    audioBufferList     = nil;
     _minimoogInstrument.deallocateRenderResources();
 }
 
@@ -61,9 +87,9 @@
      render, we're doing it wrong.
      */
     __block MinimoogInstrument *minimoogInstrumentCapture = &_minimoogInstrument;
-    AUHostMusicalContextBlock musicalContextCapture       = _musicalContext;
-    AUMIDIOutputEventBlock    outputEventBlockCapture     = _outputEventBlock;
-    AUHostTransportStateBlock transportStateBlockCapture  = _transportStateBlock;
+    AUHostMusicalContextBlock musicalContextCapture       = musicalContext;
+    AUMIDIOutputEventBlock    outputEventBlockCapture     = outputEventBlock;
+    AUHostTransportStateBlock transportStateBlockCapture  = transportStateBlock;
     __block BOOL transportStateIsMoving = NO;
     
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags* actionFlags           ,

@@ -13,9 +13,11 @@
 }
 
 - (id)init;
+- (id)initWithAudioFormat:(AVAudioFormat*)audioFormat maxChannels:(AVAudioChannelCount) maxChannels;
 - (BOOL)allocateRenderResourcesWithMusicalContext:(AUHostMusicalContextBlock) musicalContext
                                  outputEventBlock:(AUMIDIOutputEventBlock)    outputEventBlock
-                              transportStateBlock:(AUHostTransportStateBlock) transportStateBlock;
+                              transportStateBlock:(AUHostTransportStateBlock) transportStateBlock
+                                        maxFrames:(AVAudioFrameCount)         maxFrames;
 - (void)deallocateRenderResources;
 - (void)setParameter:(AUParameterAddress) address value:(AUValue) value;
 - (AUValue)getParameter:(AUParameterAddress) address;

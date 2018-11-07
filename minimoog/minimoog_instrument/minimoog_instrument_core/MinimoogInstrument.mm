@@ -29,11 +29,11 @@ MinimoogInstrument::~MinimoogInstrument() {
 }
 
 
-bool MinimoogInstrument::allocateRenderResources() {
+bool MinimoogInstrument::doAllocateRenderResources() {
     return true;
 }
 
-void MinimoogInstrument::deallocateRenderResources() {
+void MinimoogInstrument::doDeallocateRenderResources() {
     
 }
 
