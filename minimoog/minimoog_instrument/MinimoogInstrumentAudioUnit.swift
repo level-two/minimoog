@@ -10,7 +10,7 @@ import AVFoundation
 extension String : Error { }
 
 public class MinimoogInstrumentAudioUnit : AUAudioUnit {
-    enum ParamAddr : AUParameterAddress {
+    enum ParamAddr : AUParameterAddress, CaseIterable {
         case osc1RangeParamAddr = 0
         case osc1WaveformParamAddr
         case osc2RangeParamAddr
