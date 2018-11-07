@@ -175,8 +175,8 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         
         self.maximumFramesToRender = 512
         
-        // load presets and set default values
-        
+        // apply default preset
+        self.currentPreset = self.factoryPresetsManager.defaultAuPreset()
     }
 
     // MARK: - AUAudioUnit Overrides
@@ -197,82 +197,5 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
     private func fillParametersFromFactoryPreset(withIndex index:Int) {
         factoryPresetsManager.getPreset(withIndex: index)?.fillParametersFromPreset(parameterTree?.allParameters)
     }
-    
-    
-    
-    /*
-    func createPreset((NSInteger)number name:(NSString*)name -> AUAudioUnitPreset{
-        AUAudioUnitPreset* newPreset = [AUAudioUnitPreset new]
-        newPreset.number = number
-        newPreset.name = name
-        return newPreset
-    }
-
-    func currentPreset -> AUAudioUnitPreset {
-        if (_currentPreset.number >= 0) {
-            NSLog(@"Returning Current Factory Preset: %ld\n", (long)_currentFactoryPresetIndex)
-            return [_presets objectAtIndex:_currentFactoryPresetIndex]
-        } else {
-            NSLog(@"Returning Current Custom Preset: %ld, %@\n", (long)_currentPreset.number, _currentPreset.name)
-            return _currentPreset
-        }
-    }
-
-    func setCurrentPreset:(AUAudioUnitPreset *)currentPreset{
-        if (nil == currentPreset) {
-            NSLog(@"nil passed to setCurrentPreset!")
-            return
-        }
-        
-        if (currentPreset.number >= 0) {
-            // factory preset
-            for (AUAudioUnitPreset *factoryPreset in _presets) {
-                if (currentPreset.number == factoryPreset.number) {
-                    AUParameter *cutoffParameter    = [self.parameterTree valueForKey: @"cutoff"]
-                    AUParameter *resonanceParameter = [self.parameterTree valueForKey: @"resonance"]
-                    
-                    cutoffParameter.value    = presetParameters[factoryPreset.number].cutoffValue
-                    resonanceParameter.value = presetParameters[factoryPreset.number].resonanceValue
-                    
-                    // set factory preset as current
-                    _currentPreset             = currentPreset
-                    _currentFactoryPresetIndex = factoryPreset.number
-                    NSLog(@"currentPreset Factory: %ld, %@\n", (long)_currentFactoryPresetIndex, factoryPreset.name)
-                    
-                    break
-                }
-            }
-        } else if (nil != currentPreset.name) {
-            // set custom preset as current
-            _currentPreset = currentPreset
-            NSLog(@"currentPreset Custom: %ld, %@\n", (long)_currentPreset.number, _currentPreset.name)
-        } else {
-            NSLog(@"setCurrentPreset not set! - invalid AUAudioUnitPreset\n")
-        }
-    }
-
-    // Methods for user presets storing and loading
-    func fullState() -> [String:AnyObject]{
-        NSLog(@"calling: %s", __PRETTY_FUNCTION__ )
-        NSMutableDictionary *state = [[NSMutableDictionary alloc] initWithDictionary: super.fullState]
-
-        // you can do just a setObject:forKey on state, but in real life you will probably have many parameters.
-        // so, add a param dictionary to fullState.
-        NSDictionary<NSString*, id> *params = @{
-                                                @"intervalParameter": [NSNumber numberWithInt: intervalParam.value],
-                                                }
-        state[@"fullStateParams"] = [NSKeyedArchiver archivedDataWithRootObject: params]
-        
-        return state
-    }
-
-    func setFullState(_:[String:AnyObject] fullState) {
-        NSLog(@"calling: %s", __PRETTY_FUNCTION__ )
-        NSData *data         = (NSData *)fullState[@"fullStateParams"]
-        NSDictionary *params = [NSKeyedUnarchiver unarchiveObjectWithData:data]
-        intervalParam.value  = [(NSNumber *)params[@"intervalParameter"] intValue]
-    }
-    */
-
 }
 

@@ -7,19 +7,18 @@
 //
 
 class MinimoogInstrumentFactoryPresetsManager {
-    struct PresetDef : Decodable {
-        var presetName: String
-        var presetIndex: Int
-        var params: [String:Float]
-    }
-    
     struct PresetsDef : Decodable {
+        struct PresetDef : Decodable {
+            var presetName: String
+            var presetIndex: Int
+            var params: [String:Double]
+        }
+        
         var presets: [PresetDef]
         var defaultPresetIndex: Int
     }
     
     public var defaultPresetIndex: Int
-    
     private var presets: [MinimoogInstrumentPreset]
     
     init() {
@@ -47,6 +46,11 @@ class MinimoogInstrumentFactoryPresetsManager {
         return nil
     }
     
+    public func defaultAuPreset() -> AUAudioUnitPreset? {
+        let preset = getPreset(withIndex: self.defaultPresetIndex)
+        return preset?.getAuPreset()
+    }
+    
     public func getAuPresets() -> [AUAudioUnitPreset] {
         var auPresets:[AUAudioUnitPreset] = []
         for preset in self.presets {
@@ -56,12 +60,19 @@ class MinimoogInstrumentFactoryPresetsManager {
     }
     
     private func loadPresetsDefFromFile() -> PresetsDef? {
+        guard let url  = Bundle.main.url(forResource: "FactoryPresets", withExtension: "plist") else { return nil }
+        
+        var presetsDef : PresetsDef?
         let decoder = PropertyListDecoder()
-        guard
-            let url     = Bundle.main.url(forResource: "FactoryPresets", withExtension: "plist"),
-            let data    = try? Data(contentsOf: url),
-            let result  = try? decoder.decode(PresetsDef.self, from: data)
-        else { return nil }
-        return result
+        
+        do {
+            let data = try Data(contentsOf: url)
+            presetsDef = try decoder.decode(PresetsDef.self, from: data)
+        }
+        catch {
+            print(error)
+        }
+        
+        return presetsDef
     }
 }

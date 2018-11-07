@@ -16,6 +16,8 @@
 		930F396421679E1100BAB7F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 930F396321679E1100BAB7F3 /* Assets.xcassets */; };
 		930F396721679E1100BAB7F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930F396521679E1100BAB7F3 /* LaunchScreen.storyboard */; };
 		930F398021691B2F00BAB7F3 /* minimoog_instrument.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		931E349F219319AB00451814 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931E349E219319AB00451814 /* FactoryPresets.plist */; };
+		931E34A0219319AB00451814 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931E349E219319AB00451814 /* FactoryPresets.plist */; };
 		93BAFB5C21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
 		93BAFB5D21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
 		93BAFB5E21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
@@ -85,6 +87,7 @@
 		930F396821679E1100BAB7F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = minimoog_instrument.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		930F398621691B6B00BAB7F3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		931E349E219319AB00451814 /* FactoryPresets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = FactoryPresets.plist; path = minimoog_instrument/Assets/FactoryPresets.plist; sourceTree = SOURCE_ROOT; };
 		93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
 		93BAFB4721875C3A004C0D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentFactoryPresetsManager.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 		93BAFB4C21875C3A004C0D7C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				931E349E219319AB00451814 /* FactoryPresets.plist */,
 				93BAFB4D21875C3A004C0D7C /* knob_range.png */,
 				93BAFB4E21875C3A004C0D7C /* knob_volume.png */,
 				93BAFB4F21875C3A004C0D7C /* knob_detune.png */,
@@ -293,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				931E349F219319AB00451814 /* FactoryPresets.plist in Resources */,
 				93BAFB6E21875C3B004C0D7C /* knob_waveform.png in Resources */,
 				93BAFB6C21875C3B004C0D7C /* knob_detune.png in Resources */,
 				93BAFB7221875C3B004C0D7C /* knob_bg.png in Resources */,
@@ -311,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				931E34A0219319AB00451814 /* FactoryPresets.plist in Resources */,
 				93BAFB7321875C3B004C0D7C /* knob_bg.png in Resources */,
 				93BAFB6D21875C3B004C0D7C /* knob_detune.png in Resources */,
 				93BAFB7121875C3B004C0D7C /* knob_pointer.png in Resources */,

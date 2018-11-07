@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>defaultPresetIndex</key>
+	<integer>1</integer>
+	<key>presets</key>
+	<array>
+		<dict>
+			<key>presetName</key>
+			<string>Factory Preset 0</string>
+			<key>presetIndex</key>
+			<integer>0</integer>
+			<key>params</key>
+			<dict>
+				<key>osc1Range</key>
+				<real>2</real>
+				<key>osc1Waveform</key>
+				<real>0</real>
+				<key>osc2Range</key>
+				<real>0</real>
+				<key>osc2Detune</key>
+				<real>0</real>
+				<key>osc2Waveform</key>
+				<real>0</real>
+				<key>mixOsc1Volume</key>
+				<real>10</real>
+				<key>mixOsc2Volume</key>
+				<real>0</real>
+				<key>mixNoiseVolume</key>
+				<real>0</real>
+			</dict>
+		</dict>
+		<dict>
+			<key>presetName</key>
+			<string>Factory Preset 1</string>
+			<key>presetIndex</key>
+			<integer>1</integer>
+			<key>params</key>
+			<dict>
+				<key>osc1Range</key>
+				<real>2</real>
+				<key>osc1Waveform</key>
+				<real>0</real>
+				<key>osc2Range</key>
+				<real>2</real>
+				<key>osc2Detune</key>
+				<real>4</real>
+				<key>osc2Waveform</key>
+				<real>0</real>
+				<key>mixOsc1Volume</key>
+				<real>10</real>
+				<key>mixOsc2Volume</key>
+				<real>5</real>
+				<key>mixNoiseVolume</key>
+				<real>0.7</real>
+			</dict>
+		</dict>
+		<dict>
+			<key>presetName</key>
+			<string>Factory Preset 2</string>
+			<key>presetIndex</key>
+			<integer>2</integer>
+			<key>params</key>
+			<dict>
+				<key>osc1Range</key>
+				<real>4</real>
+				<key>osc1Waveform</key>
+				<real>3</real>
+				<key>osc2Range</key>
+				<real>4</real>
+				<key>osc2Detune</key>
+				<real>-8</real>
+				<key>osc2Waveform</key>
+				<real>1</real>
+				<key>mixOsc1Volume</key>
+				<real>3</real>
+				<key>mixOsc2Volume</key>
+				<real>3</real>
+				<key>mixNoiseVolume</key>
+				<real>5</real>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

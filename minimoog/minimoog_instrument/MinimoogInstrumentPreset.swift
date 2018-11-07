@@ -9,10 +9,10 @@
 class MinimoogInstrumentPreset {
     public var presetName: String = ""
     public var presetIndex: Int = 0
-    public var presetDic:[String:Float] = [:]
+    public var presetDic:[String:Double] = [:]
     
     
-    init(presetIndex:Int, presetName:String, dictionary:[String:Float]) {
+    init(presetIndex:Int, presetName:String, dictionary:[String:Double]) {
         self.presetName  = presetName
         self.presetIndex = presetIndex
         self.presetDic   = dictionary
@@ -26,7 +26,7 @@ class MinimoogInstrumentPreset {
         guard parameters != nil else { return }
         
         for param in parameters! {
-            self.presetDic[param.identifier] = Float(param.value)
+            self.presetDic[param.identifier] = Double(param.value)
         }
     }
     
@@ -35,7 +35,7 @@ class MinimoogInstrumentPreset {
         
         presetName  = fullState!["Name"] as! String
         presetIndex = fullState!["Index"] as! Int
-        presetDic   = fullState!["presetDic"] as! [String:Float]
+        presetDic   = fullState!["presetDic"] as! [String:Double]
     }
     
     public func getAuPreset() -> AUAudioUnitPreset {
