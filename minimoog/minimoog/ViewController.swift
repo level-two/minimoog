@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     
     var playEngine: SimplePlayEngine!
-    var parameterObserverToken: AUParameterObserverToken!
     var minimoogInstrumentViewController: MinimoogInstrumentViewController!
     
     // MARK: View Life Cycle
@@ -83,7 +82,6 @@ class ViewController: UIViewController {
     
     func connectParametersToControls() {
         minimoogInstrumentViewController.audioUnit = playEngine.testAudioUnit
-        //guard let parameterTree = playEngine.testAudioUnit?.parameterTree else { return }
     }
     
     /// Handles Play/Stop button touches.

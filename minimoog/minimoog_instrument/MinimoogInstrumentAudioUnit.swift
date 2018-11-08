@@ -99,27 +99,6 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         get { return self.minimoogInstrumentWrapper.internalRenderBlock() }
     }
     
-    private func createParam(
-          _   identifier: String,
-          _         name: String,
-          _      address: ParamAddr,
-          _          min: Float,
-          _          max: Float,
-          _         unit: AudioUnitParameterUnit,
-          _ valueStrings: [String] = []) -> AUParameter {
-        return AUParameterTree.createParameter(
-            withIdentifier:identifier,
-            name:name,
-            address:address.rawValue,
-            min:AUValue(min),
-            max:AUValue(max),
-            unit:unit,
-            unitName:nil,
-            flags:[.flag_IsWritable, .flag_IsReadable],
-            valueStrings:(valueStrings.isEmpty ? nil : valueStrings),
-            dependentParameters:nil)
-    }
-    
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         minimoogInstrumentWrapper = MinimoogInstrumentObjcWrapper()
         factoryPresetsManager = MinimoogInstrumentFactoryPresetsManager()
@@ -151,6 +130,17 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
             }
         }
         
+        // observe parameters change and update synth core
+        self.parameterTree!.implementorValueObserver = { [weak self] param, value in
+            guard let strongSelf = self else { return }
+            strongSelf.minimoogInstrumentWrapper.setParameter(param.address, value:value)
+        }
+        
+        self.parameterTree!.implementorValueProvider = { [weak self] param in
+            guard let strongSelf = self else { return AUValue(0) }
+            return strongSelf.minimoogInstrumentWrapper.getParameter(param.address)
+        }
+        
         // Create the output bus.
         let defaultFormat = AVAudioFormat(standardFormatWithSampleRate:44100.0, channels:2)
         self.minimoogInstrumentWrapper.setSampleRate(defaultFormat!.sampleRate)
@@ -162,21 +152,20 @@ public class MinimoogInstrumentAudioUnit : AUAudioUnit {
         self.inputBusses  = AUAudioUnitBusArray(audioUnit:self, busType:.input, busses: [inputBus])
         self.outputBusses = AUAudioUnitBusArray(audioUnit:self, busType:.output, busses: [outputBus])
         
-        // observe parameters change and update synth core
-        self.parameterTree!.implementorValueObserver = { [weak self] param, value in
-            guard let strongSelf = self else { return }
-            strongSelf.minimoogInstrumentWrapper.setParameter(param.address, value:value)
-        }
-
-        self.parameterTree!.implementorValueProvider = { [weak self] param in
-            guard let strongSelf = self else { return AUValue(0) }
-            return strongSelf.minimoogInstrumentWrapper.getParameter(param.address)
-        }
-        
         self.maximumFramesToRender = 512
         
         // apply default preset
         self.currentPreset = self.factoryPresetsManager.defaultAuPreset()
+    }
+    
+    private func createParam(
+        _ identifier: String, _ name: String, _ address: ParamAddr, _ min: Float, _ max: Float,
+        _ unit: AudioUnitParameterUnit, _ valueStrings: [String] = []) -> AUParameter
+    {
+        return AUParameterTree.createParameter(
+            withIdentifier:identifier, name:name, address:address.rawValue, min:AUValue(min),
+            max:AUValue(max), unit:unit, unitName:nil, flags:[.flag_IsWritable, .flag_IsReadable],
+            valueStrings:(valueStrings.isEmpty ? nil : valueStrings), dependentParameters:nil)
     }
 
     // MARK: - AUAudioUnit Overrides

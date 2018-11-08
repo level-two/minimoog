@@ -69,8 +69,6 @@ void MinimoogInstrument::setParameter(AUParameterAddress address, AUValue value)
             m_mixNoiseVolume = value;
             m_mixNoiseAmplMultiplier = value / 10.;
             break;
-        default:
-            break;
     }
 }
 
@@ -80,20 +78,28 @@ AUValue MinimoogInstrument::getParameter(AUParameterAddress address) {
     switch (address) {
         case osc1RangeParamAddr:
             val = m_osc1Range;
+            break;
         case osc1WaveformParamAddr:
             val = m_osc1Waveform;
+            break;
         case osc2RangeParamAddr:
             val = m_osc2Range;
+            break;
         case osc2DetuneParamAddr:
             val = m_osc2Detune;
+            break;
         case osc2WaveformParamAddr:
             val = m_osc2Waveform;
+            break;
         case mixOsc1VolumeParamAddr:
             val = m_mixOsc1Volume;
+            break;
         case mixOsc2VolumeParamAddr:
             val = m_mixOsc2Volume;
+            break;
         case mixNoiseVolumeParamAddr:
             val = m_mixNoiseVolume;
+            break;
     }
     return val;
 }
