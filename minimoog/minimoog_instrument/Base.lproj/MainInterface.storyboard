@@ -26,13 +26,13 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ww-KD-wNF" userLabel="Device - Osc1">
-                                <rect key="frame" x="62.5" y="35" width="250" height="150"/>
+                                <rect key="frame" x="37.5" y="35" width="300" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="pvB-N0-tr2">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OSCILLATOR-1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tka-T3-qe9">
-                                        <rect key="frame" x="67" y="14" width="116" height="21"/>
+                                        <rect key="frame" x="92" y="14" width="116" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -96,11 +96,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Aa8-MZ-OK8"/>
                                             <outlet property="knobImageView" destination="OcF-lH-Ddk" id="jjz-On-luS"/>
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9T-da-Axi" userLabel="Osc1 Waveform Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
-                                        <rect key="frame" x="142" y="25" width="100" height="100"/>
+                                        <rect key="frame" x="192" y="25" width="100" height="100"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_waveform" translatesAutoresizingMaskIntoConstraints="NO" id="ZC3-mf-Xa5">
                                                 <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
@@ -158,6 +159,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
+                                            <action selector="osc1WaveformChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="bBi-pP-lRM"/>
                                             <outlet property="knobImageView" destination="fbi-Dw-75V" id="OWU-qT-8s4"/>
                                         </connections>
                                     </view>
@@ -166,7 +168,7 @@
                                 <constraints>
                                     <constraint firstItem="GYf-fR-SMo" firstAttribute="centerY" secondItem="2Ww-KD-wNF" secondAttribute="centerY" id="1vm-GL-if6"/>
                                     <constraint firstItem="Tka-T3-qe9" firstAttribute="centerX" secondItem="2Ww-KD-wNF" secondAttribute="centerX" id="3H2-eY-hHs"/>
-                                    <constraint firstAttribute="width" constant="250" id="KCv-QC-t7B"/>
+                                    <constraint firstAttribute="width" constant="300" id="KCv-QC-t7B"/>
                                     <constraint firstItem="Tka-T3-qe9" firstAttribute="top" secondItem="2Ww-KD-wNF" secondAttribute="top" constant="14" id="Qom-AY-QeM"/>
                                     <constraint firstItem="GYf-fR-SMo" firstAttribute="leading" secondItem="2Ww-KD-wNF" secondAttribute="leading" constant="8" id="bgZ-NE-8J0"/>
                                     <constraint firstAttribute="trailing" secondItem="W9T-da-Axi" secondAttribute="trailing" constant="8" id="cox-xL-5Cz"/>
@@ -178,17 +180,471 @@
                                     <constraint firstItem="pvB-N0-tr2" firstAttribute="width" secondItem="2Ww-KD-wNF" secondAttribute="width" id="vKJ-7L-jmV"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URH-Y4-KAd" userLabel="Device - Osc2">
+                                <rect key="frame" x="37.5" y="185" width="300" height="150"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="qQI-Sw-tuo">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OSCILLATOR-2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTC-EB-Coj">
+                                        <rect key="frame" x="91" y="14" width="118.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qU9-b3-Zac" userLabel="Osc2 Range Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                        <rect key="frame" x="8" y="25" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_range" translatesAutoresizingMaskIntoConstraints="NO" id="gTX-nt-rXH">
+                                                <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="gTX-nt-rXH" secondAttribute="height" multiplier="1:1" id="Szy-k8-Zch"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_pointer" translatesAutoresizingMaskIntoConstraints="NO" id="IFl-5j-m9G">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="IFl-5j-m9G" secondAttribute="height" multiplier="1:1" id="XkZ-9j-yM5"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frf-e0-EvX">
+                                                <rect key="frame" x="25.5" y="79" width="49" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstItem="gTX-nt-rXH" firstAttribute="centerX" secondItem="qU9-b3-Zac" secondAttribute="centerX" id="IBq-Wo-PRV"/>
+                                            <constraint firstAttribute="height" constant="100" id="KkH-3c-lhV"/>
+                                            <constraint firstItem="frf-e0-EvX" firstAttribute="centerX" secondItem="qU9-b3-Zac" secondAttribute="centerX" id="Ny3-QX-1ge"/>
+                                            <constraint firstItem="IFl-5j-m9G" firstAttribute="centerX" secondItem="qU9-b3-Zac" secondAttribute="centerX" id="QEa-y8-FJN"/>
+                                            <constraint firstItem="gTX-nt-rXH" firstAttribute="top" secondItem="qU9-b3-Zac" secondAttribute="top" id="bBn-4w-49s"/>
+                                            <constraint firstItem="IFl-5j-m9G" firstAttribute="top" secondItem="qU9-b3-Zac" secondAttribute="top" id="hW5-0t-Whl"/>
+                                            <constraint firstAttribute="width" constant="100" id="mbs-sq-1dm"/>
+                                            <constraint firstItem="gTX-nt-rXH" firstAttribute="width" secondItem="qU9-b3-Zac" secondAttribute="width" constant="1" id="ohU-KA-sMO"/>
+                                            <constraint firstAttribute="bottom" secondItem="frf-e0-EvX" secondAttribute="bottom" id="sV8-SL-twv"/>
+                                            <constraint firstItem="IFl-5j-m9G" firstAttribute="width" secondItem="qU9-b3-Zac" secondAttribute="width" id="umd-l7-2dA"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-60"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="60"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc2RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="blF-FI-AhB"/>
+                                            <outlet property="knobImageView" destination="IFl-5j-m9G" id="WjI-2O-Kdz"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLg-AY-ptS" userLabel="Osc2 Detune Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                        <rect key="frame" x="100" y="25" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_detune" translatesAutoresizingMaskIntoConstraints="NO" id="u0i-mJ-2AZ">
+                                                <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="u0i-mJ-2AZ" secondAttribute="height" multiplier="1:1" id="TiK-J9-xJE"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_pointer" translatesAutoresizingMaskIntoConstraints="NO" id="iqN-YG-WaD">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="iqN-YG-WaD" secondAttribute="height" multiplier="1:1" id="iSH-hu-29d"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcH-6s-sL6">
+                                                <rect key="frame" x="22.5" y="79" width="55.5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Avp-Ih-BmH"/>
+                                            <constraint firstItem="u0i-mJ-2AZ" firstAttribute="top" secondItem="LLg-AY-ptS" secondAttribute="top" id="D9U-bc-ZdZ"/>
+                                            <constraint firstItem="iqN-YG-WaD" firstAttribute="top" secondItem="LLg-AY-ptS" secondAttribute="top" id="GXs-SU-jg1"/>
+                                            <constraint firstAttribute="bottom" secondItem="VcH-6s-sL6" secondAttribute="bottom" id="PvC-mE-CED"/>
+                                            <constraint firstItem="iqN-YG-WaD" firstAttribute="centerX" secondItem="LLg-AY-ptS" secondAttribute="centerX" id="Vj2-qm-XLb"/>
+                                            <constraint firstItem="u0i-mJ-2AZ" firstAttribute="width" secondItem="LLg-AY-ptS" secondAttribute="width" constant="1" id="cBv-Md-sIh"/>
+                                            <constraint firstItem="VcH-6s-sL6" firstAttribute="centerX" secondItem="LLg-AY-ptS" secondAttribute="centerX" id="fK4-iP-629"/>
+                                            <constraint firstItem="iqN-YG-WaD" firstAttribute="width" secondItem="LLg-AY-ptS" secondAttribute="width" id="p9v-sr-0Xz"/>
+                                            <constraint firstAttribute="width" constant="100" id="xVW-H8-AeE"/>
+                                            <constraint firstItem="u0i-mJ-2AZ" firstAttribute="centerX" secondItem="LLg-AY-ptS" secondAttribute="centerX" id="zOS-GC-P7u"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="-8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc2DetuneChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="H0U-Pb-BMR"/>
+                                            <outlet property="knobImageView" destination="iqN-YG-WaD" id="UCi-69-PA8"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxM-tl-qF7" userLabel="Osc2 Waveform Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                        <rect key="frame" x="192" y="25" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_waveform" translatesAutoresizingMaskIntoConstraints="NO" id="jFf-ND-Efc">
+                                                <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="jFf-ND-Efc" secondAttribute="height" multiplier="1:1" id="LP5-sn-xs5"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_pointer" translatesAutoresizingMaskIntoConstraints="NO" id="qtj-YE-MeP">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qtj-YE-MeP" secondAttribute="height" multiplier="1:1" id="PG3-Ff-lRH"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbv-BL-CqC" userLabel="Waveform">
+                                                <rect key="frame" x="11.5" y="79" width="77.5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstItem="jFf-ND-Efc" firstAttribute="top" secondItem="pxM-tl-qF7" secondAttribute="top" id="04A-Wm-24i"/>
+                                            <constraint firstAttribute="height" constant="100" id="B1P-xL-je6"/>
+                                            <constraint firstItem="bbv-BL-CqC" firstAttribute="centerX" secondItem="pxM-tl-qF7" secondAttribute="centerX" id="GTL-In-Nri"/>
+                                            <constraint firstItem="jFf-ND-Efc" firstAttribute="centerX" secondItem="pxM-tl-qF7" secondAttribute="centerX" id="L6H-G2-UTa"/>
+                                            <constraint firstItem="jFf-ND-Efc" firstAttribute="width" secondItem="pxM-tl-qF7" secondAttribute="width" constant="1" id="VJr-ZK-pVt"/>
+                                            <constraint firstItem="qtj-YE-MeP" firstAttribute="top" secondItem="pxM-tl-qF7" secondAttribute="top" id="nkn-ZL-aQP"/>
+                                            <constraint firstAttribute="width" constant="100" id="nlq-ah-Vj6"/>
+                                            <constraint firstAttribute="bottom" secondItem="bbv-BL-CqC" secondAttribute="bottom" id="uh5-YO-aCW"/>
+                                            <constraint firstItem="qtj-YE-MeP" firstAttribute="width" secondItem="pxM-tl-qF7" secondAttribute="width" id="vqv-15-kCb"/>
+                                            <constraint firstItem="qtj-YE-MeP" firstAttribute="centerX" secondItem="pxM-tl-qF7" secondAttribute="centerX" id="wz3-Ox-qcw"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-60"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="60"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc2WaveformChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="pMK-Yh-5da"/>
+                                            <outlet property="knobImageView" destination="qtj-YE-MeP" id="Cqr-MI-fGY"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qU9-b3-Zac" firstAttribute="leading" secondItem="URH-Y4-KAd" secondAttribute="leading" constant="8" id="2d8-RD-e06"/>
+                                    <constraint firstItem="xTC-EB-Coj" firstAttribute="centerX" secondItem="URH-Y4-KAd" secondAttribute="centerX" id="49R-HZ-PVB"/>
+                                    <constraint firstItem="qQI-Sw-tuo" firstAttribute="centerY" secondItem="URH-Y4-KAd" secondAttribute="centerY" id="7YZ-iW-G2t"/>
+                                    <constraint firstItem="qQI-Sw-tuo" firstAttribute="centerX" secondItem="URH-Y4-KAd" secondAttribute="centerX" id="COY-6A-RCb"/>
+                                    <constraint firstAttribute="height" constant="150" id="Gw4-rU-gXW"/>
+                                    <constraint firstAttribute="width" constant="300" id="O00-bd-lnk"/>
+                                    <constraint firstItem="qQI-Sw-tuo" firstAttribute="width" secondItem="URH-Y4-KAd" secondAttribute="width" id="OJe-MF-54y"/>
+                                    <constraint firstItem="pxM-tl-qF7" firstAttribute="centerY" secondItem="URH-Y4-KAd" secondAttribute="centerY" id="WVu-S2-Fae"/>
+                                    <constraint firstItem="LLg-AY-ptS" firstAttribute="centerX" secondItem="URH-Y4-KAd" secondAttribute="centerX" id="XJR-Zk-Pkd"/>
+                                    <constraint firstItem="xTC-EB-Coj" firstAttribute="top" secondItem="URH-Y4-KAd" secondAttribute="top" constant="14" id="dJN-vS-1gT"/>
+                                    <constraint firstItem="qU9-b3-Zac" firstAttribute="centerY" secondItem="URH-Y4-KAd" secondAttribute="centerY" id="fya-Cx-9NC"/>
+                                    <constraint firstAttribute="trailing" secondItem="pxM-tl-qF7" secondAttribute="trailing" constant="8" id="pHF-Qc-IUz"/>
+                                    <constraint firstItem="qQI-Sw-tuo" firstAttribute="height" secondItem="URH-Y4-KAd" secondAttribute="height" id="pym-si-RGn"/>
+                                    <constraint firstItem="LLg-AY-ptS" firstAttribute="centerY" secondItem="URH-Y4-KAd" secondAttribute="centerY" id="uDX-08-B2B"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aFD-jV-cbQ" userLabel="Device - Mix">
+                                <rect key="frame" x="37.5" y="335" width="300" height="150"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="frame" translatesAutoresizingMaskIntoConstraints="NO" id="D0L-3h-gJw">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MIXER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i03-gF-RlY">
+                                        <rect key="frame" x="125" y="14" width="50.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nag-M5-nMf" userLabel="Osc1 Volume Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                        <rect key="frame" x="8" y="25" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_volume" translatesAutoresizingMaskIntoConstraints="NO" id="0GN-5T-okS">
+                                                <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="0GN-5T-okS" secondAttribute="height" multiplier="1:1" id="kby-FF-QfA"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_pointer" translatesAutoresizingMaskIntoConstraints="NO" id="6cx-8n-B6c">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="6cx-8n-B6c" secondAttribute="height" multiplier="1:1" id="S9V-M5-D9c"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Osc1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omp-HT-Ygw">
+                                                <rect key="frame" x="31" y="79" width="38" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstItem="0GN-5T-okS" firstAttribute="width" secondItem="Nag-M5-nMf" secondAttribute="width" constant="1" id="4zg-rl-SxP"/>
+                                            <constraint firstItem="6cx-8n-B6c" firstAttribute="width" secondItem="Nag-M5-nMf" secondAttribute="width" id="7E7-SM-rJp"/>
+                                            <constraint firstAttribute="bottom" secondItem="omp-HT-Ygw" secondAttribute="bottom" id="ACD-iz-pJX"/>
+                                            <constraint firstItem="omp-HT-Ygw" firstAttribute="centerX" secondItem="Nag-M5-nMf" secondAttribute="centerX" id="BUC-Lt-vgr"/>
+                                            <constraint firstItem="0GN-5T-okS" firstAttribute="centerX" secondItem="Nag-M5-nMf" secondAttribute="centerX" id="MNq-RO-XNs"/>
+                                            <constraint firstItem="6cx-8n-B6c" firstAttribute="top" secondItem="Nag-M5-nMf" secondAttribute="top" id="aY3-58-X28"/>
+                                            <constraint firstAttribute="height" constant="100" id="anD-Rv-ybq"/>
+                                            <constraint firstAttribute="width" constant="100" id="iap-47-1Wp"/>
+                                            <constraint firstItem="0GN-5T-okS" firstAttribute="top" secondItem="Nag-M5-nMf" secondAttribute="top" id="pua-p6-J7c"/>
+                                            <constraint firstItem="6cx-8n-B6c" firstAttribute="centerX" secondItem="Nag-M5-nMf" secondAttribute="centerX" id="t7J-ht-lCg"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="mixOsc1VolumeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8Ph-jL-7EM"/>
+                                            <outlet property="knobImageView" destination="6cx-8n-B6c" id="S04-5K-HO0"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6JU-Ig-Wc5" userLabel="Osc2 Volume Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                        <rect key="frame" x="100" y="25" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_volume" translatesAutoresizingMaskIntoConstraints="NO" id="bNr-mo-RhM">
+                                                <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="bNr-mo-RhM" secondAttribute="height" multiplier="1:1" id="gke-uc-LP2"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_pointer" translatesAutoresizingMaskIntoConstraints="NO" id="3DE-47-zjJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="3DE-47-zjJ" secondAttribute="height" multiplier="1:1" id="p22-u1-gtv"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Osc2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etw-kO-hO2">
+                                                <rect key="frame" x="30" y="79" width="40.5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="19Q-O2-PcK"/>
+                                            <constraint firstItem="bNr-mo-RhM" firstAttribute="centerX" secondItem="6JU-Ig-Wc5" secondAttribute="centerX" id="MQt-L1-1OW"/>
+                                            <constraint firstItem="bNr-mo-RhM" firstAttribute="top" secondItem="6JU-Ig-Wc5" secondAttribute="top" id="SFc-9Y-gIR"/>
+                                            <constraint firstAttribute="width" constant="100" id="Tbj-JL-Qex"/>
+                                            <constraint firstAttribute="bottom" secondItem="Etw-kO-hO2" secondAttribute="bottom" id="UAJ-JD-bKI"/>
+                                            <constraint firstItem="3DE-47-zjJ" firstAttribute="top" secondItem="6JU-Ig-Wc5" secondAttribute="top" id="YFl-eE-nYa"/>
+                                            <constraint firstItem="3DE-47-zjJ" firstAttribute="width" secondItem="6JU-Ig-Wc5" secondAttribute="width" id="m9A-St-ck4"/>
+                                            <constraint firstItem="3DE-47-zjJ" firstAttribute="centerX" secondItem="6JU-Ig-Wc5" secondAttribute="centerX" id="swp-Jw-fsV"/>
+                                            <constraint firstItem="bNr-mo-RhM" firstAttribute="width" secondItem="6JU-Ig-Wc5" secondAttribute="width" constant="1" id="vyX-Ul-JyB"/>
+                                            <constraint firstItem="Etw-kO-hO2" firstAttribute="centerX" secondItem="6JU-Ig-Wc5" secondAttribute="centerX" id="wVI-EF-okd"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="mixOsc2VolumeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="jj7-A9-cMO"/>
+                                            <outlet property="knobImageView" destination="3DE-47-zjJ" id="pEs-mX-nE6"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qvd-1F-9dR" userLabel="Noise Volume Knob" customClass="MinimoogInstrumentKnob" customModule="minimoog">
+                                        <rect key="frame" x="192" y="25" width="100" height="100"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_volume" translatesAutoresizingMaskIntoConstraints="NO" id="dHn-BN-n0T">
+                                                <rect key="frame" x="-0.5" y="0.0" width="101" height="101"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="dHn-BN-n0T" secondAttribute="height" multiplier="1:1" id="XPe-1R-e20"/>
+                                                </constraints>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="knob_pointer" translatesAutoresizingMaskIntoConstraints="NO" id="THG-Vt-UlX">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="THG-Vt-UlX" secondAttribute="height" multiplier="1:1" id="lrg-xw-3qI"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Noise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sJ-Dh-T2H">
+                                                <rect key="frame" x="28" y="79" width="44" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstItem="dHn-BN-n0T" firstAttribute="centerX" secondItem="Qvd-1F-9dR" secondAttribute="centerX" id="5Cx-o7-Xcr"/>
+                                            <constraint firstItem="THG-Vt-UlX" firstAttribute="top" secondItem="Qvd-1F-9dR" secondAttribute="top" id="6EP-7n-icz"/>
+                                            <constraint firstItem="dHn-BN-n0T" firstAttribute="top" secondItem="Qvd-1F-9dR" secondAttribute="top" id="E7o-sv-hCF"/>
+                                            <constraint firstItem="8sJ-Dh-T2H" firstAttribute="centerX" secondItem="Qvd-1F-9dR" secondAttribute="centerX" id="IEi-Sv-Vdg"/>
+                                            <constraint firstItem="THG-Vt-UlX" firstAttribute="centerX" secondItem="Qvd-1F-9dR" secondAttribute="centerX" id="Ngq-Mh-mi8"/>
+                                            <constraint firstItem="THG-Vt-UlX" firstAttribute="width" secondItem="Qvd-1F-9dR" secondAttribute="width" id="Ssa-mg-Zwt"/>
+                                            <constraint firstItem="dHn-BN-n0T" firstAttribute="width" secondItem="Qvd-1F-9dR" secondAttribute="width" constant="1" id="Ye8-9Z-giU"/>
+                                            <constraint firstAttribute="height" constant="100" id="gJ7-mV-zNh"/>
+                                            <constraint firstAttribute="bottom" secondItem="8sJ-Dh-T2H" secondAttribute="bottom" id="kUq-pZ-dY6"/>
+                                            <constraint firstAttribute="width" constant="100" id="ouZ-G0-SfS"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="mixNoiseVolumeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="8mf-ot-r7F"/>
+                                            <outlet property="knobImageView" destination="THG-Vt-UlX" id="eES-NS-hrf"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="2u3-kU-QmN"/>
+                                    <constraint firstItem="6JU-Ig-Wc5" firstAttribute="centerX" secondItem="aFD-jV-cbQ" secondAttribute="centerX" id="9W5-4y-eK1"/>
+                                    <constraint firstItem="6JU-Ig-Wc5" firstAttribute="centerY" secondItem="aFD-jV-cbQ" secondAttribute="centerY" id="BEe-tV-NsB"/>
+                                    <constraint firstItem="Qvd-1F-9dR" firstAttribute="centerY" secondItem="aFD-jV-cbQ" secondAttribute="centerY" id="GbW-zD-hni"/>
+                                    <constraint firstItem="D0L-3h-gJw" firstAttribute="centerX" secondItem="aFD-jV-cbQ" secondAttribute="centerX" id="IbA-vD-a3U"/>
+                                    <constraint firstItem="i03-gF-RlY" firstAttribute="centerX" secondItem="aFD-jV-cbQ" secondAttribute="centerX" id="Ii6-mZ-40Y"/>
+                                    <constraint firstItem="i03-gF-RlY" firstAttribute="top" secondItem="aFD-jV-cbQ" secondAttribute="top" constant="14" id="Lc8-IY-SlO"/>
+                                    <constraint firstItem="D0L-3h-gJw" firstAttribute="height" secondItem="aFD-jV-cbQ" secondAttribute="height" id="NvX-XY-ak6"/>
+                                    <constraint firstAttribute="width" constant="300" id="SjX-9r-ogA"/>
+                                    <constraint firstItem="Nag-M5-nMf" firstAttribute="leading" secondItem="aFD-jV-cbQ" secondAttribute="leading" constant="8" id="Z3r-DV-SeG"/>
+                                    <constraint firstItem="D0L-3h-gJw" firstAttribute="width" secondItem="aFD-jV-cbQ" secondAttribute="width" id="hzk-ZB-Yxq"/>
+                                    <constraint firstItem="D0L-3h-gJw" firstAttribute="centerY" secondItem="aFD-jV-cbQ" secondAttribute="centerY" id="kwV-Ch-ZFF"/>
+                                    <constraint firstItem="Nag-M5-nMf" firstAttribute="centerY" secondItem="aFD-jV-cbQ" secondAttribute="centerY" id="qgA-pK-8Ib"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qvd-1F-9dR" secondAttribute="trailing" constant="8" id="vV5-ua-Bpp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="UQf-Hd-lyb" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="1sZ-nb-Gbs"/>
+                            <constraint firstItem="URH-Y4-KAd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1yJ-8O-KG4"/>
                             <constraint firstItem="2Ww-KD-wNF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Hc-XZ-kyW"/>
                             <constraint firstItem="UQf-Hd-lyb" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="8qC-Zr-XLr"/>
                             <constraint firstItem="UQf-Hd-lyb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cgx-Tj-LGK"/>
+                            <constraint firstItem="aFD-jV-cbQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CpO-D2-u6F"/>
                             <constraint firstItem="2Ww-KD-wNF" firstAttribute="top" secondItem="bFi-R9-BTa" secondAttribute="bottom" constant="15" id="GDX-Jo-IKs"/>
                             <constraint firstItem="UQf-Hd-lyb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PA6-gK-fCn"/>
+                            <constraint firstItem="aFD-jV-cbQ" firstAttribute="top" secondItem="URH-Y4-KAd" secondAttribute="bottom" id="Wbc-2H-4YC"/>
+                            <constraint firstItem="URH-Y4-KAd" firstAttribute="top" secondItem="2Ww-KD-wNF" secondAttribute="bottom" id="f8t-JQ-ql6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mixNoiseVolumeKnob" destination="Qvd-1F-9dR" id="Ut3-av-X7p"/>
+                        <outlet property="mixOsc1VolumeKnob" destination="Nag-M5-nMf" id="Maj-4i-cNu"/>
+                        <outlet property="mixOsc2VolumeKnob" destination="6JU-Ig-Wc5" id="3r7-3b-JJN"/>
+                        <outlet property="osc1RangeKnob" destination="GYf-fR-SMo" id="lNV-X3-rQg"/>
+                        <outlet property="osc1WaveformKnob" destination="W9T-da-Axi" id="4D7-wU-rs4"/>
+                        <outlet property="osc2DetuneKnob" destination="LLg-AY-ptS" id="48S-cn-cqk"/>
+                        <outlet property="osc2RangeKnob" destination="qU9-b3-Zac" id="bqJ-Oi-MPL"/>
+                        <outlet property="osc2WaveformKnob" destination="pxM-tl-qF7" id="GfV-Wv-rYo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -197,8 +653,10 @@
     </scenes>
     <resources>
         <image name="frame" width="49" height="48"/>
+        <image name="knob_detune" width="640" height="640"/>
         <image name="knob_pointer" width="640" height="640"/>
         <image name="knob_range" width="640" height="640"/>
+        <image name="knob_volume" width="640" height="640"/>
         <image name="knob_waveform" width="640" height="640"/>
     </resources>
 </document>

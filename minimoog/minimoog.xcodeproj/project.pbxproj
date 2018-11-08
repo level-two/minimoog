@@ -163,11 +163,11 @@
 				93BAFB4C21875C3A004C0D7C /* Assets */,
 				93BAFB5421875C3A004C0D7C /* minimoog_instrument_core */,
 				93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */,
-				93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */,
 				93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */,
 				93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */,
 				93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */,
 				93BAFB4B21875C3A004C0D7C /* MinimoogInstrumentViewController.swift */,
+				93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */,
 				93BAFB5321875C3A004C0D7C /* Info.plist */,
 			);
 			path = minimoog_instrument;
