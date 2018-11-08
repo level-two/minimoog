@@ -9,7 +9,6 @@
 import UIKit
 import CoreAudioKit
 
-
 public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFactory {
     // MARK: Outlets
     @IBOutlet weak var osc1RangeKnob     : MinimoogInstrumentKnob!

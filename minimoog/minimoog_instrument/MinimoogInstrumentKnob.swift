@@ -110,7 +110,9 @@ public class MinimoogInstrumentKnob: UIControl {
             let curOffset         = -Float(recognizer.translation(in: self).y)
             let delta             = curOffset - _prevOffset
             _prevOffset           = curOffset
-            let newValue          = _value + (maxValue-minValue)*delta/Float(self.bounds.height)
+            // 128 is number or the total parameter steps. It is multiplied by 2 to achieve
+            // sufficient tolerance and smoothness with touches
+            let newValue          = _value + (maxValue-minValue)*delta/(128*2)
             setValue(newValue, animated:false)
             sendActions(for: .valueChanged)
         default:
