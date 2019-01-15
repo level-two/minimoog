@@ -23,15 +23,15 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     // MARK: Public variables
     public var audioUnit: AUAudioUnit? {
         didSet {
-            DispatchQueue.main.async { [unowned self] in
-                guard self.isViewLoaded else { return }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self, self.isViewLoaded else { return }
                 
                 self.connectViewWithAU()
                 
                 // Assign default values to all controls
-                MinimoogInstrumentAudioUnit.ParamAddr.allCases.forEach { addr in
-                    guard let parameter = self.audioUnit?.parameterTree?.parameter(withAddress: addr.rawValue) else { return }
-                    self.updateUiControl(withAddress: addr, value: parameter.value)
+                MinimoogInstrumentAudioUnit.ParamAddr.allCases.forEach { [weak self] addr in
+                    guard let parameter = self?.audioUnit?.parameterTree?.parameter(withAddress: addr.rawValue) else { return }
+                    self?.updateUiControl(withAddress: addr, value: parameter.value)
                 }
             }
         }
@@ -49,9 +49,9 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
         connectViewWithAU()
         
         // Assign default values to all controls
-        MinimoogInstrumentAudioUnit.ParamAddr.allCases.forEach { addr in
-            guard let parameter = audioUnit?.parameterTree?.parameter(withAddress: addr.rawValue) else { return }
-            updateUiControl(withAddress: addr, value: parameter.value)
+        MinimoogInstrumentAudioUnit.ParamAddr.allCases.forEach { [weak self] addr in
+            guard let parameter = self?.audioUnit?.parameterTree?.parameter(withAddress: addr.rawValue) else { return }
+            self?.updateUiControl(withAddress: addr, value: parameter.value)
         }
     }
     
@@ -63,14 +63,10 @@ public class MinimoogInstrumentViewController: AUViewController, AUAudioUnitFact
     
     func connectViewWithAU() {
         guard let paramTree = audioUnit?.parameterTree else { return }
-        parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] address, value in
-            guard
-                let strongSelf = self,
-                let addr = MinimoogInstrumentAudioUnit.ParamAddr(rawValue:UInt64(value))
-            else { return }
-            
-            DispatchQueue.main.async {
-                strongSelf.updateUiControl(withAddress:addr, value:value)
+        parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] _, value in
+            guard let addr = MinimoogInstrumentAudioUnit.ParamAddr(rawValue:UInt64(value)) else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUiControl(withAddress:addr, value:value)
             }
         })
     }

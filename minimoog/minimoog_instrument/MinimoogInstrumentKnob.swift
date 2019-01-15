@@ -25,14 +25,22 @@ public class MinimoogInstrumentKnob: UIControl {
     
     var value : Float {
         get {
-            return (stepSize != 0) ? getSnappedValue() : _value
+            return (stepSize != 0) ? getSnappedValue() : curValue
         }
         set {
-            if _isValueLockedByUI == false {
+            if isValueLockedByUI == false {
                 setValue(newValue, animated:true)
             }
         }
     }
+    
+    // MARK: Private variables
+    private var isViewLoaded         : Bool = false
+    private var curValue             : Float = 0
+    private var curAngle             : Float = 0
+    private var isValueLockedByUI    : Bool = false
+    private var panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer()
+    private var prevOffset           : Float = 0
     
     // MARK: Overrides
     override init(frame: CGRect) {
@@ -47,38 +55,30 @@ public class MinimoogInstrumentKnob: UIControl {
     
     // MARK: Public functions
     public func setValue(_ newValue: Float, animated: Bool = false) {
-        let prevAngle = _curAngle
-        _value        = min(maxValue, max(minValue, newValue))
-        _curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
-        rotateKnob(from:prevAngle, to:_curAngle, animated:animated)
+        let prevAngle = curAngle
+        curValue        = min(maxValue, max(minValue, newValue))
+        curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
+        rotateKnob(from:prevAngle, to:curAngle, animated:animated)
     }
     
-    // MARK: Private variables
-    private var _isViewLoaded         : Bool = false
-    private var _value                : Float = 0
-    private var _curAngle             : Float = 0
-    private var _isValueLockedByUI    : Bool = false
-    private var _panGestureRecognizer : UIPanGestureRecognizer = UIPanGestureRecognizer()
-    private var _prevOffset           : Float = 0
-    
     private func commonInit() {
-        _panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
-        self.addGestureRecognizer(_panGestureRecognizer)
+        panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
+        self.addGestureRecognizer(panGestureRecognizer)
         self.isUserInteractionEnabled = true
     }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
-        if _isViewLoaded == false {
-            _isViewLoaded = true
-            _value        = initValue
-            _curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
-            rotateKnob(from: 0, to: _curAngle, animated: false)
+        if isViewLoaded == false {
+            isViewLoaded = true
+            curValue     = initValue
+            curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
+            rotateKnob(from: 0, to: curAngle, animated: false)
         }
     }
     
     private func getSnappedValue() -> Float {
-        let snappedVal = minValue + roundf((_value-minValue)/stepSize)*stepSize
+        let snappedVal = minValue + roundf((curValue-minValue)/stepSize)*stepSize
         return min(maxValue, max(minValue, snappedVal))
     }
     
@@ -103,21 +103,22 @@ public class MinimoogInstrumentKnob: UIControl {
     @objc private func handlePan(recognizer:UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
-            _isValueLockedByUI    = true
-            _prevOffset           = 0
+            isValueLockedByUI    = true
+            prevOffset           = 0
         case .changed:
-            _isValueLockedByUI    = true
-            let curOffset         = -Float(recognizer.translation(in: self).y)
-            let delta             = curOffset - _prevOffset
-            _prevOffset           = curOffset
+            isValueLockedByUI    = true
+            let curOffset        = -Float(recognizer.translation(in: self).y)
+            let delta            = curOffset - prevOffset
+            prevOffset           = curOffset
+            
             // 128 is number or the total parameter steps. It is multiplied by 2 to achieve
             // sufficient tolerance and smoothness with touches
-            let newValue          = _value + (maxValue-minValue)*delta/(128*2)
+            let newValue         = curValue + (maxValue-minValue)*delta/(128*2)
             setValue(newValue, animated:false)
             sendActions(for: .valueChanged)
         default:
-            _isValueLockedByUI    = false
-            _prevOffset           = 0
+            isValueLockedByUI    = false
+            prevOffset           = 0
         }
     }
 }
