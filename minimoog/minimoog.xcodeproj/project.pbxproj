@@ -20,8 +20,10 @@
 		9345F55A2194C00E00922DF8 /* instrument_assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9345F5592194C00E00922DF8 /* instrument_assets.xcassets */; };
 		9345F55B2194C00E00922DF8 /* instrument_assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9345F5592194C00E00922DF8 /* instrument_assets.xcassets */; };
 		9345F55C2194C4A700922DF8 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 931E349E219319AB00451814 /* FactoryPresets.plist */; };
-		93BAFB5C21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
-		93BAFB5D21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
+		934D450C21FA64410038DA58 /* CustomUiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 934D450A21FA64410038DA58 /* CustomUiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		934D450F21FA64410038DA58 /* CustomUiKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934D450821FA64410038DA58 /* CustomUiKit.framework */; };
+		934D451021FA64410038DA58 /* CustomUiKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 934D450821FA64410038DA58 /* CustomUiKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		934D451421FA644B0038DA58 /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */; };
 		93BAFB5E21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
 		93BAFB5F21875C3B004C0D7C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93BAFB4621875C3A004C0D7C /* MainInterface.storyboard */; };
 		93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */; };
@@ -48,6 +50,13 @@
 			remoteGlobalIDString = 930F397121691B2F00BAB7F3;
 			remoteInfo = minimoog_instrument;
 		};
+		934D450D21FA64410038DA58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 930F395121679E0F00BAB7F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 934D450721FA64410038DA58;
+			remoteInfo = CustomUiKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +69,17 @@
 				930F398021691B2F00BAB7F3 /* minimoog_instrument.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		933DEC6921FA1DC1007C471A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				934D451021FA64410038DA58 /* CustomUiKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -79,6 +99,9 @@
 		930F398621691B6B00BAB7F3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		931E349E219319AB00451814 /* FactoryPresets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = FactoryPresets.plist; path = minimoog_instrument/Assets/FactoryPresets.plist; sourceTree = SOURCE_ROOT; };
 		9345F5592194C00E00922DF8 /* instrument_assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = instrument_assets.xcassets; sourceTree = "<group>"; };
+		934D450821FA64410038DA58 /* CustomUiKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CustomUiKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		934D450A21FA64410038DA58 /* CustomUiKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomUiKit.h; sourceTree = "<group>"; };
+		934D450B21FA64410038DA58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
 		93BAFB4721875C3A004C0D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentFactoryPresetsManager.swift; sourceTree = "<group>"; };
@@ -100,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				934D450F21FA64410038DA58 /* CustomUiKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +135,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		934D450521FA64410038DA58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -119,6 +150,7 @@
 			children = (
 				93BAFB4421875C3A004C0D7C /* minimoog_instrument */,
 				930F395B21679E0F00BAB7F3 /* minimoog */,
+				934D450921FA64410038DA58 /* CustomUiKit */,
 				930F395A21679E0F00BAB7F3 /* Products */,
 				930F398521691B6A00BAB7F3 /* Frameworks */,
 			);
@@ -129,6 +161,7 @@
 			children = (
 				930F395921679E0F00BAB7F3 /* minimoog.app */,
 				930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */,
+				934D450821FA64410038DA58 /* CustomUiKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,12 +190,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		934D450921FA64410038DA58 /* CustomUiKit */ = {
+			isa = PBXGroup;
+			children = (
+				93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */,
+				934D450A21FA64410038DA58 /* CustomUiKit.h */,
+				934D450B21FA64410038DA58 /* Info.plist */,
+			);
+			path = CustomUiKit;
+			sourceTree = "<group>";
+		};
 		93BAFB4421875C3A004C0D7C /* minimoog_instrument */ = {
 			isa = PBXGroup;
 			children = (
 				93BAFB4C21875C3A004C0D7C /* Assets */,
 				93BAFB5421875C3A004C0D7C /* minimoog_instrument_core */,
-				93BAFB4521875C3A004C0D7C /* MinimoogInstrumentKnob.swift */,
 				93BAFB4821875C3A004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift */,
 				93BAFB4921875C3A004C0D7C /* MinimoogInstrumentPreset.swift */,
 				93BAFB4A21875C3A004C0D7C /* MinimoogInstrumentAudioUnit.swift */,
@@ -198,6 +240,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		934D450321FA64410038DA58 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				934D450C21FA64410038DA58 /* CustomUiKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		930F395821679E0F00BAB7F3 /* minimoog */ = {
 			isa = PBXNativeTarget;
@@ -207,11 +260,13 @@
 				930F395621679E0F00BAB7F3 /* Frameworks */,
 				930F395721679E0F00BAB7F3 /* Resources */,
 				930F398421691B2F00BAB7F3 /* Embed App Extensions */,
+				933DEC6921FA1DC1007C471A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				930F397F21691B2F00BAB7F3 /* PBXTargetDependency */,
+				934D450E21FA64410038DA58 /* PBXTargetDependency */,
 			);
 			name = minimoog;
 			productName = minimoog;
@@ -235,6 +290,24 @@
 			productReference = 930F397221691B2F00BAB7F3 /* minimoog_instrument.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		934D450721FA64410038DA58 /* CustomUiKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 934D451121FA64410038DA58 /* Build configuration list for PBXNativeTarget "CustomUiKit" */;
+			buildPhases = (
+				934D450321FA64410038DA58 /* Headers */,
+				934D450421FA64410038DA58 /* Sources */,
+				934D450521FA64410038DA58 /* Frameworks */,
+				934D450621FA64410038DA58 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CustomUiKit;
+			productName = CustomUiKit;
+			productReference = 934D450821FA64410038DA58 /* CustomUiKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -250,6 +323,9 @@
 					};
 					930F397121691B2F00BAB7F3 = {
 						CreatedOnToolsVersion = 10.0;
+					};
+					934D450721FA64410038DA58 = {
+						CreatedOnToolsVersion = 10.1;
 					};
 				};
 			};
@@ -268,6 +344,7 @@
 			targets = (
 				930F395821679E0F00BAB7F3 /* minimoog */,
 				930F397121691B2F00BAB7F3 /* minimoog_instrument */,
+				934D450721FA64410038DA58 /* CustomUiKit */,
 			);
 		};
 /* End PBXProject section */
@@ -297,6 +374,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		934D450621FA64410038DA58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -309,7 +393,6 @@
 				93BAFB6221875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */,
 				930E79A02175518A00568351 /* SimplePlayEngine.swift in Sources */,
 				93BAFB7A21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */,
-				93BAFB5C21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */,
 				930F395F21679E0F00BAB7F3 /* ViewController.swift in Sources */,
 				93BAFB6021875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */,
 				93BAFB7821875C3B004C0D7C /* MinimoogInstrument.mm in Sources */,
@@ -324,12 +407,19 @@
 			files = (
 				93BAFB7721875C3B004C0D7C /* MinimoogInstrumentBase.mm in Sources */,
 				93BAFB6321875C3B004C0D7C /* MinimoogInstrumentPreset.swift in Sources */,
-				93BAFB5D21875C3B004C0D7C /* MinimoogInstrumentKnob.swift in Sources */,
 				93BAFB7921875C3B004C0D7C /* MinimoogInstrument.mm in Sources */,
 				93BAFB6721875C3B004C0D7C /* MinimoogInstrumentViewController.swift in Sources */,
 				93BAFB6521875C3B004C0D7C /* MinimoogInstrumentAudioUnit.swift in Sources */,
 				93BAFB7B21875C3B004C0D7C /* MinimoogInstrumentObjcWrapper.mm in Sources */,
 				93BAFB6121875C3B004C0D7C /* MinimoogInstrumentFactoryPresetsManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		934D450421FA64410038DA58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				934D451421FA644B0038DA58 /* MinimoogInstrumentKnob.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +430,11 @@
 			isa = PBXTargetDependency;
 			target = 930F397121691B2F00BAB7F3 /* minimoog_instrument */;
 			targetProxy = 930F397E21691B2F00BAB7F3 /* PBXContainerItemProxy */;
+		};
+		934D450E21FA64410038DA58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 934D450721FA64410038DA58 /* CustomUiKit */;
+			targetProxy = 934D450D21FA64410038DA58 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -569,6 +664,62 @@
 			};
 			name = Release;
 		};
+		934D451221FA64410038DA58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CustomUiKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yauheni.lychkouski.CustomUiKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		934D451321FA64410038DA58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CustomUiKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = yauheni.lychkouski.CustomUiKit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -595,6 +746,15 @@
 			buildConfigurations = (
 				930F398221691B2F00BAB7F3 /* Debug */,
 				930F398321691B2F00BAB7F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		934D451121FA64410038DA58 /* Build configuration list for PBXNativeTarget "CustomUiKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				934D451221FA64410038DA58 /* Debug */,
+				934D451321FA64410038DA58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
