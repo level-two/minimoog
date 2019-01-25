@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     
     var playEngine: SimplePlayEngine!
-    var minimoogInstrumentViewController: MinimoogInstrumentViewController!
+    var minimoogInstrumentViewController: MinimoogAUViewController!
     
     // MARK: View Life Cycle
     override func viewDidLoad() {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
          
          Note that this registration is local to this process.
          */
-        AUAudioUnit.registerSubclass(MinimoogInstrumentAudioUnit.self, as: componentDescription, name:"Minimoog emulation demo", version: UInt32.max)
+        AUAudioUnit.registerSubclass(MinimoogAU.self, as: componentDescription, name:"Minimoog emulation demo", version: UInt32.max)
         
         // Instantiate and insert our audio unit effect into the chain.
         playEngine.selectAudioUnitWithComponentDescription(componentDescription) {
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         let appExtensionBundle = Bundle(url: pluginURL)
         
         let storyboard = UIStoryboard(name: "MainInterface", bundle: appExtensionBundle)
-        minimoogInstrumentViewController = storyboard.instantiateInitialViewController() as? MinimoogInstrumentViewController
+        minimoogInstrumentViewController = storyboard.instantiateInitialViewController() as? MinimoogAUViewController
         
         // Present the view controller's view.
         if let view = minimoogInstrumentViewController.view {
