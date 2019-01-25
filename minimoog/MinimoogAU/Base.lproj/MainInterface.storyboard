@@ -21,24 +21,188 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ww-KD-wNF" userLabel="Device - Osc1" customClass="BorderedView" customModule="CustomUiKit">
-                                <rect key="frame" x="229" y="20" width="300" height="116"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-q5-Dfg" userLabel="Controllers" customClass="BorderedView" customModule="CustomUiKit">
+                                <rect key="frame" x="0.0" y="0.0" width="91" height="375"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OSCILLATOR-1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tka-T3-qe9">
-                                        <rect key="frame" x="72" y="0.0" width="116" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPp-Mi-32K" userLabel="Tune">
+                                        <rect key="frame" x="31.5" y="58.5" width="28" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GYf-fR-SMo" userLabel="Osc1 Range Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="14" y="25" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-ln-wRj" userLabel="Tune" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="20.5" y="81.5" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Fq3-aa-qA4"/>
+                                            <constraint firstAttribute="width" constant="50" id="Vve-32-6pO"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="-2.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="2.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="cTO-7l-1I9"/>
+                                        </connections>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJc-o1-cqI" userLabel="Glide">
+                                        <rect key="frame" x="30.5" y="139.5" width="30" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XqT-Hm-10d" userLabel="Glide" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="20.5" y="162.5" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="oaP-h3-y0r"/>
+                                            <constraint firstAttribute="width" constant="50" id="xfa-w7-X1Y"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="2r5-Tq-lOb"/>
+                                        </connections>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ModulationMix" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-vO-qdV">
+                                        <rect key="frame" x="4" y="220.5" width="83" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AM0-zK-VEJ" userLabel="ModulationMix" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="20.5" y="243.5" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="H02-XB-0AG"/>
+                                            <constraint firstAttribute="height" constant="50" id="KsW-EM-VDo"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="160"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ddc-3P-DrM"/>
+                                        </connections>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Controllers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pI-py-y9X">
+                                        <rect key="frame" x="14" y="352" width="63" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="bZ4-ln-wRj" firstAttribute="bottom" secondItem="eJc-o1-cqI" secondAttribute="top" constant="-8" id="05P-Kz-WSd"/>
+                                    <constraint firstItem="Q7h-vO-qdV" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="D99-wv-XLQ"/>
+                                    <constraint firstItem="XqT-Hm-10d" firstAttribute="centerY" secondItem="C9x-q5-Dfg" secondAttribute="centerY" id="JUy-vA-4V4"/>
+                                    <constraint firstItem="SPp-Mi-32K" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="KUJ-wG-Jvf"/>
+                                    <constraint firstItem="AM0-zK-VEJ" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="Oyd-Kx-lQ2"/>
+                                    <constraint firstAttribute="width" constant="91" id="P2g-f7-0qa"/>
+                                    <constraint firstItem="XqT-Hm-10d" firstAttribute="top" secondItem="eJc-o1-cqI" secondAttribute="bottom" constant="8" id="PaM-sR-ksr"/>
+                                    <constraint firstItem="bZ4-ln-wRj" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="QzA-rd-QPN"/>
+                                    <constraint firstItem="eJc-o1-cqI" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="Yvc-Tc-58P"/>
+                                    <constraint firstItem="Q7h-vO-qdV" firstAttribute="top" secondItem="XqT-Hm-10d" secondAttribute="bottom" constant="8" id="g8x-IB-4no"/>
+                                    <constraint firstAttribute="bottom" secondItem="8pI-py-y9X" secondAttribute="bottom" constant="8" id="mQZ-de-7Oq"/>
+                                    <constraint firstItem="bZ4-ln-wRj" firstAttribute="top" secondItem="SPp-Mi-32K" secondAttribute="bottom" constant="8" id="sQ1-RF-PVL"/>
+                                    <constraint firstItem="AM0-zK-VEJ" firstAttribute="top" secondItem="Q7h-vO-qdV" secondAttribute="bottom" constant="8" id="vOM-Ji-cUZ"/>
+                                    <constraint firstItem="XqT-Hm-10d" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="vwG-mh-hoo"/>
+                                    <constraint firstItem="8pI-py-y9X" firstAttribute="centerX" secondItem="C9x-q5-Dfg" secondAttribute="centerX" id="xqP-nL-Y9b"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Ww-KD-wNF" userLabel="Oscillator bank" customClass="BorderedView" customModule="CustomUiKit">
+                                <rect key="frame" x="91" y="0.0" width="221" height="375"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OSCILLATOR-1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tka-T3-qe9">
+                                        <rect key="frame" x="67.5" y="20" width="86" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwn-Ue-qSr">
+                                        <rect key="frame" x="21" y="43" width="36" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYf-fR-SMo" userLabel="Osc1 Range Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="14" y="66" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="bSO-Nj-dA2"/>
+                                            <constraint firstAttribute="width" constant="50" id="eJt-XK-kka"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                 <real key="value" value="0.0"/>
@@ -63,91 +227,43 @@
                                             <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Aa8-MZ-OK8"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W9T-da-Axi" userLabel="Osc1 Waveform Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="192" y="25" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" notEnabled="YES"/>
-                                        </accessibility>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
-                                                <real key="value" value="-60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
-                                                <real key="value" value="60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="osc1WaveformChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="bBi-pP-lRM"/>
-                                        </connections>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwn-Ue-qSr">
-                                        <rect key="frame" x="20" y="89" width="49" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8e-NF-J9M" userLabel="Waveform">
+                                        <rect key="frame" x="153.5" y="43" width="57" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8e-NF-J9M" userLabel="Waveform">
-                                        <rect key="frame" x="184" y="89" width="77.5" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="URH-Y4-KAd" userLabel="Device - Osc2" customClass="BorderedView" customModule="CustomUiKit">
-                                <rect key="frame" x="229" y="135" width="300" height="105"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frf-e0-EvX">
-                                        <rect key="frame" x="14" y="84" width="49" height="21"/>
+                                        <rect key="frame" x="132" y="50" width="36" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcH-6s-sL6">
-                                        <rect key="frame" x="103" y="84" width="55.5" height="21"/>
+                                        <rect key="frame" x="129" y="50" width="41" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OSCILLATOR-2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTC-EB-Coj">
-                                        <rect key="frame" x="71" y="0.0" width="118.5" height="21"/>
+                                        <rect key="frame" x="106" y="50" width="87" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qU9-b3-Zac" userLabel="Osc2 Range Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="8" y="25" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qU9-b3-Zac" userLabel="Osc2 Range Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="125" y="33" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ChV-ra-ujN"/>
+                                            <constraint firstAttribute="width" constant="50" id="p5T-92-huz"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                 <real key="value" value="0.0"/>
@@ -172,13 +288,16 @@
                                             <action selector="osc2RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="blF-FI-AhB"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LLg-AY-ptS" userLabel="Osc2 Detune Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="100" y="25" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LLg-AY-ptS" userLabel="Osc2 Detune Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="125" y="33" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ClE-ar-oU2"/>
+                                            <constraint firstAttribute="width" constant="50" id="d3k-mA-W01"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                 <real key="value" value="-8"/>
@@ -203,13 +322,16 @@
                                             <action selector="osc2DetuneChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="H0U-Pb-BMR"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pxM-tl-qF7" userLabel="Osc2 Waveform Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="192" y="25" width="60" height="60"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pxM-tl-qF7" userLabel="Osc2 Waveform Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="125" y="33" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                         </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="UU8-rD-A9q"/>
+                                            <constraint firstAttribute="height" constant="50" id="zAF-rr-uDK"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                 <real key="value" value="0.0"/>
@@ -235,14 +357,69 @@
                                         </connections>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbv-BL-CqC" userLabel="Waveform">
-                                        <rect key="frame" x="184" y="84" width="77.5" height="21"/>
+                                        <rect key="frame" x="121" y="50" width="57" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oscillator Bank" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv5-qR-HdV">
+                                        <rect key="frame" x="67.5" y="352" width="86" height="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9T-da-Axi" userLabel="Osc1 Waveform Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                        <rect key="frame" x="157" y="66" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="egD-bm-RUo"/>
+                                            <constraint firstAttribute="height" constant="50" id="jQV-MT-xY6"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
+                                                <real key="value" value="-60"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
+                                                <real key="value" value="60"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="osc1WaveformChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="bBi-pP-lRM"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="GYf-fR-SMo" firstAttribute="top" secondItem="lwn-Ue-qSr" secondAttribute="bottom" constant="8" id="3QB-jt-wE7"/>
+                                    <constraint firstItem="e8e-NF-J9M" firstAttribute="top" secondItem="Tka-T3-qe9" secondAttribute="bottom" constant="8" id="3iV-yI-A80"/>
+                                    <constraint firstItem="GYf-fR-SMo" firstAttribute="leading" secondItem="2Ww-KD-wNF" secondAttribute="leading" constant="14" id="Fds-uC-iWr"/>
+                                    <constraint firstAttribute="bottom" secondItem="wv5-qR-HdV" secondAttribute="bottom" constant="8" id="NRf-PN-VD2"/>
+                                    <constraint firstItem="e8e-NF-J9M" firstAttribute="centerX" secondItem="W9T-da-Axi" secondAttribute="centerX" id="TTi-3Z-5Oz"/>
+                                    <constraint firstItem="Tka-T3-qe9" firstAttribute="top" secondItem="2Ww-KD-wNF" secondAttribute="top" constant="20" id="ZT1-LV-uaz"/>
+                                    <constraint firstItem="wv5-qR-HdV" firstAttribute="centerX" secondItem="2Ww-KD-wNF" secondAttribute="centerX" id="bT0-HK-oIp"/>
+                                    <constraint firstItem="lwn-Ue-qSr" firstAttribute="top" secondItem="Tka-T3-qe9" secondAttribute="bottom" constant="8" id="dh6-je-s6j"/>
+                                    <constraint firstItem="W9T-da-Axi" firstAttribute="top" secondItem="e8e-NF-J9M" secondAttribute="bottom" constant="8" id="kgg-xi-akj"/>
+                                    <constraint firstItem="lwn-Ue-qSr" firstAttribute="centerX" secondItem="GYf-fR-SMo" secondAttribute="centerX" id="kmI-JI-qTg"/>
+                                    <constraint firstAttribute="width" constant="221" id="qxx-wM-boU"/>
+                                    <constraint firstAttribute="trailing" secondItem="W9T-da-Axi" secondAttribute="trailing" constant="14" id="sy2-PI-lBD"/>
+                                    <constraint firstItem="Tka-T3-qe9" firstAttribute="centerX" secondItem="2Ww-KD-wNF" secondAttribute="centerX" id="yAi-zx-3XM"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                         <real key="value" value="1"/>
@@ -250,25 +427,25 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFD-jV-cbQ" userLabel="Device - Mix" customClass="BorderedView" customModule="CustomUiKit">
-                                <rect key="frame" x="229" y="239" width="300" height="105"/>
+                                <rect key="frame" x="419" y="250" width="300" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Noise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sJ-Dh-T2H">
-                                        <rect key="frame" x="200" y="84" width="44" height="21"/>
+                                        <rect key="frame" x="206" y="84" width="33" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MIXER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i03-gF-RlY">
-                                        <rect key="frame" x="109" y="0.0" width="50.5" height="21"/>
+                                        <rect key="frame" x="118" y="0.0" width="37" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nag-M5-nMf" userLabel="Osc1 Volume Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="8" y="25" width="60" height="60"/>
+                                        <rect key="frame" x="8" y="25" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -299,7 +476,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6JU-Ig-Wc5" userLabel="Osc2 Volume Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="100" y="25" width="60" height="60"/>
+                                        <rect key="frame" x="100" y="25" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -330,7 +507,7 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qvd-1F-9dR" userLabel="Noise Volume Knob" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="192" y="25" width="60" height="60"/>
+                                        <rect key="frame" x="192" y="25" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -361,16 +538,16 @@
                                         </connections>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Osc1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omp-HT-Ygw">
-                                        <rect key="frame" x="19" y="84" width="38" height="21"/>
+                                        <rect key="frame" x="24" y="84" width="28" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Osc2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Etw-kO-hO2">
-                                        <rect key="frame" x="109" y="84" width="40.5" height="21"/>
+                                        <rect key="frame" x="115" y="84" width="30" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -382,144 +559,16 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-q5-Dfg" customClass="BorderedView" customModule="CustomUiKit">
-                                <rect key="frame" x="0.0" y="20" width="149" height="355"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Controllers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pI-py-y9X">
-                                        <rect key="frame" x="37" y="326" width="84" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Glide" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJc-o1-cqI" userLabel="Glide">
-                                        <rect key="frame" x="23" y="161" width="30" height="15"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ModulationMix" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7h-vO-qdV">
-                                        <rect key="frame" x="63" y="160" width="83" height="15"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XqT-Hm-10d" userLabel="Glide" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="13" y="184" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" notEnabled="YES"/>
-                                        </accessibility>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
-                                                <real key="value" value="-60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
-                                                <real key="value" value="60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="2r5-Tq-lOb"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-ln-wRj" userLabel="Tune" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="49" y="103" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" notEnabled="YES"/>
-                                        </accessibility>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
-                                                <real key="value" value="-60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
-                                                <real key="value" value="60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="cTO-7l-1I9"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AM0-zK-VEJ" userLabel="ModulationMix" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
-                                        <rect key="frame" x="79" y="184" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" notEnabled="YES"/>
-                                        </accessibility>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                <real key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="initValue">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="minAngle">
-                                                <real key="value" value="-60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="maxAngle">
-                                                <real key="value" value="60"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="stepSize">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="osc1RangeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ddc-3P-DrM"/>
-                                        </connections>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tune" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPp-Mi-32K" userLabel="Tune">
-                                        <rect key="frame" x="60" y="80" width="28" height="15"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="C9x-q5-Dfg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="b3f-dI-BpM"/>
+                            <constraint firstItem="C9x-q5-Dfg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="eoZ-mJ-RCa"/>
+                            <constraint firstItem="2Ww-KD-wNF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="qzH-dA-RMX"/>
+                            <constraint firstItem="2Ww-KD-wNF" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="rCB-dD-feA"/>
+                            <constraint firstItem="C9x-q5-Dfg" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="t6v-k9-Om2"/>
+                            <constraint firstItem="2Ww-KD-wNF" firstAttribute="leading" secondItem="C9x-q5-Dfg" secondAttribute="trailing" id="xd1-Cw-WR4"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mixNoiseVolumeKnob" destination="Qvd-1F-9dR" id="Ut3-av-X7p"/>
