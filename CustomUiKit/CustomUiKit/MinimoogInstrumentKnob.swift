@@ -74,22 +74,21 @@ public class MinimoogInstrumentKnob: UIControl {
     }
     
     func commonInit() {
-        self.backgroundColor = .green
-        
         panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
         self.addGestureRecognizer(panGestureRecognizer)
         self.isUserInteractionEnabled = true
-        #if !TARGET_INTERFACE_BUILDER
-        makeKnob(frame: self.bounds)
-        #endif
     }
     
     override public func layoutSubviews() {
         super.layoutSubviews()
         
-        #if TARGET_INTERFACE_BUILDER
-        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        makeKnob(frame: self.bounds)
+        #if !TARGET_INTERFACE_BUILDER
+            if self.knobPointerLayer == nil {
+                makeKnob(frame: self.bounds)
+            }
+        #else
+            self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            makeKnob(frame: self.bounds)
         #endif
         
         if isViewLoaded == false {
@@ -135,9 +134,8 @@ public class MinimoogInstrumentKnob: UIControl {
             let delta            = curOffset - prevOffset
             prevOffset           = curOffset
             
-            // 128 is number or the total parameter steps. It is multiplied by 2 to achieve
-            // sufficient tolerance and smoothness with touches
-            let newValue         = curValue + (maxValue-minValue)*delta/(128*2)
+            // 128 is number or the total parameter steps
+            let newValue         = curValue + (maxValue-minValue)*delta/128
             setValue(newValue, animated:false)
             sendActions(for: .valueChanged)
         default:
