@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 @IBDesignable
-class BorderedView: UIView {
-    @IBInspectable var borderColor: UIColor? {
+public class BorderedView: UIView {
+    @IBInspectable public var borderColor: UIColor? {
         set { layer.borderColor = newValue?.cgColor }
         get {
             guard let color = layer.borderColor else { return nil }
@@ -19,12 +19,12 @@ class BorderedView: UIView {
         }
     }
     
-    @IBInspectable var borderWidth: CGFloat {
+    @IBInspectable public var borderWidth: CGFloat {
         set { layer.borderWidth = newValue }
         get { return layer.borderWidth }
     }
     
-    @IBInspectable var cornerRadius: CGFloat {
+    @IBInspectable public var cornerRadius: CGFloat {
         set {
             layer.cornerRadius = newValue
             clipsToBounds = newValue > 0

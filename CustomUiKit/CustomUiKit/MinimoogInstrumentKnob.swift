@@ -50,12 +50,12 @@ public class MinimoogInstrumentKnob: UIControl {
     var prevOffset           : Float = 0
     
     // MARK: Overrides
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -124,7 +124,7 @@ public class MinimoogInstrumentKnob: UIControl {
     }
     
     // MARK: UIPanGestureRecognizer delegate
-    @objc func handlePan(recognizer:UIPanGestureRecognizer) {
+    @objc public func handlePan(recognizer:UIPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             isValueLockedByUI    = true
