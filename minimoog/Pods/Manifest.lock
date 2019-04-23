@@ -1,0 +1,34 @@
+PODS:
+  - CustomUiKit (0.0.1)
+  - Grids (0.0.2):
+    - SnapKit (~> 4.0.0)
+  - SnapKit (4.0.1)
+
+DEPENDENCIES:
+  - CustomUiKit (from `../CustomUiKit`)
+  - Grids (from `https://github.com/level-two/Grids.git`)
+  - SnapKit (~> 4.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  CustomUiKit:
+    :path: "../CustomUiKit"
+  Grids:
+    :git: https://github.com/level-two/Grids.git
+
+CHECKOUT OPTIONS:
+  Grids:
+    :commit: 33a3030d79d5b2d18ff1d74701c13fc672b5da0d
+    :git: https://github.com/level-two/Grids.git
+
+SPEC CHECKSUMS:
+  CustomUiKit: bb507339f207cd049f79d6239aaed0826891e322
+  Grids: 245b5a0bc812a1974dd4a37e79ac38450b4b24a5
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+
+PODFILE CHECKSUM: 6132406da984c5a8692ee8792c6744ccb44dfb9a
+
+COCOAPODS: 1.6.1
