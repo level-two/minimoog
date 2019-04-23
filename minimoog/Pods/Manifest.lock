@@ -2,15 +2,18 @@ PODS:
   - CustomUiKit (0.0.1)
   - Grids (0.0.2):
     - SnapKit (~> 4.0.0)
+  - RxSwift (4.5.0)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
   - CustomUiKit (from `../CustomUiKit`)
   - Grids (from `https://github.com/level-two/Grids.git`)
+  - RxSwift
   - SnapKit (~> 4.0.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - RxSwift
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -27,8 +30,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   CustomUiKit: bb507339f207cd049f79d6239aaed0826891e322
   Grids: 245b5a0bc812a1974dd4a37e79ac38450b4b24a5
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: 6132406da984c5a8692ee8792c6744ccb44dfb9a
+PODFILE CHECKSUM: d1b8d1b6ef7283d989283880813aa5ce474bb56b
 
 COCOAPODS: 1.6.1
