@@ -22,14 +22,14 @@ extension String : Error { }
 public class MinimoogAU : AUAudioUnit {
     // MARK: Types
     enum ParamAddr : AUParameterAddress, CaseIterable {
-        case osc1RangeParamAddr = 0
-        case osc1WaveformParamAddr
-        case osc2RangeParamAddr
-        case osc2DetuneParamAddr
-        case osc2WaveformParamAddr
-        case mixOsc1VolumeParamAddr
-        case mixOsc2VolumeParamAddr
-        case mixNoiseVolumeParamAddr
+        case osc1Range = 0
+        case osc1Waveform
+        case osc2Range
+        case osc2Detune
+        case osc2Waveform
+        case mixOsc1Volume
+        case mixOsc2Volume
+        case mixNoiseVolume
     }
     
     typealias AUParameterDescription = (String, String, ParamAddr, Float, Float, AudioUnitParameterUnit, [String]?)
@@ -106,14 +106,14 @@ public class MinimoogAU : AUAudioUnit {
     
     // MARK: Private variables
     private let paramsDescription : [AUParameterDescription] = [
-        ("osc1Range"     ,"Oscillator 1 Range"       , .osc1RangeParamAddr     ,  0,  5, .indexed, ["LO","32'","16'","8'","4'","2'"]),
-        ("osc1Waveform"  ,"Oscillator 1 Waveform"    , .osc1WaveformParamAddr  ,  0,  5, .indexed, ["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"]),
-        ("osc2Range"     ,"Oscillator 2 Range"       , .osc2RangeParamAddr     ,  0,  5, .indexed, ["LO","32'","16'","8'","4'","2'"]),
-        ("osc2Detune"    ,"Oscillator 2 Detune"      , .osc2DetuneParamAddr    , -8,  8, .cents  , nil),
-        ("osc2Waveform"  ,"Oscillator 2 Waveform"    , .osc2WaveformParamAddr  ,  0,  5, .indexed, ["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"]),
-        ("mixOsc1Volume" ,"Mixer Oscillator 1 Volume", .mixOsc1VolumeParamAddr ,  0, 10, .customUnit, nil),
-        ("mixOsc2Volume" ,"Mixer Oscillator 2 Volume", .mixOsc2VolumeParamAddr ,  0, 10, .customUnit, nil),
-        ("mixNoiseVolume","Mixer Noise Volume"       , .mixNoiseVolumeParamAddr,  0, 10, .customUnit, nil)]
+        ("osc1Range"     ,"Oscillator 1 Range"       , .osc1Range     ,  0,  5, .indexed, ["LO","32'","16'","8'","4'","2'"]),
+        ("osc1Waveform"  ,"Oscillator 1 Waveform"    , .osc1Waveform  ,  0,  5, .indexed, ["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"]),
+        ("osc2Range"     ,"Oscillator 2 Range"       , .osc2Range     ,  0,  5, .indexed, ["LO","32'","16'","8'","4'","2'"]),
+        ("osc2Detune"    ,"Oscillator 2 Detune"      , .osc2Detune    , -8,  8, .cents  , nil),
+        ("osc2Waveform"  ,"Oscillator 2 Waveform"    , .osc2Waveform  ,  0,  5, .indexed, ["Triangle","Ramp","Sawtooth","Square","Pulse1","Pulse2"]),
+        ("mixOsc1Volume" ,"Mixer Oscillator 1 Volume", .mixOsc1Volume ,  0, 10, .customUnit, nil),
+        ("mixOsc2Volume" ,"Mixer Oscillator 2 Volume", .mixOsc2Volume ,  0, 10, .customUnit, nil),
+        ("mixNoiseVolume","Mixer Noise Volume"       , .mixNoiseVolume,  0, 10, .customUnit, nil)]
     
     private var minimoogInstrumentWrapper: MinimoogObjcWrapper
     private var curParameterTree         : AUParameterTree!

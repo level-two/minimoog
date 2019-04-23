@@ -23,14 +23,14 @@
 
 // Define parameter addresses.
 enum {
-    osc1RangeParamAddr = 0,
-    osc1WaveformParamAddr,
-    osc2RangeParamAddr,
-    osc2DetuneParamAddr,
-    osc2WaveformParamAddr,
-    mixOsc1VolumeParamAddr,
-    mixOsc2VolumeParamAddr,
-    mixNoiseVolumeParamAddr
+    osc1Range = 0,
+    osc1Waveform,
+    osc2Range,
+    osc2Detune,
+    osc2Waveform,
+    mixOsc1Volume,
+    mixOsc2Volume,
+    mixNoiseVolume
 };
 
 class Minimoog : public MinimoogBase {

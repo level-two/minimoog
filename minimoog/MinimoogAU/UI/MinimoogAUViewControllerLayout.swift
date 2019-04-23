@@ -18,36 +18,10 @@
 import Foundation
 import UIKit
 import SnapKit
+import CustomUiKit
 
-public class MinimoogAUView: UIView {
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        assemble()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    let osc1Group          = UIVIew()
-    let osc1RangeKnob      = UIKnob()
-    let osc1WaveformKnob   = UIKnob()
-    
-    let osc2Group          = UIVIew()
-    let osc2RangeKnob      = UIKnob()
-    let osc2DetuneKnob     = UIKnob()
-    let osc2WaveformKnob   = UIKnob()
-    
-    let mixGroup           = UIVIew()
-    let mixOsc1VolumeKnob  = UIKnob()
-    let mixOsc2VolumeKnob  = UIKnob()
-    let mixNoiseVolumeKnob = UIKnob()
-}
-
-extension MinimoogAUView {
+extension MinimoogAudioUnitViewController {
     private func assemble() {
-        // setup buttons
-        
         osc1Group.addSubviews(
             osc1RangeKnob,
             osc1WaveformKnob
@@ -70,8 +44,6 @@ extension MinimoogAUView {
             osc2Group,
             mixGroup
         )
-        
-        setupLayout()
     }
     
     private func setupLayout() {
@@ -127,6 +99,8 @@ extension MinimoogAUView {
             make.left.equalTo(self.snp.leftMargin)
         }
         
+        self.osc2Group.grids.horizontal(subviews: [osc2RangeKnob, osc2DetuneKnob, osc2WaveformKnob])
+        
         // MIX Group
         mixOsc1VolumeKnob.snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
@@ -146,25 +120,7 @@ extension MinimoogAUView {
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        
-        
-        
-        
-        goodByeLabel.snp.makeConstraints { make in
-            make.center.equalTo(self)
-        }
-        
-        farewellButton.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.snp.topMargin)
-            make.left.equalTo(self.snp.leftMargin)
-        }
-        
-        seeYouButton.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.snp.topMargin)
-            make.right.equalTo(self.snp.rightMargin)
-        }
+        self.mixGroup.grids.horizontal(subviews: [mixOsc1VolumeKnob, mixOsc2VolumeKnob, mixNoiseVolumeKnob])
     }
 }
 

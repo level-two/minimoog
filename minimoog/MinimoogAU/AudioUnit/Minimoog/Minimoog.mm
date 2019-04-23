@@ -48,33 +48,33 @@ void Minimoog::doDeallocateRenderResources() {
 
 void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
     switch (address) {
-        case osc1RangeParamAddr:
+        case osc1Range:
             m_osc1Range = value;
             updateOsc1State();
             break;
-        case osc1WaveformParamAddr:
+        case osc1Waveform:
             m_osc1Waveform = value;
             break;
-        case osc2RangeParamAddr:
+        case osc2Range:
             m_osc2Range = value;
             updateOsc2State();
             break;
-        case osc2DetuneParamAddr:
+        case osc2Detune:
             m_osc2Detune = value;
             updateOsc2State();
             break;
-        case osc2WaveformParamAddr:
+        case osc2Waveform:
             m_osc2Waveform = value;
             break;
-        case mixOsc1VolumeParamAddr:
+        case mixOsc1Volume:
             m_mixOsc1Volume = value;
             m_mixOsc1AmplMultiplier = value / 10.;
             break;
-        case mixOsc2VolumeParamAddr:
+        case mixOsc2Volume:
             m_mixOsc2Volume = value;
             m_mixOsc2AmplMultiplier = value / 10.;
             break;
-        case mixNoiseVolumeParamAddr:
+        case mixNoiseVolume:
             m_mixNoiseVolume = value;
             m_mixNoiseAmplMultiplier = value / 10.;
             break;
@@ -85,28 +85,28 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
 AUValue Minimoog::getParameter(AUParameterAddress address) {
     AUValue val = 0;
     switch (address) {
-        case osc1RangeParamAddr:
+        case osc1Range:
             val = m_osc1Range;
             break;
-        case osc1WaveformParamAddr:
+        case osc1Waveform:
             val = m_osc1Waveform;
             break;
-        case osc2RangeParamAddr:
+        case osc2Range:
             val = m_osc2Range;
             break;
-        case osc2DetuneParamAddr:
+        case osc2Detune:
             val = m_osc2Detune;
             break;
-        case osc2WaveformParamAddr:
+        case osc2Waveform:
             val = m_osc2Waveform;
             break;
-        case mixOsc1VolumeParamAddr:
+        case mixOsc1Volume:
             val = m_mixOsc1Volume;
             break;
-        case mixOsc2VolumeParamAddr:
+        case mixOsc2Volume:
             val = m_mixOsc2Volume;
             break;
-        case mixNoiseVolumeParamAddr:
+        case mixNoiseVolume:
             val = m_mixNoiseVolume;
             break;
     }
