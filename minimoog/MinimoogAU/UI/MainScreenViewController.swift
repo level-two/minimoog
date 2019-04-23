@@ -22,14 +22,14 @@ import CustomUiKit
 
 public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
     // MARK: Outlets
-    @IBOutlet weak var osc1RangeKnob     : MinimoogInstrumentKnob!
-    @IBOutlet weak var osc1WaveformKnob  : MinimoogInstrumentKnob!
-    @IBOutlet weak var osc2RangeKnob     : MinimoogInstrumentKnob!
-    @IBOutlet weak var osc2DetuneKnob    : MinimoogInstrumentKnob!
-    @IBOutlet weak var osc2WaveformKnob  : MinimoogInstrumentKnob!
-    @IBOutlet weak var mixOsc1VolumeKnob : MinimoogInstrumentKnob!
-    @IBOutlet weak var mixOsc2VolumeKnob : MinimoogInstrumentKnob!
-    @IBOutlet weak var mixNoiseVolumeKnob: MinimoogInstrumentKnob!
+    @IBOutlet weak var osc1RangeKnob     : UIKnob!
+    @IBOutlet weak var osc1WaveformKnob  : UIKnob!
+    @IBOutlet weak var osc2RangeKnob     : UIKnob!
+    @IBOutlet weak var osc2DetuneKnob    : UIKnob!
+    @IBOutlet weak var osc2WaveformKnob  : UIKnob!
+    @IBOutlet weak var mixOsc1VolumeKnob : UIKnob!
+    @IBOutlet weak var mixOsc2VolumeKnob : UIKnob!
+    @IBOutlet weak var mixNoiseVolumeKnob: UIKnob!
     
     // MARK: Public variables
     public var audioUnit: AUAudioUnit? {
@@ -88,6 +88,7 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
     }
     
     func updateUiControl(withAddress address:MinimoogAU.ParamAddr, value:AUValue) {
+        return
         switch address {
         case .osc1RangeParamAddr:
             osc1RangeKnob.value = value

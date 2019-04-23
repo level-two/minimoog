@@ -30,7 +30,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-ln-wRj" userLabel="Tune" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bZ4-ln-wRj" userLabel="Tune" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="8" y="83" width="32" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -66,7 +66,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sn9-v1-ZVT" userLabel="Glide-midref" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sn9-v1-ZVT" userLabel="Glide-midref" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="8" y="144" width="32" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -102,7 +102,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wr0-Hw-DpD" userLabel="Modulation Mix" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wr0-Hw-DpD" userLabel="Modulation Mix" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="8" y="205" width="32" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -169,7 +169,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DH-fr-4or" userLabel="O1-Range" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7DH-fr-4or" userLabel="O1-Range" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="10" y="77" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -202,7 +202,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t29-SC-82T" userLabel="O1-Waveform" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t29-SC-82T" userLabel="O1-Waveform" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="98" y="77" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -235,7 +235,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsK-ja-Pxg" userLabel="O2-Range" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsK-ja-Pxg" userLabel="O2-Range" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="10" y="142" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -268,7 +268,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xT8-ox-6Th" userLabel="O2-Frequency-midref" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xT8-ox-6Th" userLabel="O2-Frequency-midref" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="54" y="142" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -304,7 +304,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szY-Eo-Jsn" userLabel="O2-Waveform" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szY-Eo-Jsn" userLabel="O2-Waveform" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="98" y="142" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -337,7 +337,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98R-ss-qKc" userLabel="O3-Range" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98R-ss-qKc" userLabel="O3-Range" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="10" y="207" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -370,7 +370,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4w-IS-TS6" userLabel="O3-Waveform" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4w-IS-TS6" userLabel="O3-Waveform" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="98" y="207" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -403,7 +403,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kf-vv-W9h" userLabel="O3-Frequency" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1kf-vv-W9h" userLabel="O3-Frequency" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="54" y="207" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -496,7 +496,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOn-tB-jI4" userLabel="O1-Volume" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOn-tB-jI4" userLabel="O1-Volume" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="18" y="77" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -529,7 +529,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWs-So-QnQ" userLabel="O2-Volume-ref" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWs-So-QnQ" userLabel="O2-Volume-ref" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="18" y="142" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -571,7 +571,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0v-rr-6iY" userLabel="O3-Volume" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0v-rr-6iY" userLabel="O3-Volume" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="18" y="207" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -604,7 +604,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-Hg-gsI" userLabel="Noise Volume" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfz-Hg-gsI" userLabel="Noise Volume" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="62" y="77" width="36" height="36"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -682,7 +682,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLh-gD-ze5" userLabel="Cutoff" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLh-gD-ze5" userLabel="Cutoff" customClass="UIKnob" customModule="CustomUiKit">
                                                         <rect key="frame" x="-2" y="42" width="34.5" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -715,7 +715,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIt-FU-A4x" userLabel="Emphasys - ref" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UIt-FU-A4x" userLabel="Emphasys - ref" customClass="UIKnob" customModule="CustomUiKit">
                                                         <rect key="frame" x="40.5" y="42" width="35" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -751,7 +751,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1n-cu-m2s" userLabel="Contour Amt" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1n-cu-m2s" userLabel="Contour Amt" customClass="UIKnob" customModule="CustomUiKit">
                                                         <rect key="frame" x="83.5" y="42" width="34.5" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -784,7 +784,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHS-FU-ZvV" userLabel="Attack" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gHS-FU-ZvV" userLabel="Attack" customClass="UIKnob" customModule="CustomUiKit">
                                                         <rect key="frame" x="-2" y="106" width="34.5" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -817,7 +817,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aD-uo-kpN" userLabel="Decay" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8aD-uo-kpN" userLabel="Decay" customClass="UIKnob" customModule="CustomUiKit">
                                                         <rect key="frame" x="40.5" y="106" width="35" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -850,7 +850,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cg-pY-iol" userLabel="Sustain" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cg-pY-iol" userLabel="Sustain" customClass="UIKnob" customModule="CustomUiKit">
                                                         <rect key="frame" x="83.5" y="106" width="34.5" height="35"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <accessibility key="accessibilityConfiguration">
@@ -946,7 +946,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7a2-yW-mjy" userLabel="Attack" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7a2-yW-mjy" userLabel="Attack" customClass="UIKnob" customModule="CustomUiKit">
                                                 <rect key="frame" x="3.5" y="47.5" width="36.5" height="33"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -979,7 +979,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVw-CR-ts0" userLabel="Decay - ref" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UVw-CR-ts0" userLabel="Decay - ref" customClass="UIKnob" customModule="CustomUiKit">
                                                 <rect key="frame" x="48" y="47.5" width="36" height="33"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -1015,7 +1015,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Tq-IB-v8V" userLabel="Sustain" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Tq-IB-v8V" userLabel="Sustain" customClass="UIKnob" customModule="CustomUiKit">
                                                 <rect key="frame" x="92" y="47.5" width="36.5" height="33"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <accessibility key="accessibilityConfiguration">
@@ -1099,7 +1099,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCy-g7-bsn" userLabel="Filter Vol" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCy-g7-bsn" userLabel="Filter Vol" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="5" y="86" width="38" height="38.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">
@@ -1141,7 +1141,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWm-Ji-SPp" userLabel="Contour Vol" customClass="MinimoogInstrumentKnob" customModule="CustomUiKit">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWm-Ji-SPp" userLabel="Contour Vol" customClass="UIKnob" customModule="CustomUiKit">
                                         <rect key="frame" x="5" y="215" width="38" height="38"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <accessibility key="accessibilityConfiguration">

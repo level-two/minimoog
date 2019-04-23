@@ -20,7 +20,7 @@ import Foundation
 //import AVFoundation
 
 @IBDesignable
-public class MinimoogInstrumentKnob: UIControl {
+public class UIKnob: UIControl {
     // MARK: Public variables
     @IBInspectable public var minValue : Float = 0
     @IBInspectable public var maxValue : Float = 1
@@ -146,7 +146,7 @@ public class MinimoogInstrumentKnob: UIControl {
 }
 
 
-extension MinimoogInstrumentKnob {
+extension UIKnob {
     func makeKnob(frame: CGRect) {
         let minSize      = min(frame.width, frame.height)
         let size         = CGSize(width: minSize, height: minSize)
