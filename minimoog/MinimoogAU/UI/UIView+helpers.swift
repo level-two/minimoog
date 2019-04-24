@@ -18,8 +18,8 @@
 import Foundation
 import UIKit
 
-extension UIVIew {
-    func addSubveiews(_ views: UIView...) {
-        views.forEach(self.addSubvivew)
+extension UIView {
+    func addSubviews(_ views: UIView...) {
+        views.forEach(self.addSubview)
     }
 }

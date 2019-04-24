@@ -17,10 +17,10 @@
 
 import UIKit
 import Foundation
-//import AVFoundation
+import RxSwift
 
 @IBDesignable
-class UIKnobInteractor: UIControl {
+class UIKnob: UIControl {
     // MARK: Public variables
     @IBInspectable public var minValue : Float = 0
     @IBInspectable public var maxValue : Float = 1
@@ -28,6 +28,9 @@ class UIKnobInteractor: UIControl {
     @IBInspectable public var initValue: Float = 0.5
     @IBInspectable public var minAngle : Float = -270
     @IBInspectable public var maxAngle : Float =  270
+    
+    
+    public let onValue = PublishSubject<Float>()
     
     public var value : Float {
         get {
@@ -71,6 +74,8 @@ class UIKnobInteractor: UIControl {
         curValue      = min(maxValue, max(minValue, newValue))
         curAngle      = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
         rotateKnob(from:prevAngle, to:curAngle, animated:animated)
+        
+        onValue.onNext(newValue)
     }
     
     func commonInit() {

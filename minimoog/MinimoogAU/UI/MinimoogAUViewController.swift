@@ -19,64 +19,68 @@ import AVFoundation
 import UIKit
 import RxSwift
 import RxCocoa
-import CustomUiKit
 
-public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
+class MinimoogAUViewController: UIViewController {
     public let onKnob = PublishSubject<(MinimoogAU.ParameterId, AUValue)>()
-    
+
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+
         assembleView()
         setupLayout()
         bindEvents()
     }
-    
+
     public func setKnobValue(withAddress paramId: MinimoogAU.ParameterId, value: AUValue) {
-        knob[paramId].value = value
+        knobs[paramId]!.value = value
     }
+
+    internal let osc1Group = UIView()
+    internal let osc2Group = UIView()
+    internal let mixGroup = UIView()
     
-    private let osc1Group = UIView()
-    private let osc2Group = UIView()
-    private let mixGroup = UIView()
-    private let knob = [MinimoogAU.ParameterId: UIKnob]()
-    
-    private let disposeBag = DisposeBag()
+    fileprivate var knobs = [MinimoogAU.ParameterId: UIKnob]()
+    fileprivate let disposeBag = DisposeBag()
 }
 
 extension MinimoogAUViewController {
     private func assembleView() {
-        MinimoogAU.ParameterId.forEach {
-            knob[$0] = UIKnob()
+        MinimoogAU.ParameterId.allCases.forEach {
+            knobs[$0] = UIKnob()
         }
-        
+
         osc1Group.addSubviews(
-            knob[.osc1Range],
-            knob[.osc1Waveform]
+            knob(.osc1Range),
+            knob(.osc1Waveform)
         )
-        
+
         osc2Group.addSubviews(
-            knob[.osc2Range],
-            knob[.osc2Detune],
-            knob[.osc2Waveform]
+            knob(.osc2Range),
+            knob(.osc2Detune),
+            knob(.osc2Waveform)
         )
-        
+
         mixGroup.addSubviews(
-            knob[.mixOsc1Volume],
-            knob[.mixOsc2Volume],
-            knob[.mixNoiseVolume]
+            knob(.mixOsc1Volume),
+            knob(.mixOsc2Volume),
+            knob(.mixNoiseVolume)
         )
-        
-        addSubviews(
+
+        self.view.addSubviews(
             osc1Group,
             osc2Group,
             mixGroup
         )
     }
-    
+
     func bindEvents() {
-        knob.forEach { paramId, knob in
-            knob.rx.value.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
+        knobs.forEach { pair in
+            let (paramId, knob) = pair
+            knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
         }
+    }
+    
+    func knob(_ paramId: MinimoogAU.ParameterId) -> UIKnob {
+        return knobs[paramId]!
     }
 }

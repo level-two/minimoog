@@ -14,30 +14,29 @@ import AVFoundation
 	`AVAudioUnitComponentManager`. The engine supports choosing from the audio unit's
 	presets.
 */
-public class SimplePlayEngine : NSObject {
+public class SimplePlayEngine: NSObject {
 
     // MARK: Properties
-	
-	private var componentType: UInt32
-	{
+
+	private var componentType: UInt32 {
 		willSet {
 			stopPlaying()
-            
+
             // Destroy any pre-existing unit.
             if testUnitNode != nil {
                 if isEffect() {
                     // Break player -> effect connection.
                     engine.disconnectNodeInput(testUnitNode!)
                 }
-                
+
                 // Break testUnitNode -> mixer connection
                 engine.disconnectNodeInput(engine.mainMixerNode)
-                
+
                 // We're done with the unit; release all references.
                 engine.detach(testUnitNode!)
-                
+
                 instrumentPlayer = nil
-                
+
                 testUnitNode = nil
                 testAudioUnit = nil
                 presetList = [AUAudioUnitPreset]()
@@ -47,41 +46,41 @@ public class SimplePlayEngine : NSObject {
 			if componentType != kAudioUnitType_Effect && componentType != kAudioUnitType_MusicDevice {
 				componentType = kAudioUnitType_Effect
 			}
-            
+
             if isEffect() {
                 // Connect player -> mixer.
                 engine.connect(player, to: engine.mainMixerNode, format: file!.processingFormat)
             }
-            
+
 			if componentsFoundCallback != nil {
 				updateAudioUnitList()
 			}
 		}
 	}
-	
+
 	/// The currently selected `AUAudioUnit`, if any.
 	public var testAudioUnit: AUAudioUnit?
-    
+
 	/// The audio unit's presets.
 	var presetList = [AUAudioUnitPreset]()
 
 	/// Synchronizes starting/stopping the engine and scheduling file segments.
 	private let stateChangeQueue = DispatchQueue(label: "SimplePlayEngine.stateChangeQueue")
-	
+
     /// Playback engine.
 	private let engine = AVAudioEngine()
-	
+
     /// Engine's player node.
 	private let player = AVAudioPlayerNode()
-    
-    private var instrumentPlayer: InstrumentPlayer? = nil
-	
+
+    private var instrumentPlayer: InstrumentPlayer?
+
     /// Engine's test unit node.
 	private var testUnitNode: AVAudioUnit?
 
 	/// File to play.
 	private var file: AVAudioFile?
-    
+
 	/// Whether we are playing.
 	private var isPlaying = false
 
@@ -90,21 +89,21 @@ public class SimplePlayEngine : NSObject {
 
     /// Serializes all access to `availableAudioUnits`.
 	private let availableAudioUnitsAccessQueue = DispatchQueue(label: "SimplePlayEngine.availableAudioUnitsAccessQueue")
-    
+
 	/// List of available audio unit components.
 	private var _availableAudioUnits = [AVAudioUnitComponent]()
-    
+
 	func isEffect() -> Bool { return componentType == kAudioUnitType_Effect }
 	func isInstrument() -> Bool { return componentType == kAudioUnitType_MusicDevice }
-    
+
     func setInstrument() {
-        componentType = kAudioUnitType_MusicDevice;
+        componentType = kAudioUnitType_MusicDevice
     }
 
     func setEffect() {
-        componentType = kAudioUnitType_Effect;
+        componentType = kAudioUnitType_Effect
     }
-    
+
     /**
         `self._availableAudioUnits` is accessed from multiple thread contexts. Use
         a dispatch queue for synchronization.
@@ -112,11 +111,11 @@ public class SimplePlayEngine : NSObject {
     var availableAudioUnits: [AVAudioUnitComponent] {
         get {
             var result: [AVAudioUnitComponent]!
-            
+
             availableAudioUnitsAccessQueue.sync {
                 result = self._availableAudioUnits
             }
-            
+
             return result
         }
 
@@ -128,13 +127,12 @@ public class SimplePlayEngine : NSObject {
     }
 
     // MARK: Initialization
-    
+
     public init(componentType inComponentType: UInt32, componentsFoundCallback inComponentsFoundCallback: (() -> Void)? = nil) {
-		
+
 		if inComponentType != kAudioUnitType_Effect && inComponentType != kAudioUnitType_MusicDevice {
 			componentType = kAudioUnitType_Effect // alternatively, could fail here.
-		}
-		else {
+		} else {
 			componentType = inComponentType
 		}
 		componentsFoundCallback = inComponentsFoundCallback
@@ -149,11 +147,11 @@ public class SimplePlayEngine : NSObject {
 
 			setPlayerFile(fileURL)
 		}
-		
+
 		if componentsFoundCallback != nil {
 			// Only bother to look up components if the client provided a callback.
 			updateAudioUnitList()
-			
+
 			// Sign up for a notification when the list of available components changes.
 			NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: kAudioComponentRegistrationsChangedNotification as String), object: nil, queue: nil) { [weak self] _ in
 				self?.updateAudioUnitList()
@@ -163,12 +161,11 @@ public class SimplePlayEngine : NSObject {
         #if os(iOS)
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-        }
-        catch {
+        } catch {
             fatalError("Can't set Audio Session category.")
         }
 		#endif
-		
+
         /*
             Sign up for a notification when an audio unit crashes. Note that we
             handle this on the main queue for thread-safety.
@@ -185,7 +182,7 @@ public class SimplePlayEngine : NSObject {
 			}
 		}
 	}
-	
+
 	/**
         This is called from init and when we get a notification that the list of
         available components has changed.
@@ -204,62 +201,59 @@ public class SimplePlayEngine : NSObject {
             componentDescription.componentManufacturer = 0
             componentDescription.componentFlags = 0
             componentDescription.componentFlagsMask = 0
-            
+
 			self.availableAudioUnits = AVAudioUnitComponentManager.shared().components(matching: componentDescription)
-			
+
 			// Let the UI know that we have an updated list of units.
 			DispatchQueue.main.async {
 				self.componentsFoundCallback!()
 			}
 		}
 	}
-	
+
 	private func setPlayerFile(_ fileURL: URL) {
 		do {
 			let file = try AVAudioFile(forReading: fileURL)
-            
+
             self.file = file
-            
+
             engine.connect(player, to: engine.mainMixerNode, format: file.processingFormat)
-		}
-		catch {
+		} catch {
 			fatalError("Could not create AVAudioFile instance. error: \(error).")
 		}
 	}
-	
+
 	private func setSessionActive(_ active: Bool) {
 		#if os(iOS)
         do {
             try AVAudioSession.sharedInstance().setActive(active)
-        }
-        catch {
+        } catch {
             fatalError("Could not set Audio Session active \(active). error: \(error).")
         }
 		#endif
 	}
 
     // MARK: Playback State
-    
+
     public func startPlaying() {
         stateChangeQueue.sync {
             guard !self.isPlaying else { return }
             self.startPlayingInternal()
         }
     }
-    
+
     public func stopPlaying() {
         stateChangeQueue.sync {
             guard self.isPlaying else { return }
             self.stopPlayingInternal()
         }
     }
-    
+
 	public func togglePlay() -> Bool {
 		stateChangeQueue.sync {
 			if self.isPlaying {
 				self.stopPlayingInternal()
-			}
-			else {
+			} else {
 				self.startPlayingInternal()
 			}
 		}
@@ -270,24 +264,23 @@ public class SimplePlayEngine : NSObject {
 	private func startPlayingInternal() {
 		// assumptions: we are protected by stateChangeQueue. we are not playing.
 		setSessionActive(true)
-		
+
 		if isEffect() {
 			// Schedule buffers on the player.
 			scheduleEffectLoop()
 			scheduleEffectLoop()
 		}
-        
+
         let hardwareFormat = self.engine.outputNode.outputFormat(forBus: 0)
         self.engine.connect(self.engine.mainMixerNode, to: self.engine.outputNode, format: hardwareFormat)
-		
+
 		// Start the engine.
 		do {
 			try engine.start()
-		}
-		catch {
+		} catch {
 			fatalError("Could not start engine. error: \(error).")
 		}
-		
+
 		if isEffect() {
 			// Start the player.
 			player.play()
@@ -297,7 +290,7 @@ public class SimplePlayEngine : NSObject {
 		}
 		isPlaying = true
 	}
-	
+
 	private func stopPlayingInternal() {
 		// assumptions: we are protected by stateChangeQueue. we are playing.
         if isEffect() {
@@ -315,7 +308,7 @@ public class SimplePlayEngine : NSObject {
         guard let file = file else {
             fatalError("`file` must not be nil in \(#function).")
         }
-        
+
 		player.scheduleFile(file, at: nil) {
 			self.stateChangeQueue.async {
 				if self.isPlaying {
@@ -324,25 +317,25 @@ public class SimplePlayEngine : NSObject {
 			}
 		}
 	}
-	
+
     // MARK: Preset Selection
-    
+
 	public func selectPresetIndex(_ presetIndex: Int) {
         guard testAudioUnit != nil else { return }
 
         testAudioUnit!.currentPreset = presetList[presetIndex]
 	}
-	
+
     // MARK: AudioUnit Selection
-    
+
     public func selectAudioUnitComponent(_ component: AVAudioUnitComponent?, completionHandler: @escaping () -> Void) {
         selectAudioUnitWithComponentDescription(component?.audioComponentDescription, completionHandler: completionHandler)
 	}
-	
+
     public func selectAudioUnitWithComponentDescription2(_ componentDescription: AudioComponentDescription, completionHandler: @escaping (() -> Void)) {
-		self.selectAudioUnitWithComponentDescription(componentDescription, completionHandler:completionHandler)
+		self.selectAudioUnitWithComponentDescription(componentDescription, completionHandler: completionHandler)
 	}
-	
+
 	/*
 		Asynchronously begin changing the engine's installed unit, and call the
         supplied completion handler when the operation is complete.
@@ -356,14 +349,14 @@ public class SimplePlayEngine : NSObject {
                 instrumentPlayer = InstrumentPlayer.init(audioUnit: testAudioUnit)
                 instrumentPlayer?.play()
             }
-            
+
 			completionHandler()
 		}
-		
+
 		let hardwareFormat = self.engine.outputNode.outputFormat(forBus: 0)
-		
+
 		self.engine.connect(self.engine.mainMixerNode, to: self.engine.outputNode, format: hardwareFormat)
-		
+
 		/*
 			Pause the player before re-wiring it. (It is not simple to keep it 
             playing across an insertion or deletion.)
@@ -374,14 +367,14 @@ public class SimplePlayEngine : NSObject {
             instrumentPlayer?.stop()
             instrumentPlayer = nil
         }
-		
+
 		// Destroy any pre-existing unit.
 		if testUnitNode != nil {
 			if isEffect() {
 				// Break player -> effect connection.
 				engine.disconnectNodeInput(testUnitNode!)
 			}
-			
+
 			// Break testUnitNode -> mixer connection
 			engine.disconnectNodeInput(engine.mainMixerNode)
 
@@ -389,7 +382,7 @@ public class SimplePlayEngine : NSObject {
 				// Connect player -> mixer.
 				engine.connect(player, to: engine.mainMixerNode, format: file!.processingFormat)
 			}
-			
+
 			// We're done with the unit; release all references.
 			engine.detach(testUnitNode!)
 
@@ -400,12 +393,12 @@ public class SimplePlayEngine : NSObject {
 
 		// Insert the audio unit, if any.
 		if let componentDescription = componentDescription {
-			AVAudioUnit.instantiate(with: componentDescription, options: []) { avAudioUnit, error in
+			AVAudioUnit.instantiate(with: componentDescription, options: []) { avAudioUnit, _ in
                 guard let avAudioUnit = avAudioUnit else { return }
-                
+
                 self.testUnitNode = avAudioUnit
 				self.engine.attach(avAudioUnit)
-				
+
 				if self.isEffect() {
 					// Disconnect player -> mixer.
 					self.engine.disconnectNodeInput(self.engine.mainMixerNode)
@@ -417,11 +410,11 @@ public class SimplePlayEngine : NSObject {
 					let stereoFormat = AVAudioFormat(standardFormatWithSampleRate: hardwareFormat.sampleRate, channels: 2)
 	                self.engine.connect(avAudioUnit, to: self.engine.mainMixerNode, format: stereoFormat)
 				}
-				
+
 				self.testAudioUnit = avAudioUnit.auAudioUnit
                 self.presetList = avAudioUnit.auAudioUnit.factoryPresets ?? []
                 avAudioUnit.auAudioUnit.contextName = "running in AUv3Host"
-				
+
 				done()
 			}
 		} else {
@@ -434,56 +427,56 @@ public class SimplePlayEngine : NSObject {
 	This class implements a basic player for our instrument sample au,
     sending some MIDI events on a concurrent thread until stopped.
  */
-internal class InstrumentPlayer : NSObject {
-    
+internal class InstrumentPlayer: NSObject {
+
     internal init?(audioUnit: AUAudioUnit?) {
         guard audioUnit != nil else { return nil }
         guard let theNoteBlock = audioUnit!.scheduleMIDIEventBlock else { return nil }
-        
+
         noteBlock = theNoteBlock
         super.init()
     }
-    
+
     internal func play() {
         if (false == isPlaying) {
             isDone = false
             scheduleInstrumentLoop()
         }
     }
-    
+
     @discardableResult
-    internal func stop()->Bool {
+    internal func stop() -> Bool {
         self.isPlaying = false
             synced(self.isDone as AnyObject) {}
         return isDone
     }
-    
+
     private var isPlaying = false
     private var isDone = false
     private var noteBlock: AUScheduleMIDIEventBlock
-    
-    private func synced(_ lock: AnyObject, closure: () -> ()) {
+
+    private func synced(_ lock: AnyObject, closure: () -> Void) {
         objc_sync_enter(lock)
         closure()
         objc_sync_exit(lock)
     }
-    
+
     private func scheduleInstrumentLoop() {
         isPlaying = true
-        
+
         let cbytes = UnsafeMutablePointer<UInt8>.allocate(capacity: 3)
-        
+
         DispatchQueue.global(qos: .default).async {
             cbytes[0] = 0xB0
             cbytes[1] = 123
             cbytes[2] = 0
             self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
             usleep(useconds_t(0.1 * 1e6))
-            
-            var releaseTime:Float = 0.05;
-            
+
+            var releaseTime: Float = 0.05
+
             usleep(useconds_t(0.1 * 1e6))
-            
+
             var i = 0
             self.synced(self.isDone as AnyObject) {
                 while self.isPlaying {
@@ -491,28 +484,28 @@ internal class InstrumentPlayer : NSObject {
                     if releaseTime < 10.0 {
                         releaseTime = min(releaseTime * 1.05, 10.0)
                     }
-                    
+
                     cbytes[0] = 0x90
                     cbytes[1] = UInt8(60 + i)
                     cbytes[2] = 64
                     self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
-                    
+
                     usleep(useconds_t(0.2 * 1e6))
-                    
+
                     cbytes[2] = 0    // note off
                     self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
-                    
+
                     i += 2
                     if i >= 24 {
                         i = -12
                     }
                 } // while isPlaying
-                
+
                 cbytes[0] = 0xB0
                 cbytes[1] = 123
                 cbytes[2] = 0
                 self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
-                
+
                 self.isDone = true
             } // synced
         } // dispached

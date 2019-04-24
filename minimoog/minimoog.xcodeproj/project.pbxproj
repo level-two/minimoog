@@ -26,6 +26,7 @@
 		930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9304379921FB6459008D22E0 /* FactoryPresets.plist */; };
 		930437A621FB645A008D22E0 /* MinimoogAUPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */; };
 		930437A721FB645A008D22E0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9304379C21FB645A008D22E0 /* MainInterface.storyboard */; };
+		9310B427227045780039667E /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B426227045780039667E /* UIKnob.swift */; };
 		935EE6ED226EE0DA00A8A9EE /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */; };
 		936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift */; };
 		936D546C2205BA7200C9D0F3 /* MinimoogAUInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D546B2205BA7200C9D0F3 /* MinimoogAUInteractor.swift */; };
@@ -91,6 +92,7 @@
 		9304379921FB6459008D22E0 /* FactoryPresets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FactoryPresets.plist; sourceTree = "<group>"; };
 		9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogAUPreset.swift; sourceTree = "<group>"; };
 		9304379D21FB645A008D22E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		9310B426227045780039667E /* UIKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKnob.swift; sourceTree = "<group>"; };
 		935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+helpers.swift"; sourceTree = "<group>"; };
 		9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -224,6 +226,7 @@
 				9304378C21FB6459008D22E0 /* MinimoogAUViewController.swift */,
 				936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift */,
 				935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */,
+				9310B426227045780039667E /* UIKnob.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -261,6 +264,8 @@
 			buildConfigurationList = 9304375F21FB6118008D22E0 /* Build configuration list for PBXNativeTarget "Minimoog" */;
 			buildPhases = (
 				A31C173424C7CFE9DBE676A6 /* [CP] Check Pods Manifest.lock */,
+				9310B42822705F400039667E /* SwiftLint autocorrect */,
+				9310B42922705FB80039667E /* SwiftLint check */,
 				9304374921FB6117008D22E0 /* Sources */,
 				9304374A21FB6117008D22E0 /* Frameworks */,
 				9304374B21FB6117008D22E0 /* Resources */,
@@ -282,8 +287,6 @@
 			buildConfigurationList = 9304377521FB619D008D22E0 /* Build configuration list for PBXNativeTarget "MinimoogAU" */;
 			buildPhases = (
 				6BB35F804A79F32C4E6E01FA /* [CP] Check Pods Manifest.lock */,
-				9310B421227038B60039667E /* SwiftLint */,
-				9310B422227039800039667E /* SwiftLint autocorrect */,
 				9304376221FB619D008D22E0 /* Sources */,
 				9304376321FB619D008D22E0 /* Frameworks */,
 				9304376421FB619D008D22E0 /* Resources */,
@@ -391,8 +394,8 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Minimoog/Pods-Minimoog-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CustomUiKit/CustomUiKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Grids/Grids.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
@@ -400,8 +403,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CustomUiKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Grids.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
@@ -410,25 +413,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Minimoog/Pods-Minimoog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9310B421227038B60039667E /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		9310B422227039800039667E /* SwiftLint autocorrect */ = {
+		9310B42822705F400039667E /* SwiftLint autocorrect */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -444,7 +429,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint autocorrect\"\n";
+		};
+		9310B42922705FB80039667E /* SwiftLint check */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint check";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		A31C173424C7CFE9DBE676A6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -492,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935EE6ED226EE0DA00A8A9EE /* UIView+helpers.swift in Sources */,
+				9310B427227045780039667E /* UIKnob.swift in Sources */,
 				930437A621FB645A008D22E0 /* MinimoogAUPreset.swift in Sources */,
 				930437A321FB645A008D22E0 /* MinimoogAUFactoryPresetsManager.swift in Sources */,
 				9304379F21FB645A008D22E0 /* MinimoogObjcWrapper.mm in Sources */,

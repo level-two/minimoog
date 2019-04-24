@@ -18,46 +18,46 @@
 import AVFoundation
 
 class MinimoogAUFactoryPresetsManager {
-    struct PresetsDef : Decodable {
-        struct PresetDef : Decodable {
+    struct PresetsDef: Decodable {
+        struct PresetDef: Decodable {
             var presetName: String
             var presetIndex: Int
-            var params: [String:Double]
+            var params: [String: Double]
         }
-        
+
         var presets: [PresetDef]
         var defaultPresetIndex: Int
     }
-    
+
     public var defaultPresetIndex: Int = 0
     private var presets = [MinimoogAUPreset]()
-    
+
     init() {
         guard let presetsDef = loadPresetsDefFromFile() else { return }
         defaultPresetIndex = presetsDef.defaultPresetIndex
         presets = presetsDef.presets.map {
-            MinimoogAUPreset(presetIndex:$0.presetIndex, presetName:$0.presetName, dictionary:$0.params)
+            MinimoogAUPreset(presetIndex: $0.presetIndex, presetName: $0.presetName, dictionary: $0.params)
         }
     }
-    
-    public func getPreset(withIndex index:Int) -> MinimoogAUPreset? {
+
+    public func getPreset(withIndex index: Int) -> MinimoogAUPreset? {
         return presets.first { $0.presetIndex == index }
     }
-    
+
     public func defaultPreset() -> MinimoogAUPreset? {
         return getPreset(withIndex: self.defaultPresetIndex)
     }
-    
+
     public func allPresets() -> [MinimoogAUPreset] {
         return presets.sorted(by: {$0.presetIndex < $1.presetIndex})
     }
-    
+
     private func loadPresetsDefFromFile() -> PresetsDef? {
         guard
             let url = Bundle.main.url(forResource: "FactoryPresets", withExtension: "plist"),
             let data = try? Data(contentsOf: url)
         else { return nil }
-        
+
         return try? PropertyListDecoder().decode(PresetsDef.self, from: data)
     }
 }

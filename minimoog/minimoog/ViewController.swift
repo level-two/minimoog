@@ -22,20 +22,20 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var minimoogInstrumentAUContainerView: UIView!
     @IBOutlet weak var playButton: UIButton!
-    
+
     var playEngine: SimplePlayEngine!
     var minimoogInstrumentViewController: MinimoogAUViewController!
-    
+
     // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set up the plug-in's custom view.
         embedPlugInView()
-        
+
         // Create an audio file playback engine.
         playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice)
-        
+
         /*
          Register the AU in-process for development/debugging.
          First, build an AudioComponentDescription matching the one in our
@@ -49,22 +49,22 @@ class ViewController: UIViewController {
         componentDescription.componentManufacturer = 0x594c5943 /*'YLYC'*/
         componentDescription.componentFlags = 0
         componentDescription.componentFlagsMask = 0
-        
+
         /*
          Register our `AUAudioUnit` subclass, `AUv3FilterDemo`, to make it able
          to be instantiated via its component description.
          
          Note that this registration is local to this process.
          */
-        AUAudioUnit.registerSubclass(MinimoogAU.self, as: componentDescription, name:"Minimoog emulation demo", version: UInt32.max)
-        
+        AUAudioUnit.registerSubclass(MinimoogAU.self, as: componentDescription, name: "Minimoog emulation demo", version: UInt32.max)
+
         // Instantiate and insert our audio unit effect into the chain.
         playEngine.selectAudioUnitWithComponentDescription(componentDescription) {
             // This is an asynchronous callback when complete. Finish audio unit setup.
             self.connectParametersToControls()
         }
     }
-    
+
     /// Called from `viewDidLoad(_:)` to embed the plug-in's view into the app's view.
     func embedPlugInView() {
         /*
@@ -75,24 +75,24 @@ class ViewController: UIViewController {
         let builtInPlugInsURL = Bundle.main.builtInPlugInsURL!
         let pluginURL = builtInPlugInsURL.appendingPathComponent("minimoog_instrument.appex")
         let appExtensionBundle = Bundle(url: pluginURL)
-        
+
         let storyboard = UIStoryboard(name: "MainInterface", bundle: appExtensionBundle)
         minimoogInstrumentViewController = storyboard.instantiateInitialViewController() as? MinimoogAUViewController
-        
+
         // Present the view controller's view.
         if let view = minimoogInstrumentViewController.view {
             addChild(minimoogInstrumentViewController)
             view.frame = minimoogInstrumentAUContainerView.bounds
-            
+
             minimoogInstrumentAUContainerView.addSubview(view)
             minimoogInstrumentViewController.didMove(toParent: self)
         }
     }
-    
+
     func connectParametersToControls() {
         minimoogInstrumentViewController.audioUnit = playEngine.testAudioUnit
     }
-    
+
     /// Handles Play/Stop button touches.
     @IBAction func togglePlay(_ sender: AnyObject?) {
         let isPlaying = playEngine.togglePlay()
@@ -100,4 +100,3 @@ class ViewController: UIViewController {
         playButton.setTitle(titleText, for: .normal)
     }
 }
-
