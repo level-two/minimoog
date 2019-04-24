@@ -22,71 +22,61 @@ import RxCocoa
 import CustomUiKit
 
 public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
-    public let onKnob = PublishSubject<(parameterId: MinimoogAU., value: AUValue)>()
+    public let onKnob = PublishSubject<(MinimoogAU.ParameterId, AUValue)>()
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        assemble()
+        assembleView()
         setupLayout()
         bindEvents()
     }
     
-    
-    func setKnobValue(withAddress address: MinimoogAU.ParamAddr, value:AUValue) {
-        return
-        switch address {
-        case .osc1Range:
-            osc1RangeKnob.value = value
-        case .osc1Waveform:
-            osc1WaveformKnob.value = value
-        case .osc2Range:
-            osc2RangeKnob.value = value
-        case .osc2Detune:
-            osc2DetuneKnob.value = value
-        case .osc2Waveform:
-            osc2WaveformKnob.value = value
-        case .mixOsc1Volume:
-            mixOsc1VolumeKnob.value = value
-        case .mixOsc2Volume:
-            mixOsc2VolumeKnob.value = value
-        case .mixNoiseVolume:
-            mixNoiseVolumeKnob.value = value
-        }
+    public func setKnobValue(withAddress paramId: MinimoogAU.ParameterId, value: AUValue) {
+        knob[paramId].value = value
     }
     
-    private let osc1Group          = UIView()
-    private let osc1RangeKnob      = UIKnob()
-    private let osc1WaveformKnob   = UIKnob()
-    
-    private let osc2Group          = UIView()
-    private let osc2RangeKnob      = UIKnob()
-    private let osc2DetuneKnob     = UIKnob()
-    private let osc2WaveformKnob   = UIKnob()
-    
-    private let mixGroup           = UIView()
-    private let mixOsc1VolumeKnob  = UIKnob()
-    private let mixOsc2VolumeKnob  = UIKnob()
-    private let mixNoiseVolumeKnob = UIKnob()
+    private let osc1Group = UIView()
+    private let osc2Group = UIView()
+    private let mixGroup = UIView()
+    private let knob = [MinimoogAU.ParameterId: UIKnob]()
     
     private let disposeBag = DisposeBag()
 }
 
 extension MinimoogAUViewController {
-    func bindEvents() {
-        // TODO: User ParameterID instead of Int
-        osc1RangeKnob.rx.value.map { (parameterId: .osc1Range, value: $0) }.bind(to: onKnob).disposed(by: disposeBag)
-        /*
-        osc1RangeKnob      = UIKnob()
-        osc1WaveformKnob   = UIKnob()
-        osc2RangeKnob      = UIKnob()
-        osc2DetuneKnob     = UIKnob()
-        osc2WaveformKnob   = UIKnob()
-        mixOsc1VolumeKnob  = UIKnob()
-        mixOsc2VolumeKnob  = UIKnob()
-        mixNoiseVolumeKnob = UIKnob()
-         */
+    private func assembleView() {
+        MinimoogAU.ParameterId.forEach {
+            knob[$0] = UIKnob()
+        }
+        
+        osc1Group.addSubviews(
+            knob[.osc1Range],
+            knob[.osc1Waveform]
+        )
+        
+        osc2Group.addSubviews(
+            knob[.osc2Range],
+            knob[.osc2Detune],
+            knob[.osc2Waveform]
+        )
+        
+        mixGroup.addSubviews(
+            knob[.mixOsc1Volume],
+            knob[.mixOsc2Volume],
+            knob[.mixNoiseVolume]
+        )
+        
+        addSubviews(
+            osc1Group,
+            osc2Group,
+            mixGroup
+        )
     }
     
-    
+    func bindEvents() {
+        knob.forEach { paramId, knob in
+            knob.rx.value.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
+        }
+    }
 }

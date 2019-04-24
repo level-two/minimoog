@@ -282,6 +282,8 @@
 			buildConfigurationList = 9304377521FB619D008D22E0 /* Build configuration list for PBXNativeTarget "MinimoogAU" */;
 			buildPhases = (
 				6BB35F804A79F32C4E6E01FA /* [CP] Check Pods Manifest.lock */,
+				9310B421227038B60039667E /* SwiftLint */,
+				9310B422227039800039667E /* SwiftLint autocorrect */,
 				9304376221FB619D008D22E0 /* Sources */,
 				9304376321FB619D008D22E0 /* Frameworks */,
 				9304376421FB619D008D22E0 /* Resources */,
@@ -407,6 +409,42 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Minimoog/Pods-Minimoog-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9310B421227038B60039667E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		9310B422227039800039667E /* SwiftLint autocorrect */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "SwiftLint autocorrect";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		A31C173424C7CFE9DBE676A6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -635,7 +673,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yauheni-lychkouski.minimoog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/AudioUnit/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -657,7 +695,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yauheni-lychkouski.minimoog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/AudioUnit/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -679,7 +717,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yauheni-lychkouski.minimoog.minimoogau";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/AudioUnit/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -701,7 +739,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yauheni-lychkouski.minimoog.minimoogau";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/AudioUnit/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

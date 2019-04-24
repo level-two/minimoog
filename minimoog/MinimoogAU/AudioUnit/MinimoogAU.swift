@@ -21,7 +21,7 @@ extension String : Error { }
 
 public class MinimoogAU : AUAudioUnit {
     // MARK: Types
-    enum ParamAddr : AUParameterAddress, CaseIterable {
+    enum ParameterId : AUParameterAddress, CaseIterable {
         case osc1Range = 0
         case osc1Waveform
         case osc2Range
@@ -32,7 +32,7 @@ public class MinimoogAU : AUAudioUnit {
         case mixNoiseVolume
     }
     
-    typealias AUParameterDescription = (String, String, ParamAddr, Float, Float, AudioUnitParameterUnit, [String]?)
+    typealias AUParameterDescription = (String, String, ParameterId, Float, Float, AudioUnitParameterUnit, [String]?)
     
     // MARK: Overrided properties
     override public var currentPreset: AUAudioUnitPreset? {

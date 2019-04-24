@@ -21,31 +21,6 @@ import SnapKit
 import CustomUiKit
 
 extension MinimoogAudioUnitViewController {
-    private func assemble() {
-        osc1Group.addSubviews(
-            osc1RangeKnob,
-            osc1WaveformKnob
-        )
-        
-        osc2Group.addSubviews(
-            osc2RangeKnob,
-            osc2DetuneKnob,
-            osc2WaveformKnob
-        )
-        
-        mixGroup.addSubviews(
-            mixOsc1VolumeKnob,
-            mixOsc2VolumeKnob,
-            mixNoiseVolumeKnob
-        )
-        
-        addSubviews(
-            osc1Group,
-            osc2Group,
-            mixGroup
-        )
-    }
-    
     private func setupLayout() {
         osc1Group.snp.makeConstraints { make in
             make.top.equalTo(self.snp.topMargin)
@@ -68,59 +43,59 @@ extension MinimoogAudioUnitViewController {
         self.view.grids.vertical(subviews: [osc1Group, osc2Group, mixGroup])
         
         // OSC1 Group
-        osc1RangeKnob.snp.makeConstraints { make in
+        knob[.osc1Range].snp.makeConstraints { make in
             make.width.height.equalTo(50)
             make.centerY.equalTo(superview)
         }
         
-        osc1WaveformKnob.snp.makeConstraints { make in
+        knob[.osc1Waveform].snp.makeConstraints { make in
             make.width.height.equalTo(50)
             make.centerY.equalTo(superview)
         }
         
-        self.osc1Group.grids.horizontal(subviews: [osc1RangeKnob, osc1WaveformKnob])
+        self.osc1Group.grids.horizontal(subviews: knob[.osc1Range], knob[.osc1Waveform])
         
         // OSC2 Group
-        osc2RangeKnob.snp.makeConstraints { make in
+        knob[.osc2Range].snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
             make.top.equalTo(self.snp.topMargin)
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        osc2DetuneKnob.snp.makeConstraints { make in
+        knob[.osc2Detune].snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
             make.top.equalTo(self.snp.topMargin)
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        osc2WaveformKnob.snp.makeConstraints { make in
+        knob[.osc2Waveform].snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
             make.top.equalTo(self.snp.topMargin)
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        self.osc2Group.grids.horizontal(subviews: [osc2RangeKnob, osc2DetuneKnob, osc2WaveformKnob])
+        self.osc2Group.grids.horizontal(subviews: knob[.osc2Range], knob[.osc2Detune], knob[.osc2Waveform])
         
         // MIX Group
-        mixOsc1VolumeKnob.snp.makeConstraints { make in
+        knob[.mixOsc1Volume].snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
             make.top.equalTo(self.snp.topMargin)
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        mixOsc2VolumeKnob.snp.makeConstraints { make in
+        knob[.mixOsc2Volume].snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
             make.top.equalTo(self.snp.topMargin)
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        mixNoiseVolumeKnob.snp.makeConstraints { make in
+        knob[.mixNoiseVolume].snp.makeConstraints { make in
             make.size.equalTo(CGSize(width: 50, height: 50))
             make.top.equalTo(self.snp.topMargin)
             make.left.equalTo(self.snp.leftMargin)
         }
         
-        self.mixGroup.grids.horizontal(subviews: [mixOsc1VolumeKnob, mixOsc2VolumeKnob, mixNoiseVolumeKnob])
+        self.mixGroup.grids.horizontal(subviews: [mixOsc1Volume, mixOsc2Volume, mixNoiseVolume])
     }
 }
 

@@ -17,7 +17,7 @@ class MinimoogAUInteractor {
         connectViewWithAU()
         
         // Assign default values to all controls
-        MinimoogAU.ParamAddr.allCases.forEach { [weak self] addr in
+        MinimoogAU.ParameterId.allCases.forEach { [weak self] addr in
             guard let parameter = self?.audioUnit?.parameterTree?.parameter(withAddress: addr.rawValue) else { return }
             self?.updateUiControl(withAddress: addr, value: parameter.value)
         }
@@ -32,7 +32,7 @@ class MinimoogAUInteractor {
                 self.connectViewWithAU()
                 
                 // Assign default values to all controls
-                MinimoogAU.ParamAddr.allCases.forEach { [weak self] addr in
+                MinimoogAU.ParameterId.allCases.forEach { [weak self] addr in
                     guard let parameter = self?.audioUnit?.parameterTree?.parameter(withAddress: addr.rawValue) else { return }
                     self?.updateUiControl(withAddress: addr, value: parameter.value)
                 }
@@ -50,14 +50,14 @@ class MinimoogAUInteractor {
     func connectViewWithAU() {
         guard let paramTree = audioUnit?.parameterTree else { return }
         parameterObserverToken = paramTree.token(byAddingParameterObserver: { [weak self] _, value in
-            guard let addr = MinimoogAU.ParamAddr(rawValue:UInt64(value)) else { return }
+            guard let addr = MinimoogAU.ParameterId(rawValue:UInt64(value)) else { return }
             DispatchQueue.main.async { [weak self] in
                 self?.updateUiControl(withAddress:addr, value:value)
             }
         })
     }
 
-    func setParameterValue(withAddress address:MinimoogAU.ParamAddr, value:AUValue) {
+    func setParameterValue(withAddress address:MinimoogAU.ParameterId, value:AUValue) {
         guard let parameter = audioUnit?.parameterTree?.parameter(withAddress:address.rawValue) else { return }
         parameter.setValue(value, originator: parameterObserverToken)
     }
