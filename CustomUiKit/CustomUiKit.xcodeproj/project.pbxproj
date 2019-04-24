@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		9304373A21FB5F40008D22E0 /* CustomUiKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9304373821FB5F40008D22E0 /* CustomUiKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9304374221FB5F9B008D22E0 /* MinimoogInstrumentKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304374021FB5F9B008D22E0 /* MinimoogInstrumentKnob.swift */; };
 		9304374321FB5F9B008D22E0 /* BorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304374121FB5F9B008D22E0 /* BorderedView.swift */; };
+		9310B425227043390039667E /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B424227043390039667E /* UIKnob.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9304373521FB5F40008D22E0 /* CustomUiKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CustomUiKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9304373821FB5F40008D22E0 /* CustomUiKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomUiKit.h; sourceTree = "<group>"; };
 		9304373921FB5F40008D22E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9304374021FB5F9B008D22E0 /* MinimoogInstrumentKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogInstrumentKnob.swift; sourceTree = "<group>"; };
 		9304374121FB5F9B008D22E0 /* BorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedView.swift; sourceTree = "<group>"; };
+		9310B424227043390039667E /* UIKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIKnob.swift; path = Knob/UIKnob.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,10 +50,10 @@
 		9304373721FB5F40008D22E0 /* CustomUiKit */ = {
 			isa = PBXGroup;
 			children = (
+				9310B424227043390039667E /* UIKnob.swift */,
 				9304373821FB5F40008D22E0 /* CustomUiKit.h */,
 				9304373921FB5F40008D22E0 /* Info.plist */,
 				9304374121FB5F9B008D22E0 /* BorderedView.swift */,
-				9304374021FB5F9B008D22E0 /* MinimoogInstrumentKnob.swift */,
 			);
 			path = CustomUiKit;
 			sourceTree = "<group>";
@@ -137,7 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9304374221FB5F9B008D22E0 /* MinimoogInstrumentKnob.swift in Sources */,
+				9310B425227043390039667E /* UIKnob.swift in Sources */,
 				9304374321FB5F9B008D22E0 /* BorderedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

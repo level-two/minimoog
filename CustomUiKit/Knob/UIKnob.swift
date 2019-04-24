@@ -20,7 +20,7 @@ import Foundation
 //import AVFoundation
 
 @IBDesignable
-public class UIKnob: UIControl {
+class UIKnob: UIControl {
     // MARK: Public variables
     @IBInspectable public var minValue : Float = 0
     @IBInspectable public var maxValue : Float = 1
@@ -83,12 +83,12 @@ public class UIKnob: UIControl {
         super.layoutSubviews()
         
         #if !TARGET_INTERFACE_BUILDER
-            if self.knobPointerLayer == nil {
-                makeKnob(frame: self.bounds)
-            }
-        #else
-            self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        if self.knobPointerLayer == nil {
             makeKnob(frame: self.bounds)
+        }
+        #else
+        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        makeKnob(frame: self.bounds)
         #endif
         
         if isViewLoaded == false {
