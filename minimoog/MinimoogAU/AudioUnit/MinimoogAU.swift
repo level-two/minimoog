@@ -21,7 +21,7 @@ extension String: Error { }
 
 public class MinimoogAU: AUAudioUnit {
     // MARK: Types
-    enum ParameterId: AUParameterAddress, CaseIterable {
+    public enum ParameterId: AUParameterAddress, CaseIterable {
         case osc1Range = 0
         case osc1Waveform
         case osc2Range
@@ -64,9 +64,7 @@ public class MinimoogAU: AUAudioUnit {
     }
 
     override public var factoryPresets: [AUAudioUnitPreset]? {
-        get {
-            return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
-        }
+        return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
     }
 
     override public var fullState: [String: Any]? {

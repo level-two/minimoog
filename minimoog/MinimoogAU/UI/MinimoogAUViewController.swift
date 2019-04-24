@@ -20,7 +20,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MinimoogAUViewController: UIViewController {
+public class MinimoogAUViewController: UIViewController {
     public let onKnob = PublishSubject<(MinimoogAU.ParameterId, AUValue)>()
 
     override public func viewDidLoad() {
@@ -38,7 +38,7 @@ class MinimoogAUViewController: UIViewController {
     internal let osc1Group = UIView()
     internal let osc2Group = UIView()
     internal let mixGroup = UIView()
-    
+
     fileprivate var knobs = [MinimoogAU.ParameterId: UIKnob]()
     fileprivate let disposeBag = DisposeBag()
 }
@@ -79,7 +79,7 @@ extension MinimoogAUViewController {
             knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
         }
     }
-    
+
     func knob(_ paramId: MinimoogAU.ParameterId) -> UIKnob {
         return knobs[paramId]!
     }

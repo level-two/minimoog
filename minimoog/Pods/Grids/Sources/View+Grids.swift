@@ -24,7 +24,6 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-
 import SnapKit
 
 #if os(macOS)
@@ -34,7 +33,7 @@ import SnapKit
 #endif
 
 extension Grids where Base: View {
-    
+
     /**
      Arrange the subviews equidistantly in the horizontal direction
      
@@ -44,9 +43,9 @@ extension Grids where Base: View {
      */
     public func horizontal(subviews: [View]) {
         guard subviews.count > 0 else { return }
-        
+
         var paddings: [View] = []
-        
+
         for _ in 0...subviews.count {
             let view = View()
             paddings.append(view)
@@ -56,11 +55,11 @@ extension Grids where Base: View {
                 make.height.equalTo(subviews[0].snp.height)
             })
         }
-        
+
         paddings[0].snp.makeConstraints { (make) in
             make.left.equalToSuperview()
         }
-        
+
         var lastPadding = paddings[0]
         for i in 0..<subviews.count {
             let subview = subviews[i]
@@ -72,15 +71,15 @@ extension Grids where Base: View {
                 make.left.equalTo(subview.snp.right)
                 make.width.equalTo(paddings[0].snp.width)
             })
-            
+
             lastPadding = padding
         }
-        
+
         lastPadding.snp.makeConstraints { (make) in
             make.right.equalToSuperview()
         }
     }
-    
+
     /**
      Arrange the subviews equidistantly in the vertical direction
      
@@ -90,9 +89,9 @@ extension Grids where Base: View {
      */
     public func vertical(subviews: [View]) {
         guard subviews.count > 0 else { return }
-        
+
         var paddings: [View] = []
-        
+
         for _ in 0...subviews.count {
             let view = View()
             paddings.append(view)
@@ -102,11 +101,11 @@ extension Grids where Base: View {
                 make.width.equalTo(subviews[0].snp.width)
             })
         }
-        
+
         paddings[0].snp.makeConstraints { (make) in
             make.top.equalToSuperview()
         }
-        
+
         var lastPadding = paddings[0]
         for i in 0..<subviews.count {
             let subview = subviews[i]
@@ -118,10 +117,10 @@ extension Grids where Base: View {
                 make.top.equalTo(subview.snp.bottom)
                 make.height.equalTo(paddings[0].snp.height)
             })
-            
+
             lastPadding = padding
         }
-        
+
         lastPadding.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview()
         }

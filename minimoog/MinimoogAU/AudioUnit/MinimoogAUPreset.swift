@@ -70,9 +70,9 @@ class MinimoogAUPreset {
 
 extension AUAudioUnitPreset {
     convenience init?(with preset: MinimoogAUPreset?) {
-        guard let pr = preset else { return nil }
+        guard let preset = preset else { return nil }
         self.init()
-        self.name   = pr.presetName
-        self.number = pr.presetIndex
+        self.name   = preset.presetName
+        self.number = preset.presetIndex
     }
 }

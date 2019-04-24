@@ -11,10 +11,7 @@
 ///
 /// (If the source Observable does not emit any values, the AsyncSubject also completes without emitting any values.)
 public final class AsyncSubject<Element>
-    : Observable<Element>
-    , SubjectType
-    , ObserverType
-    , SynchronizedUnsubscribeType {
+    : Observable<Element>, SubjectType, ObserverType, SynchronizedUnsubscribeType {
     public typealias SubjectObserverType = AsyncSubject<Element>
 
     typealias Observers = AnyObserver<Element>.s
@@ -41,7 +38,6 @@ public final class AsyncSubject<Element>
     #if DEBUG
         fileprivate let _synchronizationTracker = SynchronizationTracker()
     #endif
-
 
     /// Creates a subject.
     public override init() {
@@ -96,8 +92,7 @@ public final class AsyncSubject<Element>
             if let lastElement = self._lastElement {
                 self._stoppedEvent = .next(lastElement)
                 return (observers, .next(lastElement))
-            }
-            else {
+            } else {
                 self._stoppedEvent = event
                 return (observers, .completed)
             }
@@ -136,11 +131,11 @@ public final class AsyncSubject<Element>
         self._lock.lock(); defer { self._lock.unlock() }
         self._synchronized_unsubscribe(disposeKey)
     }
-    
+
     func _synchronized_unsubscribe(_ disposeKey: DisposeKey) {
         _ = self._observers.removeKey(disposeKey)
     }
-    
+
     /// Returns observer interface for subject.
     public func asObserver() -> AsyncSubject<Element> {
         return self
@@ -152,4 +147,3 @@ public final class AsyncSubject<Element>
     }
     #endif
 }
-

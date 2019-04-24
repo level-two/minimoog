@@ -17,8 +17,7 @@ enum TailRecursiveSinkCommand {
 
 /// This class is usually used with `Generator` version of the operators.
 class TailRecursiveSink<S: Sequence, O: ObserverType>
-    : Sink<O>
-    , InvocableWithValueType where S.Iterator.Element: ObservableConvertibleType, S.Iterator.Element.E == O.E {
+    : Sink<O>, InvocableWithValueType where S.Iterator.Element: ObservableConvertibleType, S.Iterator.Element.E == O.E {
     typealias Value = TailRecursiveSinkCommand
     typealias E = O.E
     typealias SequenceGenerator = (generator: S.Iterator, remaining: IntMax?)
@@ -74,13 +73,13 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
             guard let (g, left) = self._generators.last else {
                 break
             }
-            
+
             if self._isDisposed {
                 return
             }
 
             self._generators.removeLast()
-            
+
             var e = g
 
             guard let nextCandidate = e.next()?.asObservable() else {
@@ -100,8 +99,7 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
                 if knownOriginalLeft - 1 >= 1 {
                     self._generators.append((e, knownOriginalLeft - 1))
                 }
-            }
-            else {
+            } else {
                 self._generators.append((e, nil))
             }
 
@@ -114,8 +112,7 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
                         maxTailRecursiveSinkStackSize = self._generators.count
                     }
                 #endif
-            }
-            else {
+            } else {
                 next = nextCandidate
             }
         } while next == nil
@@ -141,11 +138,10 @@ class TailRecursiveSink<S: Sequence, O: ObserverType>
 
     override func dispose() {
         super.dispose()
-        
+
         self._subscription.dispose()
         self._gate.dispose()
-        
+
         self.schedule(.dispose)
     }
 }
-

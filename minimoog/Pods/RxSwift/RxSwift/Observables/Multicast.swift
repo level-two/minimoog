@@ -10,8 +10,7 @@
  Represents an observable wrapper that can be connected and disconnected from its underlying observable sequence.
  */
 public class ConnectableObservable<Element>
-    : Observable<Element>
-    , ConnectableObservableType {
+    : Observable<Element>, ConnectableObservableType {
 
     /**
      Connects the observable wrapper to its source. All subscribed observers will receive values from the underlying observable sequence as long as the connection is established.
@@ -153,7 +152,7 @@ final private class Connection<S: SubjectType>: ObserverType, Disposable {
     private var _lock: RecursiveLock
     // state
     private var _parent: ConnectableObservableAdapter<S>?
-    private var _subscription : Disposable?
+    private var _subscription: Disposable?
     private var _subjectObserver: S.SubjectObserverType
 
     private let _disposed = AtomicInt(0)
@@ -239,14 +238,13 @@ final private class ConnectableObservableAdapter<S: SubjectType>
         return subject
     }
 
-    override func subscribe<O : ObserverType>(_ observer: O) -> Disposable where O.E == S.E {
+    override func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == S.E {
         return self.lazySubject.subscribe(observer)
     }
 }
 
 final private class RefCountSink<CO: ConnectableObservableType, O: ObserverType>
-    : Sink<O>
-    , ObserverType where CO.E == O.E {
+    : Sink<O>, ObserverType where CO.E == O.E {
     typealias Element = O.E
     typealias Parent = RefCount<CO>
 
@@ -272,8 +270,7 @@ final private class RefCountSink<CO: ConnectableObservableType, O: ObserverType>
         if self._parent._count == 0 {
             self._parent._count = 1
             self._parent._connectableSubscription = self._parent._source.connect()
-        }
-        else {
+        } else {
             self._parent._count += 1
         }
         // }
@@ -292,11 +289,9 @@ final private class RefCountSink<CO: ConnectableObservableType, O: ObserverType>
 
                 connectableSubscription.dispose()
                 self._parent._connectableSubscription = nil
-            }
-            else if self._parent._count > 1 {
+            } else if self._parent._count > 1 {
                 self._parent._count -= 1
-            }
-            else {
+            } else {
                 rxFatalError("Something went wrong with RefCount disposing mechanism")
             }
             // }
@@ -368,8 +363,7 @@ final private class MulticastSink<S: SubjectType, O: ObserverType>: Sink<O>, Obs
             let connection = connectable.connect()
 
             return Disposables.create(subscription, connection)
-        }
-        catch let e {
+        } catch let e {
             self.forwardOn(.error(e))
             self.dispose()
             return Disposables.create()

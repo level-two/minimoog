@@ -477,7 +477,7 @@ internal class InstrumentPlayer: NSObject {
 
             usleep(useconds_t(0.1 * 1e6))
 
-            var i = 0
+            var playingNote = 60
             self.synced(self.isDone as AnyObject) {
                 while self.isPlaying {
                     // lengthen the releaseTime by 5% each time up to 10 seconds.
@@ -486,7 +486,7 @@ internal class InstrumentPlayer: NSObject {
                     }
 
                     cbytes[0] = 0x90
-                    cbytes[1] = UInt8(60 + i)
+                    cbytes[1] = UInt8(playingNote)
                     cbytes[2] = 64
                     self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
 
@@ -495,9 +495,9 @@ internal class InstrumentPlayer: NSObject {
                     cbytes[2] = 0    // note off
                     self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
 
-                    i += 2
-                    if i >= 24 {
-                        i = -12
+                    playingNote += 1
+                    if playingNote >= 84 {
+                        playingNote = 60
                     }
                 } // while isPlaying
 

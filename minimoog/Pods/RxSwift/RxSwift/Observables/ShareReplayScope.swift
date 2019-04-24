@@ -157,8 +157,7 @@ extension ObservableType {
 }
 
 fileprivate final class ShareReplay1WhileConnectedConnection<Element>
-    : ObserverType
-    , SynchronizedUnsubscribeType {
+    : ObserverType, SynchronizedUnsubscribeType {
     typealias E = Element
     typealias Observers = AnyObserver<Element>.s
     typealias DisposeKey = Observers.KeyType
@@ -283,7 +282,7 @@ final private class ShareReplay1WhileConnected<Element>
         let disposable = connection._synchronized_subscribe(observer)
 
         self._lock.unlock()
-        
+
         if count == 0 {
             connection.connect()
         }
@@ -292,13 +291,12 @@ final private class ShareReplay1WhileConnected<Element>
     }
 
     @inline(__always)
-    private func _synchronized_subscribe<O : ObserverType>(_ observer: O) -> Connection where O.E == E {
+    private func _synchronized_subscribe<O: ObserverType>(_ observer: O) -> Connection where O.E == E {
         let connection: Connection
 
         if let existingConnection = self._connection {
             connection = existingConnection
-        }
-        else {
+        } else {
             connection = ShareReplay1WhileConnectedConnection<Element>(
                 parent: self,
                 lock: self._lock)
@@ -310,8 +308,7 @@ final private class ShareReplay1WhileConnected<Element>
 }
 
 fileprivate final class ShareWhileConnectedConnection<Element>
-    : ObserverType
-    , SynchronizedUnsubscribeType {
+    : ObserverType, SynchronizedUnsubscribeType {
     typealias E = Element
     typealias Observers = AnyObserver<Element>.s
     typealias DisposeKey = Observers.KeyType
@@ -440,19 +437,18 @@ final private class ShareWhileConnected<Element>
     }
 
     @inline(__always)
-    private func _synchronized_subscribe<O : ObserverType>(_ observer: O) -> Connection where O.E == E {
+    private func _synchronized_subscribe<O: ObserverType>(_ observer: O) -> Connection where O.E == E {
         let connection: Connection
 
         if let existingConnection = self._connection {
             connection = existingConnection
-        }
-        else {
+        } else {
             connection = ShareWhileConnectedConnection<Element>(
                 parent: self,
                 lock: self._lock)
             self._connection = connection
         }
-        
+
         return connection
     }
 }
