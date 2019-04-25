@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1B24DCDAB1C83E7451BD2A48 /* Pods_MinimoogAU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5886E34730DFD3B9780FD59E /* Pods_MinimoogAU.framework */; };
 		826CC5E6AEAF60D7D8D1F027 /* Pods_Minimoog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C00435E7A9039F90C5393B /* Pods_Minimoog.framework */; };
-		9304377421FB619D008D22E0 /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9304378421FB6319008D22E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9304377A21FB6319008D22E0 /* LaunchScreen.storyboard */; };
 		9304378521FB6319008D22E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9304377C21FB6319008D22E0 /* Main.storyboard */; };
 		9304378621FB6319008D22E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9304377E21FB6319008D22E0 /* Assets.xcassets */; };
@@ -26,24 +25,15 @@
 		930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9304379921FB6459008D22E0 /* FactoryPresets.plist */; };
 		930437A621FB645A008D22E0 /* MinimoogAUPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */; };
 		9310B427227045780039667E /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B426227045780039667E /* UIKnob.swift */; };
-		9310B42B227065B30039667E /* MinimoogAUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378C21FB6459008D22E0 /* MinimoogAUViewController.swift */; };
-		9310B42C227065B30039667E /* MinimoogAUViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */; };
-		9310B42D227065B30039667E /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */; };
-		9310B42E227065B30039667E /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B426227045780039667E /* UIKnob.swift */; };
 		935EE6ED226EE0DA00A8A9EE /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */; };
 		936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */; };
 		93B83C3C2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */; };
 		93B83C3E2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */; };
-		93F7597E21FB71DB0009A295 /* MinimoogAU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379521FB6459008D22E0 /* MinimoogAU.swift */; };
-		93F7597F21FB71F50009A295 /* MinimoogAUPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */; };
-		93F7598021FB72310009A295 /* MinimoogAUFactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379621FB6459008D22E0 /* MinimoogAUFactoryPresetsManager.swift */; };
-		93F7598121FB72360009A295 /* MinimoogObjcWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379021FB6459008D22E0 /* MinimoogObjcWrapper.mm */; };
-		93F7598221FB72360009A295 /* Minimoog.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379221FB6459008D22E0 /* Minimoog.mm */; };
-		93F7598321FB72360009A295 /* MinimoogBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379321FB6459008D22E0 /* MinimoogBase.mm */; };
+		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9304377221FB619D008D22E0 /* PBXContainerItemProxy */ = {
+		93B83C422272616900655F1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9304374521FB6117008D22E0 /* Project object */;
 			proxyType = 1;
@@ -53,13 +43,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9304377821FB619D008D22E0 /* Embed App Extensions */ = {
+		93B83C442272616900655F1C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				9304377421FB619D008D22E0 /* MinimoogAU.appex in Embed App Extensions */,
+				93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,7 +91,6 @@
 		936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerView.swift; sourceTree = "<group>"; };
 		93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerInteractions.swift; sourceTree = "<group>"; };
 		93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerPresenter.swift; sourceTree = "<group>"; };
-		93F7597721FB706F0009A295 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A8C00435E7A9039F90C5393B /* Pods_Minimoog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minimoog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C52B7C07A43AF01052D1E10E /* Pods-Minimoog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Minimoog.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Minimoog/Pods-Minimoog.debug.xcconfig"; sourceTree = "<group>"; };
@@ -242,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				93F7597A21FB70B00009A295 /* CoreAudio.framework */,
-				93F7597721FB706F0009A295 /* AudioToolbox.framework */,
 				9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */,
 				9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */,
 				A8C00435E7A9039F90C5393B /* Pods_Minimoog.framework */,
@@ -264,13 +252,13 @@
 				9304374921FB6117008D22E0 /* Sources */,
 				9304374A21FB6117008D22E0 /* Frameworks */,
 				9304374B21FB6117008D22E0 /* Resources */,
-				9304377821FB619D008D22E0 /* Embed App Extensions */,
 				8C4B516A9D2C6538666A4F43 /* [CP] Embed Pods Frameworks */,
+				93B83C442272616900655F1C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9304377321FB619D008D22E0 /* PBXTargetDependency */,
+				93B83C432272616900655F1C /* PBXTargetDependency */,
 			);
 			name = Minimoog;
 			productName = Minimoog;
@@ -308,9 +296,22 @@
 					9304374C21FB6117008D22E0 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+						};
 					};
 					9304376521FB619D008D22E0 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -472,18 +473,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9304378A21FB6319008D22E0 /* ViewController.swift in Sources */,
-				9310B42E227065B30039667E /* UIKnob.swift in Sources */,
-				9310B42D227065B30039667E /* UIView+helpers.swift in Sources */,
-				93F7598321FB72360009A295 /* MinimoogBase.mm in Sources */,
-				93F7598021FB72310009A295 /* MinimoogAUFactoryPresetsManager.swift in Sources */,
-				93F7597F21FB71F50009A295 /* MinimoogAUPreset.swift in Sources */,
 				9304378921FB6319008D22E0 /* AppDelegate.swift in Sources */,
-				9310B42C227065B30039667E /* MinimoogAUViewControllerView.swift in Sources */,
-				93F7598121FB72360009A295 /* MinimoogObjcWrapper.mm in Sources */,
 				9304378B21FB6319008D22E0 /* SimplePlayEngine.swift in Sources */,
-				93F7597E21FB71DB0009A295 /* MinimoogAU.swift in Sources */,
-				93F7598221FB72360009A295 /* Minimoog.mm in Sources */,
-				9310B42B227065B30039667E /* MinimoogAUViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,10 +500,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9304377321FB619D008D22E0 /* PBXTargetDependency */ = {
+		93B83C432272616900655F1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9304376521FB619D008D22E0 /* MinimoogAU */;
-			targetProxy = 9304377221FB619D008D22E0 /* PBXContainerItemProxy */;
+			targetProxy = 93B83C422272616900655F1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -587,7 +578,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -642,7 +633,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -656,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C52B7C07A43AF01052D1E10E /* Pods-Minimoog.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -668,7 +660,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yauheni-lychkouski.minimoog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/AudioUnit/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -679,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 32FF2E3F17E846F9001811F9 /* Pods-Minimoog.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -691,7 +683,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yauheni-lychkouski.minimoog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "MinimoogAU/AudioUnit/Minimoog/MinimoogObjcWrapper-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

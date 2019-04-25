@@ -38,10 +38,7 @@ class MinimoogAU: AUAudioUnit {
 
     typealias AUParameterDescription = (String, String, ParameterId, Float, Float, AudioUnitParameterUnit, [String]?)
 
-    public weak var viewController: UIViewController?
-
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
-        // -- Set class own properties --
         self.minimoogInstrumentWrapper = MinimoogObjcWrapper()
         self.factoryPresetsManager     = MinimoogAUFactoryPresetsManager()
         self.curPresetIndex            = 0
@@ -49,7 +46,6 @@ class MinimoogAU: AUAudioUnit {
 
         try super.init(componentDescription: componentDescription, options: options)
 
-        // -- Set inherited and overriden properties --
         self.maximumFramesToRender = 512
 
         let params = paramsDescription.map { description in
@@ -76,10 +72,8 @@ class MinimoogAU: AUAudioUnit {
         self.inputBusses  = AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
         self.outputBusses = AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
 
-        // -- Customization and final setup --
         self.minimoogInstrumentWrapper.setSampleRate(defaultFormat.sampleRate)
 
-        // A function to provide string representations of parameter values.
         self.parameterTree.implementorStringFromValueCallback = { param, valuePtr in
             let value = (valuePtr == nil ? param.value : valuePtr!.pointee)
             if (param.unit == .indexed) {
@@ -89,7 +83,6 @@ class MinimoogAU: AUAudioUnit {
             }
         }
 
-        // observe parameters change and update synth core
         self.parameterTree.implementorValueObserver = { [weak self] param, value in
             self?.minimoogInstrumentWrapper.setParameter(param.address, value: value)
         }
@@ -98,7 +91,6 @@ class MinimoogAU: AUAudioUnit {
             return self?.minimoogInstrumentWrapper.getParameter(param.address) ?? AUValue(0)
         }
 
-        // apply default preset
         self.currentPreset = AUAudioUnitPreset(with: self.factoryPresetsManager.defaultPreset())
     }
 
@@ -185,14 +177,14 @@ extension MinimoogAU {
     }
 
     override public var internalRenderBlock: AUInternalRenderBlock {
-        get { return self.minimoogInstrumentWrapper.internalRenderBlock() }
+        return self.minimoogInstrumentWrapper.internalRenderBlock()
     }
 
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
-        guard self.minimoogInstrumentWrapper.allocateRenderResources(musicalContext: self.musicalContextBlock ,
+        guard self.minimoogInstrumentWrapper.allocateRenderResources(musicalContext: self.musicalContextBlock,
                                                                    outputEventBlock: self.midiOutputEventBlock,
-                                                                transportStateBlock: self.transportStateBlock ,
+                                                                transportStateBlock: self.transportStateBlock,
                                                                           maxFrames: self.maximumFramesToRender)
         else { throw MinimoogAUError.renderResourcesAllocationFailure }
     }
@@ -200,9 +192,5 @@ extension MinimoogAU {
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
         self.minimoogInstrumentWrapper.deallocateRenderResources()
-    }
-
-    override public func requestViewController(completionHandler: @escaping (UIViewController?) -> Void) {
-        completionHandler(self.viewController)
     }
 }

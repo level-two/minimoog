@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="minimoog" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Minimoog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kF1-Su-VHy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,7 +43,7 @@
                         <viewLayoutGuide key="safeArea" id="SGc-lT-VVr"/>
                     </view>
                     <connections>
-                        <outlet property="minimoogInstrumentAUContainerView" destination="UAV-z9-KVK" id="0od-aA-FLe"/>
+                        <outlet property="containerView" destination="UAV-z9-KVK" id="2Y0-NF-cSf"/>
                         <outlet property="playButton" destination="CbK-ac-jCb" id="VgY-Qv-h8m"/>
                     </connections>
                 </viewController>

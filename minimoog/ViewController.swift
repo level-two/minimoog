@@ -15,31 +15,24 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import UIKit
+import AVFoundation
+import Foundation
 import AudioToolbox
+import UIKit
+import CoreAudioKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var minimoogInstrumentAUContainerView: UIView!
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var playButton: UIButton!
 
     var playEngine: SimplePlayEngine!
-    var minimoogInstrumentViewController: MinimoogAUViewController!
 
-    // MARK: View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Create an audio file playback engine.
         playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice)
 
-        /*
-         Register the AU in-process for development/debugging.
-         First, build an AudioComponentDescription matching the one in our
-         .appex's Info.plist.
-         */
-        // MARK: AudioComponentDescription Important!
-        // Ensure that you update the AudioComponentDescription for your AudioUnit type, manufacturer and creator type.
         var componentDescription = AudioComponentDescription()
         componentDescription.componentType = kAudioUnitType_MusicDevice
         componentDescription.componentSubType = 0x6d6f6f67 /*'moog'*/
@@ -47,31 +40,18 @@ class ViewController: UIViewController {
         componentDescription.componentFlags = 0
         componentDescription.componentFlagsMask = 0
 
-        /*
-         Register our `AUAudioUnit` subclass, `AUv3FilterDemo`, to make it able
-         to be instantiated via its component description.
-         
-         Note that this registration is local to this process.
-         */
-        AUAudioUnit.registerSubclass(MinimoogAU.self, as: componentDescription, name: "Minimoog emulation demo", version: UInt32.max)
-
-        // Instantiate and insert our audio unit effect into the chain.
         playEngine.selectAudioUnitWithComponentDescription(componentDescription) { [weak self] in
-            guard let audioUnit = self?.playEngine.testAudioUnit else { return }
-
-            self?.embedPlugInView(from: audioUnit)
-        }
-    }
-
-    func embedPlugInView(from audioUnit: AUAudioUnit) {
-        audioUnit.requestViewController { [weak self] viewController in
             guard let self = self else { return }
-            guard let viewController = viewController else { return }
+            guard let audioUnit = self.playEngine.testAudioUnit else { return }
 
-            self.addChild(viewController)
-            self.minimoogInstrumentAUContainerView.addSubview(viewController.view)
-            viewController.didMove(toParent: self)
-            viewController.view.frame = self.minimoogInstrumentAUContainerView.bounds
+            audioUnit.requestViewController { viewController in
+                guard let viewController = viewController else { return }
+
+                self.addChild(viewController)
+                self.containerView.addSubview(viewController.view)
+                viewController.view.frame = self.containerView.bounds
+                viewController.didMove(toParent: self)
+            }
         }
     }
 

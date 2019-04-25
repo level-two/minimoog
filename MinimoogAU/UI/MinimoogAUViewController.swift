@@ -21,11 +21,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
+public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
 
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
         self.audioUnit = try MinimoogAU(componentDescription: componentDescription, options: [])
-        self.audioUnit?.viewController = self
         return self.audioUnit!
     }
 
