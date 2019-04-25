@@ -21,6 +21,35 @@ import SnapKit
 import Grids
 
 extension MinimoogAUViewController {
+    private func assembleView() {
+        ParameterId.allCases.forEach {
+            knobs[$0] = UIKnob()
+        }
+        
+        osc1Group.addSubviews(
+            knob(.osc1Range),
+            knob(.osc1Waveform)
+        )
+        
+        osc2Group.addSubviews(
+            knob(.osc2Range),
+            knob(.osc2Detune),
+            knob(.osc2Waveform)
+        )
+        
+        mixGroup.addSubviews(
+            knob(.mixOsc1Volume),
+            knob(.mixOsc2Volume),
+            knob(.mixNoiseVolume)
+        )
+        
+        self.view.addSubviews(
+            osc1Group,
+            osc2Group,
+            mixGroup
+        )
+    }
+    
     func setupLayout() {
         osc1Group.snp.makeConstraints { make in
             make.top.equalTo(self.view.snp.topMargin)
@@ -96,5 +125,9 @@ extension MinimoogAUViewController {
         }
 
         self.mixGroup.grids.horizontal(subviews: [knob(.mixOsc1Volume), knob(.mixOsc2Volume), knob(.mixNoiseVolume)])
+    }
+    
+    func knob(_ paramId: ParameterId) -> UIKnob {
+        return knobs[paramId]!
     }
 }

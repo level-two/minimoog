@@ -16,111 +16,27 @@
 // -----------------------------------------------------------------------------
 
 import AVFoundation
+import UIKit
 
-extension String: Error { }
+//extension String: Error { }
 
-public class MinimoogAU: AUAudioUnit {
-    // MARK: Types
-    public enum ParameterId: AUParameterAddress, CaseIterable {
-        case osc1Range = 0
-        case osc1Waveform
-        case osc2Range
-        case osc2Detune
-        case osc2Waveform
-        case mixOsc1Volume
-        case mixOsc2Volume
-        case mixNoiseVolume
-    }
+enum ParameterId: AUParameterAddress, CaseIterable {
+    case osc1Range = 0
+    case osc1Waveform
+    case osc2Range
+    case osc2Detune
+    case osc2Waveform
+    case mixOsc1Volume
+    case mixOsc2Volume
+    case mixNoiseVolume
+}
+
+class MinimoogAU: AUAudioUnit {
 
     typealias AUParameterDescription = (String, String, ParameterId, Float, Float, AudioUnitParameterUnit, [String]?)
+    
+    public weak var viewController: UIViewController?
 
-    // MARK: Overrided properties
-    override public var currentPreset: AUAudioUnitPreset? {
-        get {
-            if curPresetIndex < 0 {
-                let userPreset = AUAudioUnitPreset()
-                userPreset.number = curPresetIndex
-                userPreset.name   = curPresetName
-                return userPreset
-            } else {
-                return AUAudioUnitPreset(with: factoryPresetsManager.getPreset(withIndex: curPresetIndex))
-            }
-        }
-        set {
-            guard let newVal = newValue else { return }
-            curPresetIndex = newVal.number
-
-            if curPresetIndex < 0 {
-                // Parameters will be updated using fullState
-                curPresetName = newVal.name
-            } else if let factoryPreset = factoryPresetsManager.getPreset(withIndex: curPresetIndex) {
-                curPresetName = factoryPreset.presetName
-                parameterTree.allParameters.forEach { param in
-                    guard let val = factoryPreset.presetValue(for: param.identifier) else { return }
-                    param.value = val
-                }
-            }
-        }
-    }
-
-    override public var factoryPresets: [AUAudioUnitPreset]? {
-        return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
-    }
-
-    override public var fullState: [String: Any]? {
-        get {
-            let preset = MinimoogAUPreset(presetIndex: curPresetIndex, presetName: curPresetName, parameters: parameterTree.allParameters)
-            return preset.fullState
-        }
-        set {
-            let preset = MinimoogAUPreset(with: newValue)
-            parameterTree.allParameters.forEach { param in
-                guard let val = preset.presetValue(for: param.identifier) else { return }
-                param.value = val
-            }
-        }
-    }
-
-    override public var parameterTree: AUParameterTree {
-        get { return self.curParameterTree }
-        set { self.curParameterTree = newValue }
-    }
-
-    override public var inputBusses: AUAudioUnitBusArray {
-        get { return self.curInputBusses }
-        set { self.curInputBusses = newValue }
-    }
-
-    override public var outputBusses: AUAudioUnitBusArray {
-        get { return self.curOutputBusses }
-        set { self.curOutputBusses = newValue }
-    }
-
-    override public var internalRenderBlock: AUInternalRenderBlock {
-        get { return self.minimoogInstrumentWrapper.internalRenderBlock() }
-    }
-
-    // MARK: Private variables
-    private let paramsDescription: [AUParameterDescription] = [
-        ("osc1Range", "Oscillator 1 Range", .osc1Range, 0, 5, .indexed, ["LO", "32'", "16'", "8'", "4'", "2'"]),
-        ("osc1Waveform", "Oscillator 1 Waveform", .osc1Waveform, 0, 5, .indexed, ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),
-        ("osc2Range", "Oscillator 2 Range", .osc2Range, 0, 5, .indexed, ["LO", "32'", "16'", "8'", "4'", "2'"]),
-        ("osc2Detune", "Oscillator 2 Detune", .osc2Detune, -8, 8, .cents, nil),
-        ("osc2Waveform", "Oscillator 2 Waveform", .osc2Waveform, 0, 5, .indexed, ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),
-        ("mixOsc1Volume", "Mixer Oscillator 1 Volume", .mixOsc1Volume, 0, 10, .customUnit, nil),
-        ("mixOsc2Volume", "Mixer Oscillator 2 Volume", .mixOsc2Volume, 0, 10, .customUnit, nil),
-        ("mixNoiseVolume", "Mixer Noise Volume", .mixNoiseVolume, 0, 10, .customUnit, nil)]
-
-    private var minimoogInstrumentWrapper: MinimoogObjcWrapper
-    private var curParameterTree: AUParameterTree!
-    private var curInputBusses: AUAudioUnitBusArray!
-    private var curOutputBusses: AUAudioUnitBusArray!
-    private var factoryPresetsManager: MinimoogAUFactoryPresetsManager
-
-    private var curPresetIndex: Int // Positive - factory, negative - user
-    private var curPresetName: String
-
-    // MARK: Methods
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         // -- Set class own properties --
         self.minimoogInstrumentWrapper = MinimoogObjcWrapper()
@@ -182,8 +98,93 @@ public class MinimoogAU: AUAudioUnit {
         // apply default preset
         self.currentPreset = AUAudioUnitPreset(with: self.factoryPresetsManager.defaultPreset())
     }
+    
+    let paramsDescription: [AUParameterDescription] = [
+        ("osc1Range", "Oscillator 1 Range", .osc1Range, 0, 5, .indexed, ["LO", "32'", "16'", "8'", "4'", "2'"]),
+        ("osc1Waveform", "Oscillator 1 Waveform", .osc1Waveform, 0, 5, .indexed, ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),
+        ("osc2Range", "Oscillator 2 Range", .osc2Range, 0, 5, .indexed, ["LO", "32'", "16'", "8'", "4'", "2'"]),
+        ("osc2Detune", "Oscillator 2 Detune", .osc2Detune, -8, 8, .cents, nil),
+        ("osc2Waveform", "Oscillator 2 Waveform", .osc2Waveform, 0, 5, .indexed, ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),
+        ("mixOsc1Volume", "Mixer Oscillator 1 Volume", .mixOsc1Volume, 0, 10, .customUnit, nil),
+        ("mixOsc2Volume", "Mixer Oscillator 2 Volume", .mixOsc2Volume, 0, 10, .customUnit, nil),
+        ("mixNoiseVolume", "Mixer Noise Volume", .mixNoiseVolume, 0, 10, .customUnit, nil)]
+    
+    var minimoogInstrumentWrapper: MinimoogObjcWrapper
+    var curParameterTree: AUParameterTree!
+    var curInputBusses: AUAudioUnitBusArray!
+    var curOutputBusses: AUAudioUnitBusArray!
+    var factoryPresetsManager: MinimoogAUFactoryPresetsManager
+    
+    var curPresetIndex: Int // Positive - factory, negative - user
+    var curPresetName: String
+}
 
-    // MARK: AUAudioUnit Overrides
+extension MinimoogAU {
+    override public var currentPreset: AUAudioUnitPreset? {
+        get {
+            if curPresetIndex < 0 {
+                let userPreset = AUAudioUnitPreset()
+                userPreset.number = curPresetIndex
+                userPreset.name   = curPresetName
+                return userPreset
+            } else {
+                return AUAudioUnitPreset(with: factoryPresetsManager.getPreset(withIndex: curPresetIndex))
+            }
+        }
+        set {
+            guard let newVal = newValue else { return }
+            curPresetIndex = newVal.number
+            
+            if curPresetIndex < 0 {
+                // Parameters will be updated using fullState
+                curPresetName = newVal.name
+            } else if let factoryPreset = factoryPresetsManager.getPreset(withIndex: curPresetIndex) {
+                curPresetName = factoryPreset.presetName
+                parameterTree.allParameters.forEach { param in
+                    guard let val = factoryPreset.presetValue(for: param.identifier) else { return }
+                    param.value = val
+                }
+            }
+        }
+    }
+    
+    override public var factoryPresets: [AUAudioUnitPreset]? {
+        return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
+    }
+    
+    override public var fullState: [String: Any]? {
+        get {
+            let preset = MinimoogAUPreset(presetIndex: curPresetIndex, presetName: curPresetName, parameters: parameterTree.allParameters)
+            return preset.fullState
+        }
+        set {
+            let preset = MinimoogAUPreset(with: newValue)
+            parameterTree.allParameters.forEach { param in
+                guard let val = preset.presetValue(for: param.identifier) else { return }
+                param.value = val
+            }
+        }
+    }
+    
+    override public var parameterTree: AUParameterTree {
+        get { return self.curParameterTree }
+        set { self.curParameterTree = newValue }
+    }
+    
+    override public var inputBusses: AUAudioUnitBusArray {
+        get { return self.curInputBusses }
+        set { self.curInputBusses = newValue }
+    }
+    
+    override public var outputBusses: AUAudioUnitBusArray {
+        get { return self.curOutputBusses }
+        set { self.curOutputBusses = newValue }
+    }
+    
+    override public var internalRenderBlock: AUInternalRenderBlock {
+        get { return self.minimoogInstrumentWrapper.internalRenderBlock() }
+    }
+    
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
         guard self.minimoogInstrumentWrapper.allocateRenderResources(musicalContext: self.musicalContextBlock ,
@@ -196,5 +197,9 @@ public class MinimoogAU: AUAudioUnit {
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
         self.minimoogInstrumentWrapper.deallocateRenderResources()
+    }
+    
+    override public func requestViewController(completionHandler: @escaping (UIViewController?) -> Void) {
+        completionHandler(self.viewController)
     }
 }

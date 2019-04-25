@@ -25,23 +25,21 @@
 		930437A321FB645A008D22E0 /* MinimoogAUFactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379621FB6459008D22E0 /* MinimoogAUFactoryPresetsManager.swift */; };
 		930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9304379921FB6459008D22E0 /* FactoryPresets.plist */; };
 		930437A621FB645A008D22E0 /* MinimoogAUPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */; };
-		930437A721FB645A008D22E0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9304379C21FB645A008D22E0 /* MainInterface.storyboard */; };
 		9310B427227045780039667E /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B426227045780039667E /* UIKnob.swift */; };
-		9310B42A227065B30039667E /* MinimoogAUInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D546B2205BA7200C9D0F3 /* MinimoogAUInteractor.swift */; };
 		9310B42B227065B30039667E /* MinimoogAUViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378C21FB6459008D22E0 /* MinimoogAUViewController.swift */; };
-		9310B42C227065B30039667E /* MinimoogAUViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift */; };
+		9310B42C227065B30039667E /* MinimoogAUViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */; };
 		9310B42D227065B30039667E /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */; };
 		9310B42E227065B30039667E /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B426227045780039667E /* UIKnob.swift */; };
 		935EE6ED226EE0DA00A8A9EE /* UIView+helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */; };
-		936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift */; };
-		936D546C2205BA7200C9D0F3 /* MinimoogAUInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D546B2205BA7200C9D0F3 /* MinimoogAUInteractor.swift */; };
+		936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */; };
+		93B83C3C2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */; };
+		93B83C3E2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */; };
 		93F7597E21FB71DB0009A295 /* MinimoogAU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379521FB6459008D22E0 /* MinimoogAU.swift */; };
 		93F7597F21FB71F50009A295 /* MinimoogAUPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */; };
 		93F7598021FB72310009A295 /* MinimoogAUFactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379621FB6459008D22E0 /* MinimoogAUFactoryPresetsManager.swift */; };
 		93F7598121FB72360009A295 /* MinimoogObjcWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379021FB6459008D22E0 /* MinimoogObjcWrapper.mm */; };
 		93F7598221FB72360009A295 /* Minimoog.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379221FB6459008D22E0 /* Minimoog.mm */; };
 		93F7598321FB72360009A295 /* MinimoogBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379321FB6459008D22E0 /* MinimoogBase.mm */; };
-		93F7598421FB76A60009A295 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9304379C21FB645A008D22E0 /* MainInterface.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,13 +94,13 @@
 		9304379621FB6459008D22E0 /* MinimoogAUFactoryPresetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogAUFactoryPresetsManager.swift; sourceTree = "<group>"; };
 		9304379921FB6459008D22E0 /* FactoryPresets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FactoryPresets.plist; sourceTree = "<group>"; };
 		9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogAUPreset.swift; sourceTree = "<group>"; };
-		9304379D21FB645A008D22E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		9310B426227045780039667E /* UIKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKnob.swift; sourceTree = "<group>"; };
 		935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+helpers.swift"; sourceTree = "<group>"; };
 		9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerLayout.swift; sourceTree = "<group>"; };
-		936D546B2205BA7200C9D0F3 /* MinimoogAUInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUInteractor.swift; sourceTree = "<group>"; };
+		936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerView.swift; sourceTree = "<group>"; };
+		93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerInteractions.swift; sourceTree = "<group>"; };
+		93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerPresenter.swift; sourceTree = "<group>"; };
 		93F7597721FB706F0009A295 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A8C00435E7A9039F90C5393B /* Pods_Minimoog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Minimoog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,7 +175,6 @@
 		9304376721FB619D008D22E0 /* MinimoogAU */ = {
 			isa = PBXGroup;
 			children = (
-				9304379B21FB645A008D22E0 /* Base.lproj */,
 				936D546E2205BAE300C9D0F3 /* AudioUnit */,
 				936D54632205B59700C9D0F3 /* UI */,
 				9304377021FB619D008D22E0 /* Info.plist */,
@@ -216,20 +213,13 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		9304379B21FB645A008D22E0 /* Base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				9304379C21FB645A008D22E0 /* MainInterface.storyboard */,
-			);
-			path = Base.lproj;
-			sourceTree = "<group>";
-		};
 		936D54632205B59700C9D0F3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				936D546B2205BA7200C9D0F3 /* MinimoogAUInteractor.swift */,
 				9304378C21FB6459008D22E0 /* MinimoogAUViewController.swift */,
-				936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift */,
+				93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */,
+				93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */,
+				936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */,
 				935EE6EC226EE0DA00A8A9EE /* UIView+helpers.swift */,
 				9310B426227045780039667E /* UIKnob.swift */,
 			);
@@ -349,7 +339,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9304378421FB6319008D22E0 /* LaunchScreen.storyboard in Resources */,
-				93F7598421FB76A60009A295 /* MainInterface.storyboard in Resources */,
 				9304378621FB6319008D22E0 /* Assets.xcassets in Resources */,
 				9304378721FB6319008D22E0 /* drumLoop.caf in Resources */,
 				9304378521FB6319008D22E0 /* Main.storyboard in Resources */,
@@ -361,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */,
-				930437A721FB645A008D22E0 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,13 +478,12 @@
 				93F7598021FB72310009A295 /* MinimoogAUFactoryPresetsManager.swift in Sources */,
 				93F7597F21FB71F50009A295 /* MinimoogAUPreset.swift in Sources */,
 				9304378921FB6319008D22E0 /* AppDelegate.swift in Sources */,
-				9310B42C227065B30039667E /* MinimoogAUViewControllerLayout.swift in Sources */,
+				9310B42C227065B30039667E /* MinimoogAUViewControllerView.swift in Sources */,
 				93F7598121FB72360009A295 /* MinimoogObjcWrapper.mm in Sources */,
 				9304378B21FB6319008D22E0 /* SimplePlayEngine.swift in Sources */,
 				93F7597E21FB71DB0009A295 /* MinimoogAU.swift in Sources */,
 				93F7598221FB72360009A295 /* Minimoog.mm in Sources */,
 				9310B42B227065B30039667E /* MinimoogAUViewController.swift in Sources */,
-				9310B42A227065B30039667E /* MinimoogAUInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +491,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93B83C3C2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift in Sources */,
 				935EE6ED226EE0DA00A8A9EE /* UIView+helpers.swift in Sources */,
 				9310B427227045780039667E /* UIKnob.swift in Sources */,
 				930437A621FB645A008D22E0 /* MinimoogAUPreset.swift in Sources */,
@@ -511,10 +499,10 @@
 				9304379F21FB645A008D22E0 /* MinimoogObjcWrapper.mm in Sources */,
 				930437A121FB645A008D22E0 /* MinimoogBase.mm in Sources */,
 				9304379E21FB645A008D22E0 /* MinimoogAUViewController.swift in Sources */,
+				93B83C3E2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift in Sources */,
 				930437A221FB645A008D22E0 /* MinimoogAU.swift in Sources */,
 				930437A021FB645A008D22E0 /* Minimoog.mm in Sources */,
-				936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerLayout.swift in Sources */,
-				936D546C2205BA7200C9D0F3 /* MinimoogAUInteractor.swift in Sources */,
+				936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,14 +531,6 @@
 				9304377D21FB6319008D22E0 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9304379C21FB645A008D22E0 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9304379D21FB645A008D22E0 /* Base */,
-			);
-			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -681,6 +661,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = Minimoog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -703,6 +684,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = Minimoog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -723,6 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = MinimoogAU/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -745,6 +728,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = MinimoogAU/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

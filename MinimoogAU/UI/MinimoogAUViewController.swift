@@ -15,72 +15,28 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import AVFoundation
+import Foundation
+import CoreAudioKit
 import UIKit
 import RxSwift
 import RxCocoa
 
-public class MinimoogAUViewController: UIViewController {
-    public let onKnob = PublishSubject<(MinimoogAU.ParameterId, AUValue)>()
-
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-
-        assembleView()
-        setupLayout()
-        bindEvents()
+class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
+    
+    public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
+        self.audioUnit = try MinimoogAU(componentDescription: componentDescription, options: [])
+        self.audioUnit?.viewController = self
+        return self.audioUnit!
     }
+    
+    let osc1Group = UIView()
+    let osc2Group = UIView()
+    let mixGroup = UIView()
+    var knobs = [ParameterId: UIKnob]()
+    let onKnob = PublishSubject<(ParameterId, AUValue)>()
+    
+    var audioUnit: MinimoogAU?
 
-    public func setKnobValue(withAddress paramId: MinimoogAU.ParameterId, value: AUValue) {
-        knobs[paramId]!.value = value
-    }
-
-    internal let osc1Group = UIView()
-    internal let osc2Group = UIView()
-    internal let mixGroup = UIView()
-
-    fileprivate var knobs = [MinimoogAU.ParameterId: UIKnob]()
-    fileprivate let disposeBag = DisposeBag()
-}
-
-extension MinimoogAUViewController {
-    private func assembleView() {
-        MinimoogAU.ParameterId.allCases.forEach {
-            knobs[$0] = UIKnob()
-        }
-
-        osc1Group.addSubviews(
-            knob(.osc1Range),
-            knob(.osc1Waveform)
-        )
-
-        osc2Group.addSubviews(
-            knob(.osc2Range),
-            knob(.osc2Detune),
-            knob(.osc2Waveform)
-        )
-
-        mixGroup.addSubviews(
-            knob(.mixOsc1Volume),
-            knob(.mixOsc2Volume),
-            knob(.mixNoiseVolume)
-        )
-
-        self.view.addSubviews(
-            osc1Group,
-            osc2Group,
-            mixGroup
-        )
-    }
-
-    func bindEvents() {
-        knobs.forEach { pair in
-            let (paramId, knob) = pair
-            knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
-        }
-    }
-
-    func knob(_ paramId: MinimoogAU.ParameterId) -> UIKnob {
-        return knobs[paramId]!
-    }
+    let disposeBag = DisposeBag()
+    var parameterObserverToken: AUParameterObserverToken?
 }
