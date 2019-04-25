@@ -22,19 +22,19 @@ import RxSwift
 import RxCocoa
 
 class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
-    
+
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
         self.audioUnit = try MinimoogAU(componentDescription: componentDescription, options: [])
         self.audioUnit?.viewController = self
         return self.audioUnit!
     }
-    
+
     let osc1Group = UIView()
     let osc2Group = UIView()
     let mixGroup = UIView()
     var knobs = [ParameterId: UIKnob]()
     let onKnob = PublishSubject<(ParameterId, AUValue)>()
-    
+
     var audioUnit: MinimoogAU?
 
     let disposeBag = DisposeBag()

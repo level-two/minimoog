@@ -32,7 +32,7 @@ class ViewController: UIViewController {
 
         // Create an audio file playback engine.
         playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice)
-        
+
         /*
          Register the AU in-process for development/debugging.
          First, build an AudioComponentDescription matching the one in our
@@ -56,26 +56,22 @@ class ViewController: UIViewController {
         AUAudioUnit.registerSubclass(MinimoogAU.self, as: componentDescription, name: "Minimoog emulation demo", version: UInt32.max)
 
         // Instantiate and insert our audio unit effect into the chain.
-        playEngine.selectAudioUnitWithComponentDescription(componentDescription) {
-            // This is an asynchronous callback when complete. Finish audio unit setup.
-            
-            embedPlugInView(from: playEngine.testAudioUnit)
-            //self.connectParametersToControls()
+        playEngine.selectAudioUnitWithComponentDescription(componentDescription) { [weak self] in
+            guard let audioUnit = self?.playEngine.testAudioUnit else { return }
+
+            self?.embedPlugInView(from: audioUnit)
         }
     }
 
     func embedPlugInView(from audioUnit: AUAudioUnit) {
-        let viewController = audioUnit.requestViewController { [weak self] viewController in
-            guard
-                let self = self,
-                let view = viewController.view
-                else { return }
-            
+        audioUnit.requestViewController { [weak self] viewController in
+            guard let self = self else { return }
+            guard let viewController = viewController else { return }
+
             self.addChild(viewController)
-            view.frame = self.minimoogInstrumentAUContainerView.bounds
-            
-            self.minimoogInstrumentAUContainerView.addSubview(view)
+            self.minimoogInstrumentAUContainerView.addSubview(viewController.view)
             viewController.didMove(toParent: self)
+            viewController.view.frame = self.minimoogInstrumentAUContainerView.bounds
         }
     }
 
