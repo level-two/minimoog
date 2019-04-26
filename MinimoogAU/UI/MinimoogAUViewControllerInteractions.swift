@@ -26,11 +26,6 @@ extension MinimoogAUViewController {
         assembleViewInteractions()
     }
 
-    override public func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        osc1Group.setNeedsLayout()
-    }
-
     func assembleViewInteractions() {
         self.knobs.forEach { pair in
             let (paramId, knob) = pair
