@@ -1,6 +1,4 @@
 PODS:
-  - Grids (0.0.2):
-    - SnapKit (~> 4.0.0)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxSwift (4.5.0)
@@ -8,7 +6,6 @@ PODS:
   - SwiftLint (0.31.0)
 
 DEPENDENCIES:
-  - Grids (from `https://github.com/level-two/Grids.git`)
   - RxCocoa
   - RxSwift
   - SnapKit (~> 4.0.0)
@@ -21,22 +18,12 @@ SPEC REPOS:
     - SnapKit
     - SwiftLint
 
-EXTERNAL SOURCES:
-  Grids:
-    :git: https://github.com/level-two/Grids.git
-
-CHECKOUT OPTIONS:
-  Grids:
-    :commit: 33a3030d79d5b2d18ff1d74701c13fc672b5da0d
-    :git: https://github.com/level-two/Grids.git
-
 SPEC CHECKSUMS:
-  Grids: 245b5a0bc812a1974dd4a37e79ac38450b4b24a5
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: ea7a8aba84788613bc48a17a044f745dc98ece3a
+PODFILE CHECKSUM: 184b99e30206b23efdf88efb091bbe8af7d333a5
 
 COCOAPODS: 1.6.1

@@ -19,66 +19,110 @@ import Foundation
 import UIKit
 import SnapKit
 
+class KnobContainerView: UIView {
+    public let knob = UIKnob()
+    public let title = UILabel()
+
+    public func assembleView() {
+        addSubviews(
+            knob,
+            title
+        )
+    }
+
+    public func setupLayout() {
+        knob.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(50)
+        }
+
+        title.snp.makeConstraints { make in
+            make.centerX.equalTo(self.knob)
+            make.bottom.equalTo(self.knob.snp.top).inset(10)
+            make.width.equalToSuperview()
+        }
+    }
+
+    public func styleView() {
+//        let labelStyle = StringStyle(
+//            .lineHeightMultiple(1.2),
+//            .font(UIFont.systemFont(ofSize: 17))
+//        )
+//
+//        title.bonMotStyle = labelStyle
+    }
+}
+
 extension MinimoogAUViewController {
     func assembleView() {
         ParameterId.allCases.forEach {
-            knobs[$0] = UIKnob()
+            knobContainerView[$0] = KnobContainerView()
+            knobContainerView[$0]!.assembleView()
         }
 
-        osc1Group.addArrangedSubviews(
-            knobs[.osc1Range]!,
-            knobs[.osc1Waveform]!
+        osc1Stack.addArrangedSubviews(
+            knobContainerView[.osc1Range]!,
+            knobContainerView[.osc1Waveform]!
         )
 
-        osc2Group.addArrangedSubviews(
-            knobs[.osc2Range]!,
-            knobs[.osc2Detune]!,
-            knobs[.osc2Waveform]!
+        osc2Stack.addArrangedSubviews(
+            knobContainerView[.osc2Range]!,
+            knobContainerView[.osc2Detune]!,
+            knobContainerView[.osc2Waveform]!
         )
 
-        mixGroup.addArrangedSubviews(
-            knobs[.mixOsc1Volume]!,
-            knobs[.mixOsc2Volume]!,
-            knobs[.mixNoiseVolume]!
+        mixStack.addArrangedSubviews(
+            knobContainerView[.mixOsc1Volume]!,
+            knobContainerView[.mixOsc2Volume]!,
+            knobContainerView[.mixNoiseVolume]!
         )
 
-        topView.addArrangedSubviews(
-            osc1Group,
-            osc2Group,
-            mixGroup
+        topStack.addArrangedSubviews(
+            osc1Stack,
+            osc2Stack,
+            mixStack
         )
 
         view.addSubviews(
-            topView
+            topStack
         )
     }
 
     func setupLayout() {
-        topView.axis = .horizontal
-        topView.alignment = .fill
-        topView.distribution = .fillEqually
-
-        osc1Group.axis = .vertical
-        osc1Group.alignment = .center
-        osc1Group.distribution = .equalSpacing
-
-        osc2Group.axis = .vertical
-        osc2Group.alignment = .center
-        osc2Group.distribution = .equalSpacing
-
-        mixGroup.axis = .vertical
-        mixGroup.alignment = .center
-        mixGroup.distribution = .equalSpacing
-
-        knobs.forEach { pair in
-            let (_, knob) = pair
-            knob.snp.makeConstraints { make in
-                make.width.height.equalTo(50)
-            }
+        ParameterId.allCases.forEach {
+            knobContainerView[$0]!.setupLayout()
         }
 
-        topView.snp.makeConstraints { make in
+        topStack.snp.makeConstraints { make in
             make.center.size.equalToSuperview()
+        }
+
+        topStack.axis = .horizontal
+        topStack.alignment = .fill
+        topStack.distribution = .fillEqually
+
+        osc1Stack.axis = .vertical
+        osc1Stack.alignment = .center
+        osc1Stack.distribution = .equalSpacing
+
+        osc2Stack.axis = .vertical
+        osc2Stack.alignment = .center
+        osc2Stack.distribution = .equalSpacing
+
+        mixStack.axis = .vertical
+        mixStack.alignment = .center
+        mixStack.distribution = .equalSpacing
+
+        ParameterId.allCases.forEach {
+            knobContainerView[$0]!.knob.snp.makeConstraints { make in
+                make.center.size.equalToSuperview()
+            }
+        }
+    }
+
+    func styleView() {
+        ParameterId.allCases.forEach {
+            knobContainerView[$0]!.styleView()
         }
     }
 }

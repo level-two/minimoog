@@ -14,7 +14,6 @@ target 'MinimoogAU' do
 
   # Pods for MinimoogAU
   pod 'SnapKit',  '~> 4.0.0'
-  pod 'Grids', :git => 'https://github.com/level-two/Grids.git'
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'SwiftLint'

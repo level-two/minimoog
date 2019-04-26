@@ -23,14 +23,16 @@ extension MinimoogAUViewController {
 
         assembleView()
         setupLayout()
+        styleView()
         assembleViewInteractions()
     }
 
     func assembleViewInteractions() {
-        self.knobs.forEach { pair in
-            let (paramId, knob) = pair
-            knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
-        }
+//        self.knobContainerView.forEach { pair in
+//            let (paramId, knob) = pair
+//            knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
+//        }
+//        connectViewWithAU()
     }
 
     func connectViewWithAU() {
