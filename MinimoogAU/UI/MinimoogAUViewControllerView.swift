@@ -18,116 +18,69 @@
 import Foundation
 import UIKit
 import SnapKit
-import Grids
 
 extension MinimoogAUViewController {
     func assembleView() {
         ParameterId.allCases.forEach {
             knobs[$0] = UIKnob()
+            knobs[$0]!.backgroundColor = UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)
         }
 
-        osc1Group.addSubviews(
-            knob(.osc1Range),
-            knob(.osc1Waveform)
+        osc1Group.addArrangedSubviews(
+            knobs[.osc1Range]!,
+            knobs[.osc1Waveform]!
         )
 
-        osc2Group.addSubviews(
-            knob(.osc2Range),
-            knob(.osc2Detune),
-            knob(.osc2Waveform)
+        osc2Group.addArrangedSubviews(
+            knobs[.osc2Range]!,
+            knobs[.osc2Detune]!,
+            knobs[.osc2Waveform]!
         )
 
-        mixGroup.addSubviews(
-            knob(.mixOsc1Volume),
-            knob(.mixOsc2Volume),
-            knob(.mixNoiseVolume)
+        mixGroup.addArrangedSubviews(
+            knobs[.mixOsc1Volume]!,
+            knobs[.mixOsc2Volume]!,
+            knobs[.mixNoiseVolume]!
         )
 
-        self.view.addSubviews(
+        topView.addArrangedSubviews(
             osc1Group,
             osc2Group,
             mixGroup
         )
+
+        view.addSubviews(
+            topView
+        )
     }
 
     func setupLayout() {
-        osc1Group.snp.makeConstraints { make in
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-            make.right.equalTo(self.view.snp.rightMargin)
+        topView.axis = .horizontal
+        topView.alignment = .fill
+        topView.distribution = .fillEqually
+
+        osc1Group.axis = .vertical
+        osc1Group.alignment = .fill
+        osc1Group.distribution = .fillEqually
+
+        osc2Group.axis = .vertical
+        osc2Group.alignment = .fill
+        osc2Group.distribution = .fillEqually
+
+        mixGroup.axis = .vertical
+        mixGroup.alignment = .fill
+        mixGroup.distribution = .fillEqually
+
+        knobs.forEach { pair in
+            let (_, knob) = pair
+            knob.snp.makeConstraints { make in
+                make.size.height.equalTo(knob.snp.width)
+            }
         }
 
-        osc2Group.snp.makeConstraints { make in
-            make.top.equalTo(osc1Group.snp.bottomMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-            make.right.equalTo(self.view.snp.rightMargin)
+        topView.snp.makeConstraints { make in
+            make.center.equalTo(self.view)
+            make.size.equalTo(self.view)
         }
-
-        mixGroup.snp.makeConstraints { make in
-            make.top.equalTo(osc2Group.snp.bottomMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-            make.right.equalTo(self.view.snp.rightMargin)
-        }
-
-        self.view.grids.vertical(subviews: [osc1Group, osc2Group, mixGroup])
-
-        // OSC1 Group
-        knob(.osc1Range).snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.centerY.equalTo(osc1Group)
-        }
-
-        knob(.osc1Waveform).snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.centerY.equalTo(osc1Group)
-        }
-
-        self.osc1Group.grids.horizontal(subviews: [knob(.osc1Range), knob(.osc1Waveform)])
-
-        // OSC2 Group
-        knob(.osc2Range).snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-        }
-
-        knob(.osc2Detune).snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-        }
-
-        knob(.osc2Waveform).snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-        }
-
-        self.osc2Group.grids.horizontal(subviews: [knob(.osc2Range), knob(.osc2Detune), knob(.osc2Waveform)])
-
-        // MIX Group
-        knob(.mixOsc1Volume).snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-        }
-
-        knob(.mixOsc2Volume).snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-        }
-
-        knob(.mixNoiseVolume).snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: 50, height: 50))
-            make.top.equalTo(self.view.snp.topMargin)
-            make.left.equalTo(self.view.snp.leftMargin)
-        }
-
-        self.mixGroup.grids.horizontal(subviews: [knob(.mixOsc1Volume), knob(.mixOsc2Volume), knob(.mixNoiseVolume)])
-    }
-
-    func knob(_ paramId: ParameterId) -> UIKnob {
-        return knobs[paramId]!
     }
 }

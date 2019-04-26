@@ -16,9 +16,10 @@
 // -----------------------------------------------------------------------------
 
 import Foundation
+import UIKit
 
-extension MinimoogAUViewController {
-    func setKnobValue(withAddress paramId: ParameterId, value: AUValue) {
-        knobs[paramId]!.value = value
+extension UIStackView {
+    func addArrangedSubviews(_ views: UIView...) {
+        views.forEach(self.addArrangedSubview)
     }
 }

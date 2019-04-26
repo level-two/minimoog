@@ -47,9 +47,10 @@ class ViewController: UIViewController {
             audioUnit.requestViewController { viewController in
                 guard let viewController = viewController else { return }
 
-                self.addChild(viewController)
-                self.containerView.addSubview(viewController.view)
                 viewController.view.frame = self.containerView.bounds
+                viewController.willMove(toParent: self)
+                self.containerView.addSubview(viewController.view)
+                self.addChild(viewController)
                 viewController.didMove(toParent: self)
             }
         }

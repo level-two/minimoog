@@ -28,9 +28,10 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
         return self.audioUnit!
     }
 
-    let osc1Group = UIView()
-    let osc2Group = UIView()
-    let mixGroup = UIView()
+    let topView = UIStackView()
+    let osc1Group = UIStackView()
+    let osc2Group = UIStackView()
+    let mixGroup = UIStackView()
     var knobs = [ParameterId: UIKnob]()
     let onKnob = PublishSubject<(ParameterId, AUValue)>()
 
