@@ -114,7 +114,7 @@ class UIKnob: UIControl {
         let curAngleRad = curAngleDeg*Float.pi/180
         let newAngleRad = newAngleDeg*Float.pi/180
         knobPointerLayer.transform = CATransform3DMakeRotation(CGFloat(newAngleRad), 0, 0, 1)
-        if (animated) {
+        if animated {
             let midAngleRad           = (newAngleRad + curAngleRad) / 2
             let animation             = CAKeyframeAnimation(keyPath: "transform.rotation.z")
 

@@ -23,7 +23,6 @@ extension MinimoogAUViewController {
     func assembleView() {
         ParameterId.allCases.forEach {
             knobs[$0] = UIKnob()
-            knobs[$0]!.backgroundColor = UIColor(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 1)
         }
 
         osc1Group.addArrangedSubviews(
@@ -60,27 +59,26 @@ extension MinimoogAUViewController {
         topView.distribution = .fillEqually
 
         osc1Group.axis = .vertical
-        osc1Group.alignment = .fill
-        osc1Group.distribution = .fillEqually
+        osc1Group.alignment = .center
+        osc1Group.distribution = .equalSpacing
 
         osc2Group.axis = .vertical
-        osc2Group.alignment = .fill
-        osc2Group.distribution = .fillEqually
+        osc2Group.alignment = .center
+        osc2Group.distribution = .equalSpacing
 
         mixGroup.axis = .vertical
-        mixGroup.alignment = .fill
-        mixGroup.distribution = .fillEqually
+        mixGroup.alignment = .center
+        mixGroup.distribution = .equalSpacing
 
         knobs.forEach { pair in
             let (_, knob) = pair
             knob.snp.makeConstraints { make in
-                make.size.height.equalTo(knob.snp.width)
+                make.width.height.equalTo(50)
             }
         }
 
         topView.snp.makeConstraints { make in
-            make.center.equalTo(self.view)
-            make.size.equalTo(self.view)
+            make.center.size.equalToSuperview()
         }
     }
 }
