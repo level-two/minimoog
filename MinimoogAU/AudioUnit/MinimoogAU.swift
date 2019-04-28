@@ -23,86 +23,60 @@ enum MinimoogAUError: Error {
     case renderResourcesAllocationFailure
 }
 
-enum ParameterId: AUParameterAddress, CaseIterable {
-    case osc1Range = 0
-    case osc1Waveform
-    case osc2Range
-    case osc2Detune
-    case osc2Waveform
-    case mixOsc1Volume
-    case mixOsc2Volume
-    case mixNoiseVolume
-}
-
 class MinimoogAU: AUAudioUnit {
-
-    typealias AUParameterDescription = (String, String, ParameterId, Float, Float, AudioUnitParameterUnit, [String]?)
-
     override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
-        self.minimoogInstrumentWrapper = MinimoogObjcWrapper()
-        self.factoryPresetsManager     = MinimoogAUFactoryPresetsManager()
-        self.curPresetIndex            = 0
-        self.curPresetName             = ""
+        minimoogInstrumentWrapper = MinimoogObjcWrapper()
+        factoryPresetsManager = MinimoogAUFactoryPresetsManager()
+        curPresetIndex = 0
+        curPresetName = ""
 
         try super.init(componentDescription: componentDescription, options: options)
 
-        self.maximumFramesToRender = 512
-
-        let params = paramsDescription.map { description in
-            AUParameterTree.createParameter(withIdentifier: description.0,
-                                                      name: description.1,
-                                                   address: description.2.rawValue,
-                                                       min: AUValue(description.3),
-                                                       max: AUValue(description.4),
-                                                      unit: description.5,
-                                                  unitName: nil,
-                                                     flags: [.flag_IsWritable, .flag_IsReadable],
-                                              valueStrings: description.6,
-                                       dependentParameters: nil)
-        }
-        self.parameterTree = AUParameterTree.createTree(withChildren: params)
+        initParameterTree()
 
         guard let defaultFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
             throw MinimoogAUError.invalidAudioFormat
         }
 
-        //_audioStreamBasicDescription = *defaultFormat.streamDescription
-        let inputBus      = try AUAudioUnitBus(format: defaultFormat)
-        let outputBus     = try AUAudioUnitBus(format: defaultFormat)
-        self.inputBusses  = AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
-        self.outputBusses = AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
+        //audioStreamBasicDescription = *defaultFormat.streamDescription
+        let inputBus = try AUAudioUnitBus(format: defaultFormat)
+        let outputBus = try AUAudioUnitBus(format: defaultFormat)
+        inputBusses = AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
+        outputBusses = AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
+        minimoogInstrumentWrapper.setSampleRate(defaultFormat.sampleRate)
+        maximumFramesToRender = 512
 
-        self.minimoogInstrumentWrapper.setSampleRate(defaultFormat.sampleRate)
-
-        self.parameterTree.implementorStringFromValueCallback = { param, valuePtr in
+        currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
+    }
+    
+    func initParameterTree() {
+        var parameters = [AUParameter]()
+        
+        ParameterId.allCases.forEach { parameterId in
+            guard let description = AUDescription.parameter[parameterId] else { fatalError("No description for given parameterId") }
+            parameters.append(AUParameterTree.createParameter(with: description))
+        }
+        
+        parameterTree = AUParameterTree.createTree(withChildren: parameters)
+        
+        parameterTree.implementorValueObserver = { [weak self] param, value in
+            self?.minimoogInstrumentWrapper.setParameter(param.address, value: value)
+        }
+        
+        parameterTree.implementorValueProvider = { [weak self] param in
+            return self?.minimoogInstrumentWrapper.getParameter(param.address) ?? AUValue(0)
+        }
+        
+        parameterTree.implementorStringFromValueCallback = { param, valuePtr in
             let value = (valuePtr == nil ? param.value : valuePtr!.pointee)
-            if (param.unit == .indexed) {
+            
+            if param.unit == .indexed {
                 return param.valueStrings![Int(value)]
             } else {
                 return String(format: ".2", value)
             }
         }
-
-        self.parameterTree.implementorValueObserver = { [weak self] param, value in
-            self?.minimoogInstrumentWrapper.setParameter(param.address, value: value)
-        }
-
-        self.parameterTree.implementorValueProvider = { [weak self] param in
-            return self?.minimoogInstrumentWrapper.getParameter(param.address) ?? AUValue(0)
-        }
-
-        self.currentPreset = AUAudioUnitPreset(with: self.factoryPresetsManager.defaultPreset())
     }
-
-    let paramsDescription: [AUParameterDescription] = [
-        ("osc1Range", "Oscillator 1 Range", .osc1Range, 0, 5, .indexed, ["LO", "32'", "16'", "8'", "4'", "2'"]),
-        ("osc1Waveform", "Oscillator 1 Waveform", .osc1Waveform, 0, 5, .indexed, ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),
-        ("osc2Range", "Oscillator 2 Range", .osc2Range, 0, 5, .indexed, ["LO", "32'", "16'", "8'", "4'", "2'"]),
-        ("osc2Detune", "Oscillator 2 Detune", .osc2Detune, -8, 8, .cents, nil),
-        ("osc2Waveform", "Oscillator 2 Waveform", .osc2Waveform, 0, 5, .indexed, ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),
-        ("mixOsc1Volume", "Mixer Oscillator 1 Volume", .mixOsc1Volume, 0, 10, .customUnit, nil),
-        ("mixOsc2Volume", "Mixer Oscillator 2 Volume", .mixOsc2Volume, 0, 10, .customUnit, nil),
-        ("mixNoiseVolume", "Mixer Noise Volume", .mixNoiseVolume, 0, 10, .customUnit, nil)]
 
     var minimoogInstrumentWrapper: MinimoogObjcWrapper
     var curParameterTree: AUParameterTree!

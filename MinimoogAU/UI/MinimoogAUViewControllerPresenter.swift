@@ -18,13 +18,16 @@
 import Foundation
 
 extension MinimoogAUViewController {
-    func setKnobValue(withAddress paramId: ParameterId, value: AUValue) {
-        knobContainerView[paramId]!.knob.value = value
+    func setKnobValue(withAddress paramId: ParameterId, value: CGFloat) {
+        knobContainerView[paramId]!.setKnobValue(value)
     }
 
-    func setupKnobTitles() {
+    func setupKnobs() {
         ParameterId.allCases.forEach {
-            knobContainerView[$0]!.title.text = "Trololo"
+            guard let parameter = AUDescription.parameter[$0] else { return }
+            knobContainerView[$0]?.setTitle(parameter.shortName)
+            knobContainerView[$0]?.setKnobProperties(minValue: CGFloat(parameter.min), maxValue: CGFloat(parameter.max), stepSize: CGFloat(parameter.step))
+            knobContainerView[$0]?.setKnobValue(CGFloat(parameter.initValue))
         }
     }
 }

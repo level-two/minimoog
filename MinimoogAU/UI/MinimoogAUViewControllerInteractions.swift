@@ -20,10 +20,16 @@ import Foundation
 extension MinimoogAUViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+ 
+        // View
         assembleView()
         setupLayout()
         styleView()
+        
+        // Presenter
+        setupKnobs()
+        
+        // Interactions
         assembleViewInteractions()
     }
 
@@ -39,14 +45,15 @@ extension MinimoogAUViewController {
         guard let parameterTree = audioUnit?.parameterTree else { return }
 
         ParameterId.allCases.forEach { parameterId in
-            guard let parameter = parameterTree.parameter(withAddress: parameterId.rawValue) else { return }
+            guard let parameter = parameterTree.parameter(withAddress: AUDescription.parameter[parameterId]!.address) else { return }
             self.setParameterValue(for: parameterId, value: parameter.value)
+            
         }
 
         // TODO: Use RX
-        parameterObserverToken = parameterTree.token(byAddingParameterObserver: { [weak self] _, value in
-            guard let parameterId = ParameterId(rawValue: UInt64(value)) else { return }
+        parameterObserverToken = parameterTree.token(byAddingParameterObserver: { [weak self] address, value in
             DispatchQueue.main.async {
+                guard let parameterId = AUDescription.parameters.first(where: { $0.address == address })?.id else { return }
                 self?.setParameterValue(for: parameterId, value: value)
             }
         })
