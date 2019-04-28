@@ -33,7 +33,7 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
     let osc2Stack = UIStackView()
     let mixStack = UIStackView()
 
-    var knobContainerView = [ParameterId: KnobContainerView]()
+    var knobContainerView = [ParameterId: MinimoogAUKnobContainerView]()
 
     let onKnob = PublishSubject<(ParameterId, AUValue)>()
 

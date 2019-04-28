@@ -22,16 +22,16 @@ import RxSwift
 @IBDesignable
 class UIKnob: UIControl {
     // MARK: Public variables
-    @IBInspectable public var minValue: Float = 0
-    @IBInspectable public var maxValue: Float = 1
-    @IBInspectable public var stepSize: Float = 0
-    @IBInspectable public var initValue: Float = 0.5
-    @IBInspectable public var minAngle: Float = -270
-    @IBInspectable public var maxAngle: Float =  270
+    @IBInspectable public var minValue: CGFloat = 0
+    @IBInspectable public var maxValue: CGFloat = 1
+    @IBInspectable public var stepSize: CGFloat = 0
+    @IBInspectable public var initValue: CGFloat = 0.5
+    @IBInspectable public var minAngle: CGFloat = -270
+    @IBInspectable public var maxAngle: CGFloat =  270
 
-    public let onValue = PublishSubject<Float>()
+    public let onValue = PublishSubject<CGFloat>()
 
-    public var value: Float {
+    public var value: CGFloat {
         get {
             return (stepSize != 0) ? getSnappedValue() : curValue
         }
@@ -45,11 +45,11 @@ class UIKnob: UIControl {
     // MARK: Private variables
     var knobPointerLayer: CALayer!
     var isViewLoaded: Bool = false
-    var curValue: Float = 0
-    var curAngle: Float = 0
+    var curValue: CGFloat = 0
+    var curAngle: CGFloat = 0
     var isValueLockedByUI: Bool = false
     var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
-    var prevOffset: Float = 0
+    var prevOffset: CGFloat = 0
 
     // MARK: Overrides
     public override init(frame: CGRect) {
@@ -68,7 +68,7 @@ class UIKnob: UIControl {
     }
 
     // MARK: Public functions
-    public func setValue(_ newValue: Float, animated: Bool = false) {
+    public func setValue(_ newValue: CGFloat, animated: Bool = false) {
         let prevAngle = curAngle
         curValue      = min(maxValue, max(minValue, newValue))
         curAngle      = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
@@ -103,16 +103,16 @@ class UIKnob: UIControl {
         }
     }
 
-    func getSnappedValue() -> Float {
-        let snappedVal = minValue + roundf((curValue-minValue)/stepSize)*stepSize
+    func getSnappedValue() -> CGFloat {
+        let snappedVal = minValue + (((curValue-minValue)/stepSize)*stepSize).rounded()
         return min(maxValue, max(minValue, snappedVal))
     }
 
-    func rotateKnob(from curAngleDeg: Float, to newAngleDeg: Float, animated: Bool) {
+    func rotateKnob(from curAngleDeg: CGFloat, to newAngleDeg: CGFloat, animated: Bool) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        let curAngleRad = curAngleDeg*Float.pi/180
-        let newAngleRad = newAngleDeg*Float.pi/180
+        let curAngleRad = curAngleDeg*CGFloat.pi/180
+        let newAngleRad = newAngleDeg*CGFloat.pi/180
         knobPointerLayer.transform = CATransform3DMakeRotation(CGFloat(newAngleRad), 0, 0, 1)
         if animated {
             let midAngleRad           = (newAngleRad + curAngleRad) / 2
@@ -134,7 +134,7 @@ class UIKnob: UIControl {
             prevOffset           = 0
         case .changed:
             isValueLockedByUI    = true
-            let curOffset        = -Float(recognizer.translation(in: self).y)
+            let curOffset        = -CGFloat(recognizer.translation(in: self).y)
             let delta            = curOffset - prevOffset
             prevOffset           = curOffset
 
@@ -237,16 +237,16 @@ extension UIKnob {
 
         // Replicate sectors with light modulation
         let sectorsInGroup               = sectorsNum/(2*lightsNum)
-        let colorOffset                  = -Float(initAlpha)/Float(sectorsInGroup)
+        let colorOffset                  = -initAlpha/CGFloat(sectorsInGroup)
 
         let sectorsGroup                 = CAReplicatorLayer()
         sectorsGroup.frame               = frame
         sectorsGroup.instanceCount       = sectorsInGroup
         sectorsGroup.instanceTransform   = CATransform3DMakeRotation(-CGFloat.pi*2/CGFloat(sectorsNum), 0, 0, 1)
-        sectorsGroup.instanceAlphaOffset = colorOffset
-        sectorsGroup.instanceRedOffset   = colorOffset
-        sectorsGroup.instanceGreenOffset = colorOffset
-        sectorsGroup.instanceBlueOffset  = colorOffset
+        sectorsGroup.instanceAlphaOffset = Float(colorOffset)
+        sectorsGroup.instanceRedOffset   = Float(colorOffset)
+        sectorsGroup.instanceGreenOffset = Float(colorOffset)
+        sectorsGroup.instanceBlueOffset  = Float(colorOffset)
         sectorsGroup.addSublayer(sector)
 
         let sectorsGroup1                = CAReplicatorLayer()

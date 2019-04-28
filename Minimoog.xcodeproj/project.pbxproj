@@ -27,6 +27,8 @@
 		934F14822272F4AB002828DF /* UIStackView+addArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 934F14812272F4AB002828DF /* UIStackView+addArrangedSubviews.swift */; };
 		935EE6ED226EE0DA00A8A9EE /* UIView+addSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935EE6EC226EE0DA00A8A9EE /* UIView+addSubviews.swift */; };
 		936D54652205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */; };
+		93A7BD59227639B900B984D0 /* MinimoogAUKnobContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A7BD58227639B900B984D0 /* MinimoogAUKnobContainerView.swift */; };
+		93A7BD5B22763ED300B984D0 /* MinimoogAUDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A7BD5A22763ED300B984D0 /* MinimoogAUDescription.swift */; };
 		93B084372273284400AF7495 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9304379921FB6459008D22E0 /* FactoryPresets.plist */; };
 		93B83C3C2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */; };
 		93B83C3E2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */; };
@@ -90,6 +92,8 @@
 		9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerView.swift; sourceTree = "<group>"; };
+		93A7BD58227639B900B984D0 /* MinimoogAUKnobContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUKnobContainerView.swift; sourceTree = "<group>"; };
+		93A7BD5A22763ED300B984D0 /* MinimoogAUDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUDescription.swift; sourceTree = "<group>"; };
 		93B084352273250300AF7495 /* Minimoog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minimoog.entitlements; sourceTree = "<group>"; };
 		93B084362273254000AF7495 /* MinimoogAU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinimoogAU.entitlements; sourceTree = "<group>"; };
 		93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAUViewControllerInteractions.swift; sourceTree = "<group>"; };
@@ -213,9 +217,10 @@
 				93B83C3B2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift */,
 				93B83C3D2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift */,
 				936D54642205B5CE00C9D0F3 /* MinimoogAUViewControllerView.swift */,
+				93A7BD58227639B900B984D0 /* MinimoogAUKnobContainerView.swift */,
+				9310B426227045780039667E /* UIKnob.swift */,
 				935EE6EC226EE0DA00A8A9EE /* UIView+addSubviews.swift */,
 				934F14812272F4AB002828DF /* UIStackView+addArrangedSubviews.swift */,
-				9310B426227045780039667E /* UIKnob.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				9304379721FB6459008D22E0 /* Assets */,
 				9304378D21FB6459008D22E0 /* Minimoog */,
 				9304379521FB6459008D22E0 /* MinimoogAU.swift */,
+				93A7BD5A22763ED300B984D0 /* MinimoogAUDescription.swift */,
 				9304379621FB6459008D22E0 /* MinimoogAUFactoryPresetsManager.swift */,
 				9304379A21FB645A008D22E0 /* MinimoogAUPreset.swift */,
 			);
@@ -491,12 +497,14 @@
 				93B83C3C2271DA6900655F1C /* MinimoogAUViewControllerInteractions.swift in Sources */,
 				935EE6ED226EE0DA00A8A9EE /* UIView+addSubviews.swift in Sources */,
 				9310B427227045780039667E /* UIKnob.swift in Sources */,
+				93A7BD59227639B900B984D0 /* MinimoogAUKnobContainerView.swift in Sources */,
 				930437A621FB645A008D22E0 /* MinimoogAUPreset.swift in Sources */,
 				930437A321FB645A008D22E0 /* MinimoogAUFactoryPresetsManager.swift in Sources */,
 				9304379F21FB645A008D22E0 /* MinimoogObjcWrapper.mm in Sources */,
 				930437A121FB645A008D22E0 /* MinimoogBase.mm in Sources */,
 				9304379E21FB645A008D22E0 /* MinimoogAUViewController.swift in Sources */,
 				93B83C3E2271DECD00655F1C /* MinimoogAUViewControllerPresenter.swift in Sources */,
+				93A7BD5B22763ED300B984D0 /* MinimoogAUDescription.swift in Sources */,
 				934F14822272F4AB002828DF /* UIStackView+addArrangedSubviews.swift in Sources */,
 				930437A221FB645A008D22E0 /* MinimoogAU.swift in Sources */,
 				930437A021FB645A008D22E0 /* Minimoog.mm in Sources */,

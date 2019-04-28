@@ -19,44 +19,10 @@ import Foundation
 import UIKit
 import SnapKit
 
-class KnobContainerView: UIView {
-    public let knob = UIKnob()
-    public let title = UILabel()
-
-    public func assembleView() {
-        addSubviews(
-            knob,
-            title
-        )
-    }
-
-    public func setupLayout() {
-        knob.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(50)
-        }
-
-        title.snp.makeConstraints { make in
-            make.centerX.equalTo(self.knob)
-            make.bottom.equalTo(self.knob.snp.top).inset(10)
-            make.width.equalToSuperview()
-        }
-    }
-
-    public func styleView() {
-//        let labelStyle = StringStyle(
-//            .lineHeightMultiple(1.2),
-//            .font(UIFont.systemFont(ofSize: 17))
-//        )
-//
-//        title.bonMotStyle = labelStyle
-    }
-}
-
 extension MinimoogAUViewController {
     func assembleView() {
         ParameterId.allCases.forEach {
-            knobContainerView[$0] = KnobContainerView()
+            knobContainerView[$0] = MinimoogAUKnobContainerView()
             knobContainerView[$0]!.assembleView()
         }
 
