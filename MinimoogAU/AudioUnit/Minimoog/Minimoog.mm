@@ -25,7 +25,7 @@ static inline double noteToHz(int noteNumber)
 
 static inline double detunedNoteToHz(int noteNumber, float cents)
 {
-    return 440. * exp2((noteNumber + cents/8. - 69.)/12.);
+    return 440. * exp2((noteNumber + cents/1200. - 69.)/12.);
 }
 
 
@@ -49,32 +49,40 @@ void Minimoog::doDeallocateRenderResources() {
 void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
     switch (address) {
         case osc1Range:
+            assert(value >= 1 && value <= 6);
             m_osc1Range = value;
             updateOsc1State();
             break;
         case osc1Waveform:
+            assert(value >= 1 && value <= 6);
             m_osc1Waveform = value;
             break;
         case osc2Range:
+            assert(value >= 1 && value <= 6);
             m_osc2Range = value;
             updateOsc2State();
             break;
         case osc2Detune:
+            assert(value >= -1200 && value <= 1200);
             m_osc2Detune = value;
             updateOsc2State();
             break;
         case osc2Waveform:
+            assert(value >= 1 && value <= 6);
             m_osc2Waveform = value;
             break;
         case mixOsc1Volume:
+            assert(value >= 0 && value <= 10);
             m_mixOsc1Volume = value;
             m_mixOsc1AmplMultiplier = value / 10.;
             break;
         case mixOsc2Volume:
+            assert(value >= 0 && value <= 10);
             m_mixOsc2Volume = value;
             m_mixOsc2AmplMultiplier = value / 10.;
             break;
         case mixNoiseVolume:
+            assert(value >= 0 && value <= 10);
             m_mixNoiseVolume = value;
             m_mixNoiseAmplMultiplier = value / 10.;
             break;
@@ -165,13 +173,13 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 
 void Minimoog::updateOsc1State() {
     m_osc1Freq = noteToHz(m_currentNote);
-    m_osc1FreqMultiplier = (m_osc1Range == 0) ? 1./128. : exp2f(m_osc1Range - 2.);
+    m_osc1FreqMultiplier = (m_osc1Range == 1) ? 1./128. : exp2f(m_osc1Range - 3.);
 }
 
 
 void Minimoog::updateOsc2State() {
     m_osc2Freq = detunedNoteToHz(m_currentNote, m_osc2Detune);
-    m_osc2FreqMultiplier = (m_osc2Range == 0) ? 1./128. : exp2f(m_osc2Range - 2.);
+    m_osc2FreqMultiplier = (m_osc2Range == 1) ? 1./128. : exp2f(m_osc2Range - 3.);
 }
 
 

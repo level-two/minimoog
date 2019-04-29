@@ -48,7 +48,7 @@ class MinimoogAUKnobContainerView: UIView {
         title.text = text
     }
 
-    public func setKnobProperties(minValue: CGFloat, maxValue: CGFloat, stepSize: CGFloat, minAngle: CGFloat = -270, maxAngle: CGFloat = 270) {
+    public func setKnobProperties(minValue: CGFloat, maxValue: CGFloat, stepSize: CGFloat, minAngle: CGFloat = -150, maxAngle: CGFloat = 150) {
         knob.minValue = minValue
         knob.maxValue = maxValue
         knob.stepSize = stepSize

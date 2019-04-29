@@ -26,10 +26,8 @@ class UIKnob: UIControl {
     @IBInspectable public var maxValue: CGFloat = 1
     @IBInspectable public var stepSize: CGFloat = 0
     @IBInspectable public var initValue: CGFloat = 0.5
-    @IBInspectable public var minAngle: CGFloat = -270
-    @IBInspectable public var maxAngle: CGFloat =  270
-
-    public let onValue = PublishSubject<CGFloat>()
+    @IBInspectable public var minAngle: CGFloat = -150
+    @IBInspectable public var maxAngle: CGFloat = 150
 
     public var value: CGFloat {
         get {
@@ -74,7 +72,6 @@ class UIKnob: UIControl {
         curAngle      = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
         rotateKnob(from: prevAngle, to: curAngle, animated: animated)
 
-        onValue.onNext(newValue)
     }
 
     func commonInit() {
