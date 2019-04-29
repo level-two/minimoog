@@ -23,22 +23,40 @@ import RxCocoa
 
 public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
 
+    var audioUnit: MinimoogAU! {
+        didSet {
+            guard isViewLoaded else { return }
+            assembleViewInteractions()
+        }
+    }
+
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
         self.audioUnit = try MinimoogAU(componentDescription: componentDescription, options: [])
         return self.audioUnit!
+    }
+
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+
+        // View
+        assembleView()
+        setupLayout()
+        styleView()
+
+        // Presenter
+        setupKnobContainers()
+
+        // Interactions
+        guard audioUnit != nil else { return }
+        assembleViewInteractions()
     }
 
     let topStack = UIStackView()
     let osc1Stack = UIStackView()
     let osc2Stack = UIStackView()
     let mixStack = UIStackView()
-
     var knobContainerView = [ParameterId: MinimoogAUKnobContainerView]()
 
     let onKnob = PublishSubject<(ParameterId, AUValue)>()
-
-    var audioUnit: MinimoogAU?
-
     let disposeBag = DisposeBag()
-    var parameterObserverToken: AUParameterObserverToken?
 }

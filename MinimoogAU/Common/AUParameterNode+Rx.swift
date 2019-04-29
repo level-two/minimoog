@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-//    Copyright (C) 2018 Yauheni Lychkouski.
+//    Copyright (C) 2019 Yauheni Lychkouski.
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -16,19 +16,19 @@
 // -----------------------------------------------------------------------------
 
 import Foundation
+import CoreAudioKit
 import RxSwift
-import RxCocoa
 
-extension MinimoogAUViewController {
-    func assembleViewInteractions() {
-        audioUnit.parameterTree.rx.onParameter()
-            .observeOn(MainScheduler.instance)
-            .bind(onNext: setKnobValue)
-            .disposed(by: disposeBag)
+extension Reactive where Base: AUParameterNode {
+    public func onParameter() -> Observable<(AUParameterAddress, AUValue)> {
+        return Observable.create { observer in
+            let parameterObserverToken = self.base.token(byAddingParameterObserver: { address, value in
+                observer.on(.next((address, value)))
+            })
 
-//        self.knobContainerView.forEach { pair in
-//            let (paramId, knob) = pair
-//            knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
-//        }
+            return Disposables.create {
+                self.base.removeParameterObserver(parameterObserverToken)
+            }
+        }
     }
 }

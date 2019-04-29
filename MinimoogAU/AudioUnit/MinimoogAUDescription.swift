@@ -1,15 +1,24 @@
+// -----------------------------------------------------------------------------
+//    Copyright (C) 2019 Yauheni Lychkouski.
 //
-//  File.swift
-//  MinimoogAU
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
 //
-//  Created by Yauheni Lychkouski on 4/28/19.
-//  Copyright © 2019 Yauheni Lychkouski. All rights reserved.
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
 //
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
 
 import Foundation
 
-enum ParameterId: CaseIterable {
-    case osc1Range
+enum ParameterId: AUParameterAddress, CaseIterable {
+    case osc1Range = 0
     case osc1Waveform
     case osc2Range
     case osc2Detune
@@ -17,20 +26,11 @@ enum ParameterId: CaseIterable {
     case mixOsc1Volume
     case mixOsc2Volume
     case mixNoiseVolume
-    
+
     var address: AUParameterAddress {
-        switch self {
-        case .osc1Range: return 0
-        case .osc1Waveform: return 1
-        case .osc2Range: return 2
-        case .osc2Detune: return 3
-        case .osc2Waveform: return 4
-        case .mixOsc1Volume: return 5
-        case .mixOsc2Volume: return 6
-        case .mixNoiseVolume: return 7
-        }
+        return self.rawValue
     }
-        
+
     var identifier: String {
         switch self {
         case .osc1Range: return "osc1Range"
@@ -55,16 +55,12 @@ struct ParameterDescription {
     var initValue: Float
     var unit: AudioUnitParameterUnit
     var valueStrings: [String]?
-    
+
     var address: AUParameterAddress { return id.address }
     var identifier: String { return id.identifier }
 }
 
 struct AUDescription {
-    public static func parameter(_ id: ParameterId) -> ParameterDescription {
-        return AUDescription.parameters.first { $0.id == id }!
-    }
-    
     public static let parameters: [ParameterDescription] = [
         .init(id: .osc1Range, name: "Oscillator 1 Range", shortName: "Range", min: 1, max: 6, step: 1, initValue: 2, unit: .indexed, valueStrings: ["LO", "32'", "16'", "8'", "4'", "2'"]),
         .init(id: .osc1Waveform, name: "Oscillator 1 Waveform", shortName: "Waveform", min: 1, max: 6, step: 1, initValue: 1, unit: .indexed, valueStrings: ["Triangle", "Ramp", "Sawtooth", "Square", "Pulse1", "Pulse2"]),

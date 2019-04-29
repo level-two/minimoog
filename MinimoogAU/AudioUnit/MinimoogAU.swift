@@ -33,6 +33,7 @@ class MinimoogAU: AUAudioUnit {
         try super.init(componentDescription: componentDescription, options: options)
 
         initParameterTree()
+        setupParameterObservers()
 
         guard let defaultFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
             throw MinimoogAUError.invalidAudioFormat
@@ -48,28 +49,24 @@ class MinimoogAU: AUAudioUnit {
 
         currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
     }
-    
+
     func initParameterTree() {
-        var parameters = [AUParameter]()
-        
-        ParameterId.allCases.forEach { parameterId in
-            guard let description = AUDescription.parameter[parameterId] else { fatalError("No description for given parameterId") }
-            parameters.append(AUParameterTree.createParameter(with: description))
-        }
-        
+        let parameters = AUDescription.parameters.map(AUParameterTree.createParameter)
         parameterTree = AUParameterTree.createTree(withChildren: parameters)
-        
+    }
+
+    func setupParameterObservers() {
         parameterTree.implementorValueObserver = { [weak self] param, value in
             self?.minimoogInstrumentWrapper.setParameter(param.address, value: value)
         }
-        
+
         parameterTree.implementorValueProvider = { [weak self] param in
             return self?.minimoogInstrumentWrapper.getParameter(param.address) ?? AUValue(0)
         }
-        
+
         parameterTree.implementorStringFromValueCallback = { param, valuePtr in
             let value = (valuePtr == nil ? param.value : valuePtr!.pointee)
-            
+
             if param.unit == .indexed {
                 return param.valueStrings![Int(value)]
             } else {

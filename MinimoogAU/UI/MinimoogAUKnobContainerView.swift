@@ -26,31 +26,31 @@ class MinimoogAUKnobContainerView: UIView {
             title
         )
     }
-    
+
     public func setupLayout() {
         knob.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.height.equalTo(50)
         }
-        
+
         title.snp.makeConstraints { make in
             make.centerX.equalTo(self.knob)
             make.width.equalToSuperview()
             make.bottom.equalTo(self.knob.snp.top).inset(10)
         }
     }
-    
+
     public func styleView() {
         backgroundColor = .clear
 
         layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 4
     }
-    
+
     public func setTitle(_ text: String) {
         title.text = text
     }
-    
+
     public func setKnobProperties(minValue: CGFloat, maxValue: CGFloat, stepSize: CGFloat, minAngle: CGFloat = -270, maxAngle: CGFloat = 270) {
         knob.minValue = minValue
         knob.maxValue = maxValue
@@ -58,11 +58,11 @@ class MinimoogAUKnobContainerView: UIView {
         knob.minAngle = minAngle
         knob.maxAngle = maxAngle
     }
-    
+
     public func setKnobValue(_ value: CGFloat) {
         knob.value = value
     }
-    
+
     let knob = UIKnob()
     let title = UILabel()
 }
