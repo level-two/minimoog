@@ -18,7 +18,7 @@
 import Foundation
 
 extension MinimoogAUViewController {
-    func setKnobValue(_ address: AUParameterAddress, value: AUValue) {
+    func setKnobValue(_ address: AUParameterAddress, _ value: AUValue) {
         guard let id = ParameterId(rawValue: address) else { return }
         knobContainerView[id]!.setKnobValue(CGFloat(value))
     }

@@ -21,14 +21,22 @@ import RxCocoa
 
 extension MinimoogAUViewController {
     func assembleViewInteractions() {
-        audioUnit.parameterTree.rx.onParameter()
-            .observeOn(MainScheduler.instance)
-            .bind(onNext: setKnobValue)
-            .disposed(by: disposeBag)
+        parameterObserverToken = audioUnit?.parameterTree.token(byAddingParameterObserver: { [weak self] address, value in
+            DispatchQueue.main.async { self?.setKnobValue(address, value) }
+        })
 
-//        self.knobContainerView.forEach { pair in
-//            let (paramId, knob) = pair
-//            knob.onValue.map { (paramId, $0) }.bind(to: onKnob).disposed(by: disposeBag)
-//        }
+        self.knobContainerView.forEach { pair in
+            let (parameterId, container) = pair
+
+            container.knob
+                .rx.controlEvent(.valueChanged)
+                .bind { [weak self] in
+                    guard let self = self else { return }
+                    guard let parameter = self.audioUnit?.parameterTree.parameter(withAddress: parameterId.address) else { return }
+
+                    parameter.setValue(AUValue(container.knob.value), originator: self.parameterObserverToken)
+                }.disposed(by: disposeBag)
+        }
+
     }
 }

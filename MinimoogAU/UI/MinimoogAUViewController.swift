@@ -22,8 +22,7 @@ import RxSwift
 import RxCocoa
 
 public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
-
-    var audioUnit: MinimoogAU! {
+    var audioUnit: MinimoogAU? {
         didSet {
             guard isViewLoaded else { return }
             assembleViewInteractions()
@@ -51,6 +50,12 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
         assembleViewInteractions()
     }
 
+    deinit {
+        if let observerToken = parameterObserverToken {
+            audioUnit?.parameterTree.removeParameterObserver(observerToken)
+        }
+    }
+
     let topStack = UIStackView()
     let osc1Stack = UIStackView()
     let osc2Stack = UIStackView()
@@ -59,4 +64,5 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
 
     let onKnob = PublishSubject<(ParameterId, AUValue)>()
     let disposeBag = DisposeBag()
+    var parameterObserverToken: AUParameterObserverToken?
 }

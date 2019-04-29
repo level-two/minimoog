@@ -34,17 +34,14 @@ class MinimoogAUKnobContainerView: UIView {
         }
 
         title.snp.makeConstraints { make in
-            make.centerX.equalTo(self.knob)
-            make.width.equalToSuperview()
-            make.bottom.equalTo(self.knob.snp.top).inset(10)
+            make.centerX.width.equalToSuperview()
+            make.bottom.equalTo(self.knob.snp.top)
         }
     }
 
     public func styleView() {
         backgroundColor = .clear
-
-        layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = 4
+        title.textAlignment = .center
     }
 
     public func setTitle(_ text: String) {

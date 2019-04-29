@@ -68,25 +68,23 @@ extension MinimoogAUViewController {
         topStack.distribution = .fillEqually
 
         osc1Stack.axis = .vertical
-        osc1Stack.alignment = .center
-        osc1Stack.distribution = .equalSpacing
+        osc1Stack.alignment = .fill
+        osc1Stack.distribution = .fillEqually
 
         osc2Stack.axis = .vertical
-        osc2Stack.alignment = .center
-        osc2Stack.distribution = .equalSpacing
+        osc2Stack.alignment = .fill
+        osc2Stack.distribution = .fillEqually
 
         mixStack.axis = .vertical
-        mixStack.alignment = .center
-        mixStack.distribution = .equalSpacing
-
-        ParameterId.allCases.forEach {
-            knobContainerView[$0]!.knob.snp.makeConstraints { make in
-                make.center.size.equalToSuperview()
-            }
-        }
+        mixStack.alignment = .fill
+        mixStack.distribution = .fillEqually
     }
 
     func styleView() {
+        [topStack, osc1Stack, osc2Stack, mixStack].forEach {
+            $0.spacing = 10
+        }
+
         ParameterId.allCases.forEach {
             knobContainerView[$0]!.styleView()
         }
