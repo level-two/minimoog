@@ -43,7 +43,7 @@ class UIKnob: UIControl {
     }
 
     // MARK: Private variables
-    var knobPointerLayer: CALayer!
+    var knobPointerLayer: CALayer?
     var isViewLoaded: Bool = false
     var curValue: CGFloat = 0
     var curAngle: CGFloat = 0
@@ -113,7 +113,7 @@ class UIKnob: UIControl {
         CATransaction.setDisableActions(true)
         let curAngleRad = curAngleDeg*CGFloat.pi/180
         let newAngleRad = newAngleDeg*CGFloat.pi/180
-        knobPointerLayer.transform = CATransform3DMakeRotation(CGFloat(newAngleRad), 0, 0, 1)
+        knobPointerLayer?.transform = CATransform3DMakeRotation(CGFloat(newAngleRad), 0, 0, 1)
         if animated {
             let midAngleRad           = (newAngleRad + curAngleRad) / 2
             let animation             = CAKeyframeAnimation(keyPath: "transform.rotation.z")
@@ -121,7 +121,7 @@ class UIKnob: UIControl {
             animation.values          = [curAngleRad, midAngleRad, newAngleRad]
             animation.keyTimes        = [0.0, 0.5, 1.0]
             animation.timingFunctions = [CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)]
-            knobPointerLayer.add(animation, forKey: "transform.rotation.z")
+            knobPointerLayer?.add(animation, forKey: "transform.rotation.z")
         }
         CATransaction.commit()
     }
@@ -164,8 +164,8 @@ extension UIKnob {
         self.layer.addSublayer(knobLayer)
 
         self.knobPointerLayer = pointerLayer(size: size)
-        self.knobPointerLayer.frame = drawingFrame
-        self.layer.addSublayer(self.knobPointerLayer)
+        self.knobPointerLayer!.frame = drawingFrame
+        self.layer.addSublayer(self.knobPointerLayer!)
     }
 
     func shadowLayer(size: CGSize) -> CALayer {
