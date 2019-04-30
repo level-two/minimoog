@@ -6,5 +6,7 @@
 	<array>
 		<string>group.com.yauheni-lychkouski.minimoog</string>
 	</array>
+	<key>inter-app-audio</key>
+	<true/>
 </dict>
 </plist>
