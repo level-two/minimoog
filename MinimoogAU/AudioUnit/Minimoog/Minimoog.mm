@@ -16,7 +16,7 @@
 // -----------------------------------------------------------------------------
 
 #import "Minimoog.hpp"
-
+#import "GeneratorSine.hpp"
 
 static inline double noteToHz(int noteNumber)
 {
@@ -28,15 +28,16 @@ static inline double detunedNoteToHz(int noteNumber, float cents)
     return 440. * exp2((noteNumber + cents/1200. - 69.)/12.);
 }
 
-
 Minimoog::Minimoog() {
+    m_osc1Generator = new GeneratorSine();
+    m_osc2Generator = new GeneratorSine();
     srand48(time(0));
 }
 
 Minimoog::~Minimoog() {
-    
+    delete m_osc1Generator;
+    delete m_osc2Generator;
 }
-
 
 bool Minimoog::doAllocateRenderResources() {
     return true;
@@ -89,7 +90,6 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
     }
 }
 
-
 AUValue Minimoog::getParameter(AUParameterAddress address) {
     AUValue val = 0;
     switch (address) {
@@ -121,11 +121,9 @@ AUValue Minimoog::getParameter(AUParameterAddress address) {
     return val;
 }
 
-
 void Minimoog::startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) {
     setParameter(address, value);
 }
-
 
 void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 {
@@ -142,17 +140,19 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case 0x80 : { // note off
             uint8_t note = midiEvent.data[1];
             uint8_t vel  = midiEvent.data[2];
-            m_osc1Ampl  = 0;
-            m_osc2Ampl  = 0;
-            m_noiseAmpl = 0;
+            if (note == m_currentNote) {
+                m_osc1Generator->setAmplitude(0);
+                m_osc2Generator->setAmplitude(0);
+                m_noiseAmpl = 0;
+            }
             break;
         }
         case 0x90 : { // note on
             uint8_t note = midiEvent.data[1];
-            m_currentNote = note;
             uint8_t vel  = midiEvent.data[2];
-            m_osc1Ampl  = vel / 127.;
-            m_osc2Ampl  = vel / 127.;
+            m_currentNote = note;
+            m_osc1Generator->setAmplitude(vel / 127.);
+            m_osc2Generator->setAmplitude(vel / 127.);
             m_noiseAmpl = vel / 127.;
             updateOsc1State();
             updateOsc2State();
@@ -161,8 +161,8 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case 0xb0 : { // control change
             uint8_t cc_num = midiEvent.data[1];
             if (cc_num == 0x7b) { // all notes off
-                m_osc1Ampl  = 0;
-                m_osc2Ampl  = 0;
+                m_osc1Generator->setAmplitude(0);
+                m_osc2Generator->setAmplitude(0);
                 m_noiseAmpl = 0;
             }
             break;
@@ -170,39 +170,49 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
     }
 }
 
+void Minimoog::setSampleRate(float sr) {
+    m_osc1Generator->setSampleRate(sr);
+    m_osc2Generator->setSampleRate(sr);
+}
 
 void Minimoog::updateOsc1State() {
-    m_osc1Freq = noteToHz(m_currentNote);
-    m_osc1FreqMultiplier = (m_osc1Range == 1) ? 1./128. : exp2f(m_osc1Range - 3.);
+    float freqMultiplier = (m_osc1Range == 1) ? 1./128. : exp2f(m_osc1Range - 3.);
+    float noteFrequency = freqMultiplier * noteToHz(m_currentNote);
+    m_osc1Generator->setFrequency(noteFrequency);
 }
 
 
 void Minimoog::updateOsc2State() {
-    m_osc2Freq = detunedNoteToHz(m_currentNote, m_osc2Detune);
-    m_osc2FreqMultiplier = (m_osc2Range == 1) ? 1./128. : exp2f(m_osc2Range - 3.);
+    float freqMultiplier = (m_osc2Range == 1) ? 1./128. : exp2f(m_osc2Range - 3.);
+    float noteFrequency = freqMultiplier * detunedNoteToHz(m_currentNote, m_osc2Detune);
+    m_osc2Generator->setFrequency(noteFrequency);
 }
-
 
 void Minimoog::doRender(float *outL, float *outR) {
     // OSC1
-    m_osc1Phase += 2.*M_PI * m_osc1Freq * m_osc1FreqMultiplier / m_sampleRate;
-    if (m_osc1Phase > 2.*M_PI) m_osc1Phase -= 2.*M_PI;
-    float osc1Smp = m_osc1Ampl * sin(m_osc1Phase);
+    float osc1Smpl;
+    float osc1Smpr;
+    m_osc1Generator->render(&osc1Smpl, &osc1Smpr);
     
     // OSC2
-    m_osc2Phase += 2.*M_PI * m_osc2Freq * m_osc2FreqMultiplier / m_sampleRate;
-    if (m_osc2Phase > 2.*M_PI) m_osc2Phase -= 2.*M_PI;
-    float osc2Smp = m_osc2Ampl * sin(m_osc2Phase);
+    float osc2Smpl;
+    float osc2Smpr;
+    m_osc2Generator->render(&osc2Smpl, &osc2Smpr);
     
     // NOISE
-    float noiseSmp = (float)drand48() * 2. - 1.;
-    // MIX
+    float noiseSmp = m_noiseAmpl * ((float)drand48() * 2. - 1.);
     
-    float mixSmp =
-        osc1Smp  * m_mixOsc1AmplMultiplier +
-        osc2Smp  * m_mixOsc2AmplMultiplier +
+    // MIX
+    float mixSmpl =
+        osc1Smpl  * m_mixOsc1AmplMultiplier +
+        osc2Smpl  * m_mixOsc2AmplMultiplier +
         noiseSmp * m_mixNoiseAmplMultiplier;
     
-    *outL = mixSmp;
-    *outR = mixSmp;
+    float mixSmpr =
+        osc1Smpr  * m_mixOsc1AmplMultiplier +
+        osc2Smpr  * m_mixOsc2AmplMultiplier +
+        noiseSmp * m_mixNoiseAmplMultiplier;
+    
+    *outL = mixSmpl;
+    *outR = mixSmpr;
 }

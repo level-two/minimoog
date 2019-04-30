@@ -1,10 +1,19 @@
+// -----------------------------------------------------------------------------
+//    Copyright (C) 2018 Yauheni Lychkouski.
 //
-//  GeneratorSine.hpp
-//  MinimoogAU
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
 //
-//  Created by Yauheni Lychkouski on 4/29/19.
-//  Copyright © 2019 Yauheni Lychkouski. All rights reserved.
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
 //
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// -----------------------------------------------------------------------------
 
 #ifndef GeneratorSine_hpp
 #define GeneratorSine_hpp
@@ -12,14 +21,15 @@
 #include <stdio.h>
 #include "GeneratorBase.hpp"
 
-class GeneratorSine: GeneratorBase {
+class GeneratorSine: public GeneratorBase {
 public:
     GeneratorSine();
     virtual ~GeneratorSine();
     
-    virtual void onRender(float *outL, float *outR);
+    virtual void render(float *outL, float *outR);
     
 private:
+    float m_phase = 0;
 };
 
 #endif /* GeneratorSine_hpp */

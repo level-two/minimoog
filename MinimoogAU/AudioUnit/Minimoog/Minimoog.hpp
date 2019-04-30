@@ -20,6 +20,7 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 #import "MinimoogBase.hpp"
+#import "GeneratorBase.hpp"
 
 // Define parameter addresses.
 enum {
@@ -46,7 +47,8 @@ public:
     virtual bool    doAllocateRenderResources();
     virtual void    doDeallocateRenderResources();
     virtual void    doRender       (float *outL, float *outR);
-
+    virtual void    setSampleRate  (float sr);
+    
 private:
     void updateOsc1State();
     void updateOsc2State();
@@ -65,17 +67,10 @@ private:
     int m_currentNote;
     
     // OSC1
-    float m_osc1Ampl;
-    float m_osc1Freq;
-    float m_osc1FreqMultiplier;
-    float m_osc1Phase;
+    GeneratorBase *m_osc1Generator;
     
     // OSC2
-    float m_osc2Ampl;
-    float m_osc2Freq;
-    float m_osc2FreqMultiplier;
-    float m_osc2FreqDetune;
-    float m_osc2Phase;
+    GeneratorBase *m_osc2Generator;
     
     // NOISE
     float m_noiseAmpl;

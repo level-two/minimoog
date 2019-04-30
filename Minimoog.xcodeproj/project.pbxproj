@@ -203,17 +203,17 @@
 		9304378D21FB6459008D22E0 /* Minimoog */ = {
 			isa = PBXGroup;
 			children = (
-				9304378E21FB6459008D22E0 /* Minimoog.hpp */,
-				9304378F21FB6459008D22E0 /* MinimoogBase.hpp */,
-				9304379021FB6459008D22E0 /* MinimoogObjcWrapper.mm */,
 				9304379121FB6459008D22E0 /* MinimoogObjcWrapper.h */,
-				9304379221FB6459008D22E0 /* Minimoog.mm */,
+				9304379021FB6459008D22E0 /* MinimoogObjcWrapper.mm */,
+				9304378F21FB6459008D22E0 /* MinimoogBase.hpp */,
 				9304379321FB6459008D22E0 /* MinimoogBase.mm */,
-				9304379421FB6459008D22E0 /* MinimoogObjcWrapper-Bridging-Header.h */,
+				9304378E21FB6459008D22E0 /* Minimoog.hpp */,
+				9304379221FB6459008D22E0 /* Minimoog.mm */,
 				93D22E1E22774D8E005E4E41 /* GeneratorBase.hpp */,
 				9380715C2277511100CCC52E /* GeneratorBase.cpp */,
-				93D22E2022774F3C005E4E41 /* GeneratorSine.cpp */,
 				93D22E2122774F3C005E4E41 /* GeneratorSine.hpp */,
+				93D22E2022774F3C005E4E41 /* GeneratorSine.cpp */,
+				9304379421FB6459008D22E0 /* MinimoogObjcWrapper-Bridging-Header.h */,
 			);
 			path = Minimoog;
 			sourceTree = "<group>";

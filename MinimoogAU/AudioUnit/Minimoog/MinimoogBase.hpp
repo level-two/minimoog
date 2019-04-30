@@ -32,7 +32,6 @@ public:
     MinimoogBase();
     virtual ~MinimoogBase();
     
-    // Interface
     virtual void    setParameter   (AUParameterAddress address, AUValue value)                             = 0;
     virtual AUValue getParameter   (AUParameterAddress address)                                            = 0;
 	virtual void    startRamp      (AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
@@ -40,11 +39,10 @@ public:
     virtual void    doRender       (float *outL, float *outR)                                              = 0;
     virtual bool    doAllocateRenderResources()                                                            = 0;
     virtual void    doDeallocateRenderResources()                                                          = 0;
-	
-    // Public methods
+    virtual void    setSampleRate(float sr)                                                                = 0;
+    
     bool allocateRenderResources(const AudioBufferList* audioBufferList);
     void deallocateRenderResources();
-    void setSampleRate(float sr) { m_sampleRate = sr; };
     
     void render(AudioUnitRenderActionFlags* actionFlags          ,
                 const AudioTimeStamp*       timestamp            ,
@@ -54,15 +52,12 @@ public:
                 const AURenderEvent*        realtimeEventListHead,
                 AURenderPullInputBlock      pullInputBlock       );
     
-    // Private methods
 private:
     void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill);
     void renderSegmentFrames(AUAudioFrameCount frameCount, AudioBufferList*  outputData, AUAudioFrameCount const bufferOffset);
 	void performAllSimultaneousEvents(AUEventSampleTime now, AURenderEvent const* &event);
     
-    // Protected variables
 protected:
-    float m_sampleRate;
     const AudioBufferList *m_audioBufferList;
 };
 
