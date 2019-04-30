@@ -43,9 +43,6 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
         setupLayout()
         styleView()
 
-        // Presenter
-        setupKnobContainers()
-
         // Interactions
         guard audioUnit != nil else { return }
         setupInitialKnobValues()
