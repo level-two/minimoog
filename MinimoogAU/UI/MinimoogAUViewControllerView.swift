@@ -81,8 +81,11 @@ extension MinimoogAUViewController {
     }
 
     func styleView() {
+        self.view.backgroundColor = .black
+        
         [topStack, osc1Stack, osc2Stack, mixStack].forEach {
-            $0.spacing = 10
+            $0.spacing = 1
+            $0.backgroundColor = .white
         }
 
         ParameterId.allCases.forEach {

@@ -20,6 +20,17 @@ import RxSwift
 import RxCocoa
 
 extension MinimoogAUViewController {
+
+    func setupInitialKnobValues() {
+        AUDescription.parameters.forEach(setupKnobContainer)
+
+        ParameterId.allCases.forEach { parameterId in
+            guard let parameter = self.audioUnit?.parameterTree.parameter(withAddress: parameterId.address) else { return }
+
+            setKnobValue(parameterId.address, parameter.value)
+        }
+    }
+
     func assembleViewInteractions() {
         parameterObserverToken = audioUnit?.parameterTree.token(byAddingParameterObserver: { [weak self] address, value in
             DispatchQueue.main.async { self?.setKnobValue(address, value) }
@@ -28,8 +39,7 @@ extension MinimoogAUViewController {
         self.knobContainerView.forEach { pair in
             let (parameterId, container) = pair
 
-            container.knob
-                .rx.controlEvent(.valueChanged)
+            container.knob.rx.controlEvent(.valueChanged)
                 .bind { [weak self] in
                     guard let self = self else { return }
                     guard let parameter = self.audioUnit?.parameterTree.parameter(withAddress: parameterId.address) else { return }
@@ -37,6 +47,5 @@ extension MinimoogAUViewController {
                     parameter.setValue(AUValue(container.knob.value), originator: self.parameterObserverToken)
                 }.disposed(by: disposeBag)
         }
-
     }
 }

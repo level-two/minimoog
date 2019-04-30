@@ -25,6 +25,7 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
     var audioUnit: MinimoogAU? {
         didSet {
             guard isViewLoaded else { return }
+            setupInitialKnobValues()
             assembleViewInteractions()
         }
     }
@@ -47,6 +48,7 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
 
         // Interactions
         guard audioUnit != nil else { return }
+        setupInitialKnobValues()
         assembleViewInteractions()
     }
 

@@ -23,11 +23,7 @@ extension MinimoogAUViewController {
         knobContainerView[id]!.setKnobValue(CGFloat(value))
     }
 
-    func setupKnobContainers() {
-        AUDescription.parameters.forEach(setupKnobContainer)
-    }
-
-    fileprivate func setupKnobContainer(using description: ParameterDescription) {
+    func setupKnobContainer(using description: ParameterDescription) {
         guard let containerView = knobContainerView[description.id] else { return }
         containerView.setTitle(description.shortName)
         containerView.setKnobProperties(minValue: CGFloat(description.min), maxValue: CGFloat(description.max), stepSize: CGFloat(description.step))
