@@ -25,8 +25,10 @@ public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
     var audioUnit: MinimoogAU? {
         didSet {
             guard isViewLoaded else { return }
-            setupInitialKnobValues()
-            assembleViewInteractions()
+            DispatchQueue.main.async { [weak self] in
+                self?.setupInitialKnobValues()
+                self?.assembleViewInteractions()
+            }
         }
     }
 

@@ -28,20 +28,23 @@ class MinimoogAUKnobContainerView: UIView {
     }
 
     public func setupLayout() {
-        knob.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.height.equalTo(50)
-        }
-
         title.snp.makeConstraints { make in
             make.centerX.width.equalToSuperview()
-            make.bottom.equalTo(self.knob.snp.top)
+            make.top.equalTo(self.snp.top)
+        }
+
+        knob.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview()
+            make.top.equalTo(title.snp.bottom)
+            make.bottom.equalTo(self.snp.bottom)
         }
     }
 
     public func styleView() {
         backgroundColor = .clear
         title.textAlignment = .center
+        //knob.backgroundColor = .init(red: CGFloat.random(in: 0...1), green: CGFloat.random(in: 0...1), blue: CGFloat.random(in: 0...1), alpha: 0.5)
     }
 
     public func setTitle(_ text: String) {

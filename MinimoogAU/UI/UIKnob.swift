@@ -40,9 +40,16 @@ class UIKnob: UIControl {
         }
     }
 
+    override public var bounds: CGRect {
+        didSet {
+            self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            makeKnob(frame: self.bounds)
+            setValue(self.value)
+        }
+    }
+
     // MARK: Private variables
     var knobPointerLayer: CALayer?
-    var isViewLoaded: Bool = false
     var curValue: CGFloat = 0
     var curAngle: CGFloat = 0
     var isValueLockedByUI: Bool = false
@@ -71,33 +78,14 @@ class UIKnob: UIControl {
         curValue      = min(maxValue, max(minValue, newValue))
         curAngle      = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
         rotateKnob(from: prevAngle, to: curAngle, animated: animated)
-
     }
 
     func commonInit() {
+        setValue(initValue)
+
         panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
         self.addGestureRecognizer(panGestureRecognizer)
         self.isUserInteractionEnabled = true
-    }
-
-    override public func layoutSubviews() {
-        super.layoutSubviews()
-
-        #if !TARGET_INTERFACE_BUILDER
-        if self.knobPointerLayer == nil {
-            makeKnob(frame: self.bounds)
-        }
-        #else
-        self.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-        makeKnob(frame: self.bounds)
-        #endif
-
-        if isViewLoaded == false {
-            isViewLoaded = true
-            curValue     = initValue
-            curAngle     = minAngle + (value-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
-            rotateKnob(from: 0, to: curAngle, animated: false)
-        }
     }
 
     func getSnappedValue() -> CGFloat {
