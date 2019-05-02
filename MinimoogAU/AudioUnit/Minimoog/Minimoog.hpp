@@ -67,10 +67,12 @@ private:
     int m_currentNote;
     
     // OSC1
-    GeneratorBase *m_osc1Generator;
+    int m_osc1SelectedGenerator = 0;
+    GeneratorBase* m_osc1Generator[6];
     
     // OSC2
-    GeneratorBase *m_osc2Generator;
+    int m_osc2SelectedGenerator = 0;
+    GeneratorBase* m_osc2Generator[6];
     
     // NOISE
     float m_noiseAmpl;

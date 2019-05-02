@@ -17,6 +17,8 @@
 
 #import "Minimoog.hpp"
 #import "GeneratorSine.hpp"
+#import "GeneratorSquare.hpp"
+#import "GeneratorSaw.hpp"
 
 static inline double noteToHz(int noteNumber)
 {
@@ -29,14 +31,26 @@ static inline double detunedNoteToHz(int noteNumber, float cents)
 }
 
 Minimoog::Minimoog() {
-    m_osc1Generator = new GeneratorSine();
-    m_osc2Generator = new GeneratorSine();
+    m_osc1Generator[0] = new GeneratorSaw(0.5);
+    m_osc2Generator[0] = new GeneratorSaw(0.5);
+    m_osc1Generator[1] = new GeneratorSine();
+    m_osc2Generator[1] = new GeneratorSine();
+    m_osc1Generator[2] = new GeneratorSaw(1.0);
+    m_osc2Generator[2] = new GeneratorSaw(1.0);
+    m_osc1Generator[3] = new GeneratorSquare(0.5);
+    m_osc2Generator[3] = new GeneratorSquare(0.5);
+    m_osc1Generator[4] = new GeneratorSquare(0.25);
+    m_osc2Generator[4] = new GeneratorSquare(0.25);
+    m_osc1Generator[5] = new GeneratorSquare(0.125);
+    m_osc2Generator[5] = new GeneratorSquare(0.125);
     srand48(time(0));
 }
 
 Minimoog::~Minimoog() {
-    delete m_osc1Generator;
-    delete m_osc2Generator;
+    for (int i = 0; i < 5; i++) {
+        delete m_osc1Generator[i];
+        delete m_osc2Generator[i];
+    }
 }
 
 bool Minimoog::doAllocateRenderResources() {
@@ -57,6 +71,7 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
         case osc1Waveform:
             assert(value >= 1 && value <= 6);
             m_osc1Waveform = value;
+            m_osc1SelectedGenerator = (int) value - 1;
             break;
         case osc2Range:
             assert(value >= 1 && value <= 6);
@@ -71,6 +86,7 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
         case osc2Waveform:
             assert(value >= 1 && value <= 6);
             m_osc2Waveform = value;
+            m_osc2SelectedGenerator = (int) value - 1;
             break;
         case mixOsc1Volume:
             assert(value >= 0 && value <= 10);
@@ -141,8 +157,10 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             uint8_t note = midiEvent.data[1];
             uint8_t vel  = midiEvent.data[2];
             if (note == m_currentNote) {
-                m_osc1Generator->setAmplitude(0);
-                m_osc2Generator->setAmplitude(0);
+                for (int i = 0; i < 5; i++) {
+                    m_osc1Generator[i]->setAmplitude(0);
+                    m_osc2Generator[i]->setAmplitude(0);
+                }
                 m_noiseAmpl = 0;
             }
             break;
@@ -151,8 +169,10 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             uint8_t note = midiEvent.data[1];
             uint8_t vel  = midiEvent.data[2];
             m_currentNote = note;
-            m_osc1Generator->setAmplitude(vel / 127.);
-            m_osc2Generator->setAmplitude(vel / 127.);
+            for (int i = 0; i < 5; i++) {
+                m_osc1Generator[i]->setAmplitude(vel / 127.);
+                m_osc2Generator[i]->setAmplitude(vel / 127.);
+            }
             m_noiseAmpl = vel / 127.;
             updateOsc1State();
             updateOsc2State();
@@ -161,8 +181,10 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case 0xb0 : { // control change
             uint8_t cc_num = midiEvent.data[1];
             if (cc_num == 0x7b) { // all notes off
-                m_osc1Generator->setAmplitude(0);
-                m_osc2Generator->setAmplitude(0);
+                for (int i = 0; i < 5; i++) {
+                    m_osc1Generator[i]->setAmplitude(0);
+                    m_osc2Generator[i]->setAmplitude(0);
+                }
                 m_noiseAmpl = 0;
             }
             break;
@@ -171,33 +193,37 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 }
 
 void Minimoog::setSampleRate(float sr) {
-    m_osc1Generator->setSampleRate(sr);
-    m_osc2Generator->setSampleRate(sr);
+    m_osc1Generator[m_osc1SelectedGenerator]->setSampleRate(sr);
+    m_osc2Generator[m_osc1SelectedGenerator]->setSampleRate(sr);
 }
 
 void Minimoog::updateOsc1State() {
     float freqMultiplier = (m_osc1Range == 1) ? 1./128. : exp2f(m_osc1Range - 3.);
     float noteFrequency = freqMultiplier * noteToHz(m_currentNote);
-    m_osc1Generator->setFrequency(noteFrequency);
+    for (int i = 0; i < 5; i++) {
+        m_osc1Generator[i]->setFrequency(noteFrequency);
+    }
 }
 
 
 void Minimoog::updateOsc2State() {
     float freqMultiplier = (m_osc2Range == 1) ? 1./128. : exp2f(m_osc2Range - 3.);
     float noteFrequency = freqMultiplier * detunedNoteToHz(m_currentNote, m_osc2Detune);
-    m_osc2Generator->setFrequency(noteFrequency);
+    for (int i = 0; i < 5; i++) {
+        m_osc2Generator[i]->setFrequency(noteFrequency);
+    }
 }
 
 void Minimoog::doRender(float *outL, float *outR) {
     // OSC1
     float osc1Smpl;
     float osc1Smpr;
-    m_osc1Generator->render(&osc1Smpl, &osc1Smpr);
+    m_osc1Generator[m_osc1SelectedGenerator]->render(&osc1Smpl, &osc1Smpr);
     
     // OSC2
     float osc2Smpl;
     float osc2Smpr;
-    m_osc2Generator->render(&osc2Smpl, &osc2Smpr);
+    m_osc2Generator[m_osc1SelectedGenerator]->render(&osc2Smpl, &osc2Smpr);
     
     // NOISE
     float noiseSmp = m_noiseAmpl * ((float)drand48() * 2. - 1.);

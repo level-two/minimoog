@@ -15,24 +15,24 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-#include "GeneratorSine.hpp"
-#include <math.h>
+#ifndef GeneratorSaw_hpp
+#define GeneratorSaw_hpp
 
-GeneratorSine::GeneratorSine() {
-    
-}
+#include <stdio.h>
+#include "GeneratorBase.hpp"
 
-GeneratorSine::~GeneratorSine() {
+class GeneratorSaw: public GeneratorBase {
+public:
+    GeneratorSaw();
+    GeneratorSaw(float raiseTime);
+    virtual ~GeneratorSaw();
     
-}
+    virtual void render(float *outL, float *outR);
+    void setRaiseTime(float raiseTime) { m_raiseTime = raiseTime;}
+    
+private:
+    float m_relTime = 0;
+    float m_raiseTime = 0;
+};
 
-void GeneratorSine::render(float *outL, float *outR) {
-    m_phase += 2. * M_PI * m_frequency / m_sampleRate;
-    
-    if (m_phase > 2. * M_PI) m_phase -= 2. * M_PI;
-    
-    float sample = m_amplitude * sin(m_phase);
-    
-    *outL = sample;
-    *outR = sample;
-}
+#endif /* GeneratorSaw_hpp */

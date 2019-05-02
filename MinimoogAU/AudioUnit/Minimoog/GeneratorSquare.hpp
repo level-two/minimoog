@@ -15,24 +15,24 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-#include "GeneratorSine.hpp"
-#include <math.h>
+#ifndef GeneratorSquare_hpp
+#define GeneratorSquare_hpp
 
-GeneratorSine::GeneratorSine() {
-    
-}
+#include <stdio.h>
+#include "GeneratorBase.hpp"
 
-GeneratorSine::~GeneratorSine() {
+class GeneratorSquare: public GeneratorBase {
+public:
+    GeneratorSquare();
+    GeneratorSquare(float dutyCycle);
+    virtual ~GeneratorSquare();
     
-}
+    virtual void render(float *outL, float *outR);
+    void setDutyCycle(float dutyCycle) { m_dutyCycle = dutyCycle; }
+    
+private:
+    float m_dutyCycle = 0.5;
+    float m_relTime = 0;
+};
 
-void GeneratorSine::render(float *outL, float *outR) {
-    m_phase += 2. * M_PI * m_frequency / m_sampleRate;
-    
-    if (m_phase > 2. * M_PI) m_phase -= 2. * M_PI;
-    
-    float sample = m_amplitude * sin(m_phase);
-    
-    *outL = sample;
-    *outR = sample;
-}
+#endif /* GeneratorSquare_hpp */
