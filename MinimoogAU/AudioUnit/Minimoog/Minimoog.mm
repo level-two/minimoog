@@ -47,7 +47,7 @@ Minimoog::Minimoog() {
 }
 
 Minimoog::~Minimoog() {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         delete m_osc1Generator[i];
         delete m_osc2Generator[i];
     }
@@ -157,7 +157,7 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             uint8_t note = midiEvent.data[1];
             uint8_t vel  = midiEvent.data[2];
             if (note == m_currentNote) {
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 6; i++) {
                     m_osc1Generator[i]->setAmplitude(0);
                     m_osc2Generator[i]->setAmplitude(0);
                 }
@@ -169,7 +169,7 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             uint8_t note = midiEvent.data[1];
             uint8_t vel  = midiEvent.data[2];
             m_currentNote = note;
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 6; i++) {
                 m_osc1Generator[i]->setAmplitude(vel / 127.);
                 m_osc2Generator[i]->setAmplitude(vel / 127.);
             }
@@ -181,7 +181,7 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
         case 0xb0 : { // control change
             uint8_t cc_num = midiEvent.data[1];
             if (cc_num == 0x7b) { // all notes off
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 6; i++) {
                     m_osc1Generator[i]->setAmplitude(0);
                     m_osc2Generator[i]->setAmplitude(0);
                 }
@@ -193,14 +193,16 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
 }
 
 void Minimoog::setSampleRate(float sr) {
-    m_osc1Generator[m_osc1SelectedGenerator]->setSampleRate(sr);
-    m_osc2Generator[m_osc1SelectedGenerator]->setSampleRate(sr);
+    for (int i = 0; i < 6; i++) {
+        m_osc1Generator[i]->setSampleRate(sr);
+        m_osc2Generator[i]->setSampleRate(sr);
+    }
 }
 
 void Minimoog::updateOsc1State() {
     float freqMultiplier = (m_osc1Range == 1) ? 1./128. : exp2f(m_osc1Range - 3.);
     float noteFrequency = freqMultiplier * noteToHz(m_currentNote);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         m_osc1Generator[i]->setFrequency(noteFrequency);
     }
 }
@@ -209,7 +211,7 @@ void Minimoog::updateOsc1State() {
 void Minimoog::updateOsc2State() {
     float freqMultiplier = (m_osc2Range == 1) ? 1./128. : exp2f(m_osc2Range - 3.);
     float noteFrequency = freqMultiplier * detunedNoteToHz(m_currentNote, m_osc2Detune);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         m_osc2Generator[i]->setFrequency(noteFrequency);
     }
 }
