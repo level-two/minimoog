@@ -225,7 +225,7 @@ void Minimoog::doRender(float *outL, float *outR) {
     // OSC2
     float osc2Smpl;
     float osc2Smpr;
-    m_osc2Generator[m_osc1SelectedGenerator]->render(&osc2Smpl, &osc2Smpr);
+    m_osc2Generator[m_osc2SelectedGenerator]->render(&osc2Smpl, &osc2Smpr);
     
     // NOISE
     float noiseSmp = m_noiseAmpl * ((float)drand48() * 2. - 1.);
