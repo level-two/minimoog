@@ -393,7 +393,7 @@ public class SimplePlayEngine: NSObject {
 
 		// Insert the audio unit, if any.
 		if let componentDescription = componentDescription {
-			AVAudioUnit.instantiate(with: componentDescription, options: []) { avAudioUnit, _ in
+			AVAudioUnit.instantiate(with: componentDescription) { avAudioUnit, _ in
                 guard let avAudioUnit = avAudioUnit else { return }
 
                 self.testUnitNode = avAudioUnit

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cfr-SU-Pek">
+    <device id="retina5_5" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--MinimoogAU View Controller-->
+        <scene sceneID="tcK-ag-iQP">
+            <objects>
+                <viewController id="cfr-SU-Pek" customClass="MinimoogAUViewController" customModule="MinimoogAU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DdI-hw-Gej"/>
+                        <viewControllerLayoutGuide type="bottom" id="0uY-GP-MOi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RGp-Ed-HBy">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8SN-Oc-GpF">
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aby-3p-JsU">
+                                        <rect key="frame" x="0.0" y="0.0" width="147.33333333333334" height="414"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fx-7H-CIj" customClass="UIKnob" customModule="UIControls">
+                                                <rect key="frame" x="0.0" y="0.0" width="147.33333333333334" height="138"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterId">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="OSC1"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJL-gb-qAc" customClass="UIKnob" customModule="UIControls">
+                                                <rect key="frame" x="0.0" y="138" width="147.33333333333334" height="138"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterId">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Shape"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzf-63-PAH" customClass="UIKnob" customModule="UIControls">
+                                                <rect key="frame" x="0.0" y="276" width="147.33333333333334" height="138"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterId">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Vol"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vdI-9c-1yF">
+                                        <rect key="frame" x="147.33333333333334" y="0.0" width="147.00000000000003" height="414"/>
+                                        <color key="backgroundColor" red="0.0" green="0.98791292829999999" blue="1" alpha="0.28138754399999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ctA-Is-xvb">
+                                        <rect key="frame" x="294.33333333333331" y="0.0" width="147.33333333333331" height="414"/>
+                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Eut-K3-rUg">
+                                        <rect key="frame" x="441.66666666666674" y="0.0" width="147" height="414"/>
+                                        <color key="backgroundColor" red="0.0" green="0.98791292829999999" blue="1" alpha="0.28138754399999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tX3-hA-CIH">
+                                        <rect key="frame" x="588.66666666666663" y="0.0" width="147.33333333333337" height="414"/>
+                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="centerX" secondItem="RGp-Ed-HBy" secondAttribute="centerX" id="3Hg-dS-HuK"/>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="width" secondItem="RGp-Ed-HBy" secondAttribute="width" id="Xni-4m-Fiq"/>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="centerY" secondItem="RGp-Ed-HBy" secondAttribute="centerY" id="nYV-4b-APO"/>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="height" secondItem="RGp-Ed-HBy" secondAttribute="height" id="nzD-Os-gLj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outletCollection property="knobs" destination="0fx-7H-CIj" collectionClass="NSMutableArray" id="eSl-Bi-1MD"/>
+                        <outletCollection property="knobs" destination="FJL-gb-qAc" collectionClass="NSMutableArray" id="RfP-eT-26U"/>
+                        <outletCollection property="knobs" destination="Zzf-63-PAH" collectionClass="NSMutableArray" id="1Ol-D2-gmG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtA-rm-1GK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="62" y="727"/>
+        </scene>
+    </scenes>
+</document>

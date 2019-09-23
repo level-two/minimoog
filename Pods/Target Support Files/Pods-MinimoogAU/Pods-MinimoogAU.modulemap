@@ -1,6 +1,0 @@
-framework module Pods_MinimoogAU {
-  umbrella header "Pods-MinimoogAU-umbrella.h"
-
-  export *
-  module * { export * }
-}

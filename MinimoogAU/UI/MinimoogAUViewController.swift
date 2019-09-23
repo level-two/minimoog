@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-//    Copyright (C) 2018 Yauheni Lychkouski.
+//    Copyright (C) 2019 Yauheni Lychkouski.
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -16,54 +16,87 @@
 // -----------------------------------------------------------------------------
 
 import Foundation
-import CoreAudioKit
 import UIKit
-import RxSwift
-import RxCocoa
+import CoreAudioKit
+import UIControls
 
-public class MinimoogAUViewController: AUViewController, AUAudioUnitFactory {
-    var audioUnit: MinimoogAU? {
-        didSet {
-            guard isViewLoaded else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.setupInitialKnobValues()
-                self?.assembleViewInteractions()
-            }
-        }
+public class MinimoogAUViewController: AUViewController {
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        setupKnobs()
+        setKnobsTarget()
     }
 
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setParameterObserver()
+    }
+
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeParameterObserver()
+    }
+
+    @IBOutlet var knobs = [UIKnob]()
+
+    fileprivate var audioUnit: MinimoogAU?
+    fileprivate var parameterObserverToken: AUParameterObserverToken?
+}
+
+extension MinimoogAUViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
         self.audioUnit = try MinimoogAU(componentDescription: componentDescription, options: [])
         return self.audioUnit!
     }
+}
 
-    override public func viewDidLoad() {
-        super.viewDidLoad()
+extension MinimoogAUViewController {
+    func setupKnobs() {
+        knobs.forEach { knob in
+            guard let desc = AUDescription.parameters.first(where: { $0.id.rawValue == knob.parameterId }) else { return }
+            knob.title = desc.shortName
+            knob.minValue = CGFloat(desc.min)
+            knob.maxValue = CGFloat(desc.max)
+            knob.step = CGFloat(desc.step)
+            knob.value = CGFloat(desc.initValue)
+        }
 
-        // View
-        assembleView()
-        setupLayout()
-        styleView()
-
-        // Interactions
-        guard audioUnit != nil else { return }
-        setupInitialKnobValues()
-        assembleViewInteractions()
-    }
-
-    deinit {
-        if let observerToken = parameterObserverToken {
-            audioUnit?.parameterTree.removeParameterObserver(observerToken)
+        ParameterId.allCases.forEach { parameterId in
+            guard let parameter = self.audioUnit?.parameterTree.parameter(withAddress: parameterId.address) else { return }
+            setKnobValue(parameterId.address, parameter.value)
         }
     }
 
-    let topStack = UIStackView()
-    let osc1Stack = UIStackView()
-    let osc2Stack = UIStackView()
-    let mixStack = UIStackView()
-    var knobContainerView = [ParameterId: MinimoogAUKnobContainerView]()
+    func setKnobsTarget() {
+        self.knobs.forEach { knob in
+            knob.addTarget(self, action: #selector(MinimoogAUViewController.onKnobValueChanged), for: .valueChanged)
+        }
+    }
 
-    let onKnob = PublishSubject<(ParameterId, AUValue)>()
-    let disposeBag = DisposeBag()
-    var parameterObserverToken: AUParameterObserverToken?
+    func setKnobValue(_ address: AUParameterAddress, _ value: AUValue) {
+        knobs.first { $0.parameterId == address }?.value = CGFloat(value)
+    }
+
+    @objc func onKnobValueChanged(knob: UIKnob) {
+        audioUnit?
+            .parameterTree
+            .parameter(withAddress: AUParameterAddress(knob.parameterId))?
+            .setValue(AUValue(knob.value), originator: self.parameterObserverToken)
+    }
+}
+
+extension MinimoogAUViewController {
+    func setParameterObserver() {
+        parameterObserverToken = audioUnit?.parameterTree.token() { [weak self] address, value in
+            DispatchQueue.main.async { [weak self] in
+                self?.setKnobValue(address, value)
+            }
+        }
+    }
+
+    func removeParameterObserver() {
+        guard let token = parameterObserverToken else { return }
+        audioUnit?.parameterTree.removeParameterObserver(token)
+        parameterObserverToken = nil
+    }
 }
