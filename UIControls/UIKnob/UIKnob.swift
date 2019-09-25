@@ -81,16 +81,23 @@ public final class UIKnob: UIControl, NibLoadable {
 
     fileprivate var curValue: CGFloat = 0
     fileprivate var curAngle: CGFloat = 0
+    fileprivate var lastTouchOffset: CGFloat = 0
     fileprivate var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
 }
 
 extension UIKnob {
     @objc public func handlePan(recognizer: UIPanGestureRecognizer) {
-        guard recognizer.state == .changed else { return }
+        guard recognizer.state == .changed else {
+            lastTouchOffset = 0
+            return
+        }
 
-        let delta = -CGFloat(recognizer.translation(in: self).y)
+        let touchOffset = -CGFloat(recognizer.translation(in: self).y)
+        let delta = touchOffset - lastTouchOffset
+        lastTouchOffset = touchOffset
+
         let newValue = curValue + (maxValue-minValue)*delta/128 // 128 is number or the total parameter steps
-        setValue(newValue)
+        setValue(newValue.clamped(in: minValue...maxValue))
 
         sendActions(for: .valueChanged)
     }
@@ -98,13 +105,14 @@ extension UIKnob {
 
 extension UIKnob {
     func setValue(_ newValue: CGFloat, animated: Bool = false) {
-        curValue = newValue.clamped(in: minValue...maxValue)
+        curValue = newValue
 
         let prevAngle = curAngle
         curAngle = minAngle + (curValue-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
 
         UIView.animate(withDuration: animated ? 1 : 0) {
-            self.transform = self.transform.rotated(by: self.curAngle - prevAngle)
+            guard let pointer = self.pointer else { return }
+            pointer.transform = pointer.transform.rotated(by: self.curAngle - prevAngle)
         }
     }
 }
