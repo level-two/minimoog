@@ -18,11 +18,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface MinimoogObjcWrapper : NSObject {
+@interface MinimoogInstrument : NSObject {
 }
 
-- (id)init;
-- (id)initWithAudioFormat:(AVAudioFormat*)audioFormat maxChannels:(AVAudioChannelCount) maxChannels;
+- (id)initWithAudioFormat:(AVAudioFormat*)audioFormat;
 - (BOOL)allocateRenderResourcesWithMusicalContext:(AUHostMusicalContextBlock) musicalContext
                                  outputEventBlock:(AUMIDIOutputEventBlock)    outputEventBlock
                               transportStateBlock:(AUHostTransportStateBlock) transportStateBlock
@@ -30,7 +29,6 @@
 - (void)deallocateRenderResources;
 - (void)setParameter:(AUParameterAddress) address value:(AUValue) value;
 - (AUValue)getParameter:(AUParameterAddress) address;
-- (void)setSampleRate:(double)sampleRate;
 - (AUInternalRenderBlock)internalRenderBlock;
 
 @end

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>address</key>
+		<integer>0</integer>
+		<key>identifier</key>
+		<string>osc1Range</string>
+		<key>name</key>
+		<string>Oscillator 1 Range</string>
+		<key>shortName</key>
+		<string>Range</string>
+		<key>minValue</key>
+		<integer>1</integer>
+		<key>maxValue</key>
+		<integer>6</integer>
+		<key>step</key>
+		<integer>1</integer>
+		<key>unit</key>
+		<integer>21</integer>
+		<key>valueStrings</key>
+		<array>
+			<string>Lo</string>
+			<string>32&apos;</string>
+			<string>16&apos;</string>
+			<string>8&apos;</string>
+			<string>4&apos;</string>
+			<string>2&apos;</string>
+		</array>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>1</integer>
+		<key>identifier</key>
+		<string>osc1Wave</string>
+		<key>name</key>
+		<string>Oscillator 1 Waveform</string>
+		<key>shortName</key>
+		<string>Waveform</string>
+		<key>minValue</key>
+		<integer>1</integer>
+		<key>maxValue</key>
+		<integer>6</integer>
+		<key>step</key>
+		<integer>1</integer>
+		<key>valueStrings</key>
+		<array>
+			<string>Triangle</string>
+			<string>Less triangle *</string>
+			<string>Saw</string>
+			<string>Square</string>
+			<string>Pulse 25%</string>
+			<string>Pulse 12.5%</string>
+		</array>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>2</integer>
+		<key>identifier</key>
+		<string>osc2Range</string>
+		<key>name</key>
+		<string>Oscillator 2 Range</string>
+		<key>shortName</key>
+		<string>Range</string>
+		<key>minValue</key>
+		<integer>1</integer>
+		<key>maxValue</key>
+		<integer>6</integer>
+		<key>step</key>
+		<integer>1</integer>
+		<key>unit</key>
+		<integer>21</integer>
+		<key>valueStrings</key>
+		<array>
+			<string>Lo</string>
+			<string>32&apos;</string>
+			<string>16&apos;</string>
+			<string>8&apos;</string>
+			<string>4&apos;</string>
+			<string>2&apos;</string>
+		</array>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>3</integer>
+		<key>identifier</key>
+		<string>osc2Detune</string>
+		<key>name</key>
+		<string>Oscillator 2 Detune</string>
+		<key>shortName</key>
+		<string>Detune</string>
+		<key>minValue</key>
+		<integer>-8</integer>
+		<key>maxValue</key>
+		<integer>8</integer>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>4</integer>
+		<key>identifier</key>
+		<string>osc2Wave</string>
+		<key>name</key>
+		<string>Oscillator 2 Waveform</string>
+		<key>shortName</key>
+		<string>Waveform</string>
+		<key>minValue</key>
+		<integer>1</integer>
+		<key>maxValue</key>
+		<integer>6</integer>
+		<key>step</key>
+		<integer>1</integer>
+		<key>valueStrings</key>
+		<array>
+			<string>Triangle</string>
+			<string>Less triangle *</string>
+			<string>Saw</string>
+			<string>Square</string>
+			<string>Pulse 25%</string>
+			<string>Pulse 12.5%</string>
+		</array>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>5</integer>
+		<key>identifier</key>
+		<string>osc3Range</string>
+		<key>name</key>
+		<string>Oscillator 3 Range</string>
+		<key>shortName</key>
+		<string>Range</string>
+		<key>minValue</key>
+		<integer>1</integer>
+		<key>maxValue</key>
+		<integer>6</integer>
+		<key>step</key>
+		<integer>1</integer>
+		<key>unit</key>
+		<integer>21</integer>
+		<key>valueStrings</key>
+		<array>
+			<string>Lo</string>
+			<string>32&apos;</string>
+			<string>16&apos;</string>
+			<string>8&apos;</string>
+			<string>4&apos;</string>
+			<string>2&apos;</string>
+		</array>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>6</integer>
+		<key>identifier</key>
+		<string>osc3Detune</string>
+		<key>name</key>
+		<string>Oscillator 3 Detune</string>
+		<key>shortName</key>
+		<string>Detune</string>
+		<key>minValue</key>
+		<integer>-8</integer>
+		<key>maxValue</key>
+		<integer>8</integer>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>7</integer>
+		<key>identifier</key>
+		<string>osc3Wave</string>
+		<key>name</key>
+		<string>Oscillator 3 Waveform</string>
+		<key>shortName</key>
+		<string>Waveform</string>
+		<key>minValue</key>
+		<integer>1</integer>
+		<key>maxValue</key>
+		<integer>6</integer>
+		<key>step</key>
+		<integer>1</integer>
+		<key>valueStrings</key>
+		<array>
+			<string>Triangle</string>
+			<string>Less triangle *</string>
+			<string>Saw</string>
+			<string>Square</string>
+			<string>Pulse 25%</string>
+			<string>Pulse 12.5%</string>
+		</array>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>8</integer>
+		<key>identifier</key>
+		<string>osc1Volume</string>
+		<key>name</key>
+		<string>Oscillator 1 Volume</string>
+		<key>shortName</key>
+		<string>Volume</string>
+		<key>minValue</key>
+		<integer>0</integer>
+		<key>maxValue</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>9</integer>
+		<key>identifier</key>
+		<string>osc2Volume</string>
+		<key>name</key>
+		<string>Oscillator 2 Volume</string>
+		<key>shortName</key>
+		<string>Volume</string>
+		<key>minValue</key>
+		<integer>0</integer>
+		<key>maxValue</key>
+		<integer>10</integer>
+	</dict>
+	<dict>
+		<key>address</key>
+		<integer>10</integer>
+		<key>identifier</key>
+		<string>osc3Volume</string>
+		<key>name</key>
+		<string>Oscillator 3 Volume</string>
+		<key>shortName</key>
+		<string>Volume</string>
+		<key>minValue</key>
+		<integer>0</integer>
+		<key>maxValue</key>
+		<integer>10</integer>
+	</dict>
+</array>
+</plist>

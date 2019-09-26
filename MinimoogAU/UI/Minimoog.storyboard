@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MinimoogAU View Controller-->
+        <!--Minimoog View Controller-->
         <scene sceneID="tcK-ag-iQP">
             <objects>
-                <viewController id="cfr-SU-Pek" customClass="MinimoogAUViewController" customModule="MinimoogAU" sceneMemberID="viewController">
+                <viewController id="cfr-SU-Pek" customClass="MinimoogViewController" customModule="MinimoogAU" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DdI-hw-Gej"/>
                         <viewControllerLayoutGuide type="bottom" id="0uY-GP-MOi"/>
@@ -32,9 +32,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="140.66666666666666" height="132.66666666666666"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterId">
-                                                        <integer key="value" value="0"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="OSC1"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                         <real key="value" value="0.0"/>
@@ -45,15 +42,15 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="step">
                                                         <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJL-gb-qAc" customClass="UIKnob" customModule="UIControls">
                                                 <rect key="frame" x="0.0" y="140.66666666666669" width="140.66666666666666" height="132.66666666666669"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterId">
-                                                        <integer key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Shape"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                         <real key="value" value="0.0"/>
@@ -64,15 +61,15 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="step">
                                                         <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzf-63-PAH" customClass="UIKnob" customModule="UIControls">
                                                 <rect key="frame" x="0.0" y="281.33333333333331" width="140.66666666666666" height="132.66666666666669"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterId">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Vol"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="minValue">
                                                         <real key="value" value="0.0"/>
@@ -82,6 +79,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="step">
                                                         <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                        <integer key="value" value="2"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -116,9 +116,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outletCollection property="knobs" destination="0fx-7H-CIj" collectionClass="NSMutableArray" id="eSl-Bi-1MD"/>
-                        <outletCollection property="knobs" destination="FJL-gb-qAc" collectionClass="NSMutableArray" id="RfP-eT-26U"/>
-                        <outletCollection property="knobs" destination="Zzf-63-PAH" collectionClass="NSMutableArray" id="1Ol-D2-gmG"/>
+                        <outletCollection property="knobs" destination="0fx-7H-CIj" collectionClass="NSMutableArray" id="gMZ-5M-UMi"/>
+                        <outletCollection property="knobs" destination="FJL-gb-qAc" collectionClass="NSMutableArray" id="qpM-E8-CJe"/>
+                        <outletCollection property="knobs" destination="Zzf-63-PAH" collectionClass="NSMutableArray" id="oth-H2-KQm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtA-rm-1GK" userLabel="First Responder" sceneMemberID="firstResponder"/>

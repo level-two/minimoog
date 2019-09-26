@@ -16,44 +16,37 @@
 // -----------------------------------------------------------------------------
 
 #import <AVFoundation/AVFoundation.h>
-#import "MinimoogObjcWrapper.h"
+#import "MinimoogInstrument.h"
 #include "Minimoog.hpp"
 
-@interface MinimoogObjcWrapper () {
+@interface MinimoogInstrument () {
     // Instrument core - C++ class instance
-    Minimoog _minimoogInstrument;
+    Minimoog instrument;
 }
 
     @property (nonatomic, copy) AUHostMusicalContextBlock musicalContext;
-    @property (nonatomic, copy) AUMIDIOutputEventBlock    outputEventBlock;
+    @property (nonatomic, copy) AUMIDIOutputEventBlock outputEventBlock;
     @property (nonatomic, copy) AUHostTransportStateBlock transportStateBlock;
 
-    @property (nonatomic) AVAudioFormat*         audioFormat;
-    @property (nonatomic) AVAudioChannelCount    maxChannels;
+    @property (nonatomic) AVAudioFormat* audioFormat;
 
-    @property (nonatomic) AVAudioPCMBuffer*      pcmBuffer;
+    @property (nonatomic) AVAudioPCMBuffer* pcmBuffer;
     @property (nonatomic) const AudioBufferList* audioBufferList;
 @end
 
-@implementation MinimoogObjcWrapper
+@implementation MinimoogInstrument
     @synthesize musicalContext;
     @synthesize outputEventBlock;
     @synthesize transportStateBlock;
     @synthesize audioFormat;
-    @synthesize maxChannels;
     @synthesize pcmBuffer;
     @synthesize audioBufferList;
 
-- (id)init {
-    return [self initWithAudioFormat:[[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2]
-                         maxChannels:2];
-}
-
-- (id)initWithAudioFormat:(AVAudioFormat*)audioFormat maxChannels:(AVAudioChannelCount) maxChannels;
+- (id)initWithAudioFormat:(AVAudioFormat*)audioFormat
 {
     if (self = [super init]) {
         self.audioFormat = audioFormat;
-        self.maxChannels = maxChannels;
+        instrument.setSampleRate(audioFormat.sampleRate);
     }
     return self;
 }
@@ -67,7 +60,7 @@
     self.transportStateBlock = transportStateBlock;
     self.pcmBuffer           = [[AVAudioPCMBuffer alloc] initWithPCMFormat:audioFormat frameCapacity:maxFrames];
     self.audioBufferList     = pcmBuffer.audioBufferList;
-    return _minimoogInstrument.allocateRenderResources(audioBufferList);
+    return instrument.allocateRenderResources(audioBufferList);
 }
 
 - (void)deallocateRenderResources {
@@ -76,19 +69,15 @@
     transportStateBlock = nil;
     pcmBuffer           = nil;
     audioBufferList     = nil;
-    _minimoogInstrument.deallocateRenderResources();
+    instrument.deallocateRenderResources();
 }
 
 - (void)setParameter:(AUParameterAddress) address value:(AUValue) value {
-    _minimoogInstrument.setParameter(address, value);
+    instrument.setParameter(address, value);
 }
 
 - (AUValue)getParameter:(AUParameterAddress) address {
-    return _minimoogInstrument.getParameter(address);
-}
-
-- (void)setSampleRate:(double)sampleRate {
-    return _minimoogInstrument.setSampleRate(sampleRate);
+    return instrument.getParameter(address);
 }
 
 - (AUInternalRenderBlock)internalRenderBlock {
@@ -96,7 +85,7 @@
      Capture in locals to avoid ObjC member lookups. If "self" is captured in
      render, we're doing it wrong.
      */
-    __block Minimoog *minimoogCapture = &_minimoogInstrument;
+    __block Minimoog *minimoogCapture = &instrument;
     AUHostMusicalContextBlock musicalContextCapture       = musicalContext;
     AUMIDIOutputEventBlock    outputEventBlockCapture     = outputEventBlock;
     AUHostTransportStateBlock transportStateBlockCapture  = transportStateBlock;

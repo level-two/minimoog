@@ -19,7 +19,7 @@ import UIKit
 
 @IBDesignable
 public final class UIKnob: UIControl, NibLoadable {
-    @IBInspectable public var parameterId: Int = 0
+    @IBInspectable public var parameterAddress: Int = 0
     @IBInspectable public var title: String = ""
     @IBInspectable public var minValue: CGFloat = 0
     @IBInspectable public var maxValue: CGFloat = 1
@@ -41,6 +41,14 @@ public final class UIKnob: UIControl, NibLoadable {
         }
     }
 
+    public func updateLabels() {
+        titleLabel?.text = title
+        minLabel?.text = "\(minValue)"
+        midLabel?.text = "\((minValue + maxValue)/2)"
+        maxLabel?.text = "\(maxValue)"
+    }
+
+    // Lifecycle
     override public init(frame: CGRect) {
         super.init(frame: frame)
         loadFromNib()
@@ -59,26 +67,12 @@ public final class UIKnob: UIControl, NibLoadable {
         commonInit()
     }
 
-    fileprivate func commonInit() {
-        titleLabel?.text = title
-        minLabel?.text = "\(minValue)"
-        midLabel?.text = "\((minValue + maxValue)/2)"
-        maxLabel?.text = "\(maxValue)"
-
-        setValue(minValue)
-
-        panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
-        self.addGestureRecognizer(panGestureRecognizer)
-        self.isUserInteractionEnabled = true
-    }
-
-    fileprivate let minAngle: CGFloat = -150 * CGFloat.pi/180
-    fileprivate let maxAngle: CGFloat = 150 * CGFloat.pi/180
-
+    // Variables
     fileprivate var isValueLockedByUI: Bool {
         return panGestureRecognizer.state == .began || panGestureRecognizer.state == .changed
     }
-
+    fileprivate let minAngle: CGFloat = -150 * CGFloat.pi/180
+    fileprivate let maxAngle: CGFloat = 150 * CGFloat.pi/180
     fileprivate var curValue: CGFloat = 0
     fileprivate var curAngle: CGFloat = 0
     fileprivate var lastTouchOffset: CGFloat = 0
@@ -86,6 +80,15 @@ public final class UIKnob: UIControl, NibLoadable {
 }
 
 extension UIKnob {
+    fileprivate func commonInit() {
+        updateLabels()
+        setValue(minValue)
+
+        panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
+        self.addGestureRecognizer(panGestureRecognizer)
+        self.isUserInteractionEnabled = true
+    }
+
     @objc public func handlePan(recognizer: UIPanGestureRecognizer) {
         guard recognizer.state == .changed else {
             lastTouchOffset = 0
@@ -104,7 +107,7 @@ extension UIKnob {
 }
 
 extension UIKnob {
-    func setValue(_ newValue: CGFloat, animated: Bool = false) {
+    fileprivate func setValue(_ newValue: CGFloat, animated: Bool = false) {
         curValue = newValue
 
         let prevAngle = curAngle
@@ -118,7 +121,7 @@ extension UIKnob {
 }
 
 extension CGFloat {
-    func snapped(to step: CGFloat, in range: ClosedRange<CGFloat>) -> CGFloat {
+    fileprivate func snapped(to step: CGFloat, in range: ClosedRange<CGFloat>) -> CGFloat {
         guard step != 0 else { return self }
 
         let min = range.lowerBound
@@ -127,7 +130,7 @@ extension CGFloat {
         return val.clamped(in: range)
     }
 
-    func clamped(in range: ClosedRange<CGFloat>) -> CGFloat {
+    fileprivate func clamped(in range: ClosedRange<CGFloat>) -> CGFloat {
         return
             self > range.upperBound ? range.upperBound :
             self < range.lowerBound ? range.lowerBound : self

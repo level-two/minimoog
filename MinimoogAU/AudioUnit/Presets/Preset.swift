@@ -17,45 +17,44 @@
 
 import AVFoundation
 
-class MinimoogAUPreset {
-    public var presetName  = ""
-    public var presetIndex = 0
-    public var presetDic   = [String: Double]()
+class Preset {
+    public var name = ""
+    public var index = 0
+    public var dictionary = [String: Double]()
 
     public var fullState: [String: Any]? {
         get {
-            return ["Name": presetName, "Index": presetIndex, "presetDic": presetDic]
+            return ["Name": name, "Index": index, "presetDic": dictionary]
         }
 
         set {
-            guard
-                let state       = newValue,
-                let presetName  = state["Name"] as? String,
-                let presetIndex = state["Index"] as? Int,
-                let presetDic   = state["presetDic"] as? [String: Double]
+            guard let state = newValue,
+                let name = state["Name"] as? String,
+                let index = state["Index"] as? Int,
+                let dictionary = state["presetDic"] as? [String: Double]
             else {
                 print("Failed to init preset from the full state")
                 return
             }
 
-            self.presetName  = presetName
-            self.presetIndex = presetIndex
-            self.presetDic   = presetDic
+            self.name = name
+            self.index = index
+            self.dictionary = dictionary
         }
     }
 
-    init(presetIndex: Int, presetName: String, dictionary: [String: Double]) {
-        self.presetName  = presetName
-        self.presetIndex = presetIndex
-        self.presetDic   = dictionary
+    init(index: Int, name: String, dictionary: [String: Double]) {
+        self.name = name
+        self.index = index
+        self.dictionary = dictionary
     }
 
-    init(presetIndex: Int, presetName: String, parameters: [AUParameter]?) {
-        self.presetName  = presetName
-        self.presetIndex = presetIndex
-        self.presetDic =
-            parameters?.reduce(into: [String: Double]() ) { dic, par in
-                dic[par.identifier] = Double(par.value)
+    init(index: Int, name: String, parameters: [AUParameter]?) {
+        self.name = name
+        self.index = index
+        self.dictionary =
+            parameters?.reduce(into: [String: Double]() ) { dictionary, parameter in
+                dictionary[parameter.identifier] = Double(parameter.value)
             } ?? [:]
     }
 
@@ -64,15 +63,15 @@ class MinimoogAUPreset {
     }
 
     public func presetValue(for id: String) -> AUValue? {
-        return presetDic[id].map { AUValue($0) }
+        return dictionary[id].map { AUValue($0) }
     }
 }
 
 extension AUAudioUnitPreset {
-    convenience init?(with preset: MinimoogAUPreset?) {
+    convenience init?(with preset: Preset?) {
         guard let preset = preset else { return nil }
         self.init()
-        self.name   = preset.presetName
-        self.number = preset.presetIndex
+        self.name = preset.name
+        self.number = preset.index
     }
 }

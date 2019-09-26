@@ -20,11 +20,16 @@ import UIKit
 import CoreAudioKit
 import UIControls
 
-public class MinimoogAUViewController: AUViewController {
+public class MinimoogViewController: AUViewController {
+    @IBOutlet var knobs: [UIKnob]!
+
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setupKnobs()
         setKnobsTarget()
+
+        if let parameterTree = audioUnit?.parameterTree {
+            configureKnobs(with: parameterTree)
+        }
     }
 
     override public func viewWillAppear(_ animated: Bool) {
@@ -37,55 +42,59 @@ public class MinimoogAUViewController: AUViewController {
         removeParameterObserver()
     }
 
-    @IBOutlet var knobs = [UIKnob]()
-
-    fileprivate var audioUnit: MinimoogAU?
     fileprivate var parameterObserverToken: AUParameterObserverToken?
+    fileprivate var audioUnit: MinimoogAudioUnit? {
+        didSet {
+            guard isViewLoaded, let parameterTree = audioUnit?.parameterTree else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.configureKnobs(with: parameterTree)
+            }
+        }
+    }
 }
 
-extension MinimoogAUViewController: AUAudioUnitFactory {
+extension MinimoogViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        self.audioUnit = try MinimoogAU(componentDescription: componentDescription, options: [])
+        self.audioUnit = try MinimoogAudioUnit(componentDescription: componentDescription, options: [])
         return self.audioUnit!
     }
 }
 
-extension MinimoogAUViewController {
-    func setupKnobs() {
+extension MinimoogViewController {
+    func configureKnobs(with parameterTree: AUParameterTree) {
         knobs.forEach { knob in
-            guard let desc = AUDescription.parameters.first(where: { $0.id.rawValue == knob.parameterId }) else { return }
-            knob.title = desc.shortName
-            knob.minValue = CGFloat(desc.min)
-            knob.maxValue = CGFloat(desc.max)
-            knob.step = CGFloat(desc.step)
-            knob.value = CGFloat(desc.initValue)
-        }
-
-        ParameterId.allCases.forEach { parameterId in
-            guard let parameter = self.audioUnit?.parameterTree.parameter(withAddress: parameterId.address) else { return }
-            setKnobValue(parameterId.address, parameter.value)
+            let address = AUParameterAddress(knob.parameterAddress)
+            guard let parameter = parameterTree.parameter(withAddress: address) else { return }
+            knob.title = parameter.identifier
+            knob.minValue = CGFloat(parameter.minValue)
+            knob.maxValue = CGFloat(parameter.maxValue)
+            if let stepsCount = parameter.valueStrings?.count, stepsCount > 0 {
+                knob.step = (knob.maxValue - knob.minValue) / CGFloat(stepsCount)
+            }
+            knob.value = CGFloat(parameter.value)
+            knob.updateLabels()
         }
     }
 
     func setKnobsTarget() {
         self.knobs.forEach { knob in
-            knob.addTarget(self, action: #selector(MinimoogAUViewController.onKnobValueChanged), for: .valueChanged)
+            knob.addTarget(self, action: #selector(MinimoogViewController.onKnobValueChanged), for: .valueChanged)
         }
     }
 
     func setKnobValue(_ address: AUParameterAddress, _ value: AUValue) {
-        knobs.first { $0.parameterId == address }?.value = CGFloat(value)
+        knobs.first { $0.parameterAddress == address }?.value = CGFloat(value)
     }
 
     @objc func onKnobValueChanged(knob: UIKnob) {
         audioUnit?
             .parameterTree
-            .parameter(withAddress: AUParameterAddress(knob.parameterId))?
+            .parameter(withAddress: AUParameterAddress(knob.parameterAddress))?
             .setValue(AUValue(knob.value), originator: self.parameterObserverToken)
     }
 }
 
-extension MinimoogAUViewController {
+extension MinimoogViewController {
     func setParameterObserver() {
         parameterObserverToken = audioUnit?.parameterTree.token() { [weak self] address, value in
             DispatchQueue.main.async { [weak self] in

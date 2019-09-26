@@ -48,10 +48,10 @@
 				</dict>
 			</array>
 		</dict>
+		<key>NSExtensionMainStoryboard</key>
+		<string>Minimoog</string>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.AudioUnit-UI</string>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MinimoogAU</string>
 	</dict>
 </dict>
 </plist>
