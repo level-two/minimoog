@@ -29,8 +29,12 @@ enum {
     osc2Range,
     osc2Detune,
     osc2Waveform,
+    osc3Range,
+    osc3Detune,
+    osc3Waveform,
     mixOsc1Volume,
     mixOsc2Volume,
+    mixOsc3Volume,
     mixNoiseVolume
 };
 
@@ -52,6 +56,7 @@ public:
 private:
     void updateOsc1State();
     void updateOsc2State();
+    void updateOsc3State();
     
     // Parameters
     AUValue m_osc1Range;
@@ -59,8 +64,12 @@ private:
     AUValue m_osc2Range;
     AUValue m_osc2Detune;
     AUValue m_osc2Waveform;
+    AUValue m_osc3Range;
+    AUValue m_osc3Detune;
+    AUValue m_osc3Waveform;
     AUValue m_mixOsc1Volume;
     AUValue m_mixOsc2Volume;
+    AUValue m_mixOsc3Volume;
     AUValue m_mixNoiseVolume;
     
     // OSC Common
@@ -73,6 +82,10 @@ private:
     // OSC2
     int m_osc2SelectedGenerator = 0;
     GeneratorBase* m_osc2Generator[6];
+
+    // OSC3
+    int m_osc3SelectedGenerator = 0;
+    GeneratorBase* m_osc3Generator[6];
     
     // NOISE
     float m_noiseAmpl;
@@ -80,6 +93,7 @@ private:
     // MIX
     float m_mixOsc1AmplMultiplier;
     float m_mixOsc2AmplMultiplier;
+    float m_mixOsc3AmplMultiplier;
     float m_mixNoiseAmplMultiplier;
 };
 

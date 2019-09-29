@@ -20,37 +20,31 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-#import <algorithm>
-
-template <typename T>
-T clamp(T input, T low, T high) {
-	return std::min(std::max(input, low), high);
-}
 
 class MinimoogBase {
 public:
     MinimoogBase();
     virtual ~MinimoogBase();
     
-    virtual void    setParameter   (AUParameterAddress address, AUValue value)                             = 0;
-    virtual AUValue getParameter   (AUParameterAddress address)                                            = 0;
-	virtual void    startRamp      (AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
-    virtual void    handleMIDIEvent(AUMIDIEvent const& midiEvent)                                          = 0;
-    virtual void    doRender       (float *outL, float *outR)                                              = 0;
-    virtual bool    doAllocateRenderResources()                                                            = 0;
-    virtual void    doDeallocateRenderResources()                                                          = 0;
-    virtual void    setSampleRate(float sr)                                                                = 0;
+    virtual void setParameter(AUParameterAddress address, AUValue value) = 0;
+    virtual AUValue getParameter(AUParameterAddress address) = 0;
+	virtual void startRamp(AUParameterAddress address, AUValue value, AUAudioFrameCount duration) = 0;
+    virtual void handleMIDIEvent(AUMIDIEvent const& midiEvent) = 0;
+    virtual void doRender(float *outL, float *outR) = 0;
+    virtual bool doAllocateRenderResources() = 0;
+    virtual void doDeallocateRenderResources() = 0;
+    virtual void setSampleRate(float sr) = 0;
     
     bool allocateRenderResources(const AudioBufferList* audioBufferList);
     void deallocateRenderResources();
     
-    void render(AudioUnitRenderActionFlags* actionFlags          ,
-                const AudioTimeStamp*       timestamp            ,
-                AUAudioFrameCount           frameCount           ,
-                NSInteger                   outputBusNumber      ,
-                AudioBufferList*            outputData           ,
+    void render(AudioUnitRenderActionFlags* actionFlags,
+                const AudioTimeStamp*       timestamp,
+                AUAudioFrameCount           frameCount,
+                NSInteger                   outputBusNumber,
+                AudioBufferList*            outputData,
                 const AURenderEvent*        realtimeEventListHead,
-                AURenderPullInputBlock      pullInputBlock       );
+                AURenderPullInputBlock      pullInputBlock);
     
 private:
     void prepareOutputBufferList(AudioBufferList* outBufferList, AVAudioFrameCount frameCount, bool zeroFill);

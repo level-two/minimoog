@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cfr-SU-Pek">
+    <device id="retina5_5" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Minimoog View Controller-->
+        <scene sceneID="tcK-ag-iQP">
+            <objects>
+                <viewController id="cfr-SU-Pek" customClass="MinimoogViewController" customModule="MinimoogAU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DdI-hw-Gej"/>
+                        <viewControllerLayoutGuide type="bottom" id="0uY-GP-MOi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="RGp-Ed-HBy">
+                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8SN-Oc-GpF" userLabel="Modules">
+                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FbS-CL-P2a" userLabel="Oscillators">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="414"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDX-RV-09J" userLabel="Osc1">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="132.66666666666666"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="OSCILLATOR 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ix-48-wyv">
+                                                        <rect key="frame" x="83" y="0.0" width="74" height="12"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-Wd-nGc">
+                                                        <rect key="frame" x="0.0" y="9.6666666666666714" width="240" height="123.00000000000001"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-d2-CbP" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Range"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdS-Ht-dIy">
+                                                                <rect key="frame" x="62" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSm-jD-2Gx" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="124" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Waveform"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZr-Ax-vmv" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="186" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Volume"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="3ix-48-wyv" firstAttribute="top" secondItem="zDX-RV-09J" secondAttribute="top" id="10H-Ng-bwc"/>
+                                                    <constraint firstItem="8ie-Wd-nGc" firstAttribute="width" secondItem="zDX-RV-09J" secondAttribute="width" id="OwI-gj-AHP"/>
+                                                    <constraint firstItem="3ix-48-wyv" firstAttribute="centerX" secondItem="zDX-RV-09J" secondAttribute="centerX" id="Zpr-ZM-HW4"/>
+                                                    <constraint firstItem="8ie-Wd-nGc" firstAttribute="centerX" secondItem="zDX-RV-09J" secondAttribute="centerX" id="ibc-zV-tso"/>
+                                                    <constraint firstAttribute="bottom" secondItem="8ie-Wd-nGc" secondAttribute="bottom" id="qNk-8L-Vuh"/>
+                                                    <constraint firstItem="3ix-48-wyv" firstAttribute="baseline" secondItem="8ie-Wd-nGc" secondAttribute="top" id="vSf-7Q-490"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iO8-bd-252" userLabel="Osc2">
+                                                <rect key="frame" x="0.0" y="140.66666666666669" width="240" height="132.66666666666669"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="OSCILLATOR 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMF-g5-bpx">
+                                                        <rect key="frame" x="82.333333333333343" y="-9.6666666666666572" width="75.333333333333343" height="21.666666666666668"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="C9p-EK-9us">
+                                                        <rect key="frame" x="0.0" y="9.6666666666666856" width="240" height="123"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N84-I9-nak" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Range"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9h-Mt-Efp" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="62" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="-8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Frequency"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nP8-Lq-fnG" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="124" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="4"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Waveform"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QII-2L-EjJ" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="186" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Volume"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="9"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="C9p-EK-9us" firstAttribute="width" secondItem="iO8-bd-252" secondAttribute="width" id="4gb-hQ-2iZ"/>
+                                                    <constraint firstItem="lMF-g5-bpx" firstAttribute="firstBaseline" secondItem="iO8-bd-252" secondAttribute="top" id="DPp-OI-pPN"/>
+                                                    <constraint firstItem="lMF-g5-bpx" firstAttribute="baseline" secondItem="C9p-EK-9us" secondAttribute="top" id="j5L-eO-ABm"/>
+                                                    <constraint firstItem="lMF-g5-bpx" firstAttribute="centerX" secondItem="iO8-bd-252" secondAttribute="centerX" id="qQr-DP-Q6a"/>
+                                                    <constraint firstItem="C9p-EK-9us" firstAttribute="centerX" secondItem="iO8-bd-252" secondAttribute="centerX" id="tAH-uZ-suU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="C9p-EK-9us" secondAttribute="bottom" id="wFj-zi-gop"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdZ-zA-5J3" userLabel="Osc3">
+                                                <rect key="frame" x="0.0" y="281.33333333333331" width="240" height="132.66666666666669"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="OSCILLATOR 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfK-ja-8Tl">
+                                                        <rect key="frame" x="82.333333333333314" y="-9.6666666666666288" width="75.666666666666686" height="21.666666666666668"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eiq-zb-9RK">
+                                                        <rect key="frame" x="0.0" y="9.6666666666666856" width="240" height="123"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeR-B3-L9t" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Range"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcF-zI-uQe" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="62" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Frequency"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="-8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lrn-CA-HmX" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="124" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Waveform"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="6"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="7"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLZ-hR-Xr1" customClass="UIKnob" customModule="UIControls">
+                                                                <rect key="frame" x="186" y="0.0" width="54" height="123"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Volume"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
+                                                                        <real key="value" value="0.0"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
+                                                                        <integer key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="eiq-zb-9RK" firstAttribute="centerX" secondItem="rdZ-zA-5J3" secondAttribute="centerX" id="0mS-Kp-0Qw"/>
+                                                    <constraint firstItem="eiq-zb-9RK" firstAttribute="width" secondItem="rdZ-zA-5J3" secondAttribute="width" id="ByS-wP-2MB"/>
+                                                    <constraint firstAttribute="bottom" secondItem="eiq-zb-9RK" secondAttribute="bottom" id="LKK-P6-sRM"/>
+                                                    <constraint firstItem="UfK-ja-8Tl" firstAttribute="firstBaseline" secondItem="rdZ-zA-5J3" secondAttribute="top" id="Mp3-67-akc"/>
+                                                    <constraint firstItem="UfK-ja-8Tl" firstAttribute="centerX" secondItem="rdZ-zA-5J3" secondAttribute="centerX" id="P4b-BP-6zh"/>
+                                                    <constraint firstItem="UfK-ja-8Tl" firstAttribute="baseline" secondItem="eiq-zb-9RK" secondAttribute="top" id="UHL-Ch-6Ta"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Eut-K3-rUg">
+                                        <rect key="frame" x="248" y="0.0" width="240" height="414"/>
+                                        <color key="backgroundColor" red="0.0" green="0.98791292829999999" blue="1" alpha="0.28138754399999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tX3-hA-CIH">
+                                        <rect key="frame" x="496" y="0.0" width="240" height="414"/>
+                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="centerX" secondItem="RGp-Ed-HBy" secondAttribute="centerX" id="3Hg-dS-HuK"/>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="width" secondItem="RGp-Ed-HBy" secondAttribute="width" id="Xni-4m-Fiq"/>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="centerY" secondItem="RGp-Ed-HBy" secondAttribute="centerY" id="nYV-4b-APO"/>
+                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="height" secondItem="RGp-Ed-HBy" secondAttribute="height" id="nzD-Os-gLj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outletCollection property="knobs" destination="pZ8-d2-CbP" collectionClass="NSMutableArray" id="wIF-Wx-Su8"/>
+                        <outletCollection property="knobs" destination="fSm-jD-2Gx" collectionClass="NSMutableArray" id="eLH-4H-0ni"/>
+                        <outletCollection property="knobs" destination="QZr-Ax-vmv" collectionClass="NSMutableArray" id="5oV-qX-zfx"/>
+                        <outletCollection property="knobs" destination="N84-I9-nak" collectionClass="NSMutableArray" id="DSr-GO-87y"/>
+                        <outletCollection property="knobs" destination="y9h-Mt-Efp" collectionClass="NSMutableArray" id="oF2-Kx-JYV"/>
+                        <outletCollection property="knobs" destination="nP8-Lq-fnG" collectionClass="NSMutableArray" id="r5W-mw-cDS"/>
+                        <outletCollection property="knobs" destination="QII-2L-EjJ" collectionClass="NSMutableArray" id="X2k-jw-DEo"/>
+                        <outletCollection property="knobs" destination="YeR-B3-L9t" collectionClass="NSMutableArray" id="AO5-Qq-9Vc"/>
+                        <outletCollection property="knobs" destination="TcF-zI-uQe" collectionClass="NSMutableArray" id="dwx-mX-KLv"/>
+                        <outletCollection property="knobs" destination="Lrn-CA-HmX" collectionClass="NSMutableArray" id="w85-hV-8tC"/>
+                        <outletCollection property="knobs" destination="uLZ-hR-Xr1" collectionClass="NSMutableArray" id="suM-IC-qU1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtA-rm-1GK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="62" y="727"/>
+        </scene>
+    </scenes>
+</document>

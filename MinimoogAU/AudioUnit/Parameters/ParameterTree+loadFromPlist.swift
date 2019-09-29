@@ -28,23 +28,23 @@ extension AUParameterTree {
         }
 
         let data = try Data(contentsOf: plistUrl)
-        let descriptions = try PropertyListDecoder().decode([ParameterDescription].self, from: data)
-        let parameters = descriptions.map(AUParameterTree.createParameter)
+        let dic = try PropertyListDecoder().decode([String:ParameterDef].self, from: data)
+        let parameters = dic.map(AUParameterTree.createParameter)
 
         return AUParameterTree.createTree(withChildren: parameters)
     }
 
-    fileprivate static func createParameter(with description: ParameterDescription) -> AUParameter {
+    fileprivate static func createParameter(_ identifier: String, _ parameterDef: ParameterDef) -> AUParameter {
         return AUParameterTree.createParameter(
-            withIdentifier: description.identifier,
-            name: description.name,
-            address: description.address,
-            min: AUValue(description.minValue),
-            max: AUValue(description.maxValue),
-            unit: description.unit ?? .customUnit,
+            withIdentifier: identifier,
+            name: parameterDef.name,
+            address: parameterDef.address,
+            min: AUValue(parameterDef.minValue),
+            max: AUValue(parameterDef.maxValue),
+            unit: parameterDef.unit ?? .customUnit,
             unitName: nil,
             flags: [.flag_IsWritable, .flag_IsReadable],
-            valueStrings: description.valueStrings,
+            valueStrings: parameterDef.valueStrings,
             dependentParameters: nil
         )
     }

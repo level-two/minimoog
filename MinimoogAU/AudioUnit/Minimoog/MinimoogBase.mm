@@ -17,6 +17,7 @@
 
 
 #import "MinimoogBase.hpp"
+#import <algorithm>
 
 MinimoogBase::MinimoogBase() {
     m_audioBufferList = nullptr;

@@ -79,7 +79,7 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
             updateOsc2State();
             break;
         case osc2Detune:
-            assert(value >= -1200 && value <= 1200);
+            assert(value >= -8 && value <= 8);
             m_osc2Detune = value;
             updateOsc2State();
             break;
@@ -87,6 +87,21 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
             assert(value >= 1 && value <= 6);
             m_osc2Waveform = value;
             m_osc2SelectedGenerator = (int) value - 1;
+            break;
+        case osc3Range:
+            assert(value >= 1 && value <= 6);
+            m_osc3Range = value;
+            updateOsc3State();
+            break;
+        case osc3Detune:
+            assert(value >= -8 && value <= 8);
+            m_osc3Detune = value;
+            updateOsc3State();
+            break;
+        case osc3Waveform:
+            assert(value >= 1 && value <= 6);
+            m_osc3Waveform = value;
+            m_osc3SelectedGenerator = (int) value - 1;
             break;
         case mixOsc1Volume:
             assert(value >= 0 && value <= 10);
@@ -97,6 +112,11 @@ void Minimoog::setParameter(AUParameterAddress address, AUValue value) {
             assert(value >= 0 && value <= 10);
             m_mixOsc2Volume = value;
             m_mixOsc2AmplMultiplier = value / 10.;
+            break;
+        case mixOsc3Volume:
+            assert(value >= 0 && value <= 10);
+            m_mixOsc3Volume = value;
+            m_mixOsc3AmplMultiplier = value / 10.;
             break;
         case mixNoiseVolume:
             assert(value >= 0 && value <= 10);
@@ -124,11 +144,23 @@ AUValue Minimoog::getParameter(AUParameterAddress address) {
         case osc2Waveform:
             val = m_osc2Waveform;
             break;
+        case osc3Range:
+            val = m_osc3Range;
+            break;
+        case osc3Detune:
+            val = m_osc3Detune;
+            break;
+        case osc3Waveform:
+            val = m_osc3Waveform;
+            break;
         case mixOsc1Volume:
             val = m_mixOsc1Volume;
             break;
         case mixOsc2Volume:
             val = m_mixOsc2Volume;
+            break;
+        case mixOsc3Volume:
+            val = m_mixOsc3Volume;
             break;
         case mixNoiseVolume:
             val = m_mixNoiseVolume;
@@ -172,10 +204,12 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
             for (int i = 0; i < 6; i++) {
                 m_osc1Generator[i]->setAmplitude(vel / 127.);
                 m_osc2Generator[i]->setAmplitude(vel / 127.);
+                m_osc3Generator[i]->setAmplitude(vel / 127.);
             }
             m_noiseAmpl = vel / 127.;
             updateOsc1State();
             updateOsc2State();
+            updateOsc3State();
             break;
         }
         case 0xb0 : { // control change
@@ -184,6 +218,7 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
                 for (int i = 0; i < 6; i++) {
                     m_osc1Generator[i]->setAmplitude(0);
                     m_osc2Generator[i]->setAmplitude(0);
+                    m_osc3Generator[i]->setAmplitude(0);
                 }
                 m_noiseAmpl = 0;
             }
@@ -196,6 +231,7 @@ void Minimoog::setSampleRate(float sr) {
     for (int i = 0; i < 6; i++) {
         m_osc1Generator[i]->setSampleRate(sr);
         m_osc2Generator[i]->setSampleRate(sr);
+        m_osc3Generator[i]->setSampleRate(sr);
     }
 }
 
@@ -207,12 +243,19 @@ void Minimoog::updateOsc1State() {
     }
 }
 
-
 void Minimoog::updateOsc2State() {
     float freqMultiplier = (m_osc2Range == 1) ? 1./128. : exp2f(m_osc2Range - 3.);
-    float noteFrequency = freqMultiplier * detunedNoteToHz(m_currentNote, m_osc2Detune);
+    float noteFrequency = freqMultiplier * detunedNoteToHz(m_currentNote, m_osc2Detune * 1200/8);
     for (int i = 0; i < 6; i++) {
         m_osc2Generator[i]->setFrequency(noteFrequency);
+    }
+}
+
+void Minimoog::updateOsc3State() {
+    float freqMultiplier = (m_osc3Range == 1) ? 1./128. : exp2f(m_osc3Range - 3.);
+    float noteFrequency = freqMultiplier * detunedNoteToHz(m_currentNote, m_osc3Detune * 1200/8);
+    for (int i = 0; i < 6; i++) {
+        m_osc3Generator[i]->setFrequency(noteFrequency);
     }
 }
 
@@ -226,6 +269,11 @@ void Minimoog::doRender(float *outL, float *outR) {
     float osc2Smpl;
     float osc2Smpr;
     m_osc2Generator[m_osc2SelectedGenerator]->render(&osc2Smpl, &osc2Smpr);
+
+    // OSC3
+    float osc3Smpl;
+    float osc3Smpr;
+    m_osc3Generator[m_osc3SelectedGenerator]->render(&osc3Smpl, &osc3Smpr);
     
     // NOISE
     float noiseSmp = m_noiseAmpl * ((float)drand48() * 2. - 1.);
@@ -234,11 +282,13 @@ void Minimoog::doRender(float *outL, float *outR) {
     float mixSmpl =
         osc1Smpl  * m_mixOsc1AmplMultiplier +
         osc2Smpl  * m_mixOsc2AmplMultiplier +
+        osc3Smpl  * m_mixOsc3AmplMultiplier +
         noiseSmp * m_mixNoiseAmplMultiplier;
     
     float mixSmpr =
         osc1Smpr  * m_mixOsc1AmplMultiplier +
         osc2Smpr  * m_mixOsc2AmplMultiplier +
+        osc3Smpr  * m_mixOsc3AmplMultiplier +
         noiseSmp * m_mixNoiseAmplMultiplier;
     
     *outL = mixSmpl;

@@ -90,14 +90,14 @@
     AUMIDIOutputEventBlock    outputEventBlockCapture     = outputEventBlock;
     AUHostTransportStateBlock transportStateBlockCapture  = transportStateBlock;
     __block BOOL transportStateIsMoving = NO;
-    
-    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags* actionFlags           ,
-                              const AudioTimeStamp*       timestamp             ,
-                              AVAudioFrameCount           frameCount            ,
-                              NSInteger                   outputBusNumber       ,
-                              AudioBufferList*            outputData            ,
-                              const AURenderEvent*        realtimeEventListHead ,
-                              AURenderPullInputBlock      pullInputBlock        ) {
+
+    return ^AUAudioUnitStatus(AudioUnitRenderActionFlags* actionFlags,
+                              const AudioTimeStamp*       timestamp,
+                              AVAudioFrameCount           frameCount,
+                              NSInteger                   outputBusNumber,
+                              AudioBufferList*            outputData,
+                              const AURenderEvent*        realtimeEventListHead,
+                              AURenderPullInputBlock      pullInputBlock) {
         double currentTempo = 120.0;
         
         if (musicalContextCapture) {
