@@ -45,9 +45,12 @@ public class MinimoogViewController: AUViewController {
     fileprivate var parameterObserverToken: AUParameterObserverToken?
     fileprivate var audioUnit: MinimoogAudioUnit? {
         didSet {
-            guard isViewLoaded, let parameterTree = audioUnit?.parameterTree else { return }
             DispatchQueue.main.async { [weak self] in
-                self?.configureKnobs(with: parameterTree)
+                guard let self = self,
+                    self.isViewLoaded,
+                    let parameterTree = self.audioUnit?.parameterTree
+                    else { return }
+                self.configureKnobs(with: parameterTree)
             }
         }
     }

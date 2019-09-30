@@ -33,16 +33,22 @@ static inline double detunedNoteToHz(int noteNumber, float cents)
 Minimoog::Minimoog() {
     m_osc1Generator[0] = new GeneratorSaw(0.5);
     m_osc2Generator[0] = new GeneratorSaw(0.5);
+    m_osc3Generator[0] = new GeneratorSaw(0.5);
     m_osc1Generator[1] = new GeneratorSine();
     m_osc2Generator[1] = new GeneratorSine();
+    m_osc3Generator[1] = new GeneratorSine();
     m_osc1Generator[2] = new GeneratorSaw(1.0);
     m_osc2Generator[2] = new GeneratorSaw(1.0);
+    m_osc3Generator[2] = new GeneratorSaw(1.0);
     m_osc1Generator[3] = new GeneratorSquare(0.5);
     m_osc2Generator[3] = new GeneratorSquare(0.5);
+    m_osc3Generator[3] = new GeneratorSquare(0.5);
     m_osc1Generator[4] = new GeneratorSquare(0.25);
     m_osc2Generator[4] = new GeneratorSquare(0.25);
+    m_osc3Generator[4] = new GeneratorSquare(0.25);
     m_osc1Generator[5] = new GeneratorSquare(0.125);
     m_osc2Generator[5] = new GeneratorSquare(0.125);
+    m_osc3Generator[5] = new GeneratorSquare(0.125);
     srand48(time(0));
 }
 
@@ -50,6 +56,7 @@ Minimoog::~Minimoog() {
     for (int i = 0; i < 6; i++) {
         delete m_osc1Generator[i];
         delete m_osc2Generator[i];
+        delete m_osc3Generator[i];
     }
 }
 
@@ -192,6 +199,7 @@ void Minimoog::handleMIDIEvent(AUMIDIEvent const& midiEvent)
                 for (int i = 0; i < 6; i++) {
                     m_osc1Generator[i]->setAmplitude(0);
                     m_osc2Generator[i]->setAmplitude(0);
+                    m_osc3Generator[i]->setAmplitude(0);
                 }
                 m_noiseAmpl = 0;
             }
