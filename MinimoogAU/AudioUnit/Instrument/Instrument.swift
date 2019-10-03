@@ -1,5 +1,5 @@
 //
-//  MinimoogInstrument.swift
+//  Instrument.swift
 //  MinimoogAU
 //
 //  Created by Yauheni Lychkouski on 10/1/19.
@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class MinimoogInstrument {
+class Instrument {
 
     init(with audioFormat:AVAudioFormat) {
         self.audioFormat = audioFormat
