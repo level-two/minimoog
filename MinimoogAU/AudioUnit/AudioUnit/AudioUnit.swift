@@ -15,49 +15,31 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import AVFoundation
 import UIKit
+import AudioToolbox
 
-class MinimoogAudioUnit: AUAudioUnit {
-    override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
+class AudioUnit: AUAudioUnit {fileprivate var instrument: InstrumentType
+
+    init(instrument: Instrument, componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         guard let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
-            throw MinimoogAudioUnitError.invalidAudioFormat
+            throw AudioUnitError.invalidAudioFormat
         }
 
-        instrument = .init(audioFormat: audioFormat)
-        inputBus = try .init(format: audioFormat)
-        outputBus = try .init(format: audioFormat)
-        curParameterTree = try .load(from: "ParametersDescription.plist")
+        self.instrument = instrument
+        inputBus = try AUAudioUnitBus(format: audioFormat)
+        outputBus = try AUAudioUnitBus(format: audioFormat)
+        curParameterTree = try AUParameterTree.load(from: "ParametersDescription.plist")
 
         try super.init(componentDescription: componentDescription, options: options)
 
         maximumFramesToRender = 512
+
+        instrument.audioFormat = audioFormat
+
         currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
         setParameterTreeObservers()
     }
 
-    fileprivate var instrument: MinimoogInstrument
-    fileprivate var curParameterTree: AUParameterTree
-    fileprivate var factoryPresetsManager = FactoryPresetsManager()
-
-    fileprivate var inputBus: AUAudioUnitBus
-    fileprivate var outputBus: AUAudioUnitBus
-
-    fileprivate lazy var curInputBusses: AUAudioUnitBusArray = {
-        return .init(audioUnit: self, busType: .input, busses: [inputBus])
-    }()
-
-    fileprivate lazy var curOutputBusses: AUAudioUnitBusArray = {
-
-        return .init(audioUnit: self, busType: .output, busses: [outputBus])
-    }()
-
-    // Positive - factory, negative - user
-    fileprivate var curPresetIndex = 0
-    fileprivate var curPresetName = ""
-}
-
-extension MinimoogAudioUnit {
     override public var parameterTree: AUParameterTree {
         return self.curParameterTree
     }
@@ -70,26 +52,48 @@ extension MinimoogAudioUnit {
         return self.curOutputBusses
     }
 
-    override public var internalRenderBlock: AUInternalRenderBlock {
-        return self.instrument.internalRenderBlock()
-    }
-
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
-        guard self.instrument.allocateRenderResources(musicalContext: self.musicalContextBlock,
-                                                      outputEventBlock: self.midiOutputEventBlock,
-                                                      transportStateBlock: self.transportStateBlock,
-                                                      maxFrames: self.maximumFramesToRender)
-        else { throw MinimoogAudioUnitError.renderResourcesAllocationFailure }
+        try instrument.allocateRenderResources()
     }
 
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
-        self.instrument.deallocateRenderResources()
+        instrument.deallocateRenderResources()
     }
+
+    override public var internalRenderBlock: AUInternalRenderBlock {
+        return { [weak self] actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBlock -> AUAudioUnitStatus in
+            guard let self = self else { return kAudioUnitErr_Uninitialized }
+            return self.instrument.render(actionFlags: actionFlags,
+                                          timestamp: timestamp,
+                                          frameCount: frameCount,
+                                          outputBusNumber: outputBusNumber,
+                                          outputData: outputData,
+                                          realtimeEventListHead: realtimeEventListHead,
+                                          pullInputBlock: pullInputBlock)
+        }
+    }
+
+
+    private var inputBus: AUAudioUnitBus
+    private var outputBus: AUAudioUnitBus
+
+    private lazy var curInputBusses: AUAudioUnitBusArray = {
+        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
+    }()
+
+    private lazy var curOutputBusses: AUAudioUnitBusArray = {
+        return AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
+    }()
+
+    fileprivate var curParameterTree: AUParameterTree
+    fileprivate var factoryPresetsManager = FactoryPresetsManager()
+    fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
+    fileprivate var curPresetName = ""
 }
 
-extension MinimoogAudioUnit {
+extension AudioUnit {
     override public var factoryPresets: [AUAudioUnitPreset]? {
         return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
     }
@@ -137,7 +141,7 @@ extension MinimoogAudioUnit {
     }
 }
 
-extension MinimoogAudioUnit {
+extension AudioUnit {
     fileprivate func setParameterTreeObservers() {
         curParameterTree.implementorValueObserver = { [weak self] param, value in
             self?.instrument.setParameter(param.address, value: value)

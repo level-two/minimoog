@@ -15,7 +15,7 @@
 		9304378B21FB6319008D22E0 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378321FB6319008D22E0 /* SimplePlayEngine.swift */; };
 		930437A021FB645A008D22E0 /* Minimoog.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379221FB6459008D22E0 /* Minimoog.mm */; };
 		930437A121FB645A008D22E0 /* MinimoogBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9304379321FB6459008D22E0 /* MinimoogBase.mm */; };
-		930437A221FB645A008D22E0 /* MinimoogAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379521FB6459008D22E0 /* MinimoogAudioUnit.swift */; };
+		930437A221FB645A008D22E0 /* AudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379521FB6459008D22E0 /* AudioUnit.swift */; };
 		930437A321FB645A008D22E0 /* FactoryPresetsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379621FB6459008D22E0 /* FactoryPresetsManager.swift */; };
 		930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9304379921FB6459008D22E0 /* FactoryPresets.plist */; };
 		930437A621FB645A008D22E0 /* Preset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304379A21FB645A008D22E0 /* Preset.swift */; };
@@ -25,6 +25,7 @@
 		93AEA5E7227AF211003B9B76 /* GeneratorSaw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93AEA5E5227AF211003B9B76 /* GeneratorSaw.cpp */; };
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		93D22E2222774F3C005E4E41 /* GeneratorSine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 93D22E2022774F3C005E4E41 /* GeneratorSine.cpp */; };
+		9E06994223B6418800F60DC9 /* AUParameter+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E06994123B6418800F60DC9 /* AUParameter+make.swift */; };
 		9E55A578233925680020828C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A577233925680020828C /* NibLoadable.swift */; };
 		9E55A57D233AB99C0020828C /* UIControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* UIControls.framework */; };
 		9E55A586233B65B10020828C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A585233B65B10020828C /* Assets.xcassets */; };
@@ -34,11 +35,15 @@
 		9E55A5B4233BB4760020828C /* FactoryPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A5B3233BB4760020828C /* FactoryPresets.swift */; };
 		9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
-		9E55A5B9233CBF630020828C /* MinimoogAudioUnitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A5B8233CBF630020828C /* MinimoogAudioUnitError.swift */; };
+		9E55A5B9233CBF630020828C /* AudioUnitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A5B8233CBF630020828C /* AudioUnitError.swift */; };
 		9E5910CD23434C1300268FE5 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5910CC23434C1300268FE5 /* Module.swift */; };
-		9E5910CF23434C5E00268FE5 /* InstrumentCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5910CE23434C5E00268FE5 /* InstrumentCore.swift */; };
-		9E5910D223434EC500268FE5 /* SignalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5910D123434EC500268FE5 /* SignalRouter.swift */; };
-		9E5910D423434F2100268FE5 /* SignalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5910D323434F2100268FE5 /* SignalNode.swift */; };
+		9E6197FA2345F674006B6F79 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6197F92345F674006B6F79 /* Generator.swift */; };
+		9E6197FC2345F683006B6F79 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6197FB2345F683006B6F79 /* Effect.swift */; };
+		9E6197FE2345F6D2006B6F79 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6197FD2345F6D2006B6F79 /* Sample.swift */; };
+		9E6198002345F7F7006B6F79 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6197FF2345F7F7006B6F79 /* Note.swift */; };
+		9E6198022345F7FF006B6F79 /* Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6198012345F7FF006B6F79 /* Velocity.swift */; };
+		9E6198042345FE6D006B6F79 /* ControlGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6198032345FE6D006B6F79 /* ControlGenerator.swift */; };
+		9E6198062345FE8F006B6F79 /* ControlVoltage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6198052345FE8F006B6F79 /* ControlVoltage.swift */; };
 		9EB4F0A72338BBC70090EB6F /* UIKnob.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4F0A62338BBC70090EB6F /* UIKnob.xib */; };
 		9EDF05732342A9FB00BF5087 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF05722342A9FB00BF5087 /* Instrument.swift */; };
 		9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF974C8233507BF00A8C25C /* Minimoog.storyboard */; };
@@ -113,8 +118,7 @@
 		9304378F21FB6459008D22E0 /* MinimoogBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MinimoogBase.hpp; sourceTree = "<group>"; };
 		9304379221FB6459008D22E0 /* Minimoog.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Minimoog.mm; sourceTree = "<group>"; };
 		9304379321FB6459008D22E0 /* MinimoogBase.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MinimoogBase.mm; sourceTree = "<group>"; };
-		9304379421FB6459008D22E0 /* MinimoogObjcWrapper-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MinimoogObjcWrapper-Bridging-Header.h"; sourceTree = "<group>"; };
-		9304379521FB6459008D22E0 /* MinimoogAudioUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimoogAudioUnit.swift; sourceTree = "<group>"; };
+		9304379521FB6459008D22E0 /* AudioUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnit.swift; sourceTree = "<group>"; };
 		9304379621FB6459008D22E0 /* FactoryPresetsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactoryPresetsManager.swift; sourceTree = "<group>"; };
 		9304379921FB6459008D22E0 /* FactoryPresets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FactoryPresets.plist; sourceTree = "<group>"; };
 		9304379A21FB645A008D22E0 /* Preset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preset.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		93D22E2022774F3C005E4E41 /* GeneratorSine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GeneratorSine.cpp; sourceTree = "<group>"; };
 		93D22E2122774F3C005E4E41 /* GeneratorSine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GeneratorSine.hpp; sourceTree = "<group>"; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		9E06994123B6418800F60DC9 /* AUParameter+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameter+make.swift"; sourceTree = "<group>"; };
 		9E55A577233925680020828C /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		9E55A585233B65B10020828C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E55A5A4233B83530020828C /* ParametersDescription.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ParametersDescription.plist; sourceTree = "<group>"; };
@@ -140,11 +145,15 @@
 		9E55A5B1233BB4650020828C /* FactoryPresetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetData.swift; sourceTree = "<group>"; };
 		9E55A5B3233BB4760020828C /* FactoryPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresets.swift; sourceTree = "<group>"; };
 		9E55A5B5233CB2000020828C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		9E55A5B8233CBF630020828C /* MinimoogAudioUnitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogAudioUnitError.swift; sourceTree = "<group>"; };
+		9E55A5B8233CBF630020828C /* AudioUnitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitError.swift; sourceTree = "<group>"; };
 		9E5910CC23434C1300268FE5 /* Module.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Module.swift; sourceTree = "<group>"; };
-		9E5910CE23434C5E00268FE5 /* InstrumentCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentCore.swift; sourceTree = "<group>"; };
-		9E5910D123434EC500268FE5 /* SignalRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalRouter.swift; sourceTree = "<group>"; };
-		9E5910D323434F2100268FE5 /* SignalNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalNode.swift; sourceTree = "<group>"; };
+		9E6197F92345F674006B6F79 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
+		9E6197FB2345F683006B6F79 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		9E6197FD2345F6D2006B6F79 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
+		9E6197FF2345F7F7006B6F79 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		9E6198012345F7FF006B6F79 /* Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Velocity.swift; sourceTree = "<group>"; };
+		9E6198032345FE6D006B6F79 /* ControlGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlGenerator.swift; sourceTree = "<group>"; };
+		9E6198052345FE8F006B6F79 /* ControlVoltage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlVoltage.swift; sourceTree = "<group>"; };
 		9EB4F0A62338BBC70090EB6F /* UIKnob.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIKnob.xib; sourceTree = "<group>"; };
 		9EDF05722342A9FB00BF5087 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		9EF974C8233507BF00A8C25C /* Minimoog.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Minimoog.storyboard; sourceTree = "<group>"; };
@@ -248,13 +257,6 @@
 				9304379221FB6459008D22E0 /* Minimoog.mm */,
 				93D22E1E22774D8E005E4E41 /* GeneratorBase.hpp */,
 				9380715C2277511100CCC52E /* GeneratorBase.cpp */,
-				93D22E2122774F3C005E4E41 /* GeneratorSine.hpp */,
-				93D22E2022774F3C005E4E41 /* GeneratorSine.cpp */,
-				93AEA5E3227AF1FE003B9B76 /* GeneratorSquare.hpp */,
-				93AEA5E2227AF1FE003B9B76 /* GeneratorSquare.cpp */,
-				93AEA5E6227AF211003B9B76 /* GeneratorSaw.hpp */,
-				93AEA5E5227AF211003B9B76 /* GeneratorSaw.cpp */,
-				9304379421FB6459008D22E0 /* MinimoogObjcWrapper-Bridging-Header.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -309,6 +311,7 @@
 			children = (
 				93A7BD5A22763ED300B984D0 /* ParameterDef.swift */,
 				9E55A5AA233BA35A0020828C /* ParameterTree+loadFromPlist.swift */,
+				9E06994123B6418800F60DC9 /* AUParameter+make.swift */,
 			);
 			path = Parameters;
 			sourceTree = "<group>";
@@ -327,8 +330,8 @@
 		9E5910C923434AD200268FE5 /* AudioUnit */ = {
 			isa = PBXGroup;
 			children = (
-				9304379521FB6459008D22E0 /* MinimoogAudioUnit.swift */,
-				9E55A5B8233CBF630020828C /* MinimoogAudioUnitError.swift */,
+				9304379521FB6459008D22E0 /* AudioUnit.swift */,
+				9E55A5B8233CBF630020828C /* AudioUnitError.swift */,
 			);
 			path = AudioUnit;
 			sourceTree = "<group>";
@@ -336,11 +339,9 @@
 		9E5910CA23434ADC00268FE5 /* Instrument */ = {
 			isa = PBXGroup;
 			children = (
-				9E5910D023434E9A00268FE5 /* Chain */,
+				9EDF05722342A9FB00BF5087 /* Instrument.swift */,
 				9E5910CB23434BF800268FE5 /* Modules */,
 				9304378D21FB6459008D22E0 /* Core */,
-				9EDF05722342A9FB00BF5087 /* Instrument.swift */,
-				9E5910CE23434C5E00268FE5 /* InstrumentCore.swift */,
 			);
 			path = Instrument;
 			sourceTree = "<group>";
@@ -348,18 +349,22 @@
 		9E5910CB23434BF800268FE5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				9E6197FD2345F6D2006B6F79 /* Sample.swift */,
+				9E6197FF2345F7F7006B6F79 /* Note.swift */,
+				9E6198012345F7FF006B6F79 /* Velocity.swift */,
+				9E6198052345FE8F006B6F79 /* ControlVoltage.swift */,
 				9E5910CC23434C1300268FE5 /* Module.swift */,
+				9E6197F92345F674006B6F79 /* Generator.swift */,
+				9E6198032345FE6D006B6F79 /* ControlGenerator.swift */,
+				9E6197FB2345F683006B6F79 /* Effect.swift */,
+				93D22E2122774F3C005E4E41 /* GeneratorSine.hpp */,
+				93D22E2022774F3C005E4E41 /* GeneratorSine.cpp */,
+				93AEA5E3227AF1FE003B9B76 /* GeneratorSquare.hpp */,
+				93AEA5E2227AF1FE003B9B76 /* GeneratorSquare.cpp */,
+				93AEA5E6227AF211003B9B76 /* GeneratorSaw.hpp */,
+				93AEA5E5227AF211003B9B76 /* GeneratorSaw.cpp */,
 			);
 			path = Modules;
-			sourceTree = "<group>";
-		};
-		9E5910D023434E9A00268FE5 /* Chain */ = {
-			isa = PBXGroup;
-			children = (
-				9E5910D123434EC500268FE5 /* SignalRouter.swift */,
-				9E5910D323434F2100268FE5 /* SignalNode.swift */,
-			);
-			path = Chain;
 			sourceTree = "<group>";
 		};
 		9EF974CA2335127A00A8C25C /* GUI */ = {
@@ -573,23 +578,28 @@
 				93AEA5E7227AF211003B9B76 /* GeneratorSaw.cpp in Sources */,
 				930437A621FB645A008D22E0 /* Preset.swift in Sources */,
 				9E5910CD23434C1300268FE5 /* Module.swift in Sources */,
+				9E6198062345FE8F006B6F79 /* ControlVoltage.swift in Sources */,
 				9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */,
-				9E55A5B9233CBF630020828C /* MinimoogAudioUnitError.swift in Sources */,
-				9E5910D423434F2100268FE5 /* SignalNode.swift in Sources */,
+				9E55A5B9233CBF630020828C /* AudioUnitError.swift in Sources */,
+				9E6197FE2345F6D2006B6F79 /* Sample.swift in Sources */,
 				9E55A5B2233BB4650020828C /* FactoryPresetData.swift in Sources */,
 				930437A321FB645A008D22E0 /* FactoryPresetsManager.swift in Sources */,
-				9E5910CF23434C5E00268FE5 /* InstrumentCore.swift in Sources */,
+				9E06994223B6418800F60DC9 /* AUParameter+make.swift in Sources */,
 				930437A121FB645A008D22E0 /* MinimoogBase.mm in Sources */,
+				9E6198002345F7F7006B6F79 /* Note.swift in Sources */,
+				9E6197FC2345F683006B6F79 /* Effect.swift in Sources */,
 				93D22E2222774F3C005E4E41 /* GeneratorSine.cpp in Sources */,
 				93AEA5E4227AF1FE003B9B76 /* GeneratorSquare.cpp in Sources */,
 				93A7BD5B22763ED300B984D0 /* ParameterDef.swift in Sources */,
-				930437A221FB645A008D22E0 /* MinimoogAudioUnit.swift in Sources */,
+				930437A221FB645A008D22E0 /* AudioUnit.swift in Sources */,
 				9E55A5AB233BA35A0020828C /* ParameterTree+loadFromPlist.swift in Sources */,
 				9E55A5B4233BB4760020828C /* FactoryPresets.swift in Sources */,
 				9EDF05732342A9FB00BF5087 /* Instrument.swift in Sources */,
 				930437A021FB645A008D22E0 /* Minimoog.mm in Sources */,
+				9E6198042345FE6D006B6F79 /* ControlGenerator.swift in Sources */,
+				9E6197FA2345F674006B6F79 /* Generator.swift in Sources */,
 				9380715D2277511100CCC52E /* GeneratorBase.cpp in Sources */,
-				9E5910D223434EC500268FE5 /* SignalRouter.swift in Sources */,
+				9E6198022345F7FF006B6F79 /* Velocity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

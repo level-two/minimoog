@@ -25,16 +25,6 @@ public:
     GeneratorBase();
     virtual ~GeneratorBase();
     
-    virtual void render(float *outL, float *outR) = 0;
-    
-    void setFrequency(float frequency) { m_frequency = frequency; }
-    void setAmplitude(float amplitude) { m_amplitude = amplitude; }
-    void setSampleRate(float sampleRate) { m_sampleRate = sampleRate; }
-    
-protected:
-    float m_frequency = 0;
-    float m_amplitude = 0;
-    float m_sampleRate = 0;
 };
 
 

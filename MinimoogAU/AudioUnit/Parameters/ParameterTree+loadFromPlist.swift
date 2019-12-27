@@ -15,37 +15,22 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import Foundation
+import AudioToolbox
 
 enum AUParameterTreeError: Error {
     case failedLoadParameters
 }
 
 extension AUParameterTree {
-    static func load(from plistFile: String) throws -> AUParameterTree {
+    init(from plistFile: String) throws {
         guard let plistUrl = Bundle.main.url(forResource: plistFile, withExtension: nil) else {
             throw AUParameterTreeError.failedLoadParameters
         }
 
         let data = try Data(contentsOf: plistUrl)
         let dic = try PropertyListDecoder().decode([String:ParameterDef].self, from: data)
-        let parameters = dic.map(AUParameterTree.createParameter)
+        let parameters = dic.map(AUParameter.make)
 
-        return AUParameterTree.createTree(withChildren: parameters)
-    }
-
-    fileprivate static func createParameter(_ identifier: String, _ parameterDef: ParameterDef) -> AUParameter {
-        return AUParameterTree.createParameter(
-            withIdentifier: identifier,
-            name: parameterDef.name,
-            address: parameterDef.address,
-            min: AUValue(parameterDef.minValue),
-            max: AUValue(parameterDef.maxValue),
-            unit: parameterDef.unit ?? .customUnit,
-            unitName: nil,
-            flags: [.flag_IsWritable, .flag_IsReadable],
-            valueStrings: parameterDef.valueStrings,
-            dependentParameters: nil
-        )
+        self.init(withChildren: parameters)
     }
 }

@@ -43,7 +43,7 @@ public class MinimoogViewController: AUViewController {
     }
 
     fileprivate var parameterObserverToken: AUParameterObserverToken?
-    fileprivate var audioUnit: MinimoogAudioUnit? {
+    fileprivate var audioUnit: AUAudioUnit? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self,
@@ -58,12 +58,13 @@ public class MinimoogViewController: AUViewController {
 
 extension MinimoogViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        self.audioUnit = try MinimoogAudioUnit(componentDescription: componentDescription, options: [])
+        let instrument = MinimoogInstrument()
+        self.audioUnit = try AudioUnit(componentDescription: componentDescription, options: [], instrument: instrument)
         return self.audioUnit!
     }
 }
 
-extension MinimoogViewController {
+fileprivate extension MinimoogViewController {
     func configureKnobs(with parameterTree: AUParameterTree) {
         knobs.forEach { knob in
             let address = AUParameterAddress(knob.parameterAddress)
@@ -97,7 +98,7 @@ extension MinimoogViewController {
     }
 }
 
-extension MinimoogViewController {
+fileprivate extension MinimoogViewController {
     func setParameterObserver() {
         parameterObserverToken = audioUnit?.parameterTree.token() { [weak self] address, value in
             DispatchQueue.main.async { [weak self] in
