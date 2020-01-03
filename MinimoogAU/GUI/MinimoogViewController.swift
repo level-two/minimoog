@@ -58,8 +58,8 @@ public class MinimoogViewController: AUViewController {
 
 extension MinimoogViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        let instrument = MinimoogInstrument()
-        self.audioUnit = try AudioUnit(componentDescription: componentDescription, options: [], instrument: instrument)
+        let instrument = Instrument()
+        self.audioUnit = try AudioUnit(instrument: instrument, componentDescription: componentDescription, options: [])
         return self.audioUnit!
     }
 }
@@ -92,7 +92,7 @@ fileprivate extension MinimoogViewController {
 
     @objc func onKnobValueChanged(knob: UIKnob) {
         audioUnit?
-            .parameterTree
+            .parameterTree?
             .parameter(withAddress: AUParameterAddress(knob.parameterAddress))?
             .setValue(AUValue(knob.value), originator: self.parameterObserverToken)
     }
@@ -100,7 +100,7 @@ fileprivate extension MinimoogViewController {
 
 fileprivate extension MinimoogViewController {
     func setParameterObserver() {
-        parameterObserverToken = audioUnit?.parameterTree.token() { [weak self] address, value in
+        parameterObserverToken = audioUnit?.parameterTree?.token() { [weak self] address, value in
             DispatchQueue.main.async { [weak self] in
                 self?.setKnobValue(address, value)
             }
@@ -109,7 +109,7 @@ fileprivate extension MinimoogViewController {
 
     func removeParameterObserver() {
         guard let token = parameterObserverToken else { return }
-        audioUnit?.parameterTree.removeParameterObserver(token)
+        audioUnit?.parameterTree?.removeParameterObserver(token)
         parameterObserverToken = nil
     }
 }

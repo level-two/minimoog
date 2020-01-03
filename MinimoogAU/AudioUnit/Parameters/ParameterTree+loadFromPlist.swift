@@ -22,8 +22,8 @@ enum AUParameterTreeError: Error {
 }
 
 extension AUParameterTree {
-    init(from plistFile: String) throws {
-        guard let plistUrl = Bundle.main.url(forResource: plistFile, withExtension: nil) else {
+    class func createTree(from plistFile: String, bundle: Bundle = .main) throws -> AUParameterTree {
+        guard let plistUrl = bundle.url(forResource: plistFile, withExtension: nil) else {
             throw AUParameterTreeError.failedLoadParameters
         }
 
@@ -31,6 +31,6 @@ extension AUParameterTree {
         let dic = try PropertyListDecoder().decode([String:ParameterDef].self, from: data)
         let parameters = dic.map(AUParameter.make)
 
-        self.init(withChildren: parameters)
+        return AUParameterTree.createTree(withChildren: parameters)
     }
 }

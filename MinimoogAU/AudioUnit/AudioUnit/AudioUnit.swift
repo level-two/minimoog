@@ -15,10 +15,12 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import UIKit
 import AudioToolbox
+import AVFoundation
 
-class AudioUnit: AUAudioUnit {fileprivate var instrument: InstrumentType
+class AudioUnit: AUAudioUnit {
+
+    fileprivate var instrument: Instrument
 
     init(instrument: Instrument, componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
         guard let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
@@ -28,7 +30,7 @@ class AudioUnit: AUAudioUnit {fileprivate var instrument: InstrumentType
         self.instrument = instrument
         inputBus = try AUAudioUnitBus(format: audioFormat)
         outputBus = try AUAudioUnitBus(format: audioFormat)
-        curParameterTree = try AUParameterTree.load(from: "ParametersDescription.plist")
+        curParameterTree = try AUParameterTree.createTree(from: "ParametersDescription.plist")
 
         try super.init(componentDescription: componentDescription, options: options)
 
@@ -63,16 +65,7 @@ class AudioUnit: AUAudioUnit {fileprivate var instrument: InstrumentType
     }
 
     override public var internalRenderBlock: AUInternalRenderBlock {
-        return { [weak self] actionFlags, timestamp, frameCount, outputBusNumber, outputData, realtimeEventListHead, pullInputBlock -> AUAudioUnitStatus in
-            guard let self = self else { return kAudioUnitErr_Uninitialized }
-            return self.instrument.render(actionFlags: actionFlags,
-                                          timestamp: timestamp,
-                                          frameCount: frameCount,
-                                          outputBusNumber: outputBusNumber,
-                                          outputData: outputData,
-                                          realtimeEventListHead: realtimeEventListHead,
-                                          pullInputBlock: pullInputBlock)
-        }
+        return instrument.renderBlock
     }
 
 
@@ -144,11 +137,11 @@ extension AudioUnit {
 extension AudioUnit {
     fileprivate func setParameterTreeObservers() {
         curParameterTree.implementorValueObserver = { [weak self] param, value in
-            self?.instrument.setParameter(param.address, value: value)
+            self?.instrument.setParameter(address: param.address, value: value)
         }
 
         curParameterTree.implementorValueProvider = { [weak self] param in
-            return self?.instrument.getParameter(param.address) ?? AUValue(0)
+            return self?.instrument.getParameter(address: param.address) ?? AUValue(0)
         }
 
         curParameterTree.implementorStringFromValueCallback = { param, valuePtr in
