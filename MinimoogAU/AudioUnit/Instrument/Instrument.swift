@@ -10,30 +10,40 @@ import Foundation
 import AVFoundation
 
 class Instrument {
+    enum InstrumentError: Error {
+        case audioFormatNotSet
+    }
+
     var audioFormat: AVAudioFormat?
+    fileprivate var musicalContextBlock: AUHostMusicalContextBlock?
+    fileprivate var transportStateBlock: AUHostTransportStateBlock?
+    fileprivate var outputEventBlock: AUMIDIOutputEventBlock?
+    // fileprivate var transportStateIsMoving: Bool = false
+    fileprivate var audioBufferList: UnsafeMutableAudioBufferListPointer?
+    fileprivate var pcmBuffer: AVAudioPCMBuffer? {
+        didSet {
+            audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
+        }
+    }
 
-    fileprivate var musicalContext: AUHostMusicalContextBlock?
-    fileprivate var transportState: AUHostTransportStateBlock?
-    fileprivate var outputEvent: AUMIDIOutputEventBlock?
-    fileprivate var pcmBuffer: AVAudioPCMBuffer?
-    // fileprivate var audioBufferList: UnsafePointer<AudioBufferList>
-    fileprivate var transportStateIsMoving: Bool = false
-
-//    init(with audioFormat: AVAudioFormat) {
-//        self.audioFormat = audioFormat
-        // TODO instrument.setSampleRate(audioFormat.sampleRate)
-//    }
-
-    func allocateRenderResources() throws {
-        
+    func allocateRenderResources(musicalContextBlock: AUHostMusicalContextBlock?,
+                                 outputEventBlock: AUMIDIOutputEventBlock?,
+                                 transportStateBlock: AUHostTransportStateBlock?,
+                                 maxFrames: AVAudioFrameCount) throws {
+        guard let audioFormat = audioFormat else {
+            throw InstrumentError.audioFormatNotSet
+        }
+        self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: maxFrames)
+        self.musicalContextBlock = musicalContextBlock
+        self.outputEventBlock = outputEventBlock
+        self.transportStateBlock = transportStateBlock
     }
 
     func deallocateRenderResources() {
-        musicalContext = nil
-        outputEvent = nil
-        transportState = nil
+        musicalContextBlock = nil
+        outputEventBlock = nil
+        transportStateBlock = nil
         pcmBuffer = nil
-        //audioBufferList = nil
         // TODO instrument.deallocateRenderResources()
     }
 
@@ -56,70 +66,63 @@ class Instrument {
                               pullInputBlock:AURenderPullInputBlock?)
                               -> AUAudioUnitStatus in
 
-            guard let self = self else { return kAudioUnitErr_Uninitialized }
+            guard let self = self,
+                let audioBufferList = self.audioBufferList
+                else { return kAudioUnitErr_Uninitialized }
 
-//            self.prepareOutputBufferList(outputData, frameCount, true)
-//
-//            let now = AUEventSampleTime(timestamp.mSampleTime)
-//            let event = realtimeEventListHead
-//            var framesRemaining = frameCount
-//
-//            while framesRemaining > 0 {
-//                // If there are no more events, we can process the entire remaining segment and exit
-//                if event == nullptr {
-//                    let bufferOffset = frameCount - framesRemaining
-//                    self.renderSegmentFrames(framesRemaining, outputData, bufferOffset)
-//                    break
-//                }
-//
-//                // **** start late events late
-//                let timeZero = AUEventSampleTime(0)
-//                let headEventTime = event.head.eventSampleTime
-//                let framesThisSegment = AUAudioFrameCount(max(timeZero, headEventTime - now))
-//
-//                // Compute everything before the next event.
-//                if framesThisSegment > 0 {
-//                    let bufferOffset = frameCount - framesRemaining
-//                    self.renderSegmentFrames(framesThisSegment, outputData, bufferOffset)
-//
-//                    // Advance frames.
-//                    framesRemaining -= framesThisSegment
-//
-//                    // Advance time.
-//                    now += AUEventSampleTime(framesThisSegment)
-//                }
-//
-//                self.performAllSimultaneousEvents(now, event)
-//            }
+            let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
+
+            self.prepare(outBufferList: outBufferList, using: audioBufferList, zeroFill: false)
+
+            var lastEventTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
+            var framesRemaining = frameCount
+
+            var event = realtimeEventListHead?.pointee
+            while let curEvent = event {
+                let curEventTime = curEvent.head.eventSampleTime
+                let framesInSegment = AUAudioFrameCount(curEventTime - lastEventTime)
+
+                let bufferOffset = frameCount - framesRemaining
+                self.renderFrames(to: outBufferList, framesCount: framesInSegment, startingFrom: bufferOffset)
+
+                self.perform(event: curEvent)
+
+                lastEventTime = curEventTime
+                framesRemaining -= framesInSegment
+                event = curEvent.head.next?.pointee
+            }
+
+            let bufferOffset = frameCount - framesRemaining
+            self.renderFrames(to: outBufferList, framesCount: framesRemaining, startingFrom: bufferOffset)
 
             return noErr
         }
     }
 }
 
-extension Instrument {
-    fileprivate func prepareOutputBufferList(outBufferList: inout AudioBufferList,
-                                             frameCount: AVAudioFrameCount,
-                                             zeroFill: Bool) {
-//        let byteSize = frameCount * sizeOf(Float.self)
-//
-//        for idx in [0 ..< outBufferList.mNumberBuffers] {
-//            outBufferList.mBuffers[idx].mNumberChannels = m_audioBufferList.mBuffers[idx].mNumberChannels
-//            outBufferList.mBuffers[idx].mDataByteSize = byteSize
-//
-//            if outBufferList.mBuffers[idx].mData == nullptr {
-//                outBufferList.mBuffers[idx].mData = m_audioBufferList.mBuffers[i].mData
-//            }
-//
-//            if zeroFill {
-//                memset(outBufferList.mBuffers[i].mData, 0, byteSize)
-//            }
-//        }
+fileprivate extension Instrument {
+
+    func prepare(outBufferList: UnsafeMutableAudioBufferListPointer,
+                 using audioBufferList: UnsafeMutableAudioBufferListPointer,
+                 zeroFill: Bool) {
+
+        for idx in outBufferList.indices {
+            outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
+            outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
+
+            if outBufferList[idx].mData == nil {
+                outBufferList[idx].mData = audioBufferList[idx].mData
+            }
+
+            if zeroFill {
+                memset(outBufferList[idx].mData, 0, Int(outBufferList[idx].mDataByteSize))
+            }
+        }
     }
 
-    fileprivate func renderSegmentFrames(frameCount: AUAudioFrameCount,
-                                         outputData: AudioBufferList,
-                                         bufferOffset: AUAudioFrameCount) {
+    func renderFrames(to outBufferList: UnsafeMutableAudioBufferListPointer,
+                      framesCount: AUAudioFrameCount,
+                      startingFrom bufferOffset: AUAudioFrameCount) {
 //        for idx in [0 ..< frameCount] {
 //            float* outL = (float*)outputData.mBuffers[0].mData + bufferOffset + idx
 //            float* outR = (float*)outputData.mBuffers[1].mData + bufferOffset + ikdx
@@ -127,21 +130,20 @@ extension Instrument {
 //        }
     }
 
-    fileprivate func performAllSimultaneousEvents(now: AUEventSampleTime, event: AURenderEvent) {
-//        repeat {
-//            switch (event.head.eventType) {
-//            case .parameter:
-//                let paramEvent = event.parameter
-//                setParameter(paramEvent.parameterAddress, paramEvent.value)
-//            case .parameterRamp:
-//                let paramEvent = event.parameter
-//                startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
-//            case .MIDI:
-//                handleMIDIEvent(event.MIDI)
-//            default:
-//                break
-//            }
-//            event = event.head.next
-//        } while (event && event.head.eventSampleTime <= now)
+    func perform(event: AURenderEvent) {
+        switch (event.head.eventType) {
+        case .parameter:
+            let paramEvent = event.parameter
+            setParameter(address: paramEvent.parameterAddress, value: paramEvent.value)
+        case .parameterRamp:
+            //let paramEvent = event.parameter
+            //startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
+            break
+        case .MIDI:
+            //handleMIDIEvent(event.MIDI)
+            break
+        default:
+            break
+        }
     }
 }

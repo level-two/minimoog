@@ -56,7 +56,10 @@ class AudioUnit: AUAudioUnit {
 
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
-        try instrument.allocateRenderResources()
+        try instrument.allocateRenderResources(musicalContextBlock: self.musicalContextBlock,
+                                               outputEventBlock: self.midiOutputEventBlock,
+                                               transportStateBlock: self.transportStateBlock,
+                                               maxFrames: self.maximumFramesToRender)
     }
 
     override public func deallocateRenderResources() {
