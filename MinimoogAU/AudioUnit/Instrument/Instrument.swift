@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class Instrument {
+final class Instrument {
     enum InstrumentError: Error {
         case audioFormatNotSet
     }

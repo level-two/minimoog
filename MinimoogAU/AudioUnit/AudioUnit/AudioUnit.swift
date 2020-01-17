@@ -18,11 +18,44 @@
 import AudioToolbox
 import AVFoundation
 
-class AudioUnit: AUAudioUnit {
-
+final class AudioUnit: AUAudioUnit {
     fileprivate var instrument: Instrument
+    fileprivate var curParameterTree: AUParameterTree
+    fileprivate var factoryPresetsManager = FactoryPresetsManager()
+    fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
+    fileprivate var curPresetName = ""
 
-    init(instrument: Instrument, componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
+    private var inputBus: AUAudioUnitBus
+    private var outputBus: AUAudioUnitBus
+
+    private lazy var curInputBusses: AUAudioUnitBusArray = {
+        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
+    }()
+
+    private lazy var curOutputBusses: AUAudioUnitBusArray = {
+        return AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
+    }()
+
+    override public var parameterTree: AUParameterTree {
+        return self.curParameterTree
+    }
+
+    override public var inputBusses: AUAudioUnitBusArray {
+        return self.curInputBusses
+    }
+
+    override public var outputBusses: AUAudioUnitBusArray {
+        return self.curOutputBusses
+    }
+
+    override public var internalRenderBlock: AUInternalRenderBlock {
+        return instrument.renderBlock
+    }
+
+    init(instrument: Instrument,
+         componentDescription: AudioComponentDescription,
+         options: AudioComponentInstantiationOptions = []) throws {
+
         guard let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
             throw AudioUnitError.invalidAudioFormat
         }
@@ -42,18 +75,6 @@ class AudioUnit: AUAudioUnit {
         setParameterTreeObservers()
     }
 
-    override public var parameterTree: AUParameterTree {
-        return self.curParameterTree
-    }
-
-    override public var inputBusses: AUAudioUnitBusArray {
-        return self.curInputBusses
-    }
-
-    override public var outputBusses: AUAudioUnitBusArray {
-        return self.curOutputBusses
-    }
-
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
         try instrument.allocateRenderResources(musicalContextBlock: self.musicalContextBlock,
@@ -66,27 +87,6 @@ class AudioUnit: AUAudioUnit {
         super.deallocateRenderResources()
         instrument.deallocateRenderResources()
     }
-
-    override public var internalRenderBlock: AUInternalRenderBlock {
-        return instrument.renderBlock
-    }
-
-
-    private var inputBus: AUAudioUnitBus
-    private var outputBus: AUAudioUnitBus
-
-    private lazy var curInputBusses: AUAudioUnitBusArray = {
-        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
-    }()
-
-    private lazy var curOutputBusses: AUAudioUnitBusArray = {
-        return AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
-    }()
-
-    fileprivate var curParameterTree: AUParameterTree
-    fileprivate var factoryPresetsManager = FactoryPresetsManager()
-    fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
-    fileprivate var curPresetName = ""
 }
 
 extension AudioUnit {
@@ -137,8 +137,8 @@ extension AudioUnit {
     }
 }
 
-extension AudioUnit {
-    fileprivate func setParameterTreeObservers() {
+fileprivate extension AudioUnit {
+    func setParameterTreeObservers() {
         curParameterTree.implementorValueObserver = { [weak self] param, value in
             self?.instrument.setParameter(address: param.address, value: value)
         }
