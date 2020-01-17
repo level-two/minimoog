@@ -10,11 +10,8 @@ import Foundation
 import AVFoundation
 
 final class Instrument {
-    enum InstrumentError: Error {
-        case audioFormatNotSet
-    }
-
-    var audioFormat: AVAudioFormat?
+    fileprivate let module: Module
+    fileprivate let audioFormat: AVAudioFormat
     fileprivate var musicalContextBlock: AUHostMusicalContextBlock?
     fileprivate var transportStateBlock: AUHostTransportStateBlock?
     fileprivate var outputEventBlock: AUMIDIOutputEventBlock?
@@ -26,13 +23,15 @@ final class Instrument {
         }
     }
 
+    init(audioFormat: AVAudioFormat, module: Module) {
+        self.audioFormat = audioFormat
+        self.module = module
+    }
+
     func allocateRenderResources(musicalContextBlock: AUHostMusicalContextBlock?,
                                  outputEventBlock: AUMIDIOutputEventBlock?,
                                  transportStateBlock: AUHostTransportStateBlock?,
                                  maxFrames: AVAudioFrameCount) throws {
-        guard let audioFormat = audioFormat else {
-            throw InstrumentError.audioFormatNotSet
-        }
         self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: maxFrames)
         self.musicalContextBlock = musicalContextBlock
         self.outputEventBlock = outputEventBlock
@@ -48,12 +47,11 @@ final class Instrument {
     }
 
     func setParameter(address: AUParameterAddress, value: AUValue) {
-        // TODO instrument.setParameter(address, value)
+        module.setParameter(address: address, value: value)
     }
 
     func getParameter(address: AUParameterAddress) -> AUValue {
-        return 0
-        // TODO return instrument.getParameter(address)
+        return module.getParameter(address: address)
     }
 
     var renderBlock: AUInternalRenderBlock {
@@ -123,11 +121,17 @@ fileprivate extension Instrument {
     func renderFrames(to outBufferList: UnsafeMutableAudioBufferListPointer,
                       framesCount: AUAudioFrameCount,
                       startingFrom bufferOffset: AUAudioFrameCount) {
-//        for idx in [0 ..< frameCount] {
-//            float* outL = (float*)outputData.mBuffers[0].mData + bufferOffset + idx
-//            float* outR = (float*)outputData.mBuffers[1].mData + bufferOffset + ikdx
-//            doRender(outL, outR)
-//        }
+
+        guard let leftBufPtr = outBufferList[0].mData?.assumingMemoryBound(to: Float32.self),
+            let rightBufPtr = outBufferList[1].mData?.assumingMemoryBound(to: Float32.self)
+            else { return }
+
+        for idx in 0..<framesCount {
+            let leftSamplePtr = leftBufPtr + Int(bufferOffset + idx)
+            let rightSamplePtr = rightBufPtr + Int(bufferOffset + idx)
+            module.render(leftSample: leftSamplePtr, rightSample: rightSamplePtr)
+        }
+
     }
 
     func perform(event: AURenderEvent) {
@@ -136,11 +140,11 @@ fileprivate extension Instrument {
             let paramEvent = event.parameter
             setParameter(address: paramEvent.parameterAddress, value: paramEvent.value)
         case .parameterRamp:
-            //let paramEvent = event.parameter
-            //startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
+            let paramEvent = event.parameter
+//            startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
             break
         case .MIDI:
-            //handleMIDIEvent(event.MIDI)
+//            handleMIDIEvent(event.MIDI)
             break
         default:
             break

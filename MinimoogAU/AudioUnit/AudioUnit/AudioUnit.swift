@@ -52,14 +52,11 @@ final class AudioUnit: AUAudioUnit {
         return instrument.renderBlock
     }
 
-    init(instrument: Instrument,
+    init(audioFormat: AVAudioFormat,
+         instrument: Instrument,
          componentDescription: AudioComponentDescription,
          options: AudioComponentInstantiationOptions = []) throws {
-
-        guard let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
-            throw AudioUnitError.invalidAudioFormat
-        }
-
+        
         self.instrument = instrument
         inputBus = try AUAudioUnitBus(format: audioFormat)
         outputBus = try AUAudioUnitBus(format: audioFormat)
@@ -68,8 +65,6 @@ final class AudioUnit: AUAudioUnit {
         try super.init(componentDescription: componentDescription, options: options)
 
         maximumFramesToRender = 512
-
-        instrument.audioFormat = audioFormat
 
         currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
         setParameterTreeObservers()

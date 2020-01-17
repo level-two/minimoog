@@ -15,10 +15,10 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import Foundation
 import UIKit
 import CoreAudioKit
 import UIControls
+import AVFoundation
 
 public class MinimoogViewController: AUViewController {
     @IBOutlet var knobs: [UIKnob]!
@@ -58,8 +58,15 @@ public class MinimoogViewController: AUViewController {
 
 extension MinimoogViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        let instrument = Instrument()
-        self.audioUnit = try AudioUnit(instrument: instrument, componentDescription: componentDescription, options: [])
+        guard let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
+            throw AudioUnitError.invalidAudioFormat
+        }
+        let module = SineModule(sampleRate: Float32(audioFormat.sampleRate))
+        let instrument = Instrument(audioFormat: audioFormat, module: module)
+        self.audioUnit = try AudioUnit(audioFormat: audioFormat,
+                                       instrument: instrument,
+                                       componentDescription: componentDescription,
+                                       options: [])
         return self.audioUnit!
     }
 }
