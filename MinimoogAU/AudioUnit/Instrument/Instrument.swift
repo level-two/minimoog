@@ -17,11 +17,7 @@ final class Instrument {
     fileprivate var outputEventBlock: AUMIDIOutputEventBlock?
     // fileprivate var transportStateIsMoving: Bool = false
     fileprivate var audioBufferList: UnsafeMutableAudioBufferListPointer?
-    fileprivate var pcmBuffer: AVAudioPCMBuffer? {
-        didSet {
-            audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
-        }
-    }
+    fileprivate var pcmBuffer: AVAudioPCMBuffer?
 
     init(audioFormat: AVAudioFormat, module: Module) {
         self.audioFormat = audioFormat
@@ -33,6 +29,9 @@ final class Instrument {
                                  transportStateBlock: AUHostTransportStateBlock?,
                                  maxFrames: AVAudioFrameCount) throws {
         self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: maxFrames)
+        self.pcmBuffer?.frameLength = maxFrames
+        self.audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
+
         self.musicalContextBlock = musicalContextBlock
         self.outputEventBlock = outputEventBlock
         self.transportStateBlock = transportStateBlock
@@ -43,6 +42,7 @@ final class Instrument {
         outputEventBlock = nil
         transportStateBlock = nil
         pcmBuffer = nil
+        audioBufferList = nil
         // TODO instrument.deallocateRenderResources()
     }
 
@@ -80,6 +80,10 @@ final class Instrument {
                 let curEventTime = curEvent.head.eventSampleTime
                 let framesInSegment = AUAudioFrameCount(curEventTime - lastEventTime)
 
+                if framesInSegment > framesRemaining {
+                    break
+                }
+
                 let bufferOffset = frameCount - framesRemaining
                 self.renderFrames(to: outBufferList, framesCount: framesInSegment, startingFrom: bufferOffset)
 
@@ -105,10 +109,9 @@ fileprivate extension Instrument {
                  zeroFill: Bool) {
 
         for idx in outBufferList.indices {
-            outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
-            outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
-
             if outBufferList[idx].mData == nil {
+                outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
+                outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
                 outBufferList[idx].mData = audioBufferList[idx].mData
             }
 

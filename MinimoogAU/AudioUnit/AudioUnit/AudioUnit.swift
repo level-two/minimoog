@@ -64,8 +64,6 @@ final class AudioUnit: AUAudioUnit {
 
         try super.init(componentDescription: componentDescription, options: options)
 
-        maximumFramesToRender = 512
-
         currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
         setParameterTreeObservers()
     }
