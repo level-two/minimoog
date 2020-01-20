@@ -54,6 +54,8 @@ final class Instrument {
         return module.getParameter(address: address)
     }
 
+    func handle(midiEvent: )
+
     var renderBlock: AUInternalRenderBlock {
         return { [weak self] (actionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
                               timestamp: UnsafePointer<AudioTimeStamp>,
@@ -147,7 +149,7 @@ fileprivate extension Instrument {
 //            startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
             break
         case .MIDI:
-//            handleMIDIEvent(event.MIDI)
+            handle(midiEvent: MidiEvent(from: event.MIDI))
             break
         default:
             break

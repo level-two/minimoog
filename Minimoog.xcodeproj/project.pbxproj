@@ -38,6 +38,7 @@
 		9E55A5B9233CBF630020828C /* AudioUnitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A5B8233CBF630020828C /* AudioUnitError.swift */; };
 		9EB4F0A72338BBC70090EB6F /* UIKnob.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4F0A62338BBC70090EB6F /* UIKnob.xib */; };
 		9EDF05732342A9FB00BF5087 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF05722342A9FB00BF5087 /* Instrument.swift */; };
+		9EE9DBD623D5E042009A953D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBD523D5E042009A953D /* Channel.swift */; };
 		9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF974C8233507BF00A8C25C /* Minimoog.storyboard */; };
 		9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF974CC233512B500A8C25C /* MinimoogViewController.swift */; };
 		9EF974D72338B9BB00A8C25C /* UIControls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF974D52338B9BB00A8C25C /* UIControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -150,6 +151,7 @@
 		9E6198052345FE8F006B6F79 /* ControlVoltage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlVoltage.swift; sourceTree = "<group>"; };
 		9EB4F0A62338BBC70090EB6F /* UIKnob.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIKnob.xib; sourceTree = "<group>"; };
 		9EDF05722342A9FB00BF5087 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
+		9EE9DBD523D5E042009A953D /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		9EF974C8233507BF00A8C25C /* Minimoog.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Minimoog.storyboard; sourceTree = "<group>"; };
 		9EF974CC233512B500A8C25C /* MinimoogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogViewController.swift; sourceTree = "<group>"; };
 		9EF974D32338B9BB00A8C25C /* UIControls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIControls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -337,6 +339,7 @@
 				9EDF05722342A9FB00BF5087 /* Instrument.swift */,
 				9E5910CC23434C1300268FE5 /* Module.swift */,
 				9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */,
+				9EE9DBD523D5E042009A953D /* Channel.swift */,
 				9E4EFA4A23D1EDF8005089D2 /* Note.swift */,
 				9E6198012345F7FF006B6F79 /* Velocity.swift */,
 				9E5910CB23434BF800268FE5 /* Modules */,
@@ -578,6 +581,7 @@
 				9E4EFA4B23D1EDF8005089D2 /* Note.swift in Sources */,
 				930437A321FB645A008D22E0 /* FactoryPresetsManager.swift in Sources */,
 				9E4EFA4623D1D57F005089D2 /* Sample.swift in Sources */,
+				9EE9DBD623D5E042009A953D /* Channel.swift in Sources */,
 				9E4EFA4423D1D56A005089D2 /* Module.swift in Sources */,
 				9E4EFA4723D1D588005089D2 /* Velocity.swift in Sources */,
 				9E06994223B6418800F60DC9 /* AUParameter+make.swift in Sources */,
