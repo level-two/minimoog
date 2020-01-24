@@ -20,11 +20,11 @@
 		93A7BD5B22763ED300B984D0 /* ParameterDef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93A7BD5A22763ED300B984D0 /* ParameterDef.swift */; };
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E06994223B6418800F60DC9 /* AUParameter+make.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E06994123B6418800F60DC9 /* AUParameter+make.swift */; };
+		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
+		9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FF23DB324200D0C9B5 /* Channels.swift */; };
+		9E26DA0623DB38AD00D0C9B5 /* MidiDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26DA0523DB38AD00D0C9B5 /* MidiDataParser.swift */; };
 		9E4EFA4423D1D56A005089D2 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5910CC23434C1300268FE5 /* Module.swift */; };
 		9E4EFA4623D1D57F005089D2 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6197FD2345F6D2006B6F79 /* Sample.swift */; };
-		9E4EFA4723D1D588005089D2 /* Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6198012345F7FF006B6F79 /* Velocity.swift */; };
-		9E4EFA4923D1EDCA005089D2 /* MidiEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */; };
-		9E4EFA4B23D1EDF8005089D2 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4A23D1EDF8005089D2 /* Note.swift */; };
 		9E4EFA4D23D1F077005089D2 /* SineModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4C23D1F077005089D2 /* SineModule.swift */; };
 		9E55A578233925680020828C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A577233925680020828C /* NibLoadable.swift */; };
 		9E55A57D233AB99C0020828C /* UIControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* UIControls.framework */; };
@@ -38,7 +38,15 @@
 		9E55A5B9233CBF630020828C /* AudioUnitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A5B8233CBF630020828C /* AudioUnitError.swift */; };
 		9EB4F0A72338BBC70090EB6F /* UIKnob.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4F0A62338BBC70090EB6F /* UIKnob.xib */; };
 		9EDF05732342A9FB00BF5087 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDF05722342A9FB00BF5087 /* Instrument.swift */; };
-		9EE9DBD623D5E042009A953D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBD523D5E042009A953D /* Channel.swift */; };
+		9EE9DBE023D5F1A2009A953D /* Midi.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE9DBDE23D5F1A2009A953D /* Midi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EE9DBE423D5F1B5009A953D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBD523D5E042009A953D /* Channel.swift */; };
+		9EE9DBE523D5F1B5009A953D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4A23D1EDF8005089D2 /* Note.swift */; };
+		9EE9DBE623D5F1B5009A953D /* MidiEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */; };
+		9EE9DBE723D5F1B5009A953D /* Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6198012345F7FF006B6F79 /* Velocity.swift */; };
+		9EE9DBEA23D5F224009A953D /* Note+frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBE923D5F224009A953D /* Note+frequency.swift */; };
+		9EE9DBEB23D5F23E009A953D /* Midi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */; };
+		9EE9DBED23D5F298009A953D /* ControlValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBEC23D5F298009A953D /* ControlValue.swift */; };
+		9EE9DBEF23D5F2BD009A953D /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBEE23D5F2BD009A953D /* Pitch.swift */; };
 		9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF974C8233507BF00A8C25C /* Minimoog.storyboard */; };
 		9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF974CC233512B500A8C25C /* MinimoogViewController.swift */; };
 		9EF974D72338B9BB00A8C25C /* UIControls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF974D52338B9BB00A8C25C /* UIControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,30 +54,6 @@
 		9EF974DB2338B9BB00A8C25C /* UIControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* UIControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9EF974E02338B9CE00A8C25C /* UIKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9310B426227045780039667E /* UIKnob.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		93B83C422272616900655F1C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9304374521FB6117008D22E0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9304376521FB619D008D22E0;
-			remoteInfo = MinimoogAU;
-		};
-		9E55A57E233AB9A30020828C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9304374521FB6117008D22E0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9EF974D22338B9BB00A8C25C;
-			remoteInfo = UIControls;
-		};
-		9EF974D82338B9BB00A8C25C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9304374521FB6117008D22E0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9EF974D22338B9BB00A8C25C;
-			remoteInfo = UIControls;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		93B83C442272616900655F1C /* Embed App Extensions */ = {
@@ -131,6 +115,9 @@
 		93D22E2122774F3C005E4E41 /* GeneratorSine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GeneratorSine.hpp; sourceTree = "<group>"; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		9E06994123B6418800F60DC9 /* AUParameter+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameter+make.swift"; sourceTree = "<group>"; };
+		9E26D9FD23DB321200D0C9B5 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
+		9E26D9FF23DB324200D0C9B5 /* Channels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
+		9E26DA0523DB38AD00D0C9B5 /* MidiDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiDataParser.swift; sourceTree = "<group>"; };
 		9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiEvent.swift; sourceTree = "<group>"; };
 		9E4EFA4A23D1EDF8005089D2 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		9E4EFA4C23D1F077005089D2 /* SineModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineModule.swift; sourceTree = "<group>"; };
@@ -152,6 +139,12 @@
 		9EB4F0A62338BBC70090EB6F /* UIKnob.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIKnob.xib; sourceTree = "<group>"; };
 		9EDF05722342A9FB00BF5087 /* Instrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		9EE9DBD523D5E042009A953D /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		9EE9DBDC23D5F1A2009A953D /* Midi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Midi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EE9DBDE23D5F1A2009A953D /* Midi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Midi.h; sourceTree = "<group>"; };
+		9EE9DBDF23D5F1A2009A953D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EE9DBE923D5F224009A953D /* Note+frequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+frequency.swift"; sourceTree = "<group>"; };
+		9EE9DBEC23D5F298009A953D /* ControlValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlValue.swift; sourceTree = "<group>"; };
+		9EE9DBEE23D5F2BD009A953D /* Pitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
 		9EF974C8233507BF00A8C25C /* Minimoog.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Minimoog.storyboard; sourceTree = "<group>"; };
 		9EF974CC233512B500A8C25C /* MinimoogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogViewController.swift; sourceTree = "<group>"; };
 		9EF974D32338B9BB00A8C25C /* UIControls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UIControls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,8 +166,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EE9DBEB23D5F23E009A953D /* Midi.framework in Frameworks */,
 				9E55A57D233AB99C0020828C /* UIControls.framework in Frameworks */,
 				9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EE9DBD923D5F1A2009A953D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +195,7 @@
 				9304374F21FB6117008D22E0 /* Minimoog */,
 				9304376721FB619D008D22E0 /* MinimoogAU */,
 				9EF974D42338B9BB00A8C25C /* UIControls */,
+				9EE9DBDD23D5F1A2009A953D /* Midi */,
 				9304374E21FB6117008D22E0 /* Products */,
 				E7F418A78BB1084BAE2D5E5F /* Frameworks */,
 			);
@@ -205,6 +207,7 @@
 				9304374D21FB6117008D22E0 /* Minimoog.app */,
 				9304376621FB619D008D22E0 /* MinimoogAU.appex */,
 				9EF974D32338B9BB00A8C25C /* UIControls.framework */,
+				9EE9DBDC23D5F1A2009A953D /* Midi.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,8 +277,17 @@
 				9E55A5AF233BA3A00020828C /* Presets */,
 				9E55A5AE233BA38C0020828C /* Parameters */,
 				9E4EFA4C23D1F077005089D2 /* SineModule.swift */,
+				9EE9DBE923D5F224009A953D /* Note+frequency.swift */,
 			);
 			path = AudioUnit;
+			sourceTree = "<group>";
+		};
+		9E26D9FC23DB31FB00D0C9B5 /* Exntesions */ = {
+			isa = PBXGroup;
+			children = (
+				9E26D9FD23DB321200D0C9B5 /* Option.swift */,
+			);
+			path = Exntesions;
 			sourceTree = "<group>";
 		};
 		9E55A580233B650E0020828C /* UIKnob */ = {
@@ -338,10 +350,6 @@
 			children = (
 				9EDF05722342A9FB00BF5087 /* Instrument.swift */,
 				9E5910CC23434C1300268FE5 /* Module.swift */,
-				9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */,
-				9EE9DBD523D5E042009A953D /* Channel.swift */,
-				9E4EFA4A23D1EDF8005089D2 /* Note.swift */,
-				9E6198012345F7FF006B6F79 /* Velocity.swift */,
 				9E5910CB23434BF800268FE5 /* Modules */,
 				9304378D21FB6459008D22E0 /* Core */,
 			);
@@ -364,6 +372,32 @@
 				93AEA5E5227AF211003B9B76 /* GeneratorSaw.cpp */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		9EE9DBDD23D5F1A2009A953D /* Midi */ = {
+			isa = PBXGroup;
+			children = (
+				9E26D9FC23DB31FB00D0C9B5 /* Exntesions */,
+				9EE9DBE823D5F1BE009A953D /* Sources */,
+				9EE9DBDE23D5F1A2009A953D /* Midi.h */,
+				9EE9DBDF23D5F1A2009A953D /* Info.plist */,
+			);
+			path = Midi;
+			sourceTree = "<group>";
+		};
+		9EE9DBE823D5F1BE009A953D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9E26DA0523DB38AD00D0C9B5 /* MidiDataParser.swift */,
+				9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */,
+				9EE9DBD523D5E042009A953D /* Channel.swift */,
+				9E26D9FF23DB324200D0C9B5 /* Channels.swift */,
+				9E4EFA4A23D1EDF8005089D2 /* Note.swift */,
+				9E6198012345F7FF006B6F79 /* Velocity.swift */,
+				9EE9DBEC23D5F298009A953D /* ControlValue.swift */,
+				9EE9DBEE23D5F2BD009A953D /* Pitch.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		9EF974CA2335127A00A8C25C /* GUI */ = {
@@ -401,6 +435,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		9EE9DBD723D5F1A2009A953D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EE9DBE023D5F1A2009A953D /* Midi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9EF974CE2338B9BB00A8C25C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,8 +467,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				93B83C432272616900655F1C /* PBXTargetDependency */,
-				9EF974D92338B9BB00A8C25C /* PBXTargetDependency */,
 			);
 			name = Minimoog;
 			productName = Minimoog;
@@ -444,12 +484,29 @@
 			buildRules = (
 			);
 			dependencies = (
-				9E55A57F233AB9A30020828C /* PBXTargetDependency */,
 			);
 			name = MinimoogAU;
 			productName = MinimoogAU;
 			productReference = 9304376621FB619D008D22E0 /* MinimoogAU.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		9EE9DBDB23D5F1A2009A953D /* Midi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9EE9DBE123D5F1A2009A953D /* Build configuration list for PBXNativeTarget "Midi" */;
+			buildPhases = (
+				9EE9DBD723D5F1A2009A953D /* Headers */,
+				9EE9DBD823D5F1A2009A953D /* Sources */,
+				9EE9DBD923D5F1A2009A953D /* Frameworks */,
+				9EE9DBDA23D5F1A2009A953D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Midi;
+			productName = Midi;
+			productReference = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		9EF974D22338B9BB00A8C25C /* UIControls */ = {
 			isa = PBXNativeTarget;
@@ -502,6 +559,9 @@
 							};
 						};
 					};
+					9EE9DBDB23D5F1A2009A953D = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					9EF974D22338B9BB00A8C25C = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -523,6 +583,7 @@
 				9304374C21FB6117008D22E0 /* Minimoog */,
 				9304376521FB619D008D22E0 /* MinimoogAU */,
 				9EF974D22338B9BB00A8C25C /* UIControls */,
+				9EE9DBDB23D5F1A2009A953D /* Midi */,
 			);
 		};
 /* End PBXProject section */
@@ -545,6 +606,13 @@
 				9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */,
 				930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */,
 				9E55A5A5233B83530020828C /* ParametersDescription.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EE9DBDA23D5F1A2009A953D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,12 +646,10 @@
 				9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */,
 				9E55A5B9233CBF630020828C /* AudioUnitError.swift in Sources */,
 				9E55A5B2233BB4650020828C /* FactoryPresetData.swift in Sources */,
-				9E4EFA4B23D1EDF8005089D2 /* Note.swift in Sources */,
 				930437A321FB645A008D22E0 /* FactoryPresetsManager.swift in Sources */,
+				9EE9DBEA23D5F224009A953D /* Note+frequency.swift in Sources */,
 				9E4EFA4623D1D57F005089D2 /* Sample.swift in Sources */,
-				9EE9DBD623D5E042009A953D /* Channel.swift in Sources */,
 				9E4EFA4423D1D56A005089D2 /* Module.swift in Sources */,
-				9E4EFA4723D1D588005089D2 /* Velocity.swift in Sources */,
 				9E06994223B6418800F60DC9 /* AUParameter+make.swift in Sources */,
 				93A7BD5B22763ED300B984D0 /* ParameterDef.swift in Sources */,
 				930437A221FB645A008D22E0 /* AudioUnit.swift in Sources */,
@@ -591,7 +657,22 @@
 				9E55A5B4233BB4760020828C /* FactoryPresets.swift in Sources */,
 				9E4EFA4D23D1F077005089D2 /* SineModule.swift in Sources */,
 				9EDF05732342A9FB00BF5087 /* Instrument.swift in Sources */,
-				9E4EFA4923D1EDCA005089D2 /* MidiEvent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9EE9DBD823D5F1A2009A953D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9EE9DBEF23D5F2BD009A953D /* Pitch.swift in Sources */,
+				9EE9DBE723D5F1B5009A953D /* Velocity.swift in Sources */,
+				9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */,
+				9EE9DBED23D5F298009A953D /* ControlValue.swift in Sources */,
+				9E26DA0623DB38AD00D0C9B5 /* MidiDataParser.swift in Sources */,
+				9EE9DBE623D5F1B5009A953D /* MidiEvent.swift in Sources */,
+				9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */,
+				9EE9DBE423D5F1B5009A953D /* Channel.swift in Sources */,
+				9EE9DBE523D5F1B5009A953D /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,24 +686,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		93B83C432272616900655F1C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9304376521FB619D008D22E0 /* MinimoogAU */;
-			targetProxy = 93B83C422272616900655F1C /* PBXContainerItemProxy */;
-		};
-		9E55A57F233AB9A30020828C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9EF974D22338B9BB00A8C25C /* UIControls */;
-			targetProxy = 9E55A57E233AB9A30020828C /* PBXContainerItemProxy */;
-		};
-		9EF974D92338B9BB00A8C25C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9EF974D22338B9BB00A8C25C /* UIControls */;
-			targetProxy = 9EF974D82338B9BB00A8C25C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9304377A21FB6319008D22E0 /* LaunchScreen.storyboard */ = {
@@ -849,6 +912,66 @@
 			};
 			name = Release;
 		};
+		9EE9DBE223D5F1A2009A953D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = H488UP8W94;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Midi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.midi.Midi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9EE9DBE323D5F1A2009A953D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = H488UP8W94;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = Midi/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.midi.Midi;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		9EF974DD2338B9BB00A8C25C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -935,6 +1058,15 @@
 			buildConfigurations = (
 				9304377621FB619D008D22E0 /* Debug */,
 				9304377721FB619D008D22E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9EE9DBE123D5F1A2009A953D /* Build configuration list for PBXNativeTarget "Midi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9EE9DBE223D5F1A2009A953D /* Debug */,
+				9EE9DBE323D5F1A2009A953D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

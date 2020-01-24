@@ -1,9 +1,4 @@
-import Foundation
-
-struct Note {
-    var note: Int
-    var cents: Int
-}
+import Midi
 
 extension Note {
     var frequency: Float32 {

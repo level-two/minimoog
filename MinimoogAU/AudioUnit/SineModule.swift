@@ -1,4 +1,5 @@
 import AudioToolbox
+import Midi
 
 final class SineModule: Module {
     var parameters: [AUParameter] = []
@@ -16,15 +17,18 @@ final class SineModule: Module {
         self.timeStep = 1.0 / sampleRate
     }
 
-    func process(midiEvent: MidiEvent) {
+    func handle(midiEvent: MidiEvent) {
         switch midiEvent {
-        case .noteOn(let note, let velocity):
+        case .noteOn(let channel, let note, let velocity):
             phaseStep = 2 * Float32.pi * note.frequency * timeStep
             amplitude = Float32(velocity) / 127
             isOn = true
 
-        case .noteOff(let note, let velocity):
+        case .noteOff(let channel, let note, let velocity):
             isOn = false
+
+        default:
+            break
         }
     }
 

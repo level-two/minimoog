@@ -8,6 +8,7 @@
 
 import Foundation
 import AVFoundation
+import Midi
 
 final class Instrument {
     fileprivate let module: Module
@@ -54,7 +55,10 @@ final class Instrument {
         return module.getParameter(address: address)
     }
 
-    func handle(midiEvent: )
+    func handle(midiEvent: MidiEvent) {
+        // TBD
+        module.handle(midiEvent: midiEvent)
+    }
 
     var renderBlock: AUInternalRenderBlock {
         return { [weak self] (actionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
@@ -145,12 +149,13 @@ fileprivate extension Instrument {
             let paramEvent = event.parameter
             setParameter(address: paramEvent.parameterAddress, value: paramEvent.value)
         case .parameterRamp:
-            let paramEvent = event.parameter
+//            let paramEvent = event.parameter
 //            startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
             break
         case .MIDI:
-            handle(midiEvent: MidiEvent(from: event.MIDI))
-            break
+            if let midiEvent = MidiEvent(from: event.MIDI) {
+                handle(midiEvent: midiEvent)
+            }
         default:
             break
         }

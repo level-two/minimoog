@@ -1,5 +1,5 @@
 
-enum Channel {
+public enum Channel: Int, Option {
     case ch1
     case ch2
     case ch3
