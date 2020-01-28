@@ -19,17 +19,18 @@ import AudioToolbox
 import AVFoundation
 
 final class AudioUnit: AUAudioUnit {
-    fileprivate var instrument: Instrument
+    fileprivate var instrumentManager: InstrumentManager
     fileprivate var curParameterTree: AUParameterTree
     fileprivate var factoryPresetsManager = FactoryPresetsManager()
     fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
     fileprivate var curPresetName = ""
 
-    private var inputBus: AUAudioUnitBus
+    private var inputBus: AUAudioUnitBus?
     private var outputBus: AUAudioUnitBus
 
     private lazy var curInputBusses: AUAudioUnitBusArray = {
-        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [inputBus])
+        let buses = [inputBus].compactMap { $0 }
+        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: buses)
     }()
 
     private lazy var curOutputBusses: AUAudioUnitBusArray = {
@@ -49,18 +50,22 @@ final class AudioUnit: AUAudioUnit {
     }
 
     override public var internalRenderBlock: AUInternalRenderBlock {
-        return instrument.renderBlock
+        return instrumentManager.renderBlock
     }
 
-    init(audioFormat: AVAudioFormat,
-         instrument: Instrument,
+    init(with instrument: Instrument,
          componentDescription: AudioComponentDescription,
          options: AudioComponentInstantiationOptions = []) throws {
-        
-        self.instrument = instrument
-        inputBus = try AUAudioUnitBus(format: audioFormat)
-        outputBus = try AUAudioUnitBus(format: audioFormat)
-        curParameterTree = try AUParameterTree.createTree(from: "ParametersDescription.plist")
+
+        guard let defaultFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 44100,
+                                                channels: 2, interleaved: false) else {
+            throw AudioUnitError.invalidDefaultAudioFormat
+        }
+
+        // inputBus = try AUAudioUnitBus(format: defaultFormat)
+        outputBus = try AUAudioUnitBus(format: defaultFormat)
+        curParameterTree = AUParameterTree.createTree(withChildren: instrument.parameters)
+        instrumentManager = InstrumentManager(instrument: instrument)
 
         try super.init(componentDescription: componentDescription, options: options)
 
@@ -70,15 +75,16 @@ final class AudioUnit: AUAudioUnit {
 
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
-        try instrument.allocateRenderResources(musicalContextBlock: self.musicalContextBlock,
-                                               outputEventBlock: self.midiOutputEventBlock,
-                                               transportStateBlock: self.transportStateBlock,
-                                               maxFrames: self.maximumFramesToRender)
+        try instrumentManager.allocateRenderResources(format: outputBus.format,
+                                                      maxFrames: self.maximumFramesToRender,
+                                                      musicalContextBlock: self.musicalContextBlock,
+                                                      outputEventBlock: self.midiOutputEventBlock,
+                                                      transportStateBlock: self.transportStateBlock)
     }
 
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
-        instrument.deallocateRenderResources()
+        instrumentManager.deallocateRenderResources()
     }
 }
 
@@ -92,6 +98,7 @@ extension AudioUnit {
             let preset = Preset(index: curPresetIndex, name: curPresetName, parameters: curParameterTree.allParameters)
             return preset.fullState
         }
+        
         set {
             let preset = Preset(with: newValue)
             curParameterTree.allParameters.forEach { param in
@@ -112,6 +119,7 @@ extension AudioUnit {
                 return AUAudioUnitPreset(with: factoryPresetsManager.getPreset(withIndex: curPresetIndex))
             }
         }
+
         set {
             guard let newVal = newValue else { return }
             curPresetIndex = newVal.number
@@ -133,11 +141,11 @@ extension AudioUnit {
 fileprivate extension AudioUnit {
     func setParameterTreeObservers() {
         curParameterTree.implementorValueObserver = { [weak self] param, value in
-            self?.instrument.setParameter(address: param.address, value: value)
+            self?.instrumentManager.setParameter(address: param.address, value: value)
         }
 
         curParameterTree.implementorValueProvider = { [weak self] param in
-            return self?.instrument.getParameter(address: param.address) ?? AUValue(0)
+            return self?.instrumentManager.getParameter(address: param.address) ?? AUValue(0)
         }
 
         curParameterTree.implementorStringFromValueCallback = { param, valuePtr in

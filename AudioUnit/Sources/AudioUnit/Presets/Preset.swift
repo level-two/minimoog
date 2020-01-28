@@ -18,9 +18,9 @@
 import AVFoundation
 
 class Preset {
-    public var name = ""
-    public var index = 0
-    public var dictionary = [String: Double]()
+    var name = ""
+    var index = 0
+    var dictionary = [String: Double]()
 
     public var fullState: [String: Any]? {
         get {
@@ -62,7 +62,7 @@ class Preset {
         self.fullState = fullState
     }
 
-    public func presetValue(for id: String) -> AUValue? {
+    func presetValue(for id: String) -> AUValue? {
         return dictionary[id].map { AUValue($0) }
     }
 }

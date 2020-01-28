@@ -58,16 +58,9 @@ public class MinimoogViewController: AUViewController {
 
 extension MinimoogViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        guard let audioFormat = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2) else {
-            throw AudioUnitError.invalidAudioFormat
-        }
-        let module = SineModule(sampleRate: Float32(audioFormat.sampleRate))
-        let instrument = Instrument(audioFormat: audioFormat, module: module)
-        self.audioUnit = try AudioUnit(audioFormat: audioFormat,
-                                       instrument: instrument,
-                                       componentDescription: componentDescription,
-                                       options: [])
-        return self.audioUnit!
+        let audioUnit = try AUAudioUnit.create(with: SineGenerator(), componentDescription: componentDescription)
+        self.audioUnit = audioUnit
+        return audioUnit
     }
 }
 

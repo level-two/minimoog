@@ -1,5 +1,5 @@
 //
-//  Instrument.swift
+//  InstrumentManager.swift
 //  MinimoogAU
 //
 //  Created by Yauheni Lychkouski on 10/1/19.
@@ -10,9 +10,8 @@ import Foundation
 import AVFoundation
 import Midi
 
-final class Instrument {
-    fileprivate let module: Module
-    fileprivate let audioFormat: AVAudioFormat
+final class InstrumentManager {
+    fileprivate let instrument: Instrument
     fileprivate var musicalContextBlock: AUHostMusicalContextBlock?
     fileprivate var transportStateBlock: AUHostTransportStateBlock?
     fileprivate var outputEventBlock: AUMIDIOutputEventBlock?
@@ -20,18 +19,21 @@ final class Instrument {
     fileprivate var audioBufferList: UnsafeMutableAudioBufferListPointer?
     fileprivate var pcmBuffer: AVAudioPCMBuffer?
 
-    init(audioFormat: AVAudioFormat, module: Module) {
-        self.audioFormat = audioFormat
-        self.module = module
+    init(instrument: Instrument) {
+        self.instrument = instrument
     }
 
-    func allocateRenderResources(musicalContextBlock: AUHostMusicalContextBlock?,
+    func allocateRenderResources(format: AVAudioFormat,
+                                 maxFrames: AVAudioFrameCount,
+                                 musicalContextBlock: AUHostMusicalContextBlock?,
                                  outputEventBlock: AUMIDIOutputEventBlock?,
-                                 transportStateBlock: AUHostTransportStateBlock?,
-                                 maxFrames: AVAudioFrameCount) throws {
-        self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: maxFrames)
+                                 transportStateBlock: AUHostTransportStateBlock?) throws {
+
+        self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: maxFrames)
         self.pcmBuffer?.frameLength = maxFrames
         self.audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
+
+        self.instrument.setAudioFormat(format)
 
         self.musicalContextBlock = musicalContextBlock
         self.outputEventBlock = outputEventBlock
@@ -47,41 +49,19 @@ final class Instrument {
         // TODO instrument.deallocateRenderResources()
     }
 
-    func setParameter(address: AUParameterAddress, value: AUValue) {
-        module.setParameter(address: address, value: value)
-    }
-
-    func getParameter(address: AUParameterAddress) -> AUValue {
-        return module.getParameter(address: address)
-    }
-
-    func handle(midiEvent: MidiEvent) {
-        // TBD
-        module.handle(midiEvent: midiEvent)
-    }
-
     var renderBlock: AUInternalRenderBlock {
-        return { [weak self] (actionFlags: UnsafeMutablePointer<AudioUnitRenderActionFlags>,
-                              timestamp: UnsafePointer<AudioTimeStamp>,
-                              frameCount: AUAudioFrameCount,
-                              outputBusNumber: Int,
-                              outputData: UnsafeMutablePointer<AudioBufferList>,
-                              realtimeEventListHead:  UnsafePointer<AURenderEvent>?,
-                              pullInputBlock:AURenderPullInputBlock?)
-                              -> AUAudioUnitStatus in
+        return { [weak self] (actionFlags, timestamp, frameCount, outputBusNumber,
+                              outputData, realtimeEventListHead, pullInputBlock) -> AUAudioUnitStatus in
 
-            guard let self = self,
-                let audioBufferList = self.audioBufferList
-                else { return kAudioUnitErr_Uninitialized }
+            guard let self = self, let audioBufferList = self.audioBufferList else { return kAudioUnitErr_Uninitialized }
 
             let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
-
             self.prepare(outBufferList: outBufferList, using: audioBufferList, zeroFill: false)
 
             var lastEventTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
             var framesRemaining = frameCount
-
             var event = realtimeEventListHead?.pointee
+
             while let curEvent = event {
                 let curEventTime = curEvent.head.eventSampleTime
                 let framesInSegment = AUAudioFrameCount(curEventTime - lastEventTime)
@@ -108,8 +88,17 @@ final class Instrument {
     }
 }
 
-fileprivate extension Instrument {
+extension InstrumentManager {
+    func setParameter(address: AUParameterAddress, value: AUValue) {
+        instrument.setParameter(address: address, value: value)
+    }
 
+    func getParameter(address: AUParameterAddress) -> AUValue {
+        return instrument.getParameter(address: address)
+    }
+}
+
+extension InstrumentManager {
     func prepare(outBufferList: UnsafeMutableAudioBufferListPointer,
                  using audioBufferList: UnsafeMutableAudioBufferListPointer,
                  zeroFill: Bool) {
@@ -138,7 +127,7 @@ fileprivate extension Instrument {
         for idx in 0..<framesCount {
             let leftSamplePtr = leftBufPtr + Int(bufferOffset + idx)
             let rightSamplePtr = rightBufPtr + Int(bufferOffset + idx)
-            module.render(leftSample: leftSamplePtr, rightSample: rightSamplePtr)
+            instrument.render(leftSample: leftSamplePtr, rightSample: rightSamplePtr)
         }
 
     }
@@ -154,7 +143,7 @@ fileprivate extension Instrument {
             break
         case .MIDI:
             if let midiEvent = MidiEvent(from: event.MIDI) {
-                handle(midiEvent: midiEvent)
+                instrument.handle(midiEvent: midiEvent)
             }
         default:
             break

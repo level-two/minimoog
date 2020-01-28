@@ -1,27 +1,27 @@
 import AudioToolbox
+import AVFoundation
+import AudioUnit
 import Midi
 
-final class SineModule: Module {
+final class SineGenerator: Instrument {
     var parameters: [AUParameter] = []
 
-    private let sampleRate: Float32
-    private let timeStep: Float32
+    private var timeStep: Float32 = 0
 
     private var phase: Float32 = 0.0
     private var phaseStep: Float32 = 0.0
     private var amplitude: Float32 = 0.0
     private var isOn: Bool = false
 
-    init(sampleRate: Float32) {
-        self.sampleRate = sampleRate
-        self.timeStep = 1.0 / sampleRate
+    func setAudioFormat(_ format: AVAudioFormat) {
+        self.timeStep = 1.0 / Float32(format.sampleRate)
     }
 
     func handle(midiEvent: MidiEvent) {
         switch midiEvent {
         case .noteOn(let channel, let note, let velocity):
             phaseStep = 2 * Float32.pi * note.frequency * timeStep
-            amplitude = Float32(velocity) / 127
+            amplitude = Float32(velocity.value) / 127
             isOn = true
 
         case .noteOff(let channel, let note, let velocity):

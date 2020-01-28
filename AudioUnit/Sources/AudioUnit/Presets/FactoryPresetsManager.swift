@@ -18,31 +18,32 @@
 import AVFoundation
 
 class FactoryPresetsManager {
-    public var defaultPresetIndex: Int = 0
+    var defaultPresetIndex: Int = 0
+    private var presets = [Preset]()
 
     init() {
+        // FIXME: Pass presets through instrument protocol
         if let presetsDef = factoryPresets(from: "FactoryPresets.plist") {
             defaultPresetIndex = presetsDef.defaultPresetIndex
             presets = presetsDef.presets.map { Preset(index: $0.index, name: $0.name, dictionary: $0.parameters) }
         }
     }
 
-    public func getPreset(withIndex index: Int) -> Preset? {
+    func getPreset(withIndex index: Int) -> Preset? {
         return presets.first { $0.index == index }
     }
 
-    public func defaultPreset() -> Preset? {
+    func defaultPreset() -> Preset? {
         return getPreset(withIndex: self.defaultPresetIndex)
     }
 
-    public func allPresets() -> [Preset] {
+    func allPresets() -> [Preset] {
         return presets.sorted(by: {$0.index < $1.index})
     }
-
-    private var presets = [Preset]()
 }
-extension FactoryPresetsManager {
-    fileprivate func factoryPresets(from plistFile: String) -> FactoryPresets? {
+
+fileprivate extension FactoryPresetsManager {
+    func factoryPresets(from plistFile: String) -> FactoryPresets? {
         guard let url = Bundle.main.url(forResource: plistFile, withExtension: nil),
             let data = try? Data(contentsOf: url),
             let presets = try? PropertyListDecoder().decode(FactoryPresets.self, from: data)
