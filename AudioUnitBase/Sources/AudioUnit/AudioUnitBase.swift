@@ -18,7 +18,7 @@
 import AudioToolbox
 import AVFoundation
 
-final class AudioUnit: AUAudioUnit {
+final class AudioUnitBase: AUAudioUnit {
     fileprivate var instrumentManager: InstrumentManager
     fileprivate var curParameterTree: AUParameterTree
     fileprivate var factoryPresetsManager = FactoryPresetsManager()
@@ -88,7 +88,7 @@ final class AudioUnit: AUAudioUnit {
     }
 }
 
-extension AudioUnit {
+extension AudioUnitBase {
     override public var factoryPresets: [AUAudioUnitPreset]? {
         return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
     }
@@ -138,7 +138,7 @@ extension AudioUnit {
     }
 }
 
-fileprivate extension AudioUnit {
+fileprivate extension AudioUnitBase {
     func setParameterTreeObservers() {
         curParameterTree.implementorValueObserver = { [weak self] param, value in
             self?.instrumentManager.setParameter(address: param.address, value: value)

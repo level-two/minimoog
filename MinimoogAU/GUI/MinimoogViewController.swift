@@ -16,9 +16,11 @@
 // -----------------------------------------------------------------------------
 
 import UIKit
-import CoreAudioKit
-import UIControls
 import AVFoundation
+import CoreAudioKit
+import AudioToolbox
+import AudioUnitBase
+import UIControls
 
 public class MinimoogViewController: AUViewController {
     @IBOutlet var knobs: [UIKnob]!

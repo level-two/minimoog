@@ -1,6 +1,6 @@
 import AudioToolbox
 import AVFoundation
-import AudioUnit
+import AudioUnitBase
 import Midi
 
 final class SineGenerator: Instrument {
