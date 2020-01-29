@@ -20,13 +20,12 @@ import AVFoundation
 import Midi
 
 final class InstrumentManager {
-    fileprivate let instrument: Instrument
-    fileprivate var musicalContextBlock: AUHostMusicalContextBlock?
-    fileprivate var transportStateBlock: AUHostTransportStateBlock?
-    fileprivate var outputEventBlock: AUMIDIOutputEventBlock?
-    // fileprivate var transportStateIsMoving: Bool = false
-    fileprivate var audioBufferList: UnsafeMutableAudioBufferListPointer?
-    fileprivate var pcmBuffer: AVAudioPCMBuffer?
+    private let instrument: Instrument
+    private var musicalContextBlock: AUHostMusicalContextBlock?
+    private var transportStateBlock: AUHostTransportStateBlock?
+    private var outputEventBlock: AUMIDIOutputEventBlock?
+    private var audioBufferList: UnsafeMutableAudioBufferListPointer?
+    private var pcmBuffer: AVAudioPCMBuffer?
 
     init(instrument: Instrument) {
         self.instrument = instrument
@@ -55,17 +54,26 @@ final class InstrumentManager {
         transportStateBlock = nil
         pcmBuffer = nil
         audioBufferList = nil
-        // TODO instrument.deallocateRenderResources()
     }
 
     var renderBlock: AUInternalRenderBlock {
-        return { [weak self] (actionFlags, timestamp, frameCount, outputBusNumber,
-                              outputData, realtimeEventListHead, pullInputBlock) -> AUAudioUnitStatus in
-
-            guard let self = self, let audioBufferList = self.audioBufferList else { return kAudioUnitErr_Uninitialized }
+        return { [audioBufferListCapture = audioBufferList, instrumentCapture = instrument] _, timestamp, frameCount, _, outputData, realtimeEventListHead, _ in
+            guard let audioBufferListCapture = audioBufferListCapture else { return kAudioUnitErr_Uninitialized }
 
             let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
-            self.prepare(outBufferList: outBufferList, using: audioBufferList, zeroFill: false)
+
+            for idx in outBufferList.indices where outBufferList[idx].mData == nil {
+                outBufferList[idx].mNumberChannels = audioBufferListCapture[idx].mNumberChannels
+                outBufferList[idx].mDataByteSize = audioBufferListCapture[idx].mDataByteSize
+                outBufferList[idx].mData = audioBufferListCapture[idx].mData
+            }
+
+            let buffers = outBufferList.compactMap { $0.mData?.assumingMemoryBound(to: Float32.self) }
+
+            func render(frames: AUAudioFrameCount, offset: AUAudioFrameCount) {
+                let buffersWithOffset = buffers.map { $0 + Int(offset) }
+                instrumentCapture.render(to: buffersWithOffset, frames: frames)
+            }
 
             var lastEventTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
             var framesRemaining = frameCount
@@ -75,87 +83,33 @@ final class InstrumentManager {
                 let curEventTime = curEvent.head.eventSampleTime
                 let framesInSegment = AUAudioFrameCount(curEventTime - lastEventTime)
 
-                if framesInSegment > framesRemaining {
-                    break
+                guard framesInSegment <= framesRemaining else { break }
+
+                render(frames: framesInSegment, offset: frameCount - framesRemaining)
+
+                if curEvent.head.eventType == .parameter {
+                    instrumentCapture.setParameter(address: curEvent.parameter.parameterAddress, value: curEvent.parameter.value)
+                } else if curEvent.head.eventType == .MIDI, let midiEvent = MidiEvent(from: curEvent.MIDI) {
+                    instrumentCapture.handle(midiEvent: midiEvent)
                 }
-
-                let bufferOffset = frameCount - framesRemaining
-                self.renderFrames(to: outBufferList, framesCount: framesInSegment, startingFrom: bufferOffset)
-
-                self.perform(event: curEvent)
 
                 lastEventTime = curEventTime
                 framesRemaining -= framesInSegment
                 event = curEvent.head.next?.pointee
             }
 
-            let bufferOffset = frameCount - framesRemaining
-            self.renderFrames(to: outBufferList, framesCount: framesRemaining, startingFrom: bufferOffset)
-
+            render(frames: framesRemaining, offset: frameCount - framesRemaining)
             return noErr
         }
     }
 }
 
 extension InstrumentManager {
-    func setParameter(address: AUParameterAddress, value: AUValue) {
-        instrument.setParameter(address: address, value: value)
-    }
+//    func setParameter(address: AUParameterAddress, value: AUValue) {
+//        instrument.setParameter(address: address, value: value)
+//    }
 
     func getParameter(address: AUParameterAddress) -> AUValue {
         return instrument.getParameter(address: address)
-    }
-}
-
-extension InstrumentManager {
-    func prepare(outBufferList: UnsafeMutableAudioBufferListPointer,
-                 using audioBufferList: UnsafeMutableAudioBufferListPointer,
-                 zeroFill: Bool) {
-
-        for idx in outBufferList.indices {
-            if outBufferList[idx].mData == nil {
-                outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
-                outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
-                outBufferList[idx].mData = audioBufferList[idx].mData
-            }
-
-            if zeroFill {
-                memset(outBufferList[idx].mData, 0, Int(outBufferList[idx].mDataByteSize))
-            }
-        }
-    }
-
-    func renderFrames(to outBufferList: UnsafeMutableAudioBufferListPointer,
-                      framesCount: AUAudioFrameCount,
-                      startingFrom bufferOffset: AUAudioFrameCount) {
-
-        guard let leftBufPtr = outBufferList[0].mData?.assumingMemoryBound(to: Float32.self),
-            let rightBufPtr = outBufferList[1].mData?.assumingMemoryBound(to: Float32.self)
-            else { return }
-
-        for idx in 0..<framesCount {
-            let leftSamplePtr = leftBufPtr + Int(bufferOffset + idx)
-            let rightSamplePtr = rightBufPtr + Int(bufferOffset + idx)
-            instrument.render(leftSample: leftSamplePtr, rightSample: rightSamplePtr)
-        }
-
-    }
-
-    func perform(event: AURenderEvent) {
-        switch (event.head.eventType) {
-        case .parameter:
-            let paramEvent = event.parameter
-            setParameter(address: paramEvent.parameterAddress, value: paramEvent.value)
-        case .parameterRamp:
-//            let paramEvent = event.parameter
-//            startRamp(paramEvent.parameterAddress, paramEvent.value, paramEvent.rampDurationSampleFrames)
-            break
-        case .MIDI:
-            if let midiEvent = MidiEvent(from: event.MIDI) {
-                instrument.handle(midiEvent: midiEvent)
-            }
-        default:
-            break
-        }
     }
 }

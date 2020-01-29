@@ -21,14 +21,17 @@ import AudioUnitBase
 import Midi
 
 final class SineGenerator: Instrument {
-    var parameters: [AUParameter] = []
+    let parameters: [AUParameter] = []
 
     private var timeStep: Float32 = 0
-
-    private var phase: Float32 = 0.0
-    private var phaseStep: Float32 = 0.0
-    private var amplitude: Float32 = 0.0
+    private var phase: Float32 = 0
+    private var phaseStep: Float32 = 0
+    private var amplitude: Float32 = 0
     private var isOn: Bool = false
+
+    init() {
+
+    }
 
     func setAudioFormat(_ format: AVAudioFormat) {
         self.timeStep = 1.0 / Float32(format.sampleRate)
@@ -58,20 +61,20 @@ final class SineGenerator: Instrument {
         return 0
     }
 
-    func render(leftSample: UnsafeMutablePointer<Float32>, rightSample: UnsafeMutablePointer<Float32>) {
+    func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount) {
         guard isOn else {
-            leftSample.initialize(to: 0)
-            rightSample.initialize(to: 0)
+            buffers.forEach { $0.initialize(repeating: 0, count: Int(frames)) }
             return
         }
 
-        phase += phaseStep
-        if phase > 2 * Float32.pi {
-            phase -= 2 * Float32.pi
-        }
+        for _ in 0..<frames {
+            phase += phaseStep
+            if phase > 2 * Float32.pi {
+                phase -= 2 * Float32.pi
+            }
 
-        let sampleValue = amplitude * sin(phase)
-        leftSample.initialize(to: sampleValue)
-        rightSample.initialize(to: sampleValue)
+            let sampleValue = amplitude * sin(phase)
+            buffers.forEach { $0.initialize(to: sampleValue) }
+        }
     }
 }

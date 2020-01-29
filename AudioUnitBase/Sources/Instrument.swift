@@ -19,11 +19,14 @@ import AudioToolbox
 import AVFoundation
 import Midi
 
-public protocol Instrument {
+public protocol Instrument: class {
     var parameters: [AUParameter] { get }
-    func handle(midiEvent: MidiEvent)
+
     func setAudioFormat(_ format: AVAudioFormat)
+
     func setParameter(address: AUParameterAddress, value: AUValue)
     func getParameter(address: AUParameterAddress) -> AUValue
-    func render(leftSample: UnsafeMutablePointer<Float32>, rightSample: UnsafeMutablePointer<Float32>)
+
+    func handle(midiEvent: MidiEvent)
+    func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount)
 }
