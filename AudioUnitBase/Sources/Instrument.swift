@@ -21,7 +21,8 @@ import Midi
 
 public protocol Instrument: class {
     var parameters: [AUParameter] { get }
-
+    var channelCapabilities: [Int] { get }
+    
     func setAudioFormat(_ format: AVAudioFormat)
 
     func setParameter(address: AUParameterAddress, value: AUValue)

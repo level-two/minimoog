@@ -41,6 +41,10 @@ final class AudioUnitBase: AUAudioUnit {
         return self.curParameterTree
     }
 
+    override public var channelCapabilities: [NSNumber]? {
+        return self.instrumentManager.channelCapabilities.map(NSNumber.init)
+    }
+
     override public var inputBusses: AUAudioUnitBusArray {
         return self.curInputBusses
     }
@@ -140,9 +144,9 @@ extension AudioUnitBase {
 
 fileprivate extension AudioUnitBase {
     func setParameterTreeObservers() {
-//        curParameterTree.implementorValueObserver = { [weak self] param, value in
-//            self?.instrumentManager.setParameter(address: param.address, value: value)
-//        }
+        curParameterTree.implementorValueObserver = { [weak self] param, value in
+            self?.instrumentManager.setParameter(address: param.address, value: value)
+        }
 
         curParameterTree.implementorValueProvider = { [weak self] param in
             return self?.instrumentManager.getParameter(address: param.address) ?? AUValue(0)

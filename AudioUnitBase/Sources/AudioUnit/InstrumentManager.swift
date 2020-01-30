@@ -57,22 +57,22 @@ final class InstrumentManager {
     }
 
     var renderBlock: AUInternalRenderBlock {
-        return { [audioBufferListCapture = audioBufferList, instrumentCapture = instrument] _, timestamp, frameCount, _, outputData, realtimeEventListHead, _ in
-            guard let audioBufferListCapture = audioBufferListCapture else { return kAudioUnitErr_Uninitialized }
+        return { [unowned self] _, timestamp, frameCount, _, outputData, realtimeEventListHead, _ in
+            guard let audioBufferList = self.audioBufferList else { return kAudioUnitErr_Uninitialized }
 
             let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
 
             for idx in outBufferList.indices where outBufferList[idx].mData == nil {
-                outBufferList[idx].mNumberChannels = audioBufferListCapture[idx].mNumberChannels
-                outBufferList[idx].mDataByteSize = audioBufferListCapture[idx].mDataByteSize
-                outBufferList[idx].mData = audioBufferListCapture[idx].mData
+                outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
+                outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
+                outBufferList[idx].mData = audioBufferList[idx].mData
             }
 
             let buffers = outBufferList.compactMap { $0.mData?.assumingMemoryBound(to: Float32.self) }
 
             func render(frames: AUAudioFrameCount, offset: AUAudioFrameCount) {
                 let buffersWithOffset = buffers.map { $0 + Int(offset) }
-                instrumentCapture.render(to: buffersWithOffset, frames: frames)
+                self.instrument.render(to: buffersWithOffset, frames: frames)
             }
 
             var lastEventTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
@@ -88,9 +88,9 @@ final class InstrumentManager {
                 render(frames: framesInSegment, offset: frameCount - framesRemaining)
 
                 if curEvent.head.eventType == .parameter {
-                    instrumentCapture.setParameter(address: curEvent.parameter.parameterAddress, value: curEvent.parameter.value)
+                    self.instrument.setParameter(address: curEvent.parameter.parameterAddress, value: curEvent.parameter.value)
                 } else if curEvent.head.eventType == .MIDI, let midiEvent = MidiEvent(from: curEvent.MIDI) {
-                    instrumentCapture.handle(midiEvent: midiEvent)
+                    self.instrument.handle(midiEvent: midiEvent)
                 }
 
                 lastEventTime = curEventTime
@@ -105,11 +105,15 @@ final class InstrumentManager {
 }
 
 extension InstrumentManager {
-//    func setParameter(address: AUParameterAddress, value: AUValue) {
-//        instrument.setParameter(address: address, value: value)
-//    }
+    func setParameter(address: AUParameterAddress, value: AUValue) {
+        instrument.setParameter(address: address, value: value)
+    }
 
     func getParameter(address: AUParameterAddress) -> AUValue {
         return instrument.getParameter(address: address)
+    }
+
+    var channelCapabilities: [Int] {
+        return instrument.channelCapabilities
     }
 }

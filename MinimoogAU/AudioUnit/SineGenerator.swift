@@ -21,12 +21,27 @@ import AudioUnitBase
 import Midi
 
 final class SineGenerator: Instrument {
-    let parameters: [AUParameter] = []
+    let parameters: [AUParameter] = [
+        AUParameterTree.createParameter(
+            withIdentifier: "osc1Volume",
+            name: "Oscillator 1 Volume",
+            address: 8,
+            min: 0,
+            max: 10,
+            unit: .customUnit,
+            unitName: nil,
+            flags: [.flag_IsWritable, .flag_IsReadable],
+            valueStrings: nil,
+            dependentParameters: nil
+        )]
+
+    let channelCapabilities: [Int] = [0, -1]
 
     private var timeStep: Float32 = 0
     private var phase: Float32 = 0
     private var phaseStep: Float32 = 0
     private var amplitude: Float32 = 0
+    private var volume: Float32 = 0
     private var isOn: Bool = false
 
     init() {
@@ -54,6 +69,7 @@ final class SineGenerator: Instrument {
 
     func setParameter(address: AUParameterAddress, value: AUValue) {
         // TBD
+        volume = value/10
     }
 
     func getParameter(address: AUParameterAddress) -> AUValue {
@@ -67,14 +83,14 @@ final class SineGenerator: Instrument {
             return
         }
 
-        for _ in 0..<frames {
+        for idx in 0..<frames {
             phase += phaseStep
             if phase > 2 * Float32.pi {
                 phase -= 2 * Float32.pi
             }
 
-            let sampleValue = amplitude * sin(phase)
-            buffers.forEach { $0.initialize(to: sampleValue) }
+            let sampleValue = volume * amplitude * sin(phase)
+            buffers.forEach { ($0 + Int(idx)).initialize(to: sampleValue) }
         }
     }
 }
