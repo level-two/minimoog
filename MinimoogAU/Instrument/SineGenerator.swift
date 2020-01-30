@@ -21,27 +21,26 @@ import AudioUnitBase
 import Midi
 
 final class SineGenerator: Instrument {
-    private enum ParamAddress: AUParameterAddress {
+    fileprivate enum ParamAddress: AUParameterAddress {
         case osc1Range = 0
         case osc1Volume = 8
     }
 
+    let channelCapabilities: [Int] = [0, -1]
     let parameterTree = AUParameterTree.tree(
         .group(id: "Osc1", name: "Oscillator 1",
-               .parameter(id: "osc1Range", name: "Range", address: ParamAddress.osc1Range.rawValue, min: -2, max: 2, unit: .octaves),
-               .parameter(id: "osc1Volume", name: "Volume", address: ParamAddress.osc1Volume.rawValue, min: 0, max: 1, unit: .linearGain)
+           .parameter(id: "osc1Range", name: "Range", address: ParamAddress.osc1Range.rawValue, min: -2, max: 2, unit: .octaves),
+           .parameter(id: "osc1Volume", name: "Volume", address: ParamAddress.osc1Volume.rawValue, min: 0, max: 1, unit: .linearGain)
         )
     )
 
-    let channelCapabilities: [Int] = [0, -1]
-
-    private var timeStep: Float32 = 0
-    private var phase: Float32 = 0
-    private var phaseStep: Float32 = 0
-    private var amplitude: Float32 = 0
-    private var range: Float32 = 0
-    private var volume: Float32 = 0
-    private var isOn: Bool = false
+    fileprivate var timeStep: Float32 = 0
+    fileprivate var phase: Float32 = 0
+    fileprivate var phaseStep: Float32 = 0
+    fileprivate var amplitude: Float32 = 0
+    fileprivate var range: Float32 = 0
+    fileprivate var volume: Float32 = 0
+    fileprivate var isOn: Bool = false
 
     init() {
         setParameterTreeObservers()
@@ -67,14 +66,8 @@ final class SineGenerator: Instrument {
     }
 
     func setParameter(address: AUParameterAddress, value: AUValue) {
-        guard let addr = ParamAddress(rawValue: address) else { return }
-
-        switch addr {
-        case .osc1Range:
-            range = value
-        case .osc1Volume:
-            volume = value
-        }
+        guard let address = ParamAddress(rawValue: address) else { return }
+        setParameter(address: address, value: value)
     }
 
     func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount) {
@@ -98,20 +91,13 @@ final class SineGenerator: Instrument {
 fileprivate extension SineGenerator {
     func setParameterTreeObservers() {
         parameterTree.implementorValueObserver = { [weak self] param, value in
-            self?.setParameter(address: param.address, value: value)
+            guard let address = ParamAddress(rawValue: param.address) else { return }
+            self?.setParameter(address: address, value: value)
         }
 
         parameterTree.implementorValueProvider = { [weak self] param in
-            guard let self = self,
-                let addr = ParamAddress(rawValue: param.address)
-                else { return 0 }
-
-            switch addr {
-            case .osc1Range:
-                return self.range
-            case .osc1Volume:
-                return self.volume
-            }
+            guard let self = self, let address = ParamAddress(rawValue: param.address) else { return 0 }
+            return self.getParameter(address: address)
         }
 
 //        parameterTree.implementorStringFromValueCallback = { param, valuePtr in
@@ -123,5 +109,19 @@ fileprivate extension SineGenerator {
 //                return String(format: ".2", value)
 //            }
 //        }
+    }
+
+    func setParameter(address: ParamAddress, value: AUValue) {
+        switch address {
+        case .osc1Range: range = value
+        case .osc1Volume: volume = value
+        }
+    }
+
+    func getParameter(address: ParamAddress) -> AUValue {
+        switch address {
+        case .osc1Range: return self.range
+        case .osc1Volume: return self.volume
+        }
     }
 }
