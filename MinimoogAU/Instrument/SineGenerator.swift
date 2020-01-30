@@ -50,6 +50,11 @@ final class SineGenerator: Instrument {
         self.timeStep = 1.0 / Float32(format.sampleRate)
     }
 
+    func setParameter(address: AUParameterAddress, value: AUValue) {
+        guard let address = ParamAddress(rawValue: address) else { return }
+        setParameter(address: address, value: value)
+    }
+
     func handle(midiEvent: MidiEvent) {
         switch midiEvent {
         case .noteOn(_, let note, let velocity):
@@ -63,11 +68,6 @@ final class SineGenerator: Instrument {
         default:
             break
         }
-    }
-
-    func setParameter(address: AUParameterAddress, value: AUValue) {
-        guard let address = ParamAddress(rawValue: address) else { return }
-        setParameter(address: address, value: value)
     }
 
     func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount) {
@@ -84,6 +84,24 @@ final class SineGenerator: Instrument {
 
             let sampleValue = volume * amplitude * sin(phase)
             buffers.forEach { ($0 + Int(idx)).initialize(to: sampleValue) }
+        }
+    }
+}
+
+extension SineGenerator {
+    var factoryPresets: [[String: Any]]{
+        return [] // TBI
+    }
+
+    var presetForCurrentState: [String: Any] {
+        let keyValuePairs = parameterTree.allParameters.map { ($0.identifier, $0.value) }
+        return Dictionary(uniqueKeysWithValues: keyValuePairs)
+    }
+
+    func load(preset: [String: Any]) {
+        parameterTree.allParameters.forEach { parameter in
+            guard let value = preset[parameter.identifier] as? AUValue else { return }
+            parameter.value = value
         }
     }
 }

@@ -22,11 +22,13 @@ import Midi
 public protocol Instrument: class {
     var parameterTree: AUParameterTree { get }
     var channelCapabilities: [Int] { get }
-    
+
+    var factoryPresets: [[String: Any]]  { get }
+    var presetForCurrentState: [String: Any] { get }
+    func load(preset: [String: Any])
+
     func setAudioFormat(_ format: AVAudioFormat)
-
     func setParameter(address: AUParameterAddress, value: AUValue)
-
     func handle(midiEvent: MidiEvent)
     func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount)
 }

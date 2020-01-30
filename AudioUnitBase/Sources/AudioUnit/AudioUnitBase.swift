@@ -17,32 +17,15 @@
 
 import AudioToolbox
 import AVFoundation
+import Midi
 
 final class AudioUnitBase: AUAudioUnit {
-    fileprivate var instrumentManager: InstrumentManager
-    fileprivate var curParameterTree: AUParameterTree
-    fileprivate var factoryPresetsManager = FactoryPresetsManager()
-    fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
-    fileprivate var curPresetName = ""
-
-    private var inputBus: AUAudioUnitBus?
-    private var outputBus: AUAudioUnitBus
-
-    private lazy var curInputBusses: AUAudioUnitBusArray = {
-        let buses = [inputBus].compactMap { $0 }
-        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: buses)
-    }()
-
-    private lazy var curOutputBusses: AUAudioUnitBusArray = {
-        return AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
-    }()
-
-    override public var parameterTree: AUParameterTree {
-        return self.curParameterTree
+    public enum AudioUnitError: Error {
+        case invalidDefaultAudioFormat
     }
 
     override public var channelCapabilities: [NSNumber]? {
-        return self.instrumentManager.channelCapabilities.map(NSNumber.init)
+        return self.instrument.channelCapabilities.map(NSNumber.init)
     }
 
     override public var inputBusses: AUAudioUnitBusArray {
@@ -53,90 +36,142 @@ final class AudioUnitBase: AUAudioUnit {
         return self.curOutputBusses
     }
 
-    override public var internalRenderBlock: AUInternalRenderBlock {
-        return instrumentManager.renderBlock
+    override public var parameterTree: AUParameterTree {
+        return self.instrument.parameterTree
     }
 
-    init(with instrument: Instrument,
-         componentDescription: AudioComponentDescription,
+    fileprivate lazy var curInputBusses: AUAudioUnitBusArray = {
+        let buses = [inputBus].compactMap { $0 }
+        return AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: buses)
+    }()
+
+    fileprivate lazy var curOutputBusses: AUAudioUnitBusArray = {
+        return AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
+    }()
+
+    fileprivate var instrument: Instrument
+    fileprivate var inputBus: AUAudioUnitBus?
+    fileprivate var outputBus: AUAudioUnitBus
+    fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
+    fileprivate var curPresetName = ""
+    fileprivate var audioBufferList: UnsafeMutableAudioBufferListPointer?
+    fileprivate var pcmBuffer: AVAudioPCMBuffer?
+
+    init(with instrument: Instrument, componentDescription: AudioComponentDescription,
          options: AudioComponentInstantiationOptions = []) throws {
 
-        guard let defaultFormat = AVAudioFormat(commonFormat: .pcmFormatFloat32, sampleRate: 44100,
-                                                channels: 2, interleaved: false) else {
+        guard let defaultFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1) else {
             throw AudioUnitError.invalidDefaultAudioFormat
         }
 
-        // inputBus = try AUAudioUnitBus(format: defaultFormat)
-        outputBus = try AUAudioUnitBus(format: defaultFormat)
-        curParameterTree = instrument.parameterTree
-        instrumentManager = InstrumentManager(instrument: instrument)
+        // self.inputBus = try AUAudioUnitBus(format: defaultFormat)
+        self.outputBus = try AUAudioUnitBus(format: defaultFormat)
+        self.instrument = instrument
 
         try super.init(componentDescription: componentDescription, options: options)
 
-        currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
-    }
-
-    override public func allocateRenderResources() throws {
-        try super.allocateRenderResources()
-        try instrumentManager.allocateRenderResources(format: outputBus.format,
-                                                      maxFrames: self.maximumFramesToRender,
-                                                      musicalContextBlock: self.musicalContextBlock,
-                                                      outputEventBlock: self.midiOutputEventBlock,
-                                                      transportStateBlock: self.transportStateBlock)
-    }
-
-    override public func deallocateRenderResources() {
-        super.deallocateRenderResources()
-        instrumentManager.deallocateRenderResources()
+        currentPreset = AUAudioUnitPreset(number: 0)
     }
 }
 
 extension AudioUnitBase {
     override public var factoryPresets: [AUAudioUnitPreset]? {
-        return factoryPresetsManager.allPresets().compactMap { AUAudioUnitPreset(with: $0) }
+        let names = instrument.factoryPresets.compactMap { $0["name"] as? String }
+        return names.enumerated().map { AUAudioUnitPreset(number: $0.0, name: $0.1) }
     }
 
     override public var fullState: [String: Any]? {
         get {
-            let preset = Preset(index: curPresetIndex, name: curPresetName, parameters: curParameterTree.allParameters)
-            return preset.fullState
+            return instrument.presetForCurrentState
         }
-        
         set {
-            let preset = Preset(with: newValue)
-            curParameterTree.allParameters.forEach { param in
-                guard let val = preset.presetValue(for: param.identifier) else { return }
-                param.value = val
-            }
+            guard let newValue = newValue else { return }
+            instrument.load(preset: newValue)
         }
     }
 
     override public var currentPreset: AUAudioUnitPreset? {
         get {
-            if curPresetIndex < 0 {
-                let userPreset = AUAudioUnitPreset()
-                userPreset.number = curPresetIndex
-                userPreset.name   = curPresetName
-                return userPreset
-            } else {
-                return AUAudioUnitPreset(with: factoryPresetsManager.getPreset(withIndex: curPresetIndex))
+            return (curPresetIndex < 0) ?
+                AUAudioUnitPreset(number: curPresetIndex, name: curPresetName) :
+                factoryPresets?[safe: curPresetIndex]
+        }
+        set {
+            guard let preset = newValue else { return }
+            if preset.number < 0 {
+                curPresetIndex = preset.number
+                curPresetName = preset.name
+                // Parameters will be updated using fullState
+            } else if let factoryPreset = instrument.factoryPresets[safe: preset.number] {
+                curPresetIndex = preset.number
+                curPresetName = preset.name
+                instrument.load(preset: factoryPreset)
             }
         }
+    }
+}
 
-        set {
-            guard let newVal = newValue else { return }
-            curPresetIndex = newVal.number
+extension AudioUnitBase {
+    override public func allocateRenderResources() throws {
+        try super.allocateRenderResources()
 
-            if curPresetIndex < 0 {
-                // Parameters will be updated using fullState
-                curPresetName = newVal.name
-            } else if let factoryPreset = factoryPresetsManager.getPreset(withIndex: curPresetIndex) {
-                curPresetName = factoryPreset.name
-                curParameterTree.allParameters.forEach { param in
-                    guard let val = factoryPreset.presetValue(for: param.identifier) else { return }
-                    param.value = val
-                }
+        self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: outputBus.format, frameCapacity: maximumFramesToRender)
+        self.pcmBuffer?.frameLength = maximumFramesToRender
+        self.audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
+
+        self.instrument.setAudioFormat(outputBus.format)
+    }
+
+    override public func deallocateRenderResources() {
+        super.deallocateRenderResources()
+        pcmBuffer = nil
+        audioBufferList = nil
+    }
+
+    override public var internalRenderBlock: AUInternalRenderBlock {
+        return { [unowned self] _, timestamp, frameCount, _, outputData, realtimeEventListHead, _ in
+            guard let audioBufferList = self.audioBufferList else { return kAudioUnitErr_Uninitialized }
+
+            let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
+
+            for idx in outBufferList.indices where outBufferList[idx].mData == nil {
+                outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
+                outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
+                outBufferList[idx].mData = audioBufferList[idx].mData
             }
+
+            let buffers = outBufferList.compactMap { $0.mData?.assumingMemoryBound(to: Float32.self) }
+
+            func render(frames: AUAudioFrameCount, offset: AUAudioFrameCount) {
+                let buffersWithOffset = buffers.map { $0 + Int(offset) }
+                self.instrument.render(to: buffersWithOffset, frames: frames)
+            }
+
+            var lastEventTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
+            var framesRemaining = frameCount
+            var event = realtimeEventListHead?.pointee
+
+            while let curEvent = event {
+                let curEventTime = curEvent.head.eventSampleTime
+                let framesInSegment = AUAudioFrameCount(curEventTime - lastEventTime)
+
+                guard framesInSegment <= framesRemaining else { break }
+
+                render(frames: framesInSegment, offset: frameCount - framesRemaining)
+
+                if curEvent.head.eventType == .parameter {
+                    self.instrument.setParameter(address: curEvent.parameter.parameterAddress, value: curEvent.parameter.value)
+                } else if curEvent.head.eventType == .MIDI, let midiEvent = MidiEvent(from: curEvent.MIDI) {
+                    self.instrument.handle(midiEvent: midiEvent)
+                }
+
+                lastEventTime = curEventTime
+                framesRemaining -= framesInSegment
+                event = curEvent.head.next?.pointee
+            }
+
+            render(frames: framesRemaining, offset: frameCount - framesRemaining)
+            return noErr
         }
     }
 }
