@@ -17,11 +17,11 @@
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
 		9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FF23DB324200D0C9B5 /* Channels.swift */; };
+		9E3E9FC323E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */; };
 		9E4EFA4D23D1F077005089D2 /* SineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */; };
 		9E55A578233925680020828C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A577233925680020828C /* NibLoadable.swift */; };
 		9E55A57D233AB99C0020828C /* UIControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* UIControls.framework */; };
 		9E55A586233B65B10020828C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A585233B65B10020828C /* Assets.xcassets */; };
-		9E55A5A5233B83530020828C /* ParametersDescription.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A5A4233B83530020828C /* ParametersDescription.plist */; };
 		9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E91AB3E23E07B6000AF506B /* AudioUnitBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -93,21 +93,18 @@
 		9310B426227045780039667E /* UIKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKnob.swift; sourceTree = "<group>"; };
 		9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		93A7BD5A22763ED300B984D0 /* ParameterDef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterDef.swift; sourceTree = "<group>"; };
 		93B084352273250300AF7495 /* Minimoog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minimoog.entitlements; sourceTree = "<group>"; };
 		93B084362273254000AF7495 /* MinimoogAU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinimoogAU.entitlements; sourceTree = "<group>"; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		9E06994123B6418800F60DC9 /* AUParameter+make.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameter+make.swift"; sourceTree = "<group>"; };
 		9E115FEF23E069F800F20F33 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
 		9E26D9FD23DB321200D0C9B5 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		9E26D9FF23DB324200D0C9B5 /* Channels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
+		9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameterNode+tree+group+parameter.swift"; sourceTree = "<group>"; };
 		9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiEvent.swift; sourceTree = "<group>"; };
 		9E4EFA4A23D1EDF8005089D2 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineGenerator.swift; sourceTree = "<group>"; };
 		9E55A577233925680020828C /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		9E55A585233B65B10020828C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9E55A5A4233B83530020828C /* ParametersDescription.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ParametersDescription.plist; sourceTree = "<group>"; };
-		9E55A5AA233BA35A0020828C /* ParameterTree+loadFromPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParameterTree+loadFromPlist.swift"; sourceTree = "<group>"; };
 		9E55A5B5233CB2000020828C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9E6198012345F7FF006B6F79 /* Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Velocity.swift; sourceTree = "<group>"; };
 		9E91AB3A23E07B5F00AF506B /* AudioUnitBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioUnitBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,7 +223,7 @@
 			children = (
 				93B084362273254000AF7495 /* MinimoogAU.entitlements */,
 				9304379721FB6459008D22E0 /* Assets */,
-				936D546E2205BAE300C9D0F3 /* AudioUnit */,
+				936D546E2205BAE300C9D0F3 /* Instrument */,
 				9EF974CA2335127A00A8C25C /* GUI */,
 				9304377021FB619D008D22E0 /* Info.plist */,
 			);
@@ -246,19 +243,17 @@
 			isa = PBXGroup;
 			children = (
 				9304379921FB6459008D22E0 /* FactoryPresets.plist */,
-				9E55A5A4233B83530020828C /* ParametersDescription.plist */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		936D546E2205BAE300C9D0F3 /* AudioUnit */ = {
+		936D546E2205BAE300C9D0F3 /* Instrument */ = {
 			isa = PBXGroup;
 			children = (
-				9E55A5AE233BA38C0020828C /* Parameters */,
 				9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */,
 				9EE9DBE923D5F224009A953D /* Note+frequency.swift */,
 			);
-			path = AudioUnit;
+			path = Instrument;
 			sourceTree = "<group>";
 		};
 		9E115FDF23E03E4100F20F33 /* DataTypes */ = {
@@ -280,6 +275,15 @@
 				9E26D9FD23DB321200D0C9B5 /* Option.swift */,
 			);
 			path = Option;
+			sourceTree = "<group>";
+		};
+		9E4908A423E312DD00A86C0A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */,
+				9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9E55A580233B650E0020828C /* UIKnob */ = {
@@ -307,16 +311,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		9E55A5AE233BA38C0020828C /* Parameters */ = {
-			isa = PBXGroup;
-			children = (
-				93A7BD5A22763ED300B984D0 /* ParameterDef.swift */,
-				9E55A5AA233BA35A0020828C /* ParameterTree+loadFromPlist.swift */,
-				9E06994123B6418800F60DC9 /* AUParameter+make.swift */,
-			);
-			path = Parameters;
-			sourceTree = "<group>";
-		};
 		9E91AB3B23E07B6000AF506B /* AudioUnitBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,7 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				9EB737BF23E07C460067B357 /* Instrument.swift */,
-				9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */,
+				9E4908A423E312DD00A86C0A /* Extensions */,
 				9EB737C023E07C460067B357 /* AudioUnit */,
 			);
 			path = Sources;
@@ -615,7 +609,6 @@
 			files = (
 				9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */,
 				930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */,
-				9E55A5A5233B83530020828C /* ParametersDescription.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +662,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E3E9FC323E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift in Sources */,
 				9EB737CA23E07C460067B357 /* Instrument.swift in Sources */,
 				9EB737CB23E07C460067B357 /* AudioUnitError.swift in Sources */,
 				9EB737CC23E07C460067B357 /* AudioUnitBase.swift in Sources */,

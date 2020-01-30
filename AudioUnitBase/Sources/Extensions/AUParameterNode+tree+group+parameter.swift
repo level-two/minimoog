@@ -17,19 +17,16 @@
 
 import AudioToolbox
 
-extension AUParameter {
-    static func make(_ identifier: String, _ parameterDef: ParameterDef) -> AUParameter {
-        return AUParameterTree.createParameter(
-            withIdentifier: identifier,
-            name: parameterDef.name,
-            address: parameterDef.address,
-            min: AUValue(parameterDef.minValue),
-            max: AUValue(parameterDef.maxValue),
-            unit: parameterDef.unit ?? .customUnit,
-            unitName: nil,
-            flags: [.flag_IsWritable, .flag_IsReadable],
-            valueStrings: parameterDef.valueStrings,
-            dependentParameters: nil
-        )
+extension AUParameterNode {
+    public static func parameter(id: String, name: String, address: AUParameterAddress, min: AUValue, max: AUValue, unit: AudioUnitParameterUnit = .generic, unitName: String? = nil, valueStrings: [String]? = nil) -> AUParameter {
+        return AUParameterTree.createParameter(withIdentifier: id, name: name, address: address, min: min, max: max, unit: unit, unitName: unitName, flags: [.flag_IsReadable, .flag_IsWritable], valueStrings: valueStrings, dependentParameters: nil)
+    }
+
+    public static func group(id: String, name: String, _ children: AUParameterNode...) -> AUParameterGroup {
+        return AUParameterTree.createGroup(withIdentifier: id, name: name, children: children)
+    }
+
+    public static func tree(_ children: AUParameterNode...) -> AUParameterTree {
+        return AUParameterTree.createTree(withChildren: children)
     }
 }

@@ -105,14 +105,6 @@ final class InstrumentManager {
 }
 
 extension InstrumentManager {
-    func setParameter(address: AUParameterAddress, value: AUValue) {
-        instrument.setParameter(address: address, value: value)
-    }
-
-    func getParameter(address: AUParameterAddress) -> AUValue {
-        return instrument.getParameter(address: address)
-    }
-
     var channelCapabilities: [Int] {
         return instrument.channelCapabilities
     }

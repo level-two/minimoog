@@ -21,19 +21,17 @@ import AudioUnitBase
 import Midi
 
 final class SineGenerator: Instrument {
-    let parameters: [AUParameter] = [
-        AUParameterTree.createParameter(
-            withIdentifier: "osc1Volume",
-            name: "Oscillator 1 Volume",
-            address: 8,
-            min: 0,
-            max: 10,
-            unit: .customUnit,
-            unitName: nil,
-            flags: [.flag_IsWritable, .flag_IsReadable],
-            valueStrings: nil,
-            dependentParameters: nil
-        )]
+    private enum ParamAddress: AUParameterAddress {
+        case osc1Range = 0
+        case osc1Volume = 8
+    }
+
+    let parameterTree = AUParameterTree.tree(
+        .group(id: "Osc1", name: "Oscillator 1",
+               .parameter(id: "osc1Range", name: "Range", address: ParamAddress.osc1Range.rawValue, min: -2, max: 2, unit: .octaves),
+               .parameter(id: "osc1Volume", name: "Volume", address: ParamAddress.osc1Volume.rawValue, min: 0, max: 1, unit: .linearGain)
+        )
+    )
 
     let channelCapabilities: [Int] = [0, -1]
 
@@ -41,11 +39,12 @@ final class SineGenerator: Instrument {
     private var phase: Float32 = 0
     private var phaseStep: Float32 = 0
     private var amplitude: Float32 = 0
+    private var range: Float32 = 0
     private var volume: Float32 = 0
     private var isOn: Bool = false
 
     init() {
-
+        setParameterTreeObservers()
     }
 
     func setAudioFormat(_ format: AVAudioFormat) {
@@ -68,13 +67,14 @@ final class SineGenerator: Instrument {
     }
 
     func setParameter(address: AUParameterAddress, value: AUValue) {
-        // TBD
-        volume = value/10
-    }
+        guard let addr = ParamAddress(rawValue: address) else { return }
 
-    func getParameter(address: AUParameterAddress) -> AUValue {
-        // TBD
-        return 0
+        switch addr {
+        case .osc1Range:
+            range = value
+        case .osc1Volume:
+            volume = value
+        }
     }
 
     func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount) {
@@ -92,5 +92,36 @@ final class SineGenerator: Instrument {
             let sampleValue = volume * amplitude * sin(phase)
             buffers.forEach { ($0 + Int(idx)).initialize(to: sampleValue) }
         }
+    }
+}
+
+fileprivate extension SineGenerator {
+    func setParameterTreeObservers() {
+        parameterTree.implementorValueObserver = { [weak self] param, value in
+            self?.setParameter(address: param.address, value: value)
+        }
+
+        parameterTree.implementorValueProvider = { [weak self] param in
+            guard let self = self,
+                let addr = ParamAddress(rawValue: param.address)
+                else { return 0 }
+
+            switch addr {
+            case .osc1Range:
+                return self.range
+            case .osc1Volume:
+                return self.volume
+            }
+        }
+
+//        parameterTree.implementorStringFromValueCallback = { param, valuePtr in
+//            let value = valuePtr?.pointee ?? param.value
+//
+//            if param.unit == .indexed, let strings = param.valueStrings, Int(value) < strings.count {
+//                return strings[Int(value)]
+//            } else {
+//                return String(format: ".2", value)
+//            }
+//        }
     }
 }

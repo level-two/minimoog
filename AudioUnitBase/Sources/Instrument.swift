@@ -20,13 +20,12 @@ import AVFoundation
 import Midi
 
 public protocol Instrument: class {
-    var parameters: [AUParameter] { get }
+    var parameterTree: AUParameterTree { get }
     var channelCapabilities: [Int] { get }
     
     func setAudioFormat(_ format: AVAudioFormat)
 
     func setParameter(address: AUParameterAddress, value: AUValue)
-    func getParameter(address: AUParameterAddress) -> AUValue
 
     func handle(midiEvent: MidiEvent)
     func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount)

@@ -68,13 +68,12 @@ final class AudioUnitBase: AUAudioUnit {
 
         // inputBus = try AUAudioUnitBus(format: defaultFormat)
         outputBus = try AUAudioUnitBus(format: defaultFormat)
-        curParameterTree = AUParameterTree.createTree(withChildren: instrument.parameters)
+        curParameterTree = instrument.parameterTree
         instrumentManager = InstrumentManager(instrument: instrument)
 
         try super.init(componentDescription: componentDescription, options: options)
 
         currentPreset = AUAudioUnitPreset(with: factoryPresetsManager.defaultPreset())
-        setParameterTreeObservers()
     }
 
     override public func allocateRenderResources() throws {
@@ -137,28 +136,6 @@ extension AudioUnitBase {
                     guard let val = factoryPreset.presetValue(for: param.identifier) else { return }
                     param.value = val
                 }
-            }
-        }
-    }
-}
-
-fileprivate extension AudioUnitBase {
-    func setParameterTreeObservers() {
-        curParameterTree.implementorValueObserver = { [weak self] param, value in
-            self?.instrumentManager.setParameter(address: param.address, value: value)
-        }
-
-        curParameterTree.implementorValueProvider = { [weak self] param in
-            return self?.instrumentManager.getParameter(address: param.address) ?? AUValue(0)
-        }
-
-        curParameterTree.implementorStringFromValueCallback = { param, valuePtr in
-            let value = valuePtr?.pointee ?? param.value
-
-            if param.unit == .indexed, let strings = param.valueStrings, Int(value) < strings.count {
-                return strings[Int(value)]
-            } else {
-                return String(format: ".2", value)
             }
         }
     }
