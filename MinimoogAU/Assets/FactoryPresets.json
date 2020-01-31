@@ -1,0 +1,14 @@
+{
+    "presets": [
+        {
+            "name": "Preset1",
+            "osc1Range": 2,
+            "osc1Volume": 0.5,
+        },
+        {
+            "name": "Preset1",
+            "osc1Range": 0,
+            "osc1Volume": 1,
+        },
+    ]
+}

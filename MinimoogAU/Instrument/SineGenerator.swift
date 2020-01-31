@@ -27,12 +27,21 @@ final class SineGenerator: Instrument {
     }
 
     let channelCapabilities: [Int] = [0, -1]
+
     let parameterTree = AUParameterTree.tree(
         .group(id: "Osc1", name: "Oscillator 1",
            .parameter(id: "osc1Range", name: "Range", address: ParamAddress.osc1Range.rawValue, min: -2, max: 2, unit: .octaves),
            .parameter(id: "osc1Volume", name: "Volume", address: ParamAddress.osc1Volume.rawValue, min: 0, max: 1, unit: .linearGain)
         )
     )
+
+    lazy var factoryPresets: [[String: Any]] = {
+        guard let url = Bundle.main.url(forResource: "FactoryPresets", withExtension: "json"),
+            let data = try? Data(contentsOf: url),
+            let dic = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            else { return [] }
+        return dic?["presets"] as? [[String: Any]] ?? []
+    }()
 
     fileprivate var timeStep: Float32 = 0
     fileprivate var phase: Float32 = 0
@@ -89,10 +98,6 @@ final class SineGenerator: Instrument {
 }
 
 extension SineGenerator {
-    var factoryPresets: [[String: Any]]{
-        return [] // TBI
-    }
-
     var presetForCurrentState: [String: Any] {
         let keyValuePairs = parameterTree.allParameters.map { ($0.identifier, $0.value) }
         return Dictionary(uniqueKeysWithValues: keyValuePairs)

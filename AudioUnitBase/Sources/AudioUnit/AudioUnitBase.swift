@@ -70,7 +70,7 @@ final class AudioUnitBase: AUAudioUnit {
 
         try super.init(componentDescription: componentDescription, options: options)
 
-        currentPreset = AUAudioUnitPreset(number: 0)
+        currentPreset = factoryPresets?[safe: 0]
     }
 }
 
@@ -92,19 +92,13 @@ extension AudioUnitBase {
 
     override public var currentPreset: AUAudioUnitPreset? {
         get {
-            return (curPresetIndex < 0) ?
-                AUAudioUnitPreset(number: curPresetIndex, name: curPresetName) :
-                factoryPresets?[safe: curPresetIndex]
+            return AUAudioUnitPreset(number: curPresetIndex, name: curPresetName)
         }
         set {
             guard let preset = newValue else { return }
-            if preset.number < 0 {
-                curPresetIndex = preset.number
-                curPresetName = preset.name
-                // Parameters will be updated using fullState
-            } else if let factoryPreset = instrument.factoryPresets[safe: preset.number] {
-                curPresetIndex = preset.number
-                curPresetName = preset.name
+            curPresetIndex = preset.number
+            curPresetName = preset.name
+            if preset.number >= 0, let factoryPreset = instrument.factoryPresets[safe: preset.number] {
                 instrument.load(preset: factoryPreset)
             }
         }

@@ -13,7 +13,6 @@
 		9304378921FB6319008D22E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378121FB6319008D22E0 /* AppDelegate.swift */; };
 		9304378A21FB6319008D22E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378221FB6319008D22E0 /* ViewController.swift */; };
 		9304378B21FB6319008D22E0 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378321FB6319008D22E0 /* SimplePlayEngine.swift */; };
-		930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9304379921FB6459008D22E0 /* FactoryPresets.plist */; };
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
 		9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FF23DB324200D0C9B5 /* Channels.swift */; };
@@ -25,6 +24,7 @@
 		9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E89EE5923E38B0F00E98627 /* Midi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */; };
+		9E89EE5B23E43DBC00E98627 /* FactoryPresets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E89EE5A23E43DBC00E98627 /* FactoryPresets.json */; };
 		9E91AB3E23E07B6000AF506B /* AudioUnitBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9EB4F0A72338BBC70090EB6F /* UIKnob.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4F0A62338BBC70090EB6F /* UIKnob.xib */; };
 		9EB737C923E07C460067B357 /* AUAudioUnit+createInstument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */; };
@@ -86,7 +86,6 @@
 		9304378121FB6319008D22E0 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9304378221FB6319008D22E0 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9304378321FB6319008D22E0 /* SimplePlayEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePlayEngine.swift; sourceTree = "<group>"; };
-		9304379921FB6459008D22E0 /* FactoryPresets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FactoryPresets.plist; sourceTree = "<group>"; };
 		9310B426227045780039667E /* UIKnob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKnob.swift; sourceTree = "<group>"; };
 		9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
@@ -104,6 +103,7 @@
 		9E55A585233B65B10020828C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E55A5B5233CB2000020828C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9E6198012345F7FF006B6F79 /* Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Velocity.swift; sourceTree = "<group>"; };
+		9E89EE5A23E43DBC00E98627 /* FactoryPresets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FactoryPresets.json; sourceTree = "<group>"; };
 		9E91AB3A23E07B5F00AF506B /* AudioUnitBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioUnitBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitBase.h; sourceTree = "<group>"; };
 		9E91AB3D23E07B6000AF506B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		9304379721FB6459008D22E0 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				9304379921FB6459008D22E0 /* FactoryPresets.plist */,
+				9E89EE5A23E43DBC00E98627 /* FactoryPresets.json */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -590,7 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */,
-				930437A521FB645A008D22E0 /* FactoryPresets.plist in Resources */,
+				9E89EE5B23E43DBC00E98627 /* FactoryPresets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
