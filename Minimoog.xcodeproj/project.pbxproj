@@ -201,13 +201,10 @@
 		9304374F21FB6117008D22E0 /* Minimoog */ = {
 			isa = PBXGroup;
 			children = (
-				93B084352273250300AF7495 /* Minimoog.entitlements */,
-				9304378121FB6319008D22E0 /* AppDelegate.swift */,
-				9304377E21FB6319008D22E0 /* Assets.xcassets */,
-				9304377921FB6319008D22E0 /* Base.lproj */,
+				9E1F232723E4DD87009601D9 /* Sources */,
+				9E1F232623E4DD7D009601D9 /* Resources */,
 				9304378021FB6319008D22E0 /* Info.plist */,
-				9304378321FB6319008D22E0 /* SimplePlayEngine.swift */,
-				9304378221FB6319008D22E0 /* ViewController.swift */,
+				93B084352273250300AF7495 /* Minimoog.entitlements */,
 			);
 			path = Minimoog;
 			sourceTree = "<group>";
@@ -215,11 +212,10 @@
 		9304376721FB619D008D22E0 /* MinimoogAU */ = {
 			isa = PBXGroup;
 			children = (
-				93B084362273254000AF7495 /* MinimoogAU.entitlements */,
-				9304379721FB6459008D22E0 /* Assets */,
-				936D546E2205BAE300C9D0F3 /* Instrument */,
-				9EF974CA2335127A00A8C25C /* GUI */,
+				9E1F232823E4DDB0009601D9 /* Sources */,
+				9304379721FB6459008D22E0 /* Resources */,
 				9304377021FB619D008D22E0 /* Info.plist */,
+				93B084362273254000AF7495 /* MinimoogAU.entitlements */,
 			);
 			path = MinimoogAU;
 			sourceTree = "<group>";
@@ -233,12 +229,12 @@
 			path = Base.lproj;
 			sourceTree = "<group>";
 		};
-		9304379721FB6459008D22E0 /* Assets */ = {
+		9304379721FB6459008D22E0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				9E89EE5A23E43DBC00E98627 /* FactoryPresets.json */,
 			);
-			path = Assets;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		936D546E2205BAE300C9D0F3 /* Instrument */ = {
@@ -261,6 +257,44 @@
 				9E6198012345F7FF006B6F79 /* Velocity.swift */,
 			);
 			path = DataTypes;
+			sourceTree = "<group>";
+		};
+		9E1F232623E4DD7D009601D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9304377921FB6319008D22E0 /* Base.lproj */,
+				9304377E21FB6319008D22E0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9E1F232723E4DD87009601D9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9304378121FB6319008D22E0 /* AppDelegate.swift */,
+				9304378321FB6319008D22E0 /* SimplePlayEngine.swift */,
+				9304378221FB6319008D22E0 /* ViewController.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		9E1F232823E4DDB0009601D9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				936D546E2205BAE300C9D0F3 /* Instrument */,
+				9EF974CA2335127A00A8C25C /* GUI */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		9E1F232923E4DE17009601D9 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9EF974D52338B9BB00A8C25C /* UIControls.h */,
+				9E55A580233B650E0020828C /* UIKnob */,
+				9E55A581233B65210020828C /* Utils */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		9E26D9FC23DB31FB00D0C9B5 /* Option */ = {
@@ -311,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				9EB737BD23E07C460067B357 /* Sources */,
-				9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */,
 				9E91AB3D23E07B6000AF506B /* Info.plist */,
 			);
 			path = AudioUnitBase;
@@ -320,9 +353,10 @@
 		9EB737BD23E07C460067B357 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */,
 				9EB737BF23E07C460067B357 /* Instrument.swift */,
-				9E4908A423E312DD00A86C0A /* Extensions */,
 				9EB737C023E07C460067B357 /* AudioUnit */,
+				9E4908A423E312DD00A86C0A /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -339,7 +373,6 @@
 			isa = PBXGroup;
 			children = (
 				9EE9DBE823D5F1BE009A953D /* Sources */,
-				9EE9DBDE23D5F1A2009A953D /* Midi.h */,
 				9EE9DBDF23D5F1A2009A953D /* Info.plist */,
 			);
 			path = Midi;
@@ -348,6 +381,7 @@
 		9EE9DBE823D5F1BE009A953D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				9EE9DBDE23D5F1A2009A953D /* Midi.h */,
 				9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */,
 				9E115FDF23E03E4100F20F33 /* DataTypes */,
 				9E26D9FC23DB31FB00D0C9B5 /* Option */,
@@ -367,9 +401,7 @@
 		9EF974D42338B9BB00A8C25C /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
-				9EF974D52338B9BB00A8C25C /* UIControls.h */,
-				9E55A580233B650E0020828C /* UIKnob */,
-				9E55A581233B65210020828C /* Utils */,
+				9E1F232923E4DE17009601D9 /* Sources */,
 				9E55A584233B65800020828C /* Resources */,
 				9EF974D62338B9BB00A8C25C /* Info.plist */,
 			);
