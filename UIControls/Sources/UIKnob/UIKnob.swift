@@ -19,21 +19,20 @@ import UIKit
 
 @IBDesignable
 public final class UIKnob: UIControl, NibLoadable {
-    @IBInspectable public var parameterAddress: Int = 0
-    @IBInspectable public var title: String = ""
-    @IBInspectable public var minValue: CGFloat = 0
-    @IBInspectable public var maxValue: CGFloat = 1
-    @IBInspectable public var step: CGFloat = 0
-
-    @IBOutlet var titleLabel: UILabel?
-    @IBOutlet var minLabel: UILabel?
-    @IBOutlet var midLabel: UILabel?
-    @IBOutlet var maxLabel: UILabel?
-    @IBOutlet var pointer: UIView?
+    @IBInspectable public var address: Int = 0
+    @IBInspectable private var topImage: UIImage? { didSet { knobView?.set(topImage: topImage) } }
+    @IBInspectable private var bottomImage: UIImage? { didSet { knobView?.set(bottomImage: bottomImage) } }
+    @IBInspectable private var steps: UInt = 0
+    @IBInspectable private var minAngle: CGFloat = -150
+    @IBInspectable private var maxAngle: CGFloat = 150
     
     public var value: CGFloat {
         get {
-            return curValue.snapped(to: step, in: minValue...maxValue)
+            switch steps {
+            case 0: return curValue
+            case 1: return 0.5
+            default: return (curValue * CGFloat(steps-1)).rounded() / CGFloat(steps-1)
+            }
         }
         set {
             guard !isValueLockedByUI else { return }
@@ -41,55 +40,41 @@ public final class UIKnob: UIControl, NibLoadable {
         }
     }
 
-    public func updateLabels() {
-        titleLabel?.text = title
-        minLabel?.text = "\(minValue)"
-        midLabel?.text = "\((minValue + maxValue)/2)"
-        maxLabel?.text = "\(maxValue)"
-    }
-
-    // Lifecycle
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        loadFromNib()
+        knobView = loadFromNib(owner: self)
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        loadFromNib()
+        knobView = loadFromNib(owner: self)
     }
 
     override public func awakeFromNib() {
+        super.awakeFromNib()
         commonInit()
     }
 
-    override public func prepareForInterfaceBuilder() {
-        commonInit()
-    }
-
-    // Variables
-    fileprivate var isValueLockedByUI: Bool {
+    private var knobView: UIKnobView?
+    private var curValue: CGFloat = 0
+    private var curAngle: CGFloat = 0
+    private var lastTouchOffset: CGFloat = 0
+    private var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
+    private var isValueLockedByUI: Bool {
         return panGestureRecognizer.state == .began || panGestureRecognizer.state == .changed
     }
-    fileprivate let minAngle: CGFloat = -150 * CGFloat.pi/180
-    fileprivate let maxAngle: CGFloat = 150 * CGFloat.pi/180
-    fileprivate var curValue: CGFloat = 0
-    fileprivate var curAngle: CGFloat = 0
-    fileprivate var lastTouchOffset: CGFloat = 0
-    fileprivate var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
 }
 
-extension UIKnob {
-    fileprivate func commonInit() {
-        updateLabels()
-        setValue(minValue)
+fileprivate extension UIKnob {
+    func commonInit() {
+        setValue(0)
 
         panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
         self.addGestureRecognizer(panGestureRecognizer)
         self.isUserInteractionEnabled = true
     }
 
-    @objc public func handlePan(recognizer: UIPanGestureRecognizer) {
+    @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         guard recognizer.state == .changed else {
             lastTouchOffset = 0
             return
@@ -99,40 +84,17 @@ extension UIKnob {
         let delta = touchOffset - lastTouchOffset
         lastTouchOffset = touchOffset
 
-        let newValue = curValue + (maxValue-minValue)*delta/128 // 128 is number or the total parameter steps
-        setValue(newValue.clamped(in: minValue...maxValue))
+        let newValue = curValue + delta/128 // 128 is number or the total parameter steps
+        setValue(newValue.clamped(in: 0...1))
 
         sendActions(for: .valueChanged)
     }
-}
 
-extension UIKnob {
-    fileprivate func setValue(_ newValue: CGFloat, animated: Bool = false) {
+    func setValue(_ newValue: CGFloat, animated: Bool = false) {
         curValue = newValue
 
         let prevAngle = curAngle
-        curAngle = minAngle + (curValue-minValue)*(maxAngle-minAngle)/(maxValue-minValue)
-
-        UIView.animate(withDuration: animated ? 1 : 0) {
-            guard let pointer = self.pointer else { return }
-            pointer.transform = pointer.transform.rotated(by: self.curAngle - prevAngle)
-        }
-    }
-}
-
-extension CGFloat {
-    fileprivate func snapped(to step: CGFloat, in range: ClosedRange<CGFloat>) -> CGFloat {
-        guard step != 0 else { return self }
-
-        let min = range.lowerBound
-        let val = min + ((self-min)/step).rounded() * step
-
-        return val.clamped(in: range)
-    }
-
-    fileprivate func clamped(in range: ClosedRange<CGFloat>) -> CGFloat {
-        return
-            self > range.upperBound ? range.upperBound :
-            self < range.lowerBound ? range.lowerBound : self
+        curAngle = minAngle + value * (maxAngle - minAngle)
+        knobView?.rotate(by: curAngle - prevAngle, animated: animated)
     }
 }

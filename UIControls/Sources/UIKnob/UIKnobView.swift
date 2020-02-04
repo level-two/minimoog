@@ -17,26 +17,23 @@
 
 import UIKit
 
-protocol NibLoadable where Self: UIView {
-    func loadFromNib<TopObjectType: UIView>(owner: Any?) -> TopObjectType?
-}
+@IBDesignable
+final class UIKnobView: UIView {
+    @IBOutlet private var top: UIImageView?
+    @IBOutlet private var bottom: UIImageView?
 
-extension NibLoadable {
-    func loadFromNib<TopObjectType: UIView>(owner: Any? = nil) -> TopObjectType? {
-        let bundle = Bundle(for: type(of: self))
-        let nibName = String(describing: type(of: self))
-
-        guard let views = bundle.loadNibNamed(nibName, owner: owner, options: nil) else {
-            fatalError("Failed to load nib \(nibName) from bundle \(String(describing: bundle))")
+    func rotate(by angle: CGFloat, animated: Bool) {
+        UIView.animate(withDuration: animated ? 1 : 0) {
+            guard let top = self.top else { return }
+            top.transform = top.transform.rotated(by: angle * .pi / 180)
         }
+    }
 
-        guard let view = views.compactMap({ $0 as? TopObjectType }).first else {
-            fatalError("Failed to get view from nib \(nibName) in the bundle \(String(describing: bundle))")
-        }
+    func set(topImage: UIImage?) {
+        top?.image = topImage
+    }
 
-        view.frame = self.bounds
-        self.addSubview(view)
-
-        return view
+    func set(bottomImage: UIImage?) {
+        bottom?.image = bottomImage
     }
 }

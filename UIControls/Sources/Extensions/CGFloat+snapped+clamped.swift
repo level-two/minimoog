@@ -15,28 +15,12 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import UIKit
+import Foundation
 
-protocol NibLoadable where Self: UIView {
-    func loadFromNib<TopObjectType: UIView>(owner: Any?) -> TopObjectType?
-}
-
-extension NibLoadable {
-    func loadFromNib<TopObjectType: UIView>(owner: Any? = nil) -> TopObjectType? {
-        let bundle = Bundle(for: type(of: self))
-        let nibName = String(describing: type(of: self))
-
-        guard let views = bundle.loadNibNamed(nibName, owner: owner, options: nil) else {
-            fatalError("Failed to load nib \(nibName) from bundle \(String(describing: bundle))")
-        }
-
-        guard let view = views.compactMap({ $0 as? TopObjectType }).first else {
-            fatalError("Failed to get view from nib \(nibName) in the bundle \(String(describing: bundle))")
-        }
-
-        view.frame = self.bounds
-        self.addSubview(view)
-
-        return view
+extension CGFloat {
+    func clamped(in range: ClosedRange<CGFloat>) -> CGFloat {
+        return
+            self > range.upperBound ? range.upperBound :
+                self < range.lowerBound ? range.lowerBound : self
     }
 }
