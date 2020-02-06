@@ -68,18 +68,18 @@ extension MinimoogViewController: AUAudioUnitFactory {
 
 fileprivate extension MinimoogViewController {
     func configureKnobs(with parameterTree: AUParameterTree) {
-        knobs.forEach { knob in
-            let address = AUParameterAddress(knob.parameterAddress)
-            guard let parameter = parameterTree.parameter(withAddress: address) else { return }
-            knob.title = parameter.identifier
-            knob.minValue = CGFloat(parameter.minValue)
-            knob.maxValue = CGFloat(parameter.maxValue)
-            if let stepsCount = parameter.valueStrings?.count, stepsCount > 0 {
-                knob.step = (knob.maxValue - knob.minValue) / CGFloat(stepsCount)
-            }
-            knob.value = CGFloat(parameter.value)
-            knob.updateLabels()
-        }
+//        knobs.forEach { knob in
+//            let address = AUParameterAddress(knob.parameterAddress)
+//            guard let parameter = parameterTree.parameter(withAddress: address) else { return }
+//            knob.title = parameter.identifier
+//            knob.minValue = CGFloat(parameter.minValue)
+//            knob.maxValue = CGFloat(parameter.maxValue)
+//            if let stepsCount = parameter.valueStrings?.count, stepsCount > 0 {
+//                knob.step = (knob.maxValue - knob.minValue) / CGFloat(stepsCount)
+//            }
+//            knob.value = CGFloat(parameter.value)
+//            knob.updateLabels()
+//        }
     }
 
     func setKnobsTarget() {
@@ -89,13 +89,13 @@ fileprivate extension MinimoogViewController {
     }
 
     func setKnobValue(_ address: AUParameterAddress, _ value: AUValue) {
-        knobs.first { $0.parameterAddress == address }?.value = CGFloat(value)
+        knobs.first { $0.address == address }?.value = CGFloat(value)
     }
 
     @objc func onKnobValueChanged(knob: UIKnob) {
         audioUnit?
             .parameterTree?
-            .parameter(withAddress: AUParameterAddress(knob.parameterAddress))?
+            .parameter(withAddress: AUParameterAddress(knob.address))?
             .setValue(AUValue(knob.value), originator: self.parameterObserverToken)
     }
 }

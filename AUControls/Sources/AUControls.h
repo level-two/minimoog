@@ -17,12 +17,12 @@
 
 #import <UIKit/UIKit.h>
 
-//! Project version number for UIControls.
-FOUNDATION_EXPORT double UIControlsVersionNumber;
+//! Project version number for AUControls.
+FOUNDATION_EXPORT double AUControlsVersionNumber;
 
-//! Project version string for UIControls.
-FOUNDATION_EXPORT const unsigned char UIControlsVersionString[];
+//! Project version string for AUControls.
+FOUNDATION_EXPORT const unsigned char AUControlsVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <UIControls/PublicHeader.h>
+// In this header, you should import all the public headers of your framework using statements like #import <AUControls/PublicHeader.h>
 
 

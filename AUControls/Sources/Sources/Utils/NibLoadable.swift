@@ -15,12 +15,28 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import Foundation
+import UIKit
 
-extension CGFloat {
-    func clamped(in range: ClosedRange<CGFloat>) -> CGFloat {
-        return
-            self > range.upperBound ? range.upperBound :
-                self < range.lowerBound ? range.lowerBound : self
+protocol NibLoadable where Self: UIView {
+    func loadFromNib<TopViewType: UIView>() -> TopViewType?
+}
+
+extension NibLoadable {
+    func loadFromNib<TopViewType: UIView>() -> TopViewType? {
+        let bundle = Bundle(for: type(of: self))
+        let nibName = String(describing: type(of: self))
+
+        guard let views = bundle.loadNibNamed(nibName, owner: self, options: nil) else {
+            fatalError("Failed to load nib \(nibName) from bundle \(String(describing: bundle))")
+        }
+
+        guard let view = views.compactMap({ $0 as? TopViewType }).first else {
+            fatalError("Failed to get view from nib \(nibName) in the bundle \(String(describing: bundle))")
+        }
+
+        view.frame = self.bounds
+        self.addSubview(view)
+
+        return view
     }
 }
