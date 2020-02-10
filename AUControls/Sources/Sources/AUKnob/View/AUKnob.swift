@@ -26,6 +26,10 @@ public final class AUKnob: UIView, NibLoadable {
     @IBInspectable private var minAngle: CGFloat = -150
     @IBInspectable private var maxAngle: CGFloat = 150
 
+    override public var intrinsicContentSize: CGSize {
+        return knobView?.intrinsicContentSize ?? .zero
+    }
+
     override public init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

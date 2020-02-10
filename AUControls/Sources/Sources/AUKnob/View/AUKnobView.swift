@@ -24,12 +24,17 @@ final class AUKnobView: UIView {
 
     private var curAngle: CGFloat = 0
 
+    override var intrinsicContentSize: CGSize {
+        return bottom?.intrinsicContentSize ?? .zero
+    }
+
     func set(topImage: UIImage?) {
         top?.image = topImage
     }
 
     func set(bottomImage: UIImage?) {
         bottom?.image = bottomImage
+        invalidateIntrinsicContentSize()
     }
 
     func rotate(to angle: CGFloat, animated: Bool) {
