@@ -20,8 +20,11 @@ import AudioToolbox
 
 @IBDesignable
 public final class AUKnob: UIView, NibLoadable {
+    @IBInspectable private var address: Int = 0
     @IBInspectable private var topImage: UIImage? { didSet { knobView?.set(topImage: topImage) } }
     @IBInspectable private var bottomImage: UIImage? { didSet { knobView?.set(bottomImage: bottomImage) } }
+    @IBInspectable private var minAngle: CGFloat = -150
+    @IBInspectable private var maxAngle: CGFloat = 150
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,18 +45,19 @@ public final class AUKnob: UIView, NibLoadable {
         self.viewModel?.set(delegate: nil)
         self.viewModel = viewModel
         self.viewModel?.set(delegate: self)
+        updateView(with: viewModel.controlValue, animated: false)
     }
 
     private var viewModel: AUKnobViewModel?
-    private var knobView: UIKnobView?
-
+    private var knobView: AUKnobView?
     private var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
     private var lastTouchPosition: CGFloat = 0
 }
 
 extension AUKnob: AUKnobViewModelDelegate {
-    func update(for value: Double) {
-        // TBD
+    func update() {
+        guard let value = viewModel?.controlValue else { return }
+        updateView(with: value, animated: true)
     }
 }
 
@@ -63,23 +67,28 @@ fileprivate extension AUKnob {
     }
 
     func setupView() {
-        // rotate(to: 0) TBD ???
-
         panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
         self.addGestureRecognizer(panGestureRecognizer)
         self.isUserInteractionEnabled = true
     }
 
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
-        if recognizer.state == .changed {
-            viewModel?.lockValue()
+        switch recognizer.state {
+        case .began:
+            viewModel?.userInteractionStarted()
+        case .changed:
             let touchPosition = -recognizer.translation(in: self).y
             let offset = touchPosition - lastTouchPosition
+            viewModel?.userChangedControl(by: Double(offset/128)) // 128 is number or the total parameter steps
             lastTouchPosition = touchPosition
-            viewModel?.changeValue(by: Double(offset/128)) // 128 is number or the total parameter steps
-        } else {
-            viewModel?.unlockValue()
+        default:
+            viewModel?.userInteractionEnded()
             lastTouchPosition = 0
         }
+    }
+
+    func updateView(with value: Double, animated: Bool) {
+        let angle = minAngle + CGFloat(value) * (maxAngle - minAngle)
+        knobView?.rotate(to: angle, animated: animated)
     }
 }

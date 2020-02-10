@@ -16,8 +16,11 @@
 // -----------------------------------------------------------------------------
 
 protocol AUKnobViewModel {
+    var controlValue: Double { get }
+
     func set(delegate: AUKnobViewModelDelegate?)
-    func lockValue()
-    func unlockValue()
-    func changeValue(by delta: Double)
+
+    func userInteractionStarted()
+    func userInteractionEnded()
+    func userChangedControl(by controlDelta: Double)
 }

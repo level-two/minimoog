@@ -18,16 +18,11 @@
 import UIKit
 
 @IBDesignable
-final class UIKnobView: UIView {
-    @IBOutlet private var top: UIImageView?
-    @IBOutlet private var bottom: UIImageView?
+final class AUKnobView: UIView {
+    @IBOutlet var top: UIImageView?
+    @IBOutlet var bottom: UIImageView?
 
-    func rotate(by angle: CGFloat, animated: Bool) {
-        UIView.animate(withDuration: animated ? 1 : 0) {
-            guard let top = self.top else { return }
-            top.transform = top.transform.rotated(by: angle * .pi / 180)
-        }
-    }
+    private var curAngle: CGFloat = 0
 
     func set(topImage: UIImage?) {
         top?.image = topImage
@@ -35,5 +30,14 @@ final class UIKnobView: UIView {
 
     func set(bottomImage: UIImage?) {
         bottom?.image = bottomImage
+    }
+
+    func rotate(to angle: CGFloat, animated: Bool) {
+        let deltaAngle = angle - curAngle
+        curAngle = angle
+        UIView.animate(withDuration: animated ? 1 : 0) {
+            guard let top = self.top else { return }
+            top.transform = top.transform.rotated(by: deltaAngle * .pi / 180)
+        }
     }
 }

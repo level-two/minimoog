@@ -16,6 +16,7 @@
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
 		9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FF23DB324200D0C9B5 /* Channels.swift */; };
+		9E2E8ECE23F1C39900D552E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E3E9FC323E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */; };
 		9E4EFA4D23D1F077005089D2 /* SineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */; };
 		9E55A578233925680020828C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A577233925680020828C /* NibLoadable.swift */; };
@@ -23,7 +24,6 @@
 		9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E6734F223E8E2FF0099B342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A585233B65B10020828C /* Assets.xcassets */; };
-		9E70880123EC3CDB00C122C5 /* AUParameter+observeNormalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70880023EC3CDB00C122C5 /* AUParameter+observeNormalized.swift */; };
 		9E893D4523EABAD90052CE7A /* FrontPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E893D4423EABAD90052CE7A /* FrontPanelView.xib */; };
 		9E893D4823EABB110052CE7A /* FrontPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D4723EABB110052CE7A /* FrontPanelView.swift */; };
 		9E893D4A23EABB1B0052CE7A /* FrontPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D4923EABB1B0052CE7A /* FrontPanelViewModel.swift */; };
@@ -51,8 +51,8 @@
 		9EE9DBEF23D5F2BD009A953D /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBEE23D5F2BD009A953D /* Pitch.swift */; };
 		9EEA670523E38061005BB492 /* AUAudioUnitPreset+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA670423E38061005BB492 /* AUAudioUnitPreset+init.swift */; };
 		9EEA670723E3826A005BB492 /* Collection+safeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA670623E3826A005BB492 /* Collection+safeIndex.swift */; };
-		9EECA51623E8C60500D84914 /* AUControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EECA51523E8C60500D84914 /* AUControlView.swift */; };
-		9EECA51823E8C66900D84914 /* Double+clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EECA51723E8C66900D84914 /* Double+clamped.swift */; };
+		9EECA51623E8C60500D84914 /* AUKnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EECA51523E8C60500D84914 /* AUKnobView.swift */; };
+		9EECA51823E8C66900D84914 /* AUValue+clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EECA51723E8C66900D84914 /* AUValue+clamped.swift */; };
 		9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF974C8233507BF00A8C25C /* Minimoog.storyboard */; };
 		9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF974CC233512B500A8C25C /* MinimoogViewController.swift */; };
 		9EF974D72338B9BB00A8C25C /* AUControls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF974D52338B9BB00A8C25C /* AUControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,7 +99,6 @@
 		9E55A585233B65B10020828C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E55A5B5233CB2000020828C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9E6198012345F7FF006B6F79 /* Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Velocity.swift; sourceTree = "<group>"; };
-		9E70880023EC3CDB00C122C5 /* AUParameter+observeNormalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameter+observeNormalized.swift"; sourceTree = "<group>"; };
 		9E893D4423EABAD90052CE7A /* FrontPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FrontPanelView.xib; sourceTree = "<group>"; };
 		9E893D4723EABB110052CE7A /* FrontPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPanelView.swift; sourceTree = "<group>"; };
 		9E893D4923EABB1B0052CE7A /* FrontPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPanelViewModel.swift; sourceTree = "<group>"; };
@@ -125,8 +124,8 @@
 		9EE9DBEE23D5F2BD009A953D /* Pitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pitch.swift; sourceTree = "<group>"; };
 		9EEA670423E38061005BB492 /* AUAudioUnitPreset+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUAudioUnitPreset+init.swift"; sourceTree = "<group>"; };
 		9EEA670623E3826A005BB492 /* Collection+safeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+safeIndex.swift"; sourceTree = "<group>"; };
-		9EECA51523E8C60500D84914 /* AUControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUControlView.swift; sourceTree = "<group>"; };
-		9EECA51723E8C66900D84914 /* Double+clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+clamped.swift"; sourceTree = "<group>"; };
+		9EECA51523E8C60500D84914 /* AUKnobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUKnobView.swift; sourceTree = "<group>"; };
+		9EECA51723E8C66900D84914 /* AUValue+clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUValue+clamped.swift"; sourceTree = "<group>"; };
 		9EF974C8233507BF00A8C25C /* Minimoog.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Minimoog.storyboard; sourceTree = "<group>"; };
 		9EF974CC233512B500A8C25C /* MinimoogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogViewController.swift; sourceTree = "<group>"; };
 		9EF974D32338B9BB00A8C25C /* AUControls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUControls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E2E8ECE23F1C39900D552E6 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +365,7 @@
 			children = (
 				9EB4F0A62338BBC70090EB6F /* AUKnob.xib */,
 				9E893D5C23EACB4B0052CE7A /* AUKnob.swift */,
-				9EECA51523E8C60500D84914 /* AUControlView.swift */,
+				9EECA51523E8C60500D84914 /* AUKnobView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -431,8 +431,7 @@
 		9EECA51923E8C79800D84914 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9EECA51723E8C66900D84914 /* Double+clamped.swift */,
-				9E70880023EC3CDB00C122C5 /* AUParameter+observeNormalized.swift */,
+				9EECA51723E8C66900D84914 /* AUValue+clamped.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -760,9 +759,8 @@
 				9E893D5923EACA340052CE7A /* AUKnobViewModelDelegate.swift in Sources */,
 				9E893D5F23EACD800052CE7A /* AUKnobDefaultViewModel.swift in Sources */,
 				9E55A578233925680020828C /* NibLoadable.swift in Sources */,
-				9E70880123EC3CDB00C122C5 /* AUParameter+observeNormalized.swift in Sources */,
-				9EECA51623E8C60500D84914 /* AUControlView.swift in Sources */,
-				9EECA51823E8C66900D84914 /* Double+clamped.swift in Sources */,
+				9EECA51623E8C60500D84914 /* AUKnobView.swift in Sources */,
+				9EECA51823E8C66900D84914 /* AUValue+clamped.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,7 +1125,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = UIControls/Info.plist;
+				INFOPLIST_FILE = AUControls/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1157,7 +1155,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = UIControls/Info.plist;
+				INFOPLIST_FILE = AUControls/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

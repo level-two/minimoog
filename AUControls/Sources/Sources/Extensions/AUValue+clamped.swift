@@ -15,12 +15,12 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
-import Foundation
+import AudioToolbox
 
-extension Double {
-    func clamped(in range: ClosedRange<Double>) -> Double {
+extension AUValue {
+    func clamped(in range: ClosedRange<AUValue>) -> AUValue {
         return
             self > range.upperBound ? range.upperBound :
-                self < range.lowerBound ? range.lowerBound : self
+            self < range.lowerBound ? range.lowerBound : self
     }
 }

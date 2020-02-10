@@ -18,82 +18,71 @@
 import AudioToolbox
 
 public final class AUKnobDefaultViewModel {
-    private weak var delegate: AUKnobViewModelDelegate?
-
     init(tiedTo parameter: AUParameter) {
         self.parameter = parameter
+        value = parameter.value
         setParameterObserver()
     }
 
-    private var isValueLocked: Bool = false
-    private var value: Double = 0
+    deinit {
+        removeParameterObserver()
+    }
 
+    private var isLockedByUi: Bool = false
+    private var value: AUValue {
+        didSet { delegate?.update() }
+    }
     private var parameter: AUParameter
     private var observerToken: AUParameterObserverToken?
+    private weak var delegate: AUKnobViewModelDelegate?
 }
 
 extension AUKnobDefaultViewModel: AUKnobViewModel {
+    var controlValue: Double {
+        let min = parameter.minValue
+        let max = parameter.maxValue
+
+        if parameter.unit == .indexed {
+            return Double(value.rounded() / max)
+        } else {
+            return Double((value - min) / (max - min))
+        }
+    }
+
     func set(delegate: AUKnobViewModelDelegate?) {
         self.delegate = delegate
     }
 
-    func lockValue() {
-        isValueLocked = true
+    func userInteractionStarted() {
+        isLockedByUi = true
     }
 
-    func unlockValue() {
-        isValueLocked = false
+    func userInteractionEnded() {
+        isLockedByUi = false
     }
 
-    func changeValue(by delta: Double) {
-        value = (value + delta).clamped(in: 0...1)
-        delegate?.update(for: value)
+    func userChangedControl(by controlDelta: Double) {
+        let min = parameter.minValue
+        let max = parameter.maxValue
+        let fullRange = max - min
+        let delta = fullRange * AUValue(controlDelta)
+        value = (value + delta).clamped(in: min...max)
     }
 }
 
 fileprivate extension AUKnobDefaultViewModel {
-
     func setParameterObserver() {
-        observerToken = parameter.observeNormalizedValue() { [weak self] value in
+        observerToken = parameter.token(byAddingParameterObserver: { [weak self] _, nweValue in
             DispatchQueue.main.async { [weak self] in
-                guard self?.isValueLocked == false else { return }
-                self?.value = value
-                self?.delegate?.update(for: value)
+                guard let self = self, self.isLockedByUi == false else { return }
+                self.value = nweValue
             }
-        }
+        })
     }
 
     func removeParameterObserver() {
         guard let observerToken = observerToken else { return }
         parameter.removeParameterObserver(observerToken)
-        observerToken = nil
+        self.observerToken = nil
     }
 }
-
-//    public var value: CGFloat {
-//        get {
-//            switch steps {
-//            case 0: return curValue
-//            case 1: return 0.5
-//            default: return (curValue * CGFloat(steps-1)).rounded() / CGFloat(steps-1)
-//            }
-//        }
-//        set {
-//            guard !isValueLockedByUI else { return }
-//            setValue(newValue, animated: true)
-//        }
-//    }
-//
-//    private var curValue: CGFloat = 0
-//    private var curAngle: CGFloat = 0
-//
-//        setValue(newValue.clamped(in: 0...1))
-//
-//        sendActions(for: .valueChanged)
-//    func setValue(_ newValue: CGFloat, animated: Bool = false) {
-//        curValue = newValue
-//
-//        let prevAngle = curAngle
-//        curAngle = minAngle + value * (maxAngle - minAngle)
-//        knobView?.rotate(by: curAngle - prevAngle, animated: animated)
-//    }

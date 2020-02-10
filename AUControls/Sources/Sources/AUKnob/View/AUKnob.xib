@@ -10,9 +10,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIKnob" customModule="UIControls" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AUKnob" customModule="AUControls" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="UIKnobView" customModule="UIControls" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AUKnobView" customModule="AUControls" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="195" height="175"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -42,8 +42,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="bottom" destination="iwx-dA-Xph" id="I3x-Ru-YYt"/>
-                <outlet property="top" destination="0Zn-uw-Gjm" id="ki4-RH-eq8"/>
+                <outlet property="bottom" destination="iwx-dA-Xph" id="PUC-AD-qyy"/>
+                <outlet property="top" destination="0Zn-uw-Gjm" id="SCk-gc-8MT"/>
             </connections>
             <point key="canvasLocation" x="-5.5999999999999996" y="-67.916041979010501"/>
         </view>

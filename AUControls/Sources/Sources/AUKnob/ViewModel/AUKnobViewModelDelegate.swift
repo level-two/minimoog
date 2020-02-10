@@ -16,5 +16,5 @@
 // -----------------------------------------------------------------------------
 
 protocol AUKnobViewModelDelegate: class {
-    func update(for value: Double)
+    func update()
 }
