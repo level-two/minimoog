@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AUKnob" customModule="AUControls" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AUKnobBase" customModule="AUControls" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AUKnobView" customModule="AUControls" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="195" height="175"/>
@@ -23,7 +23,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="195" height="175"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="iwx-dA-Xph" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="HBY-Ej-Qnb"/>
                 <constraint firstItem="iwx-dA-Xph" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="JRr-gz-iGp"/>

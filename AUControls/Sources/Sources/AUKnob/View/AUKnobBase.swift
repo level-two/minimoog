@@ -19,8 +19,8 @@ import UIKit
 import AudioToolbox
 
 @IBDesignable
-public final class AUKnob: UIView, NibLoadable {
-    @IBInspectable private var address: Int = 0
+public class AUKnobBase: UIView, NibLoadable {
+    @IBInspectable public var address: Int = 0
     @IBInspectable private var topImage: UIImage? { didSet { knobView?.set(topImage: topImage) } }
     @IBInspectable private var bottomImage: UIImage? { didSet { knobView?.set(bottomImage: bottomImage) } }
     @IBInspectable private var minAngle: CGFloat = -150
@@ -45,27 +45,29 @@ public final class AUKnob: UIView, NibLoadable {
         setupView()
     }
 
-    func set(viewModel: AUKnobViewModel) {
-        self.viewModel?.set(delegate: nil)
-        self.viewModel = viewModel
-        self.viewModel?.set(delegate: self)
-        updateView(with: viewModel.controlValue, animated: false)
-    }
-
     private var viewModel: AUKnobViewModel?
     private var knobView: AUKnobView?
     private var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
     private var lastTouchPosition: CGFloat = 0
 }
 
-extension AUKnob: AUKnobViewModelDelegate {
+extension AUKnobBase {
+    func set(viewModel: AUKnobViewModel) {
+        self.viewModel?.set(delegate: nil)
+        self.viewModel = viewModel
+        self.viewModel?.set(delegate: self)
+        updateView(with: viewModel.controlValue, animated: false)
+    }
+}
+
+extension AUKnobBase: AUKnobViewModelDelegate {
     func update() {
         guard let value = viewModel?.controlValue else { return }
         updateView(with: value, animated: true)
     }
 }
 
-fileprivate extension AUKnob {
+fileprivate extension AUKnobBase {
     func commonInit() {
         knobView = loadFromNib()
     }
@@ -80,6 +82,7 @@ fileprivate extension AUKnob {
         switch recognizer.state {
         case .began:
             viewModel?.userInteractionStarted()
+            lastTouchPosition = -recognizer.translation(in: self).y
         case .changed:
             let touchPosition = -recognizer.translation(in: self).y
             let offset = touchPosition - lastTouchPosition

@@ -20,41 +20,25 @@ import AudioToolbox
 import AVFoundation
 import CoreAudioKit
 import AudioUnitBase
-import UIControls
+import AUControls
 
 public class MinimoogViewController: AUViewController {
-    @IBOutlet var knobs: [UIKnob]!
+    @IBOutlet var tabButtons: [UIButton]?
+    @IBOutlet var embeddedViews: [UIView]?
+
+    @IBAction func onButton(_ sender: UIButton) {
+        guard let index = tabButtons?.firstIndex(of: sender) else { return }
+        tabButtons?.enumerated().forEach { idx, btn in btn.isSelected = (idx == index) }
+        embeddedViews?.enumerated().forEach { idx, view in view.isHidden = (idx != index) }
+    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-        setKnobsTarget()
-
-        if let parameterTree = audioUnit?.parameterTree {
-            configureKnobs(with: parameterTree)
-        }
+        commonInit()
     }
 
-    override public func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setParameterObserver()
-    }
-
-    override public func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeParameterObserver()
-    }
-
-    fileprivate var parameterObserverToken: AUParameterObserverToken?
     fileprivate var audioUnit: AUAudioUnit? {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self,
-                    self.isViewLoaded,
-                    let parameterTree = self.audioUnit?.parameterTree
-                    else { return }
-                self.configureKnobs(with: parameterTree)
-            }
-        }
+        didSet { commonInit() }
     }
 }
 
@@ -67,51 +51,22 @@ extension MinimoogViewController: AUAudioUnitFactory {
 }
 
 fileprivate extension MinimoogViewController {
-    func configureKnobs(with parameterTree: AUParameterTree) {
-//        knobs.forEach { knob in
-//            let address = AUParameterAddress(knob.parameterAddress)
-//            guard let parameter = parameterTree.parameter(withAddress: address) else { return }
-//            knob.title = parameter.identifier
-//            knob.minValue = CGFloat(parameter.minValue)
-//            knob.maxValue = CGFloat(parameter.maxValue)
-//            if let stepsCount = parameter.valueStrings?.count, stepsCount > 0 {
-//                knob.step = (knob.maxValue - knob.minValue) / CGFloat(stepsCount)
-//            }
-//            knob.value = CGFloat(parameter.value)
-//            knob.updateLabels()
-//        }
-    }
+    func commonInit() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self,
+                self.isViewLoaded,
+                let parameterTree = self.audioUnit?.parameterTree
+                else { return }
 
-    func setKnobsTarget() {
-        self.knobs.forEach { knob in
-            knob.addTarget(self, action: #selector(MinimoogViewController.onKnobValueChanged), for: .valueChanged)
+            self.configureEmbeddedViews(with: parameterTree)
+            self.tabButtons?.enumerated().forEach { idx, btn in btn.isSelected = (idx == 0) }
+            self.embeddedViews?.enumerated().forEach { idx, view in view.isHidden = (idx != 0) }
         }
     }
 
-    func setKnobValue(_ address: AUParameterAddress, _ value: AUValue) {
-        knobs.first { $0.address == address }?.value = CGFloat(value)
-    }
-
-    @objc func onKnobValueChanged(knob: UIKnob) {
-        audioUnit?
-            .parameterTree?
-            .parameter(withAddress: AUParameterAddress(knob.address))?
-            .setValue(AUValue(knob.value), originator: self.parameterObserverToken)
-    }
-}
-
-fileprivate extension MinimoogViewController {
-    func setParameterObserver() {
-        parameterObserverToken = audioUnit?.parameterTree?.token() { [weak self] address, value in
-            DispatchQueue.main.async { [weak self] in
-                self?.setKnobValue(address, value)
-            }
-        }
-    }
-
-    func removeParameterObserver() {
-        guard let token = parameterObserverToken else { return }
-        audioUnit?.parameterTree?.removeParameterObserver(token)
-        parameterObserverToken = nil
+    func configureEmbeddedViews(with parameterTree: AUParameterTree) {
+        embeddedViews?
+            .compactMap { $0.subviews.first?.parentViewController as? ParameterTreeConfigurable }
+            .forEach { $0.configure(with: parameterTree) }
     }
 }

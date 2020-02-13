@@ -17,7 +17,7 @@
 
 import AudioToolbox
 
-public final class AUKnobDefaultViewModel {
+final class AUKnobDefaultViewModel {
     init(tiedTo parameter: AUParameter) {
         self.parameter = parameter
         value = parameter.value

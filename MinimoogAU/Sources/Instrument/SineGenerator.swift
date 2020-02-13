@@ -23,7 +23,7 @@ import Midi
 final class SineGenerator: Instrument {
     fileprivate enum ParamAddress: AUParameterAddress {
         case osc1Range = 0
-        case osc1Volume = 8
+        case osc1Volume = 1
     }
 
     let channelCapabilities: [Int] = [0, -1]

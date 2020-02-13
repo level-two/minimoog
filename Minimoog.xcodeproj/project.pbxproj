@@ -14,6 +14,8 @@
 		9304378A21FB6319008D22E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378221FB6319008D22E0 /* ViewController.swift */; };
 		9304378B21FB6319008D22E0 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378321FB6319008D22E0 /* SimplePlayEngine.swift */; };
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9E194EBD23F56F2E00D63297 /* AUKnobBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E194EBC23F56F2E00D63297 /* AUKnobBase.swift */; };
+		9E22103B23F2929C00E3BFE2 /* AUControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* AUControls.framework */; };
 		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
 		9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FF23DB324200D0C9B5 /* Channels.swift */; };
 		9E2E8ECE23F1C39900D552E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
@@ -23,19 +25,15 @@
 		9E55A57D233AB99C0020828C /* AUControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* AUControls.framework */; };
 		9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
+		9E5C387023F5797E007B8CFB /* UIResponder+parentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C386F23F5797E007B8CFB /* UIResponder+parentViewController.swift */; };
 		9E6734F223E8E2FF0099B342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A585233B65B10020828C /* Assets.xcassets */; };
-		9E893D4523EABAD90052CE7A /* FrontPanelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E893D4423EABAD90052CE7A /* FrontPanelView.xib */; };
-		9E893D4823EABB110052CE7A /* FrontPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D4723EABB110052CE7A /* FrontPanelView.swift */; };
-		9E893D4A23EABB1B0052CE7A /* FrontPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D4923EABB1B0052CE7A /* FrontPanelViewModel.swift */; };
-		9E893D4C23EABB6C0052CE7A /* FrontPanelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D4B23EABB6C0052CE7A /* FrontPanelModel.swift */; };
 		9E893D5523EAC9F40052CE7A /* AUKnobViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D5423EAC9F40052CE7A /* AUKnobViewModel.swift */; };
 		9E893D5923EACA340052CE7A /* AUKnobViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D5823EACA340052CE7A /* AUKnobViewModelDelegate.swift */; };
-		9E893D5D23EACB4B0052CE7A /* AUKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D5C23EACB4B0052CE7A /* AUKnob.swift */; };
 		9E893D5F23EACD800052CE7A /* AUKnobDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E893D5E23EACD800052CE7A /* AUKnobDefaultViewModel.swift */; };
 		9E89EE5923E38B0F00E98627 /* Midi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */; };
 		9E89EE5B23E43DBC00E98627 /* FactoryPresets.json in Resources */ = {isa = PBXBuildFile; fileRef = 9E89EE5A23E43DBC00E98627 /* FactoryPresets.json */; };
 		9E91AB3E23E07B6000AF506B /* AudioUnitBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9EB4F0A72338BBC70090EB6F /* AUKnob.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4F0A62338BBC70090EB6F /* AUKnob.xib */; };
+		9EB4F0A72338BBC70090EB6F /* AUParameterKnob.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4F0A62338BBC70090EB6F /* AUParameterKnob.xib */; };
 		9EB737C923E07C460067B357 /* AUAudioUnit+createInstument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */; };
 		9EB737CA23E07C460067B357 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BF23E07C460067B357 /* Instrument.swift */; };
 		9EB737CC23E07C460067B357 /* AudioUnitBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737C223E07C460067B357 /* AudioUnitBase.swift */; };
@@ -56,6 +54,9 @@
 		9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF974C8233507BF00A8C25C /* Minimoog.storyboard */; };
 		9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF974CC233512B500A8C25C /* MinimoogViewController.swift */; };
 		9EF974D72338B9BB00A8C25C /* AUControls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF974D52338B9BB00A8C25C /* AUControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EFC94CD23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFC94CC23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift */; };
+		9EFC94CF23F55CCB00AB4DAB /* OscillatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFC94CE23F55CCB00AB4DAB /* OscillatorViewController.swift */; };
+		9EFC94D123F562A000AB4DAB /* AUParameterKnob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFC94D023F562A000AB4DAB /* AUParameterKnob.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,6 +90,7 @@
 		93B084362273254000AF7495 /* MinimoogAU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinimoogAU.entitlements; sourceTree = "<group>"; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		9E115FEF23E069F800F20F33 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		9E194EBC23F56F2E00D63297 /* AUKnobBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUKnobBase.swift; sourceTree = "<group>"; };
 		9E26D9FD23DB321200D0C9B5 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		9E26D9FF23DB324200D0C9B5 /* Channels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
 		9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameterNode+tree+group+parameter.swift"; sourceTree = "<group>"; };
@@ -98,20 +100,16 @@
 		9E55A577233925680020828C /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		9E55A585233B65B10020828C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E55A5B5233CB2000020828C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		9E5C386F23F5797E007B8CFB /* UIResponder+parentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+parentViewController.swift"; sourceTree = "<group>"; };
 		9E6198012345F7FF006B6F79 /* Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Velocity.swift; sourceTree = "<group>"; };
-		9E893D4423EABAD90052CE7A /* FrontPanelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FrontPanelView.xib; sourceTree = "<group>"; };
-		9E893D4723EABB110052CE7A /* FrontPanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPanelView.swift; sourceTree = "<group>"; };
-		9E893D4923EABB1B0052CE7A /* FrontPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPanelViewModel.swift; sourceTree = "<group>"; };
-		9E893D4B23EABB6C0052CE7A /* FrontPanelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontPanelModel.swift; sourceTree = "<group>"; };
 		9E893D5423EAC9F40052CE7A /* AUKnobViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUKnobViewModel.swift; sourceTree = "<group>"; };
 		9E893D5823EACA340052CE7A /* AUKnobViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUKnobViewModelDelegate.swift; sourceTree = "<group>"; };
-		9E893D5C23EACB4B0052CE7A /* AUKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUKnob.swift; sourceTree = "<group>"; };
 		9E893D5E23EACD800052CE7A /* AUKnobDefaultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUKnobDefaultViewModel.swift; sourceTree = "<group>"; };
 		9E89EE5A23E43DBC00E98627 /* FactoryPresets.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FactoryPresets.json; sourceTree = "<group>"; };
 		9E91AB3A23E07B5F00AF506B /* AudioUnitBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioUnitBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioUnitBase.h; sourceTree = "<group>"; };
 		9E91AB3D23E07B6000AF506B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9EB4F0A62338BBC70090EB6F /* AUKnob.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AUKnob.xib; sourceTree = "<group>"; };
+		9EB4F0A62338BBC70090EB6F /* AUParameterKnob.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AUParameterKnob.xib; sourceTree = "<group>"; };
 		9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AUAudioUnit+createInstument.swift"; sourceTree = "<group>"; };
 		9EB737BF23E07C460067B357 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		9EB737C223E07C460067B357 /* AudioUnitBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitBase.swift; sourceTree = "<group>"; };
@@ -131,6 +129,9 @@
 		9EF974D32338B9BB00A8C25C /* AUControls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUControls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EF974D52338B9BB00A8C25C /* AUControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AUControls.h; sourceTree = "<group>"; };
 		9EF974D62338B9BB00A8C25C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9EFC94CC23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterTreeConfigurable.swift; sourceTree = "<group>"; };
+		9EFC94CE23F55CCB00AB4DAB /* OscillatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorViewController.swift; sourceTree = "<group>"; };
+		9EFC94D023F562A000AB4DAB /* AUParameterKnob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUParameterKnob.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E22103B23F2929C00E3BFE2 /* AUControls.framework in Frameworks */,
 				9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +292,7 @@
 			children = (
 				9EF974CA2335127A00A8C25C /* GUI */,
 				936D546E2205BAE300C9D0F3 /* Instrument */,
+				9E5C387123F579C8007B8CFB /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -339,15 +342,12 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		9E893D4623EABB010052CE7A /* MinimoogView */ = {
+		9E5C387123F579C8007B8CFB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				9E893D4423EABAD90052CE7A /* FrontPanelView.xib */,
-				9E893D4723EABB110052CE7A /* FrontPanelView.swift */,
-				9E893D4923EABB1B0052CE7A /* FrontPanelViewModel.swift */,
-				9E893D4B23EABB6C0052CE7A /* FrontPanelModel.swift */,
+				9E5C386F23F5797E007B8CFB /* UIResponder+parentViewController.swift */,
 			);
-			path = MinimoogView;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9E893D5223EAC9BE0052CE7A /* Sources */ = {
@@ -363,8 +363,9 @@
 		9E893D5A23EACB2E0052CE7A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9EB4F0A62338BBC70090EB6F /* AUKnob.xib */,
-				9E893D5C23EACB4B0052CE7A /* AUKnob.swift */,
+				9EFC94D023F562A000AB4DAB /* AUParameterKnob.swift */,
+				9EB4F0A62338BBC70090EB6F /* AUParameterKnob.xib */,
+				9E194EBC23F56F2E00D63297 /* AUKnobBase.swift */,
 				9EECA51523E8C60500D84914 /* AUKnobView.swift */,
 			);
 			path = View;
@@ -441,7 +442,8 @@
 			children = (
 				9EF974C8233507BF00A8C25C /* Minimoog.storyboard */,
 				9EF974CC233512B500A8C25C /* MinimoogViewController.swift */,
-				9E893D4623EABB010052CE7A /* MinimoogView */,
+				9EFC94CC23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift */,
+				9EFC94CE23F55CCB00AB4DAB /* OscillatorViewController.swift */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -670,7 +672,6 @@
 				9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */,
 				9E6734F223E8E2FF0099B342 /* Assets.xcassets in Resources */,
 				9E89EE5B23E43DBC00E98627 /* FactoryPresets.json in Resources */,
-				9E893D4523EABAD90052CE7A /* FrontPanelView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,7 +693,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EB4F0A72338BBC70090EB6F /* AUKnob.xib in Resources */,
+				9EB4F0A72338BBC70090EB6F /* AUParameterKnob.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,11 +715,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */,
+				9E5C387023F5797E007B8CFB /* UIResponder+parentViewController.swift in Sources */,
 				9EE9DBEA23D5F224009A953D /* Note+frequency.swift in Sources */,
+				9EFC94CF23F55CCB00AB4DAB /* OscillatorViewController.swift in Sources */,
+				9EFC94CD23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift in Sources */,
 				9E4EFA4D23D1F077005089D2 /* SineGenerator.swift in Sources */,
-				9E893D4823EABB110052CE7A /* FrontPanelView.swift in Sources */,
-				9E893D4A23EABB1B0052CE7A /* FrontPanelViewModel.swift in Sources */,
-				9E893D4C23EABB6C0052CE7A /* FrontPanelModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,12 +756,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E893D5523EAC9F40052CE7A /* AUKnobViewModel.swift in Sources */,
-				9E893D5D23EACB4B0052CE7A /* AUKnob.swift in Sources */,
 				9E893D5923EACA340052CE7A /* AUKnobViewModelDelegate.swift in Sources */,
+				9EFC94D123F562A000AB4DAB /* AUParameterKnob.swift in Sources */,
 				9E893D5F23EACD800052CE7A /* AUKnobDefaultViewModel.swift in Sources */,
 				9E55A578233925680020828C /* NibLoadable.swift in Sources */,
 				9EECA51623E8C60500D84914 /* AUKnobView.swift in Sources */,
 				9EECA51823E8C66900D84914 /* AUValue+clamped.swift in Sources */,
+				9E194EBD23F56F2E00D63297 /* AUKnobBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

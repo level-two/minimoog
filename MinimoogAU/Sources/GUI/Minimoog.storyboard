@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cfr-SU-Pek">
-    <device id="retina5_5" orientation="landscape">
+    <device id="retina3_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,345 +19,598 @@
                         <viewControllerLayoutGuide type="bottom" id="0uY-GP-MOi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="RGp-Ed-HBy">
-                        <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8SN-Oc-GpF" userLabel="Modules">
-                                <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyb-JT-v1p" userLabel="Buttons Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="30"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FbS-CL-P2a" userLabel="Oscillators">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="414"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="iW0-oU-8c7" userLabel="Buttons Horizontal Stack">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="30"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDX-RV-09J" userLabel="Osc1">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="132.66666666666666"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="OSCILLATOR 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ix-48-wyv">
-                                                        <rect key="frame" x="83" y="0.0" width="74" height="12"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-Wd-nGc">
-                                                        <rect key="frame" x="0.0" y="9.6666666666666714" width="240" height="123.00000000000001"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZ8-d2-CbP" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="123"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
-                                                                        <integer key="value" value="0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob-back"/>
-                                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob-pointer"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdS-Ht-dIy">
-                                                                <rect key="frame" x="62" y="0.0" width="54" height="123"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSm-jD-2Gx" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="124" y="0.0" width="54" height="123"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Waveform"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZr-Ax-vmv" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="186" y="0.0" width="54" height="123"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
-                                                                        <integer key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob-pointer"/>
-                                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob-back"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="steps">
-                                                                        <integer key="value" value="4"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyp-Dn-XRR">
+                                                <rect key="frame" x="0.0" y="0.0" width="114" height="30"/>
                                                 <constraints>
-                                                    <constraint firstItem="3ix-48-wyv" firstAttribute="top" secondItem="zDX-RV-09J" secondAttribute="top" id="10H-Ng-bwc"/>
-                                                    <constraint firstItem="8ie-Wd-nGc" firstAttribute="width" secondItem="zDX-RV-09J" secondAttribute="width" id="OwI-gj-AHP"/>
-                                                    <constraint firstItem="3ix-48-wyv" firstAttribute="centerX" secondItem="zDX-RV-09J" secondAttribute="centerX" id="Zpr-ZM-HW4"/>
-                                                    <constraint firstItem="8ie-Wd-nGc" firstAttribute="centerX" secondItem="zDX-RV-09J" secondAttribute="centerX" id="ibc-zV-tso"/>
-                                                    <constraint firstAttribute="bottom" secondItem="8ie-Wd-nGc" secondAttribute="bottom" id="qNk-8L-Vuh"/>
-                                                    <constraint firstItem="3ix-48-wyv" firstAttribute="baseline" secondItem="8ie-Wd-nGc" secondAttribute="top" id="vSf-7Q-490"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="BKO-3f-yu1"/>
                                                 </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iO8-bd-252" userLabel="Osc2">
-                                                <rect key="frame" x="0.0" y="140.66666666666669" width="240" height="132.66666666666669"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="OSCILLATOR 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMF-g5-bpx">
-                                                        <rect key="frame" x="82.333333333333343" y="-9.6666666666666572" width="75.333333333333343" height="12"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="C9p-EK-9us">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="132.66666666666666"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N84-I9-nak" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="2"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Range"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y9h-Mt-Efp" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="62" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="-8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="3"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Frequency"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nP8-Lq-fnG" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="124" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="4"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Waveform"/>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QII-2L-EjJ" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="186" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Volume"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="10"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="9"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="C9p-EK-9us" firstAttribute="width" secondItem="iO8-bd-252" secondAttribute="width" id="4gb-hQ-2iZ"/>
-                                                    <constraint firstItem="lMF-g5-bpx" firstAttribute="firstBaseline" secondItem="iO8-bd-252" secondAttribute="top" id="DPp-OI-pPN"/>
-                                                    <constraint firstItem="lMF-g5-bpx" firstAttribute="baseline" secondItem="C9p-EK-9us" secondAttribute="top" id="j5L-eO-ABm"/>
-                                                    <constraint firstItem="lMF-g5-bpx" firstAttribute="centerX" secondItem="iO8-bd-252" secondAttribute="centerX" id="qQr-DP-Q6a"/>
-                                                    <constraint firstItem="C9p-EK-9us" firstAttribute="centerX" secondItem="iO8-bd-252" secondAttribute="centerX" id="tAH-uZ-suU"/>
-                                                    <constraint firstAttribute="bottom" secondItem="C9p-EK-9us" secondAttribute="bottom" id="wFj-zi-gop"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdZ-zA-5J3" userLabel="Osc3">
-                                                <rect key="frame" x="0.0" y="281.33333333333331" width="240" height="132.66666666666669"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="OSCILLATOR 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfK-ja-8Tl">
-                                                        <rect key="frame" x="82.333333333333314" y="-9.6666666666666288" width="75.666666666666686" height="12"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eiq-zb-9RK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="132.66666666666666"/>
-                                                        <subviews>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YeR-B3-L9t" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="0.0" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Range"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="5"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcF-zI-uQe" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="62" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Frequency"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="-8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="8"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lrn-CA-HmX" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="124" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Waveform"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="6"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="1"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="7"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLZ-hR-Xr1" customClass="UIKnob" customModule="UIControls">
-                                                                <rect key="frame" x="186" y="0.0" width="54" height="132.66666666666666"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <userDefinedRuntimeAttributes>
-                                                                    <userDefinedRuntimeAttribute type="string" keyPath="title" value="Volume"/>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="minValue">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                                                        <real key="value" value="10"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="step">
-                                                                        <real key="value" value="0.0"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                    <userDefinedRuntimeAttribute type="number" keyPath="parameterAddress">
-                                                                        <integer key="value" value="10"/>
-                                                                    </userDefinedRuntimeAttribute>
-                                                                </userDefinedRuntimeAttributes>
-                                                            </view>
-                                                        </subviews>
-                                                    </stackView>
-                                                </subviews>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstItem="eiq-zb-9RK" firstAttribute="centerX" secondItem="rdZ-zA-5J3" secondAttribute="centerX" id="0mS-Kp-0Qw"/>
-                                                    <constraint firstItem="eiq-zb-9RK" firstAttribute="width" secondItem="rdZ-zA-5J3" secondAttribute="width" id="ByS-wP-2MB"/>
-                                                    <constraint firstAttribute="bottom" secondItem="eiq-zb-9RK" secondAttribute="bottom" id="LKK-P6-sRM"/>
-                                                    <constraint firstItem="UfK-ja-8Tl" firstAttribute="firstBaseline" secondItem="rdZ-zA-5J3" secondAttribute="top" id="Mp3-67-akc"/>
-                                                    <constraint firstItem="UfK-ja-8Tl" firstAttribute="centerX" secondItem="rdZ-zA-5J3" secondAttribute="centerX" id="P4b-BP-6zh"/>
-                                                    <constraint firstItem="UfK-ja-8Tl" firstAttribute="baseline" secondItem="eiq-zb-9RK" secondAttribute="top" id="UHL-Ch-6Ta"/>
-                                                </constraints>
-                                            </view>
+                                                <state key="normal" title="Osc1"/>
+                                                <connections>
+                                                    <action selector="onButton:" destination="cfr-SU-Pek" eventType="touchUpInside" id="Pfo-lO-SDY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJN-G1-nnI">
+                                                <rect key="frame" x="122" y="0.0" width="114" height="30"/>
+                                                <state key="normal" title="Osc2"/>
+                                                <connections>
+                                                    <action selector="onButton:" destination="cfr-SU-Pek" eventType="touchUpInside" id="KVQ-Nh-JgQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rV3-ed-wDV">
+                                                <rect key="frame" x="244" y="0.0" width="114" height="30"/>
+                                                <state key="normal" title="Osc3"/>
+                                                <connections>
+                                                    <action selector="onButton:" destination="cfr-SU-Pek" eventType="touchUpInside" id="1OM-aJ-53K"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liJ-ne-iIF">
+                                                <rect key="frame" x="366" y="0.0" width="114" height="30"/>
+                                                <state key="normal" title="Mix"/>
+                                                <connections>
+                                                    <action selector="onButton:" destination="cfr-SU-Pek" eventType="touchUpInside" id="0gV-pd-Y3y"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Eut-K3-rUg">
-                                        <rect key="frame" x="248" y="0.0" width="240" height="414"/>
-                                        <color key="backgroundColor" red="0.0" green="0.98791292829999999" blue="1" alpha="0.28138754399999999" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tX3-hA-CIH">
-                                        <rect key="frame" x="496" y="0.0" width="240" height="414"/>
-                                        <color key="backgroundColor" red="0.98155279210000002" green="0.46234385480000001" blue="1" alpha="0.2142200916" colorSpace="custom" customColorSpace="displayP3"/>
                                     </stackView>
                                 </subviews>
-                            </stackView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D9E-uY-AXG" customClass="UIKnob" customModule="UIControls">
-                                <rect key="frame" x="217" y="143" width="271" height="161"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="iW0-oU-8c7" secondAttribute="bottom" id="23T-U9-AW1"/>
+                                    <constraint firstItem="iW0-oU-8c7" firstAttribute="leading" secondItem="oyb-JT-v1p" secondAttribute="leading" id="4av-NY-LTx"/>
+                                    <constraint firstAttribute="trailing" secondItem="iW0-oU-8c7" secondAttribute="trailing" priority="500" id="TZM-0Z-OLV"/>
+                                    <constraint firstItem="iW0-oU-8c7" firstAttribute="top" secondItem="oyb-JT-v1p" secondAttribute="top" id="ZWp-4T-yGh"/>
+                                    <constraint firstAttribute="height" secondItem="iW0-oU-8c7" secondAttribute="height" id="vd5-BU-LCh"/>
+                                    <constraint firstItem="iW0-oU-8c7" firstAttribute="width" secondItem="oyb-JT-v1p" secondAttribute="width" priority="700" id="xqo-jE-WfQ"/>
+                                </constraints>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCW-67-ukT" userLabel="Embedded VCs Container">
+                                <rect key="frame" x="0.0" y="30" width="480" height="290"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ef2-wk-gK1" userLabel="Osc1 Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                                        <connections>
+                                            <segue destination="sBa-VW-xqN" kind="embed" id="kMs-LK-0K8"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eFp-Nm-FZc" userLabel="Osc2 Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                                        <connections>
+                                            <segue destination="rmg-cp-vxW" kind="embed" id="TpA-X1-lmS"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXl-6w-iWF" userLabel="Osc3 Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                                        <connections>
+                                            <segue destination="P8g-Al-h7F" kind="embed" id="tvm-39-I0L"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hex-dF-w4j" userLabel="Mix Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                                        <connections>
+                                            <segue destination="H0d-zo-9QC" kind="embed" id="qNo-7x-RTA"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob-pointer"/>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob-back"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="steps">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <constraints>
+                                    <constraint firstItem="Ef2-wk-gK1" firstAttribute="height" secondItem="ZCW-67-ukT" secondAttribute="height" id="2V2-oP-HZM"/>
+                                    <constraint firstItem="Ef2-wk-gK1" firstAttribute="width" secondItem="ZCW-67-ukT" secondAttribute="width" id="B0I-bi-Set"/>
+                                    <constraint firstItem="Hex-dF-w4j" firstAttribute="centerY" secondItem="ZCW-67-ukT" secondAttribute="centerY" id="Gw5-nK-nSk"/>
+                                    <constraint firstItem="Ef2-wk-gK1" firstAttribute="centerX" secondItem="ZCW-67-ukT" secondAttribute="centerX" id="HL3-Bu-KZf"/>
+                                    <constraint firstItem="eFp-Nm-FZc" firstAttribute="width" secondItem="ZCW-67-ukT" secondAttribute="width" id="I8V-q5-wCP"/>
+                                    <constraint firstItem="eFp-Nm-FZc" firstAttribute="centerY" secondItem="ZCW-67-ukT" secondAttribute="centerY" id="K46-iB-Hzz"/>
+                                    <constraint firstItem="eFp-Nm-FZc" firstAttribute="centerX" secondItem="ZCW-67-ukT" secondAttribute="centerX" id="Lyu-m3-wW1"/>
+                                    <constraint firstItem="mXl-6w-iWF" firstAttribute="centerX" secondItem="ZCW-67-ukT" secondAttribute="centerX" id="SHB-ai-zQP"/>
+                                    <constraint firstItem="eFp-Nm-FZc" firstAttribute="height" secondItem="ZCW-67-ukT" secondAttribute="height" id="T3N-oX-ZZy"/>
+                                    <constraint firstItem="Hex-dF-w4j" firstAttribute="centerX" secondItem="ZCW-67-ukT" secondAttribute="centerX" id="TTb-A0-ekr"/>
+                                    <constraint firstItem="Hex-dF-w4j" firstAttribute="width" secondItem="ZCW-67-ukT" secondAttribute="width" id="aoZ-EI-E1L"/>
+                                    <constraint firstItem="mXl-6w-iWF" firstAttribute="width" secondItem="ZCW-67-ukT" secondAttribute="width" id="bHv-Mx-Tjb"/>
+                                    <constraint firstItem="mXl-6w-iWF" firstAttribute="centerY" secondItem="ZCW-67-ukT" secondAttribute="centerY" id="eQt-ny-5Jo"/>
+                                    <constraint firstItem="Hex-dF-w4j" firstAttribute="height" secondItem="ZCW-67-ukT" secondAttribute="height" id="ewX-Fs-1xa"/>
+                                    <constraint firstItem="mXl-6w-iWF" firstAttribute="height" secondItem="ZCW-67-ukT" secondAttribute="height" id="fbi-Aa-vKf"/>
+                                    <constraint firstItem="Ef2-wk-gK1" firstAttribute="centerY" secondItem="ZCW-67-ukT" secondAttribute="centerY" id="wW4-ML-hlt"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="centerX" secondItem="RGp-Ed-HBy" secondAttribute="centerX" id="3Hg-dS-HuK"/>
-                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="width" secondItem="RGp-Ed-HBy" secondAttribute="width" id="Xni-4m-Fiq"/>
-                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="centerY" secondItem="RGp-Ed-HBy" secondAttribute="centerY" id="nYV-4b-APO"/>
-                            <constraint firstItem="8SN-Oc-GpF" firstAttribute="height" secondItem="RGp-Ed-HBy" secondAttribute="height" id="nzD-Os-gLj"/>
+                            <constraint firstItem="oyb-JT-v1p" firstAttribute="leading" secondItem="RGp-Ed-HBy" secondAttribute="leading" id="BCz-DV-Ssg"/>
+                            <constraint firstItem="ZCW-67-ukT" firstAttribute="top" secondItem="oyb-JT-v1p" secondAttribute="bottom" id="R1R-QR-mdF"/>
+                            <constraint firstItem="0uY-GP-MOi" firstAttribute="top" secondItem="ZCW-67-ukT" secondAttribute="bottom" id="Utb-Ns-UGb"/>
+                            <constraint firstItem="oyb-JT-v1p" firstAttribute="top" secondItem="DdI-hw-Gej" secondAttribute="bottom" id="hhc-hk-RhM"/>
+                            <constraint firstAttribute="trailing" secondItem="oyb-JT-v1p" secondAttribute="trailing" priority="750" id="tIj-Pe-MN8"/>
+                            <constraint firstAttribute="trailing" secondItem="ZCW-67-ukT" secondAttribute="trailing" id="y24-ME-c28"/>
+                            <constraint firstItem="ZCW-67-ukT" firstAttribute="leading" secondItem="RGp-Ed-HBy" secondAttribute="leading" id="zBb-4Z-mgC"/>
                         </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outletCollection property="knobs" destination="pZ8-d2-CbP" collectionClass="NSMutableArray" id="wIF-Wx-Su8"/>
-                        <outletCollection property="knobs" destination="fSm-jD-2Gx" collectionClass="NSMutableArray" id="eLH-4H-0ni"/>
-                        <outletCollection property="knobs" destination="QZr-Ax-vmv" collectionClass="NSMutableArray" id="5oV-qX-zfx"/>
-                        <outletCollection property="knobs" destination="N84-I9-nak" collectionClass="NSMutableArray" id="DSr-GO-87y"/>
-                        <outletCollection property="knobs" destination="y9h-Mt-Efp" collectionClass="NSMutableArray" id="oF2-Kx-JYV"/>
-                        <outletCollection property="knobs" destination="nP8-Lq-fnG" collectionClass="NSMutableArray" id="r5W-mw-cDS"/>
-                        <outletCollection property="knobs" destination="QII-2L-EjJ" collectionClass="NSMutableArray" id="X2k-jw-DEo"/>
-                        <outletCollection property="knobs" destination="YeR-B3-L9t" collectionClass="NSMutableArray" id="AO5-Qq-9Vc"/>
-                        <outletCollection property="knobs" destination="TcF-zI-uQe" collectionClass="NSMutableArray" id="dwx-mX-KLv"/>
-                        <outletCollection property="knobs" destination="Lrn-CA-HmX" collectionClass="NSMutableArray" id="w85-hV-8tC"/>
-                        <outletCollection property="knobs" destination="uLZ-hR-Xr1" collectionClass="NSMutableArray" id="suM-IC-qU1"/>
+                        <outletCollection property="tabButtons" destination="Eyp-Dn-XRR" collectionClass="NSMutableArray" id="upB-9G-WZc"/>
+                        <outletCollection property="tabButtons" destination="mJN-G1-nnI" collectionClass="NSMutableArray" id="Y3N-tR-hhe"/>
+                        <outletCollection property="tabButtons" destination="rV3-ed-wDV" collectionClass="NSMutableArray" id="pQc-0C-KGU"/>
+                        <outletCollection property="tabButtons" destination="liJ-ne-iIF" collectionClass="NSMutableArray" id="1hu-kR-fXJ"/>
+                        <outletCollection property="embeddedViews" destination="Ef2-wk-gK1" collectionClass="NSMutableArray" id="ztP-c5-mbv"/>
+                        <outletCollection property="embeddedViews" destination="eFp-Nm-FZc" collectionClass="NSMutableArray" id="1Dd-9E-W43"/>
+                        <outletCollection property="embeddedViews" destination="mXl-6w-iWF" collectionClass="NSMutableArray" id="K6f-dH-Jf4"/>
+                        <outletCollection property="embeddedViews" destination="Hex-dF-w4j" collectionClass="NSMutableArray" id="F1b-R0-YtW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtA-rm-1GK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="61.956521739130437" y="726.08695652173924"/>
+            <point key="canvasLocation" x="-390" y="707"/>
+        </scene>
+        <!--Oscillator View Controller-->
+        <scene sceneID="NMG-ec-tj3">
+            <objects>
+                <viewController storyboardIdentifier="Osc1" id="sBa-VW-xqN" customClass="OscillatorViewController" customModule="MinimoogAU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bSl-WS-qcL"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pzi-4r-gQ7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aqB-SX-ufC">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VxG-eX-TwN">
+                                <rect key="frame" x="20" y="8" width="440" height="274"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13Q-Av-TOP" userLabel="Range Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ViG-VS-c2e" userLabel="Range Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xGf-eQ-Daf" userLabel="Range Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="xGf-eQ-Daf" secondAttribute="bottom" id="22i-vI-Tq8"/>
+                                            <constraint firstItem="xGf-eQ-Daf" firstAttribute="centerX" secondItem="13Q-Av-TOP" secondAttribute="centerX" id="G25-Fg-Oam"/>
+                                            <constraint firstItem="ViG-VS-c2e" firstAttribute="top" secondItem="13Q-Av-TOP" secondAttribute="top" id="do4-vv-z5U"/>
+                                            <constraint firstItem="xGf-eQ-Daf" firstAttribute="top" secondItem="ViG-VS-c2e" secondAttribute="bottom" id="lhb-4p-pFL"/>
+                                            <constraint firstItem="ViG-VS-c2e" firstAttribute="centerX" secondItem="13Q-Av-TOP" secondAttribute="centerX" id="qrv-yd-PlJ"/>
+                                            <constraint firstItem="xGf-eQ-Daf" firstAttribute="width" secondItem="13Q-Av-TOP" secondAttribute="width" id="qzZ-iq-tTW"/>
+                                            <constraint firstItem="ViG-VS-c2e" firstAttribute="width" secondItem="13Q-Av-TOP" secondAttribute="width" id="tdi-fs-xRn"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dol-fa-pDm" userLabel="Dummy View">
+                                        <rect key="frame" x="149.5" y="0.0" width="141" height="274"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMe-7N-fNK" userLabel="Waveform Container">
+                                        <rect key="frame" x="298.5" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eur-5a-l9p" userLabel="Waveform Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="m1T-Xw-GtB" userLabel="Waveform Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="m1T-Xw-GtB" firstAttribute="width" secondItem="pMe-7N-fNK" secondAttribute="width" id="28g-JK-Apx"/>
+                                            <constraint firstItem="eur-5a-l9p" firstAttribute="width" secondItem="pMe-7N-fNK" secondAttribute="width" id="2Kg-WC-EwA"/>
+                                            <constraint firstAttribute="bottom" secondItem="m1T-Xw-GtB" secondAttribute="bottom" id="AOg-Do-czT"/>
+                                            <constraint firstItem="eur-5a-l9p" firstAttribute="top" secondItem="pMe-7N-fNK" secondAttribute="top" id="APr-mm-GCL"/>
+                                            <constraint firstItem="m1T-Xw-GtB" firstAttribute="centerX" secondItem="pMe-7N-fNK" secondAttribute="centerX" id="Moe-3q-BZR"/>
+                                            <constraint firstItem="m1T-Xw-GtB" firstAttribute="top" secondItem="eur-5a-l9p" secondAttribute="bottom" id="SGg-Pb-eR8"/>
+                                            <constraint firstItem="eur-5a-l9p" firstAttribute="centerX" secondItem="pMe-7N-fNK" secondAttribute="centerX" id="Ykl-N1-qLo"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Pzi-4r-gQ7" firstAttribute="top" secondItem="VxG-eX-TwN" secondAttribute="bottom" constant="8" symbolic="YES" id="6Ty-Cn-4qF"/>
+                            <constraint firstAttribute="trailing" secondItem="VxG-eX-TwN" secondAttribute="trailing" constant="20" symbolic="YES" id="Piy-PA-WAx"/>
+                            <constraint firstItem="VxG-eX-TwN" firstAttribute="top" secondItem="bSl-WS-qcL" secondAttribute="bottom" constant="8" symbolic="YES" id="i4J-id-6MY"/>
+                            <constraint firstItem="VxG-eX-TwN" firstAttribute="leading" secondItem="aqB-SX-ufC" secondAttribute="leading" constant="20" symbolic="YES" id="nLd-sj-Yof"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outletCollection property="knobs" destination="xGf-eQ-Daf" collectionClass="NSMutableArray" id="wF3-2U-yzO"/>
+                        <outletCollection property="knobs" destination="m1T-Xw-GtB" collectionClass="NSMutableArray" id="6AN-5V-V1I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TFP-R6-nnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="-139"/>
+        </scene>
+        <!--Oscillator View Controller-->
+        <scene sceneID="JhF-Ur-aSn">
+            <objects>
+                <viewController id="rmg-cp-vxW" customClass="OscillatorViewController" customModule="MinimoogAU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="THm-lb-99A"/>
+                        <viewControllerLayoutGuide type="bottom" id="5ou-hL-JRF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6uL-7C-Mi6">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="geG-xf-rlu">
+                                <rect key="frame" x="20" y="8" width="440" height="274"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UV6-e3-Kwg" userLabel="Range Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DM-Ep-fkI" userLabel="Range Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xFt-te-0Qx" userLabel="Range Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5DM-Ep-fkI" firstAttribute="centerX" secondItem="UV6-e3-Kwg" secondAttribute="centerX" id="47m-bH-3NO"/>
+                                            <constraint firstItem="xFt-te-0Qx" firstAttribute="centerX" secondItem="UV6-e3-Kwg" secondAttribute="centerX" id="QbN-JX-8k5"/>
+                                            <constraint firstItem="5DM-Ep-fkI" firstAttribute="top" secondItem="UV6-e3-Kwg" secondAttribute="top" id="SuP-e6-bbx"/>
+                                            <constraint firstItem="xFt-te-0Qx" firstAttribute="top" secondItem="5DM-Ep-fkI" secondAttribute="bottom" id="UW9-c3-Vjx"/>
+                                            <constraint firstItem="xFt-te-0Qx" firstAttribute="width" secondItem="UV6-e3-Kwg" secondAttribute="width" id="Xz5-Q9-q7P"/>
+                                            <constraint firstAttribute="bottom" secondItem="xFt-te-0Qx" secondAttribute="bottom" id="iVq-tX-Z4I"/>
+                                            <constraint firstItem="5DM-Ep-fkI" firstAttribute="width" secondItem="UV6-e3-Kwg" secondAttribute="width" id="jAC-Yv-YeD"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diZ-XS-Rry" userLabel="Frequency Container">
+                                        <rect key="frame" x="149.5" y="0.0" width="141" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVx-ff-Vi5" userLabel="Range Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="kOv-eG-aKo" userLabel="Range Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="BVx-ff-Vi5" firstAttribute="centerX" secondItem="diZ-XS-Rry" secondAttribute="centerX" id="QgZ-g0-RfF"/>
+                                            <constraint firstAttribute="bottom" secondItem="kOv-eG-aKo" secondAttribute="bottom" id="T3t-LN-Lax"/>
+                                            <constraint firstItem="BVx-ff-Vi5" firstAttribute="width" secondItem="diZ-XS-Rry" secondAttribute="width" id="Woc-i0-8So"/>
+                                            <constraint firstItem="kOv-eG-aKo" firstAttribute="centerX" secondItem="diZ-XS-Rry" secondAttribute="centerX" id="Xji-Bq-pLK"/>
+                                            <constraint firstItem="kOv-eG-aKo" firstAttribute="top" secondItem="BVx-ff-Vi5" secondAttribute="bottom" id="bax-GZ-Ggk"/>
+                                            <constraint firstItem="BVx-ff-Vi5" firstAttribute="top" secondItem="diZ-XS-Rry" secondAttribute="top" id="ojJ-sr-jnh"/>
+                                            <constraint firstItem="kOv-eG-aKo" firstAttribute="width" secondItem="diZ-XS-Rry" secondAttribute="width" id="xxF-lx-AIo"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pqf-Ji-ZSn" userLabel="Waveform Container">
+                                        <rect key="frame" x="298.5" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydz-rJ-fNr" userLabel="Waveform Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Ipf-Ts-XE9" userLabel="Waveform Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="ydz-rJ-fNr" firstAttribute="top" secondItem="Pqf-Ji-ZSn" secondAttribute="top" id="4up-oI-WKL"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ipf-Ts-XE9" secondAttribute="bottom" id="7Q8-4O-ETE"/>
+                                            <constraint firstItem="ydz-rJ-fNr" firstAttribute="width" secondItem="Pqf-Ji-ZSn" secondAttribute="width" id="MdS-hb-JR3"/>
+                                            <constraint firstItem="ydz-rJ-fNr" firstAttribute="centerX" secondItem="Pqf-Ji-ZSn" secondAttribute="centerX" id="SLN-Vt-301"/>
+                                            <constraint firstItem="Ipf-Ts-XE9" firstAttribute="centerX" secondItem="Pqf-Ji-ZSn" secondAttribute="centerX" id="ktT-ZW-NEP"/>
+                                            <constraint firstItem="Ipf-Ts-XE9" firstAttribute="width" secondItem="Pqf-Ji-ZSn" secondAttribute="width" id="wHF-Ub-hPO"/>
+                                            <constraint firstItem="Ipf-Ts-XE9" firstAttribute="top" secondItem="ydz-rJ-fNr" secondAttribute="bottom" id="wkA-E5-KbV"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="geG-xf-rlu" firstAttribute="leading" secondItem="6uL-7C-Mi6" secondAttribute="leading" constant="20" symbolic="YES" id="3j3-63-ke4"/>
+                            <constraint firstItem="5ou-hL-JRF" firstAttribute="top" secondItem="geG-xf-rlu" secondAttribute="bottom" constant="8" symbolic="YES" id="F2E-bO-JsQ"/>
+                            <constraint firstAttribute="trailing" secondItem="geG-xf-rlu" secondAttribute="trailing" constant="20" symbolic="YES" id="aIE-OD-Q6v"/>
+                            <constraint firstItem="geG-xf-rlu" firstAttribute="top" secondItem="THm-lb-99A" secondAttribute="bottom" constant="8" symbolic="YES" id="xc3-La-dzR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xnk-gk-GZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="540"/>
+        </scene>
+        <!--Oscillator View Controller-->
+        <scene sceneID="LVd-Id-kRk">
+            <objects>
+                <viewController id="P8g-Al-h7F" customClass="OscillatorViewController" customModule="MinimoogAU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cT0-Mb-rL7"/>
+                        <viewControllerLayoutGuide type="bottom" id="dw8-Hx-paj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n3Q-NI-Wu2">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6lR-2h-Gc5">
+                                <rect key="frame" x="20" y="8" width="440" height="274"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIK-ib-i5o" userLabel="Range Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FiW-vc-nfr" userLabel="Range Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bOj-6m-TUG" userLabel="Range Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="FiW-vc-nfr" firstAttribute="top" secondItem="LIK-ib-i5o" secondAttribute="top" id="BZX-KT-JoR"/>
+                                            <constraint firstItem="bOj-6m-TUG" firstAttribute="top" secondItem="FiW-vc-nfr" secondAttribute="bottom" id="Cfm-kC-spV"/>
+                                            <constraint firstItem="FiW-vc-nfr" firstAttribute="width" secondItem="LIK-ib-i5o" secondAttribute="width" id="G0g-nr-0be"/>
+                                            <constraint firstItem="FiW-vc-nfr" firstAttribute="centerX" secondItem="LIK-ib-i5o" secondAttribute="centerX" id="H0e-ps-yBh"/>
+                                            <constraint firstItem="bOj-6m-TUG" firstAttribute="width" secondItem="LIK-ib-i5o" secondAttribute="width" id="I4y-qN-heJ"/>
+                                            <constraint firstItem="bOj-6m-TUG" firstAttribute="centerX" secondItem="LIK-ib-i5o" secondAttribute="centerX" id="dO9-wV-ysg"/>
+                                            <constraint firstAttribute="bottom" secondItem="bOj-6m-TUG" secondAttribute="bottom" id="tRs-EL-xhs"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jmu-t0-Sdn" userLabel="Frequency Container">
+                                        <rect key="frame" x="149.5" y="0.0" width="141" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-1J-wDf" userLabel="Range Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bNo-Bb-dhz" userLabel="Range Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="bNo-Bb-dhz" firstAttribute="width" secondItem="Jmu-t0-Sdn" secondAttribute="width" id="7L8-SU-Wsl"/>
+                                            <constraint firstItem="bNo-Bb-dhz" firstAttribute="top" secondItem="8hd-1J-wDf" secondAttribute="bottom" id="L3z-gP-cvy"/>
+                                            <constraint firstItem="8hd-1J-wDf" firstAttribute="centerX" secondItem="Jmu-t0-Sdn" secondAttribute="centerX" id="T2z-Vs-OZt"/>
+                                            <constraint firstItem="8hd-1J-wDf" firstAttribute="top" secondItem="Jmu-t0-Sdn" secondAttribute="top" id="VQw-pV-7b8"/>
+                                            <constraint firstItem="bNo-Bb-dhz" firstAttribute="centerX" secondItem="Jmu-t0-Sdn" secondAttribute="centerX" id="aE5-Iq-2yJ"/>
+                                            <constraint firstItem="8hd-1J-wDf" firstAttribute="width" secondItem="Jmu-t0-Sdn" secondAttribute="width" id="gge-mu-3Ve"/>
+                                            <constraint firstAttribute="bottom" secondItem="bNo-Bb-dhz" secondAttribute="bottom" id="tar-nn-Roo"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6q-dL-rPz" userLabel="Waveform Container">
+                                        <rect key="frame" x="298.5" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waveform" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Bd-hT-wx2" userLabel="Waveform Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="lJu-eP-Hz4" userLabel="Waveform Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="7"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="7Bd-hT-wx2" firstAttribute="top" secondItem="M6q-dL-rPz" secondAttribute="top" id="Acv-NS-oxn"/>
+                                            <constraint firstItem="lJu-eP-Hz4" firstAttribute="width" secondItem="M6q-dL-rPz" secondAttribute="width" id="BlI-Av-zMs"/>
+                                            <constraint firstItem="7Bd-hT-wx2" firstAttribute="centerX" secondItem="M6q-dL-rPz" secondAttribute="centerX" id="H2u-Fa-cvg"/>
+                                            <constraint firstItem="lJu-eP-Hz4" firstAttribute="top" secondItem="7Bd-hT-wx2" secondAttribute="bottom" id="c1b-bh-lIS"/>
+                                            <constraint firstItem="7Bd-hT-wx2" firstAttribute="width" secondItem="M6q-dL-rPz" secondAttribute="width" id="mIM-9n-7lT"/>
+                                            <constraint firstAttribute="bottom" secondItem="lJu-eP-Hz4" secondAttribute="bottom" id="pKd-wS-f3g"/>
+                                            <constraint firstItem="lJu-eP-Hz4" firstAttribute="centerX" secondItem="M6q-dL-rPz" secondAttribute="centerX" id="qlL-kU-jg4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6lR-2h-Gc5" secondAttribute="trailing" constant="20" symbolic="YES" id="I4o-T5-bEy"/>
+                            <constraint firstItem="dw8-Hx-paj" firstAttribute="top" secondItem="6lR-2h-Gc5" secondAttribute="bottom" constant="8" symbolic="YES" id="T7O-or-gLl"/>
+                            <constraint firstItem="6lR-2h-Gc5" firstAttribute="leading" secondItem="n3Q-NI-Wu2" secondAttribute="leading" constant="20" symbolic="YES" id="eGp-91-4ya"/>
+                            <constraint firstItem="6lR-2h-Gc5" firstAttribute="top" secondItem="cT0-Mb-rL7" secondAttribute="bottom" constant="8" symbolic="YES" id="m2I-If-9Hc"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iiu-h4-ySt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="1277"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Kaf-vy-BjS">
+            <objects>
+                <viewController id="H0d-zo-9QC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CAU-PH-uRL"/>
+                        <viewControllerLayoutGuide type="bottom" id="J3c-lL-XR1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IhF-bJ-gUx">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="290"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QqN-WW-GRO">
+                                <rect key="frame" x="20" y="8" width="440" height="274"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SyO-ih-C4M" userLabel="Osc1 Volume Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Osc1 Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibb-ti-bwC" userLabel="Osc1 Volume Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ATI-bd-8HP" userLabel="Osc1 Volume Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Ibb-ti-bwC" firstAttribute="top" secondItem="SyO-ih-C4M" secondAttribute="top" id="6UP-hE-h1B"/>
+                                            <constraint firstItem="Ibb-ti-bwC" firstAttribute="width" secondItem="SyO-ih-C4M" secondAttribute="width" id="XCw-oe-olx"/>
+                                            <constraint firstItem="ATI-bd-8HP" firstAttribute="centerX" secondItem="SyO-ih-C4M" secondAttribute="centerX" id="iIX-MH-zsg"/>
+                                            <constraint firstItem="ATI-bd-8HP" firstAttribute="top" secondItem="Ibb-ti-bwC" secondAttribute="bottom" id="pYh-dI-m8L"/>
+                                            <constraint firstItem="ATI-bd-8HP" firstAttribute="width" secondItem="SyO-ih-C4M" secondAttribute="width" id="qUq-bg-dd1"/>
+                                            <constraint firstItem="Ibb-ti-bwC" firstAttribute="centerX" secondItem="SyO-ih-C4M" secondAttribute="centerX" id="ssx-o4-QAb"/>
+                                            <constraint firstAttribute="bottom" secondItem="ATI-bd-8HP" secondAttribute="bottom" id="uAd-rL-PTA"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daC-3a-cfa" userLabel="Osc2 Volume Container">
+                                        <rect key="frame" x="149.5" y="0.0" width="141" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Osc2 Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5R-GF-UFz" userLabel="Osc2 Volume Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="8Ic-ZX-RXo" userLabel="Osc2 Volume Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="9"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="8Ic-ZX-RXo" firstAttribute="centerX" secondItem="daC-3a-cfa" secondAttribute="centerX" id="80c-kl-3WX"/>
+                                            <constraint firstAttribute="bottom" secondItem="8Ic-ZX-RXo" secondAttribute="bottom" id="97P-iJ-2AI"/>
+                                            <constraint firstItem="b5R-GF-UFz" firstAttribute="top" secondItem="daC-3a-cfa" secondAttribute="top" id="Qcn-d4-doJ"/>
+                                            <constraint firstItem="b5R-GF-UFz" firstAttribute="width" secondItem="daC-3a-cfa" secondAttribute="width" id="VWN-db-UGT"/>
+                                            <constraint firstItem="8Ic-ZX-RXo" firstAttribute="top" secondItem="b5R-GF-UFz" secondAttribute="bottom" id="kkx-EP-wgu"/>
+                                            <constraint firstItem="b5R-GF-UFz" firstAttribute="centerX" secondItem="daC-3a-cfa" secondAttribute="centerX" id="p9L-wy-rhP"/>
+                                            <constraint firstItem="8Ic-ZX-RXo" firstAttribute="width" secondItem="daC-3a-cfa" secondAttribute="width" id="zvN-9N-pkl"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvc-Oh-b9o" userLabel="Osc3 Volume Container">
+                                        <rect key="frame" x="298.5" y="0.0" width="141.5" height="274"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Osc3 Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlB-Z6-nJS" userLabel="Osc3 Volume Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="141.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Nev-jo-WGw" userLabel="Osc3 Volume Knob" customClass="AUParameterKnob" customModule="AUControls">
+                                                <rect key="frame" x="0.0" y="20.5" width="141.5" height="253.5"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="address">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Nev-jo-WGw" firstAttribute="centerX" secondItem="fvc-Oh-b9o" secondAttribute="centerX" id="EOQ-iI-7vi"/>
+                                            <constraint firstItem="Nev-jo-WGw" firstAttribute="top" secondItem="dlB-Z6-nJS" secondAttribute="bottom" id="EjG-LI-gEt"/>
+                                            <constraint firstItem="Nev-jo-WGw" firstAttribute="width" secondItem="fvc-Oh-b9o" secondAttribute="width" id="aDZ-HJ-kWE"/>
+                                            <constraint firstAttribute="bottom" secondItem="Nev-jo-WGw" secondAttribute="bottom" id="awn-C1-tp0"/>
+                                            <constraint firstItem="dlB-Z6-nJS" firstAttribute="top" secondItem="fvc-Oh-b9o" secondAttribute="top" id="dns-0V-Shi"/>
+                                            <constraint firstItem="dlB-Z6-nJS" firstAttribute="width" secondItem="fvc-Oh-b9o" secondAttribute="width" id="nP8-kW-lnq"/>
+                                            <constraint firstItem="dlB-Z6-nJS" firstAttribute="centerX" secondItem="fvc-Oh-b9o" secondAttribute="centerX" id="w8U-uu-Cn4"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QqN-WW-GRO" firstAttribute="leading" secondItem="IhF-bJ-gUx" secondAttribute="leading" constant="20" symbolic="YES" id="8j0-ve-eby"/>
+                            <constraint firstAttribute="trailing" secondItem="QqN-WW-GRO" secondAttribute="trailing" constant="20" symbolic="YES" id="Qwb-Vs-m2R"/>
+                            <constraint firstItem="QqN-WW-GRO" firstAttribute="top" secondItem="CAU-PH-uRL" secondAttribute="bottom" constant="8" symbolic="YES" id="YnM-F6-Qy0"/>
+                            <constraint firstItem="J3c-lL-XR1" firstAttribute="top" secondItem="QqN-WW-GRO" secondAttribute="bottom" constant="8" symbolic="YES" id="vQo-ma-x0p"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="64H-MF-4Ob" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="2124"/>
         </scene>
     </scenes>
     <resources>
-        <image name="knob-back" width="455" height="440"/>
-        <image name="knob-pointer" width="454" height="440"/>
+        <image name="knob_bg" width="303" height="293"/>
+        <image name="knob_pointer" width="302" height="293"/>
     </resources>
 </document>
