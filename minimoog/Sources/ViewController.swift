@@ -32,8 +32,13 @@ class ViewController: UIViewController {
         playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice)
 
         var componentDescription = AudioComponentDescription()
-        componentDescription.componentType = kAudioUnitType_MusicDevice
-        componentDescription.componentSubType = 0x6d6f6f67 /*'moog'*/
+
+        // componentDescription.componentType = kAudioUnitType_MusicDevice
+        // componentDescription.componentSubType = 0x6d6f6f67 /*'moog'*/
+        
+        componentDescription.componentType = kAudioUnitType_MusicEffect
+        componentDescription.componentSubType = 0x73706563 /*'spec'*/
+
         componentDescription.componentManufacturer = 0x594c5943 /*'YLYC'*/
         componentDescription.componentFlags = 0
         componentDescription.componentFlagsMask = 0
