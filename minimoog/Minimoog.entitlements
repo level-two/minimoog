@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.ylychkouski.minimoog</string>
+		<string>group.com.ylychkouski.minimoog1</string>
 	</array>
 	<key>inter-app-audio</key>
 	<true/>
