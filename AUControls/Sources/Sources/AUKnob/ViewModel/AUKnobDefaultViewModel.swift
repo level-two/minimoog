@@ -30,7 +30,10 @@ final class AUKnobDefaultViewModel {
 
     private var isLockedByUi: Bool = false
     private var value: AUValue {
-        didSet { delegate?.update() }
+        didSet {
+            parameter.setValue(value, originator: observerToken)
+            delegate?.update()
+        }
     }
     private var parameter: AUParameter
     private var observerToken: AUParameterObserverToken?
