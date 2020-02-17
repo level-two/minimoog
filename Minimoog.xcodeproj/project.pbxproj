@@ -13,6 +13,14 @@
 		9304378921FB6319008D22E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378121FB6319008D22E0 /* AppDelegate.swift */; };
 		9304378A21FB6319008D22E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378221FB6319008D22E0 /* ViewController.swift */; };
 		9304378B21FB6319008D22E0 /* SimplePlayEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304378321FB6319008D22E0 /* SimplePlayEngine.swift */; };
+		936882FD23FB43ED0051E66B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 936882FC23FB43ED0051E66B /* AudioToolbox.framework */; };
+		936882FE23FB440C0051E66B /* AUControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* AUControls.framework */; };
+		936882FF23FB440C0051E66B /* AUControls.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* AUControls.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9368830123FB440E0051E66B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
+		9368830323FB44120051E66B /* AudioUnitBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E91AB3A23E07B5F00AF506B /* AudioUnitBase.framework */; };
+		9368830423FB44120051E66B /* AudioUnitBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E91AB3A23E07B5F00AF506B /* AudioUnitBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9368830523FB44150051E66B /* Midi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */; };
+		9368830623FB44150051E66B /* Midi.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		93B83C412272616900655F1C /* MinimoogAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 9304376621FB619D008D22E0 /* MinimoogAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9E194EBD23F56F2E00D63297 /* AUKnobBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E194EBC23F56F2E00D63297 /* AUKnobBase.swift */; };
 		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
@@ -21,9 +29,7 @@
 		9E3E9FC323E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */; };
 		9E4EFA4D23D1F077005089D2 /* SineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */; };
 		9E55A578233925680020828C /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E55A577233925680020828C /* NibLoadable.swift */; };
-		9E55A57D233AB99C0020828C /* AUControls.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF974D32338B9BB00A8C25C /* AUControls.framework */; };
 		9E55A5B6233CB2000020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
-		9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
 		9E5C387023F5797E007B8CFB /* UIResponder+parentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C386F23F5797E007B8CFB /* UIResponder+parentViewController.swift */; };
 		9E6734F223E8E2FF0099B342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A585233B65B10020828C /* Assets.xcassets */; };
 		9E76E5D923FB37380073CB5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */; };
@@ -38,14 +44,12 @@
 		9EB737C923E07C460067B357 /* AUAudioUnit+createInstument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */; };
 		9EB737CA23E07C460067B357 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BF23E07C460067B357 /* Instrument.swift */; };
 		9EB737CC23E07C460067B357 /* AudioUnitBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737C223E07C460067B357 /* AudioUnitBase.swift */; };
-		9EB737D223E07C620067B357 /* AudioUnitBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E91AB3A23E07B5F00AF506B /* AudioUnitBase.framework */; };
 		9EE9DBE023D5F1A2009A953D /* Midi.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE9DBDE23D5F1A2009A953D /* Midi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9EE9DBE423D5F1B5009A953D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBD523D5E042009A953D /* Channel.swift */; };
 		9EE9DBE523D5F1B5009A953D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4A23D1EDF8005089D2 /* Note.swift */; };
 		9EE9DBE623D5F1B5009A953D /* MidiEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */; };
 		9EE9DBE723D5F1B5009A953D /* Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6198012345F7FF006B6F79 /* Velocity.swift */; };
 		9EE9DBEA23D5F224009A953D /* Note+frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBE923D5F224009A953D /* Note+frequency.swift */; };
-		9EE9DBEB23D5F23E009A953D /* Midi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EE9DBDC23D5F1A2009A953D /* Midi.framework */; };
 		9EE9DBED23D5F298009A953D /* ControlValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBEC23D5F298009A953D /* ControlValue.swift */; };
 		9EE9DBEF23D5F2BD009A953D /* Pitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBEE23D5F2BD009A953D /* Pitch.swift */; };
 		9EEA670523E38061005BB492 /* AUAudioUnitPreset+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA670423E38061005BB492 /* AUAudioUnitPreset+init.swift */; };
@@ -61,6 +65,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9368830023FB440C0051E66B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				936882FF23FB440C0051E66B /* AUControls.framework in Embed Frameworks */,
+				9368830623FB44150051E66B /* Midi.framework in Embed Frameworks */,
+				9368830423FB44120051E66B /* AudioUnitBase.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		93B83C442272616900655F1C /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,6 +104,7 @@
 		9304378321FB6319008D22E0 /* SimplePlayEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePlayEngine.swift; sourceTree = "<group>"; };
 		9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9362BA3A21FB6F7700FEBE3A /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		936882FC23FB43ED0051E66B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		93B084352273250300AF7495 /* Minimoog.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Minimoog.entitlements; sourceTree = "<group>"; };
 		93B084362273254000AF7495 /* MinimoogAU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MinimoogAU.entitlements; sourceTree = "<group>"; };
 		93F7597A21FB70B00009A295 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -148,10 +166,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EB737D223E07C620067B357 /* AudioUnitBase.framework in Frameworks */,
-				9EE9DBEB23D5F23E009A953D /* Midi.framework in Frameworks */,
-				9E55A57D233AB99C0020828C /* AUControls.framework in Frameworks */,
-				9E55A5B7233CB2110020828C /* AudioToolbox.framework in Frameworks */,
+				9368830323FB44120051E66B /* AudioUnitBase.framework in Frameworks */,
+				9368830523FB44150051E66B /* Midi.framework in Frameworks */,
+				936882FE23FB440C0051E66B /* AUControls.framework in Frameworks */,
+				9368830123FB440E0051E66B /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				936882FD23FB43ED0051E66B /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +481,7 @@
 		E7F418A78BB1084BAE2D5E5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				936882FC23FB43ED0051E66B /* AudioToolbox.framework */,
 				9E115FEF23E069F800F20F33 /* CoreAudioKit.framework */,
 				9E55A5B5233CB2000020828C /* AudioToolbox.framework */,
 				93F7597A21FB70B00009A295 /* CoreAudio.framework */,
@@ -526,6 +546,7 @@
 				9304376221FB619D008D22E0 /* Sources */,
 				9304376321FB619D008D22E0 /* Frameworks */,
 				9304376421FB619D008D22E0 /* Resources */,
+				9368830023FB440C0051E66B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -841,7 +862,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -896,7 +917,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -917,7 +938,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = Minimoog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -942,7 +963,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = Minimoog/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -958,12 +979,11 @@
 		9304377621FB619D008D22E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = MinimoogAU/MinimoogAU.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = MinimoogAU/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -980,12 +1000,11 @@
 		9304377721FB619D008D22E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_ENTITLEMENTS = MinimoogAU/MinimoogAU.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				INFOPLIST_FILE = MinimoogAU/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1002,23 +1021,24 @@
 		9E91AB4023E07B6000AF506B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = H488UP8W94;
+				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = AudioUnitBase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.AudioUnitBase;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1032,23 +1052,24 @@
 		9E91AB4123E07B6000AF506B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = H488UP8W94;
+				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = AudioUnitBase/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.AudioUnitBase;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1067,19 +1088,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = H488UP8W94;
+				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Midi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.midi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1098,19 +1119,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = H488UP8W94;
+				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Midi/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.midi;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1129,18 +1150,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = H488UP8W94;
+				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = AUControls/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.aucontrols;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1159,18 +1181,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = H488UP8W94;
+				DEVELOPMENT_TEAM = 7RAKKNJU4B;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = AUControls/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ylychkouski.aucontrols;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
