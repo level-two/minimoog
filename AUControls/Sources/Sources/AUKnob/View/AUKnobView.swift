@@ -40,9 +40,7 @@ final class AUKnobView: UIView {
     func rotate(to angle: CGFloat, animated: Bool) {
         let deltaAngle = angle - curAngle
         curAngle = angle
-        UIView.animate(withDuration: animated ? 1 : 0) {
-            guard let top = self.top else { return }
-            top.transform = top.transform.rotated(by: deltaAngle * .pi / 180)
-        }
+        guard let top = self.top else { return }
+        top.transform = top.transform.rotated(by: deltaAngle * .pi / 180)
     }
 }
