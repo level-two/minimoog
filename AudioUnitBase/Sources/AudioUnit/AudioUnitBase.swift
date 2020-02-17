@@ -36,8 +36,9 @@ final class AudioUnitBase: AUAudioUnit {
         return self.curOutputBusses
     }
 
-    override public var parameterTree: AUParameterTree {
-        return self.instrument.parameterTree
+    override public var parameterTree: AUParameterTree? {
+        get { return self.instrument.parameterTree }
+        set { /* do nothing */ }
     }
 
     fileprivate lazy var curInputBusses: AUAudioUnitBusArray = {
