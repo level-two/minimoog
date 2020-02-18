@@ -44,9 +44,18 @@ public class MinimoogViewController: AUViewController {
 
 extension MinimoogViewController: AUAudioUnitFactory {
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        let audioUnit = try AUAudioUnit.create(with: SineGenerator(), componentDescription: componentDescription)
-        self.audioUnit = audioUnit
-        return audioUnit
+        switch componentDescription.componentSubType {
+        case 0x6d6f6f67: // 'moog'
+            let audioUnit = try AUAudioUnit.create(with: SineGenerator(), componentDescription: componentDescription)
+            self.audioUnit = audioUnit
+            return audioUnit
+        case 0x73706563: // 'spec'
+            let audioUnit = try AUAudioUnit.create(with: SineGenerator(), componentDescription: componentDescription)
+            self.audioUnit = audioUnit
+            return audioUnit
+        default:
+            throw AUAudioUnitFactoryError.invalidComponentDescription
+        }
     }
 }
 

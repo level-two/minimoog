@@ -29,32 +29,30 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice)
-
-        var componentDescription = AudioComponentDescription()
-
-        // componentDescription.componentType = kAudioUnitType_MusicDevice
-        // componentDescription.componentSubType = 0x6d6f6f67 /*'moog'*/
-        
-        componentDescription.componentType = kAudioUnitType_MusicEffect
-        componentDescription.componentSubType = 0x73706563 /*'spec'*/
-
-        componentDescription.componentManufacturer = 0x594c5943 /*'YLYC'*/
-        componentDescription.componentFlags = 0
-        componentDescription.componentFlagsMask = 0
-
-        playEngine.selectAudioUnitWithComponentDescription(componentDescription) { [weak self] in
+        playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice) { [weak self] in
             guard let self = self else { return }
-            guard let audioUnit = self.playEngine.testAudioUnit else { return }
 
-            audioUnit.requestViewController { viewController in
-                guard let viewController = viewController else { return }
+//            let componentSubType = 0x6d6f6f67 /*'moog'*/
+            let componentSubType = 0x73706563 /*'spec'*/
 
-                viewController.view.frame = self.containerView.bounds
-                viewController.willMove(toParent: self)
-                self.containerView.addSubview(viewController.view)
-                self.addChild(viewController)
-                viewController.didMove(toParent: self)
+            let componentDescription =
+                self.playEngine.availableAudioUnits
+                .map({ $0.audioComponentDescription })
+                .first(where: { $0.componentSubType == componentSubType })
+
+            self.playEngine.selectAudioUnitWithComponentDescription(componentDescription) { [weak self] in
+                guard let self = self else { return }
+                guard let audioUnit = self.playEngine.testAudioUnit else { return }
+
+                audioUnit.requestViewController { viewController in
+                    guard let viewController = viewController else { return }
+
+                    viewController.view.frame = self.containerView.bounds
+                    viewController.willMove(toParent: self)
+                    self.containerView.addSubview(viewController.view)
+                    self.addChild(viewController)
+                    viewController.didMove(toParent: self)
+                }
             }
         }
     }
