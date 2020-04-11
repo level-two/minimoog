@@ -26,6 +26,7 @@
 		9E26D9FE23DB321200D0C9B5 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FD23DB321200D0C9B5 /* Option.swift */; };
 		9E26DA0023DB324200D0C9B5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E26D9FF23DB324200D0C9B5 /* Channels.swift */; };
 		9E2E8ECE23F1C39900D552E6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
+		9E34BAA42441E88200947646 /* SineAudioModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E34BAA32441E88200947646 /* SineAudioModule.swift */; };
 		9E3E9FC323E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */; };
 		9E4EFA4D23D1F077005089D2 /* SineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */; };
 		9E523DE223FC9FB5007DEFA3 /* AUAudioUnitFactoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E523DE123FC9FB5007DEFA3 /* AUAudioUnitFactoryError.swift */; };
@@ -45,6 +46,10 @@
 		9EB737C923E07C460067B357 /* AUAudioUnit+createInstument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */; };
 		9EB737CA23E07C460067B357 /* Instrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737BF23E07C460067B357 /* Instrument.swift */; };
 		9EB737CC23E07C460067B357 /* AudioUnitBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB737C223E07C460067B357 /* AudioUnitBase.swift */; };
+		9EDB17B72440A26B004CCCF3 /* AudioUnitModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDB17B62440A26B004CCCF3 /* AudioUnitModule.swift */; };
+		9EDB17BA2440A295004CCCF3 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDB17B92440A295004CCCF3 /* Weak.swift */; };
+		9EDB17BD2440A340004CCCF3 /* AudioUnitModule+connectionOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDB17BC2440A340004CCCF3 /* AudioUnitModule+connectionOperators.swift */; };
+		9EDB17BF2440A378004CCCF3 /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDB17BE2440A378004CCCF3 /* Buffer.swift */; };
 		9EE9DBE023D5F1A2009A953D /* Midi.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EE9DBDE23D5F1A2009A953D /* Midi.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9EE9DBE423D5F1B5009A953D /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EE9DBD523D5E042009A953D /* Channel.swift */; };
 		9EE9DBE523D5F1B5009A953D /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4EFA4A23D1EDF8005089D2 /* Note.swift */; };
@@ -113,6 +118,7 @@
 		9E194EBC23F56F2E00D63297 /* AUKnobBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUKnobBase.swift; sourceTree = "<group>"; };
 		9E26D9FD23DB321200D0C9B5 /* Option.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Option.swift; sourceTree = "<group>"; };
 		9E26D9FF23DB324200D0C9B5 /* Channels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
+		9E34BAA32441E88200947646 /* SineAudioModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SineAudioModule.swift; sourceTree = "<group>"; };
 		9E3E9FC223E3110C004A68E0 /* AUParameterNode+tree+group+parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUParameterNode+tree+group+parameter.swift"; sourceTree = "<group>"; };
 		9E4EFA4823D1EDCA005089D2 /* MidiEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiEvent.swift; sourceTree = "<group>"; };
 		9E4EFA4A23D1EDF8005089D2 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -134,6 +140,10 @@
 		9EB737BE23E07C460067B357 /* AUAudioUnit+createInstument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AUAudioUnit+createInstument.swift"; sourceTree = "<group>"; };
 		9EB737BF23E07C460067B357 /* Instrument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instrument.swift; sourceTree = "<group>"; };
 		9EB737C223E07C460067B357 /* AudioUnitBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitBase.swift; sourceTree = "<group>"; };
+		9EDB17B62440A26B004CCCF3 /* AudioUnitModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitModule.swift; sourceTree = "<group>"; };
+		9EDB17B92440A295004CCCF3 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		9EDB17BC2440A340004CCCF3 /* AudioUnitModule+connectionOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioUnitModule+connectionOperators.swift"; sourceTree = "<group>"; };
+		9EDB17BE2440A378004CCCF3 /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		9EE9DBD523D5E042009A953D /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		9EE9DBDC23D5F1A2009A953D /* Midi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Midi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EE9DBDE23D5F1A2009A953D /* Midi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Midi.h; sourceTree = "<group>"; };
@@ -274,6 +284,7 @@
 			children = (
 				9E4EFA4C23D1F077005089D2 /* SineGenerator.swift */,
 				9EE9DBE923D5F224009A953D /* Note+frequency.swift */,
+				9E34BAA32441E88200947646 /* SineAudioModule.swift */,
 			);
 			path = Instrument;
 			sourceTree = "<group>";
@@ -419,6 +430,8 @@
 				9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */,
 				9EB737BF23E07C460067B357 /* Instrument.swift */,
 				9EB737C023E07C460067B357 /* AudioUnit */,
+				9EDB17B82440A272004CCCF3 /* AudioUnitModule */,
+				9EDB17BB2440A2A0004CCCF3 /* Etc */,
 				9E4908A423E312DD00A86C0A /* Extensions */,
 			);
 			path = Sources;
@@ -430,6 +443,24 @@
 				9EB737C223E07C460067B357 /* AudioUnitBase.swift */,
 			);
 			path = AudioUnit;
+			sourceTree = "<group>";
+		};
+		9EDB17B82440A272004CCCF3 /* AudioUnitModule */ = {
+			isa = PBXGroup;
+			children = (
+				9EDB17B62440A26B004CCCF3 /* AudioUnitModule.swift */,
+				9EDB17BC2440A340004CCCF3 /* AudioUnitModule+connectionOperators.swift */,
+				9EDB17BE2440A378004CCCF3 /* Buffer.swift */,
+			);
+			path = AudioUnitModule;
+			sourceTree = "<group>";
+		};
+		9EDB17BB2440A2A0004CCCF3 /* Etc */ = {
+			isa = PBXGroup;
+			children = (
+				9EDB17B92440A295004CCCF3 /* Weak.swift */,
+			);
+			path = Etc;
 			sourceTree = "<group>";
 		};
 		9EE9DBDD23D5F1A2009A953D /* Midi */ = {
@@ -747,6 +778,7 @@
 				9EFC94CF23F55CCB00AB4DAB /* OscillatorViewController.swift in Sources */,
 				9EFC94CD23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift in Sources */,
 				9E4EFA4D23D1F077005089D2 /* SineGenerator.swift in Sources */,
+				9E34BAA42441E88200947646 /* SineAudioModule.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +790,10 @@
 				9EB737CA23E07C460067B357 /* Instrument.swift in Sources */,
 				9EB737CC23E07C460067B357 /* AudioUnitBase.swift in Sources */,
 				9EEA670723E3826A005BB492 /* Collection+safeIndex.swift in Sources */,
+				9EDB17BF2440A378004CCCF3 /* Buffer.swift in Sources */,
+				9EDB17B72440A26B004CCCF3 /* AudioUnitModule.swift in Sources */,
+				9EDB17BD2440A340004CCCF3 /* AudioUnitModule+connectionOperators.swift in Sources */,
+				9EDB17BA2440A295004CCCF3 /* Weak.swift in Sources */,
 				9EEA670523E38061005BB492 /* AUAudioUnitPreset+init.swift in Sources */,
 				9EB737C923E07C460067B357 /* AUAudioUnit+createInstument.swift in Sources */,
 			);
