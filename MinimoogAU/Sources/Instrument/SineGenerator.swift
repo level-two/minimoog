@@ -65,18 +65,18 @@ final class SineGenerator: Instrument {
     }
 
     func handle(midiEvent: MidiEvent) {
-        switch midiEvent {
-        case .noteOn(_, let note, let velocity):
-            phaseStep = 2 * Float32.pi * note.frequency * timeStep
-            amplitude = Float32(velocity.value) / 127
-            isOn = true
-
-        case .noteOff(_, _, _):
-            isOn = false
-
-        default:
-            break
-        }
+//        switch midiEvent {
+//        case .noteOn(_, let note, let velocity):
+//            phaseStep = 2 * Float32.pi * note.frequency * timeStep
+//            amplitude = Float32(velocity.value) / 127
+//            isOn = true
+//
+//        case .noteOff(_, _, _):
+//            isOn = false
+//
+//        default:
+//            break
+//        }
     }
 
     func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount) {
