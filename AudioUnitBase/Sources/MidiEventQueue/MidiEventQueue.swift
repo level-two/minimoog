@@ -15,14 +15,15 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // -----------------------------------------------------------------------------
 
+import Foundation
 import AVFoundation
 import Midi
 
-class MidiEventQueue: Identifiable {
-    let eventType: MidiEventType
-    let id = UUID()
+public class MidiEventQueue: Identifiable {
+    public let eventType: MidiEventType
+    public let id = UUID()
 
-    init(eventType: MidiEventType, queueManager: MidiEventQueueManager) {
+    public init(eventType: MidiEventType, queueManager: MidiEventQueueManager) {
         self.eventType = eventType
         self.queueManager = queueManager
         eventFrame = []
@@ -38,7 +39,7 @@ class MidiEventQueue: Identifiable {
         nextEventIndex = -1
     }
 
-    func removeFromQueue() {
+    public func removeFromQueue() {
         queueManager?.remove(eventQueue: self)
     }
 
@@ -51,7 +52,7 @@ class MidiEventQueue: Identifiable {
         eventFrame.removeAll(keepingCapacity: true)
     }
 
-    func event(at frame: AUAudioFrameCount) -> MidiEvent? {
+    public func event(at frame: AUAudioFrameCount) -> MidiEvent? {
         guard nextEventIndex >= 0 else { return nil }
 
         if eventFrame[nextEventIndex].frame != frame { return nil }

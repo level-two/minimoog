@@ -6,10 +6,10 @@
 //  Copyright © 2020 Yauheni Lychkouski. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 
 open class AudioUnitModule {
-    public var samplesNumber: Int = 0
+    public var samplesNumber: AUAudioFrameCount = 0
     public var sampleRate: Float32 = 0
     public private(set) var audioInputs = [Buffer]()
     public private(set) var cvInputs = [Buffer]()
@@ -24,6 +24,10 @@ open class AudioUnitModule {
         return outputAudioConnections.count > 0
     }
 
+    public init() {
+
+    }
+
     func connectAudioInput(to otherModule: AudioUnitModule) {
         inputAudioConnections.append(otherModule)
         otherModule.outputAudioConnections.append(Weak(self))
@@ -34,7 +38,19 @@ open class AudioUnitModule {
         otherModule.outputCvConnections.append(Weak(self))
     }
 
-    public func allocateRenderResources(_ sampleRate: Float32, _ samplesNumber: Int) {
+    public func render(_ frameCount: AUAudioFrameCount) {
+        if renderRequests == 0 {
+            inputAudioConnections.forEach { $0.render(frameCount) }
+            inputCvConnections.forEach { $0.render(frameCount) }
+            doRender(frameCount)
+        }
+        renderRequests += 1
+        if renderRequests == outputAudioConnections.count + outputCvConnections.count {
+            renderRequests = 0
+        }
+    }
+
+    public func allocateRenderResources(_ sampleRate: Float32, _ samplesNumber: AUAudioFrameCount) {
         guard !isAllocated else { return }
 
         isAllocated = true
@@ -43,11 +59,11 @@ open class AudioUnitModule {
         self.samplesNumber = samplesNumber
 
         if audioOutputConnected {
-            audioOutput = Buffer.allocate(capacity: samplesNumber)
+            audioOutput = Buffer.allocate(capacity: Int(samplesNumber))
         }
 
         if cvOutputConnected {
-            cvOutput = Buffer.allocate(capacity: samplesNumber)
+            cvOutput = Buffer.allocate(capacity: Int(samplesNumber))
         }
 
         inputAudioConnections.forEach { $0.allocateRenderResources(sampleRate, samplesNumber) }
@@ -68,7 +84,7 @@ open class AudioUnitModule {
         isAllocated = false
     }
 
-    open func doRender() {
+    open func doRender(_ frameCount: AUAudioFrameCount) {
         // TBD: Fill outputs with rendered samples
     }
 
@@ -83,18 +99,4 @@ open class AudioUnitModule {
     private var outputCvConnections = [Weak<AudioUnitModule>]()
     private var renderRequests = 0
     private var isAllocated = false
-}
-
-fileprivate extension AudioUnitModule {
-    func render() {
-        if renderRequests == 0 {
-            inputAudioConnections.forEach { $0.render() }
-            inputCvConnections.forEach { $0.render() }
-            doRender()
-        }
-        renderRequests += 1
-        if renderRequests == outputAudioConnections.count + outputCvConnections.count {
-            renderRequests = 0
-        }
-    }
 }

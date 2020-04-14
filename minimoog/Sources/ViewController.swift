@@ -32,8 +32,8 @@ class ViewController: UIViewController {
         playEngine = SimplePlayEngine(componentType: kAudioUnitType_MusicDevice) { [weak self] in
             guard let self = self else { return }
 
-//            let componentSubType = 0x6d6f6f67 /*'moog'*/
-            let componentSubType = 0x73706563 /*'spec'*/
+            let componentSubType = 0x6d6f6f67 /*'moog'*/
+//            let componentSubType = 0x73706563 /*'spec'*/
 
             let componentDescription =
                 self.playEngine.availableAudioUnits

@@ -17,15 +17,18 @@
 
 import AudioToolbox
 import AVFoundation
-import AudioUnitBase
-import Midi
 
-final class MainOutputModule: AudioUnitModule {
-    fileprivate var volume: Float32 = 1
+public final class OutputModule: AudioUnitModule {
+    override var audioOutputConnected: Bool {
+        return true
+    }
 
-    override func doRender() {
-        for idx in 0..<samplesNumber {
-            audioOutput?[idx] = mixedInput(at: idx) * volume
+    func render(_ frameCount: AUAudioFrameCount, into buffers: inout [UnsafeMutablePointer<Float32>]) {
+        super.render(frameCount)
+
+        // TODO: take into account number of channels
+        buffers.forEach {
+            $0.initialize(from: self.audioOutput!, count: Int(frameCount))
         }
     }
 }

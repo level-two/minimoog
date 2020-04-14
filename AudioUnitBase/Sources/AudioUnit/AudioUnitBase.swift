@@ -110,15 +110,16 @@ extension AudioUnitBase {
     override public func allocateRenderResources() throws {
         try super.allocateRenderResources()
 
-        self.pcmBuffer = AVAudioPCMBuffer(pcmFormat: outputBus.format, frameCapacity: maximumFramesToRender)
-        self.pcmBuffer?.frameLength = maximumFramesToRender
-        self.audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
+        pcmBuffer = AVAudioPCMBuffer(pcmFormat: outputBus.format, frameCapacity: maximumFramesToRender)
+        pcmBuffer?.frameLength = maximumFramesToRender
+        audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
 
-        self.instrument.setAudioFormat(outputBus.format)
+        instrument.outputModule.allocateRenderResources(Float32(outputBus.format.sampleRate), maximumFramesToRender)
     }
 
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
+        instrument.outputModule.deallocateRenderResources()
         pcmBuffer = nil
         audioBufferList = nil
     }
@@ -127,45 +128,32 @@ extension AudioUnitBase {
         return { [unowned self] _, timestamp, frameCount, _, outputData, realtimeEventListHead, _ in
             guard let audioBufferList = self.audioBufferList else { return kAudioUnitErr_Uninitialized }
 
-            let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
+            let renderTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
+            var event = realtimeEventListHead?.pointee
 
+            while let curEvent = event {
+                let eventTime = curEvent.head.eventSampleTime
+                let eventFrame = AUAudioFrameCount(eventTime - renderTime)
+                guard eventFrame < frameCount  else { break }
+
+                if curEvent.head.eventType == .parameter {
+//                    self.instrument.setParameter(address: curEvent.parameter.parameterAddress, value: curEvent.parameter.value)
+                } else if curEvent.head.eventType == .MIDI, let midiEvent = MidiEvent(from: curEvent.MIDI) {
+                    self.instrument.midiEventQueueManager.push(midiEvent, at: eventFrame)
+                }
+
+                event = curEvent.head.next?.pointee
+            }
+
+            let outBufferList = UnsafeMutableAudioBufferListPointer(outputData)
             for idx in outBufferList.indices where outBufferList[idx].mData == nil {
                 outBufferList[idx].mNumberChannels = audioBufferList[idx].mNumberChannels
                 outBufferList[idx].mDataByteSize = audioBufferList[idx].mDataByteSize
                 outBufferList[idx].mData = audioBufferList[idx].mData
             }
+            var buffers = outBufferList.compactMap { $0.mData?.assumingMemoryBound(to: Float32.self) }
+            self.instrument.outputModule.render(frameCount, into: &buffers)
 
-            let buffers = outBufferList.compactMap { $0.mData?.assumingMemoryBound(to: Float32.self) }
-
-            func render(frames: AUAudioFrameCount, offset: AUAudioFrameCount) {
-                let buffersWithOffset = buffers.map { $0 + Int(offset) }
-                self.instrument.render(to: buffersWithOffset, frames: frames)
-            }
-
-            var lastEventTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
-            var framesRemaining = frameCount
-            var event = realtimeEventListHead?.pointee
-
-            while let curEvent = event {
-                let curEventTime = curEvent.head.eventSampleTime
-                let framesInSegment = AUAudioFrameCount(curEventTime - lastEventTime)
-
-                guard framesInSegment <= framesRemaining else { break }
-
-                render(frames: framesInSegment, offset: frameCount - framesRemaining)
-
-                if curEvent.head.eventType == .parameter {
-                    self.instrument.setParameter(address: curEvent.parameter.parameterAddress, value: curEvent.parameter.value)
-                } else if curEvent.head.eventType == .MIDI, let midiEvent = MidiEvent(from: curEvent.MIDI) {
-                    self.instrument.handle(midiEvent: midiEvent)
-                }
-
-                lastEventTime = curEventTime
-                framesRemaining -= framesInSegment
-                event = curEvent.head.next?.pointee
-            }
-
-            render(frames: framesRemaining, offset: frameCount - framesRemaining)
             return noErr
         }
     }

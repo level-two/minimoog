@@ -27,8 +27,11 @@ public protocol Instrument: class {
     var presetForCurrentState: [String: Any] { get }
     func load(preset: [String: Any])
 
-    func setAudioFormat(_ format: AVAudioFormat)
+    var midiEventQueueManager: MidiEventQueueManager { get }
+
     func setParameter(address: AUParameterAddress, value: AUValue)
-    func handle(midiEvent: MidiEvent)
-    func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount)
+//    func handle(midiEvent: MidiEvent)
+//    func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount)
+
+    var outputModule: OutputModule { get }
 }

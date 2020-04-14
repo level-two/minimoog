@@ -6,10 +6,10 @@
 //  Copyright © 2020 Yauheni Lychkouski. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
 
 public extension AudioUnitModule {
-    func mixedInput(at index: Int) -> Float32 {
+    func mixedInput(at index: AUAudioFrameCount) -> Float32 {
         var result = Float32(0)
         for idx in 0..<audioInputs.count {
             let input = audioInputs[idx]

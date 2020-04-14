@@ -43,58 +43,20 @@ final class SineGenerator: Instrument {
         return dic?["presets"] as? [[String: Any]] ?? []
     }()
 
-    fileprivate var timeStep: Float32 = 0
-    fileprivate var phase: Float32 = 0
-    fileprivate var phaseStep: Float32 = 0
-    fileprivate var amplitude: Float32 = 0
-    fileprivate var range: Float32 = 0
-    fileprivate var volume: Float32 = 0
-    fileprivate var isOn: Bool = false
+    let outputModule = OutputModule()
+    let midiEventQueueManager = MidiEventQueueManager()
 
     init() {
+        let sineModule = SineAudioModule(midiEventQueueManager: midiEventQueueManager)
+        sineModule --> outputModule
         setParameterTreeObservers()
     }
 
-    func setAudioFormat(_ format: AVAudioFormat) {
-        self.timeStep = 1.0 / Float32(format.sampleRate)
-    }
-
     func setParameter(address: AUParameterAddress, value: AUValue) {
-        guard let address = ParamAddress(rawValue: address) else { return }
-        setParameter(address: address, value: value)
+//        guard let address = ParamAddress(rawValue: address) else { return }
+//        setParameter(address: address, value: value)
     }
 
-    func handle(midiEvent: MidiEvent) {
-//        switch midiEvent {
-//        case .noteOn(_, let note, let velocity):
-//            phaseStep = 2 * Float32.pi * note.frequency * timeStep
-//            amplitude = Float32(velocity.value) / 127
-//            isOn = true
-//
-//        case .noteOff(_, _, _):
-//            isOn = false
-//
-//        default:
-//            break
-//        }
-    }
-
-    func render(to buffers: [UnsafeMutablePointer<Float32>], frames: AUAudioFrameCount) {
-        guard isOn else {
-            buffers.forEach { $0.initialize(repeating: 0, count: Int(frames)) }
-            return
-        }
-
-        for idx in 0..<frames {
-            phase += phaseStep
-            if phase > 2 * Float32.pi {
-                phase -= 2 * Float32.pi
-            }
-
-            let sampleValue = volume * amplitude * sin(phase)
-            buffers.forEach { ($0 + Int(idx)).initialize(to: sampleValue) }
-        }
-    }
 }
 
 extension SineGenerator {
@@ -113,15 +75,15 @@ extension SineGenerator {
 
 fileprivate extension SineGenerator {
     func setParameterTreeObservers() {
-        parameterTree.implementorValueObserver = { [weak self] param, value in
-            guard let address = ParamAddress(rawValue: param.address) else { return }
-            self?.setParameter(address: address, value: value)
-        }
+//        parameterTree.implementorValueObserver = { [weak self] param, value in
+//            guard let address = ParamAddress(rawValue: param.address) else { return }
+//            self?.setParameter(address: address, value: value)
+//        }
 
-        parameterTree.implementorValueProvider = { [weak self] param in
-            guard let self = self, let address = ParamAddress(rawValue: param.address) else { return 0 }
-            return self.getParameter(address: address)
-        }
+//        parameterTree.implementorValueProvider = { [weak self] param in
+//            guard let self = self, let address = ParamAddress(rawValue: param.address) else { return 0 }
+//            return self.getParameter(address: address)
+//        }
 
 //        parameterTree.implementorStringFromValueCallback = { param, valuePtr in
 //            let value = valuePtr?.pointee ?? param.value
@@ -134,17 +96,17 @@ fileprivate extension SineGenerator {
 //        }
     }
 
-    func setParameter(address: ParamAddress, value: AUValue) {
-        switch address {
-        case .osc1Range: range = value
-        case .osc1Volume: volume = value
-        }
-    }
-
-    func getParameter(address: ParamAddress) -> AUValue {
-        switch address {
-        case .osc1Range: return self.range
-        case .osc1Volume: return self.volume
-        }
-    }
+//    func setParameter(address: ParamAddress, value: AUValue) {
+//        switch address {
+//        case .osc1Range: range = value
+//        case .osc1Volume: volume = value
+//        }
+//    }
+//
+//    func getParameter(address: ParamAddress) -> AUValue {
+//        switch address {
+//        case .osc1Range: return self.range
+//        case .osc1Volume: return self.volume
+//        }
+//    }
 }

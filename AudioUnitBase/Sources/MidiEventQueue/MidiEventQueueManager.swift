@@ -19,30 +19,34 @@ import AVFoundation
 import Midi
 
 
-class MidiEventQueueManager {
-    func makeQueue(for eventType: MidiEventType) -> MidiEventQueue {
+public class MidiEventQueueManager {
+    public init() {
+        
+    }
+
+    public func makeQueue(for eventType: MidiEventType) -> MidiEventQueue {
         let listener = MidiEventQueue(eventType: eventType, queueManager: self)
         eventQueues.append(listener)
         return listener
     }
 
-    func remove(eventQueue: MidiEventQueue) {
+    public func remove(eventQueue: MidiEventQueue) {
         eventQueues.removeAll { $0.id == eventQueue.id }
     }
 
-    func allocateResources(framesCount: AUAudioFrameCount) {
+    public func allocateResources(framesCount: AUAudioFrameCount) {
         eventQueues.forEach { $0.allocateResources(framesCount: framesCount) }
     }
 
-    func deallocateResources() {
+    public func deallocateResources() {
         eventQueues.forEach { $0.deallocateResources() }
     }
 
-    func push(_ event: MidiEvent, at frame: AUAudioFrameCount) {
-        eventQueues.filter { $0.eventType == event.type }.map { $0.push(event, at: frame) }
+    public func push(_ event: MidiEvent, at frame: AUAudioFrameCount) {
+        eventQueues.filter { $0.eventType == event.type }.forEach { $0.push(event, at: frame) }
     }
 
-    func newCycle() {
+    public func newCycle() {
         eventQueues.forEach { $0.newCycle() }
     }
 
