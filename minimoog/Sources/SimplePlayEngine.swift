@@ -488,10 +488,12 @@ internal class InstrumentPlayer: NSObject {
                     cbytes[0] = 0x90
                     cbytes[1] = UInt8(playingNote)
                     cbytes[2] = 64
-                    self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
+                    self.noteBlock(AUEventSampleTimeImmediate+123, 0, 3, cbytes)
 
                     usleep(useconds_t(0.2 * 1e6))
 
+                    cbytes[0] = 0x80
+                    cbytes[1] = UInt8(playingNote)
                     cbytes[2] = 0    // note off
                     self.noteBlock(AUEventSampleTimeImmediate, 0, 3, cbytes)
 

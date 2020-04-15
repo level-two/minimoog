@@ -27,7 +27,7 @@ public class MidiEventQueue: Identifiable {
         self.eventType = eventType
         self.queueManager = queueManager
         eventFrame = []
-        nextEventIndex = -1
+        nextEventIndex = 0
     }
 
     func allocateResources(framesCount: AUAudioFrameCount) {
@@ -36,7 +36,7 @@ public class MidiEventQueue: Identifiable {
 
     func deallocateResources() {
         eventFrame = []
-        nextEventIndex = -1
+        nextEventIndex = 0
     }
 
     public func removeFromQueue() {
@@ -48,22 +48,17 @@ public class MidiEventQueue: Identifiable {
     }
 
     func newCycle() {
-        nextEventIndex = -1
+        nextEventIndex = 0
         eventFrame.removeAll(keepingCapacity: true)
     }
 
     public func event(at frame: AUAudioFrameCount) -> MidiEvent? {
-        guard nextEventIndex >= 0 else { return nil }
-
-        if eventFrame[nextEventIndex].frame != frame { return nil }
+        guard nextEventIndex < eventFrame.count,
+            eventFrame[nextEventIndex].frame == frame
+            else { return nil }
 
         let event = eventFrame[nextEventIndex].event
-
         nextEventIndex += 1
-        if nextEventIndex == eventFrame.count {
-            nextEventIndex = -1
-        }
-
         return event
     }
 

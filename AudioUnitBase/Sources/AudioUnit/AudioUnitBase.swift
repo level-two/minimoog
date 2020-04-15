@@ -114,11 +114,13 @@ extension AudioUnitBase {
         pcmBuffer?.frameLength = maximumFramesToRender
         audioBufferList = UnsafeMutableAudioBufferListPointer(self.pcmBuffer?.mutableAudioBufferList)
 
+        instrument.midiEventQueueManager.allocateResources(framesCount: maximumFramesToRender)
         instrument.outputModule.allocateRenderResources(Float32(outputBus.format.sampleRate), maximumFramesToRender)
     }
 
     override public func deallocateRenderResources() {
         super.deallocateRenderResources()
+        instrument.midiEventQueueManager.deallocateResources()
         instrument.outputModule.deallocateRenderResources()
         pcmBuffer = nil
         audioBufferList = nil
@@ -127,6 +129,8 @@ extension AudioUnitBase {
     override public var internalRenderBlock: AUInternalRenderBlock {
         return { [unowned self] _, timestamp, frameCount, _, outputData, realtimeEventListHead, _ in
             guard let audioBufferList = self.audioBufferList else { return kAudioUnitErr_Uninitialized }
+
+            self.instrument.midiEventQueueManager.newCycle()
 
             let renderTime = AUEventSampleTime(timestamp.pointee.mSampleTime)
             var event = realtimeEventListHead?.pointee

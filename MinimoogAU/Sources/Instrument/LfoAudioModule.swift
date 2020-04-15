@@ -20,24 +20,22 @@ import AVFoundation
 import AudioUnitBase
 import Midi
 
-final class SineAudioModule: AudioUnitModule {
+final class LfoAudioModule: AudioUnitModule {
     init(midiEventQueueManager: MidiEventQueueManager) {
         noteOnEvent = midiEventQueueManager.makeQueue(for: .noteOn)
         noteOffEvent = midiEventQueueManager.makeQueue(for: .noteOff)
-
-        // FIXME: For test
-        range = 0
-        volume = 1
     }
 
     override func doRender(_ frameCount: AUAudioFrameCount) {
         for frame in 0..<frameCount {
-            audioOutput?[frame] = 0
+            cvOutput?[frame] = 0
 
-            if let noteOn = noteOnEvent.event(at: frame) {
-                let frequency = 440 * exp2((Float32(noteOn.note) - 69)/12)
+            if let _ = noteOnEvent.event(at: frame) {
+//                phase = 0
+
+                let frequency = Float32(0.5)
                 phaseStep = 2 * Float32.pi * frequency / sampleRate
-                amplitude = Float32(noteOn.velocity) / 127
+
                 isOn = true
             }
 
@@ -46,14 +44,14 @@ final class SineAudioModule: AudioUnitModule {
             }
 
             guard isOn else { continue }
-            
-            phase += phaseStep * (1 + 0.2 * cvInputs[0][frame])
+
+            phase += phaseStep
             if phase > 2 * Float32.pi {
                 phase -= 2 * Float32.pi
             }
 
-            let sampleValue = volume * amplitude * sin(phase)
-            audioOutput?[frame] = sampleValue
+            let cvValue = sin(phase)
+            cvOutput?[frame] = cvValue
         }
     }
 
@@ -64,10 +62,8 @@ final class SineAudioModule: AudioUnitModule {
     // state
     private var phase: Float32 = 0
     private var phaseStep: Float32 = 0
-    private var amplitude: Float32 = 0
     private var isOn: Bool = false
 
     // params
-    private var range: Float32 = 0
-    private var volume: Float32 = 0
+    private var amplitude: Float32 = 0
 }

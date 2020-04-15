@@ -26,9 +26,11 @@ public final class OutputModule: AudioUnitModule {
     func render(_ frameCount: AUAudioFrameCount, into buffers: inout [UnsafeMutablePointer<Float32>]) {
         super.render(frameCount)
 
+        guard audioInputs.count > 0 else { return }
+
         // TODO: take into account number of channels
         buffers.forEach {
-            $0.initialize(from: self.audioOutput!, count: Int(frameCount))
+            $0.initialize(from: audioInputs[0], count: Int(frameCount))
         }
     }
 }

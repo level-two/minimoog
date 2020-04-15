@@ -21,7 +21,7 @@ open class AudioUnitModule {
     }
 
     var cvOutputConnected: Bool {
-        return outputAudioConnections.count > 0
+        return outputCvConnections.count > 0
     }
 
     public init() {
@@ -45,7 +45,7 @@ open class AudioUnitModule {
             doRender(frameCount)
         }
         renderRequests += 1
-        if renderRequests == outputAudioConnections.count + outputCvConnections.count {
+        if renderRequests >= outputAudioConnections.count + outputCvConnections.count {
             renderRequests = 0
         }
     }

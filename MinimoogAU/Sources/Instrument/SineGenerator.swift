@@ -47,8 +47,10 @@ final class SineGenerator: Instrument {
     let midiEventQueueManager = MidiEventQueueManager()
 
     init() {
+        let lfoModule = LfoAudioModule(midiEventQueueManager: midiEventQueueManager)
         let sineModule = SineAudioModule(midiEventQueueManager: midiEventQueueManager)
-        sineModule --> outputModule
+        lfoModule --> sineModule ==> outputModule
+        
         setParameterTreeObservers()
     }
 
