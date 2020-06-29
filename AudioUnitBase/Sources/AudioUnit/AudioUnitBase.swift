@@ -17,6 +17,7 @@
 
 import AudioToolbox
 import AVFoundation
+import CoreAudioKit
 import Midi
 
 final class AudioUnitBase: AUAudioUnit {
@@ -51,6 +52,7 @@ final class AudioUnitBase: AUAudioUnit {
     }()
 
     fileprivate var instrument: Instrument
+    fileprivate weak var visualPresentation: InstruemtnVisualPresentation?
     fileprivate var inputBus: AUAudioUnitBus?
     fileprivate var outputBus: AUAudioUnitBus
     fileprivate var curPresetIndex = 0 // Positive - factory, negative - user
@@ -58,7 +60,9 @@ final class AudioUnitBase: AUAudioUnit {
     fileprivate var audioBufferList: UnsafeMutableAudioBufferListPointer?
     fileprivate var pcmBuffer: AVAudioPCMBuffer?
 
-    init(with instrument: Instrument, componentDescription: AudioComponentDescription,
+    init(instrument: Instrument,
+         visualPresentation: InstruemtnVisualPresentation,
+         componentDescription: AudioComponentDescription,
          options: AudioComponentInstantiationOptions = []) throws {
 
         guard let defaultFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1) else {
@@ -68,6 +72,7 @@ final class AudioUnitBase: AUAudioUnit {
         // self.inputBus = try AUAudioUnitBus(format: defaultFormat)
         self.outputBus = try AUAudioUnitBus(format: defaultFormat)
         self.instrument = instrument
+        self.visualPresentation = visualPresentation
 
         try super.init(componentDescription: componentDescription, options: options)
 
@@ -103,6 +108,33 @@ extension AudioUnitBase {
                 instrument.load(preset: factoryPreset)
             }
         }
+    }
+}
+
+extension AudioUnitBase {
+    override public func supportedViewConfigurations(_ availableViewConfigurations: [AUAudioUnitViewConfiguration]) -> IndexSet {
+        guard let supportedConfigurations = visualPresentation?.supportedViewConfigurations else { return [] }
+
+        func maxRelativeDifference(w1: CGFloat, h1: CGFloat, w2: CGFloat, h2: CGFloat) -> CGFloat {
+            let wDiff = (max(w1, w2) - min(w1, w2)) / max(w1, w2)
+            let hDiff = (max(h1, h2) - min(h1, h2)) / max(h1, h2)
+            return max(wDiff, hDiff)
+        }
+
+        var indices = IndexSet()
+        for i in 0..<availableViewConfigurations.count {
+            let w = availableViewConfigurations[i].width
+            let h = availableViewConfigurations[i].height
+
+            if let _ = supportedConfigurations.first(where: { maxRelativeDifference(w1: w, h1: h, w2: $0.width, h2: $0.height) < 0.2 }) {
+                indices.insert(i)
+            }
+        }
+        return indices
+    }
+
+    override public func select(_ viewConfiguration: AUAudioUnitViewConfiguration) {
+        visualPresentation?.select(viewConfiguration)
     }
 }
 

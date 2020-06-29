@@ -16,16 +16,10 @@
 // -----------------------------------------------------------------------------
 
 import AudioToolbox
+import AVFoundation
+import CoreAudioKit
 
-public extension AUAudioUnit {
-    static func create(instrument: Instrument,
-                       visualPresentation: InstruemtnVisualPresentation,
-                       componentDescription: AudioComponentDescription,
-                       options: AudioComponentInstantiationOptions = []) throws -> AUAudioUnit {
-
-        return try AudioUnitBase(instrument: instrument,
-                                 visualPresentation: visualPresentation,
-                                 componentDescription: componentDescription,
-                                 options: options)
-    }
+public protocol InstruemtnVisualPresentation: class {
+    var supportedViewConfigurations: [AUAudioUnitViewConfiguration] { get }
+    func select(_ viewConfiguration: AUAudioUnitViewConfiguration)
 }

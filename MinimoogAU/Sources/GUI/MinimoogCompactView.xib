@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="707" height="241"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YV8-iy-KTG">
+                    <rect key="frame" x="20" y="44" width="240" height="163"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yvu-sw-deQ">
+                            <rect key="frame" x="20" y="26" width="1363.5" height="151.5"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BvJ-ok-Laa" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="0.0" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="BvJ-ok-Laa" secondAttribute="height" multiplier="1:1" id="ewI-Du-iOL"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuT-50-DzJ" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="151.5" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="wuT-50-DzJ" secondAttribute="height" multiplier="1:1" id="Nbt-Da-B1I"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGu-7J-K7R" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="303" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="jGu-7J-K7R" secondAttribute="height" multiplier="1:1" id="hud-CG-5WX"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yep-51-z6L" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="454.5" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="yep-51-z6L" secondAttribute="height" multiplier="1:1" id="pWm-av-h68"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j3b-6e-ia3" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="606" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="j3b-6e-ia3" secondAttribute="height" multiplier="1:1" id="5cs-b9-bT2"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Xr-8t-5Wf" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="757.5" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="8Xr-8t-5Wf" secondAttribute="height" multiplier="1:1" id="j0G-Mb-tab"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tm5-oz-lU8" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="909" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Tm5-oz-lU8" secondAttribute="height" multiplier="1:1" id="GZy-fE-BA6"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MjF-2t-e9f" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="1060.5" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="MjF-2t-e9f" secondAttribute="height" multiplier="1:1" id="tlO-ld-EqO"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xY-7d-ZjV" customClass="AUParameterKnob" customModule="AUControls">
+                                    <rect key="frame" x="1212" y="0.0" width="151.5" height="151.5"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="6xY-7d-ZjV" secondAttribute="height" multiplier="1:1" id="r0N-3T-AR1"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="topImage" value="knob_pointer"/>
+                                        <userDefinedRuntimeAttribute type="image" keyPath="bottomImage" value="knob_bg"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="8Xr-8t-5Wf" firstAttribute="width" secondItem="8Xr-8t-5Wf" secondAttribute="height" multiplier="1:1" id="1k2-kT-XVm"/>
+                                <constraint firstItem="6xY-7d-ZjV" firstAttribute="width" secondItem="6xY-7d-ZjV" secondAttribute="height" multiplier="1:1" id="4kx-DL-c5I"/>
+                                <constraint firstItem="jGu-7J-K7R" firstAttribute="width" secondItem="jGu-7J-K7R" secondAttribute="height" multiplier="1:1" id="Buj-Tc-PuQ"/>
+                                <constraint firstItem="j3b-6e-ia3" firstAttribute="width" secondItem="j3b-6e-ia3" secondAttribute="height" multiplier="1:1" id="Dsr-tb-Gs4"/>
+                                <constraint firstItem="yep-51-z6L" firstAttribute="width" secondItem="yep-51-z6L" secondAttribute="height" multiplier="1:1" id="Kkc-fE-QaK"/>
+                                <constraint firstItem="Tm5-oz-lU8" firstAttribute="width" secondItem="Tm5-oz-lU8" secondAttribute="height" multiplier="1:1" id="NNh-IN-Mj8"/>
+                                <constraint firstItem="wuT-50-DzJ" firstAttribute="width" secondItem="wuT-50-DzJ" secondAttribute="height" multiplier="1:1" id="lwY-we-yBP"/>
+                                <constraint firstItem="MjF-2t-e9f" firstAttribute="width" secondItem="MjF-2t-e9f" secondAttribute="height" multiplier="1:1" id="zFx-QM-8Kj"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Yvu-sw-deQ" firstAttribute="height" secondItem="Nmk-EM-wf7" secondAttribute="height" multiplier="0.929448" id="7f2-U1-iuA"/>
+                        <constraint firstItem="Yvu-sw-deQ" firstAttribute="centerY" secondItem="Nmk-EM-wf7" secondAttribute="centerY" id="nIR-hW-YZ3"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="PGL-Vy-dxa"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="Nmk-EM-wf7"/>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="YV8-iy-KTG" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="KCv-XW-q9i"/>
+                <constraint firstItem="YV8-iy-KTG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="XZt-VJ-pMf"/>
+                <constraint firstItem="YV8-iy-KTG" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="cWL-xt-zOn"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="YV8-iy-KTG" secondAttribute="trailing" id="jve-c5-Xq4"/>
+                <constraint firstItem="YV8-iy-KTG" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="sNY-0g-gxJ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="YV8-iy-KTG" secondAttribute="bottom" id="t1F-eo-1pO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="350" y="-66.629464285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="knob_bg" width="151.5" height="146.5"/>
+        <image name="knob_pointer" width="151" height="146.5"/>
+    </resources>
+</document>

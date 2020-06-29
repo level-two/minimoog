@@ -37,6 +37,8 @@
 		9E6734F223E8E2FF0099B342 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E55A585233B65B10020828C /* Assets.xcassets */; };
 		9E76E5D923FB37380073CB5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9362BA3721FB6F3B00FEBE3A /* AVFoundation.framework */; };
 		9E76E5DA23FB37400073CB5E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E55A5B5233CB2000020828C /* AudioToolbox.framework */; };
+		9E77E97A244B1B4100355281 /* InstruemtnVisualPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E77E979244B1B4100355281 /* InstruemtnVisualPresentation.swift */; };
+		9E77E980244CFBB500355281 /* MinimoogCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E77E97F244CFBB500355281 /* MinimoogCompactView.swift */; };
 		9E853C7E244496CA00228BEC /* MidiEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E853C7D244496CA00228BEC /* MidiEventQueue.swift */; };
 		9E853C80244496E500228BEC /* MidiEventQueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E853C7F244496E500228BEC /* MidiEventQueueManager.swift */; };
 		9E853C83244497B800228BEC /* MidiEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E853C82244497B800228BEC /* MidiEventType.swift */; };
@@ -61,6 +63,7 @@
 		9EEA670723E3826A005BB492 /* Collection+safeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEA670623E3826A005BB492 /* Collection+safeIndex.swift */; };
 		9EECA51623E8C60500D84914 /* AUKnobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EECA51523E8C60500D84914 /* AUKnobView.swift */; };
 		9EECA51823E8C66900D84914 /* AUValue+clamped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EECA51723E8C66900D84914 /* AUValue+clamped.swift */; };
+		9EF919FC244D8B2200265458 /* MinimoogCompactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF919FB244D8B2200265458 /* MinimoogCompactView.xib */; };
 		9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9EF974C8233507BF00A8C25C /* Minimoog.storyboard */; };
 		9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF974CC233512B500A8C25C /* MinimoogViewController.swift */; };
 		9EF974D72338B9BB00A8C25C /* AUControls.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EF974D52338B9BB00A8C25C /* AUControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -127,6 +130,8 @@
 		9E55A5B5233CB2000020828C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		9E57A4B424471729006F1231 /* LfoAudioModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LfoAudioModule.swift; sourceTree = "<group>"; };
 		9E5C386F23F5797E007B8CFB /* UIResponder+parentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+parentViewController.swift"; sourceTree = "<group>"; };
+		9E77E979244B1B4100355281 /* InstruemtnVisualPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstruemtnVisualPresentation.swift; sourceTree = "<group>"; };
+		9E77E97F244CFBB500355281 /* MinimoogCompactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogCompactView.swift; sourceTree = "<group>"; };
 		9E853C7D244496CA00228BEC /* MidiEventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiEventQueue.swift; sourceTree = "<group>"; };
 		9E853C7F244496E500228BEC /* MidiEventQueueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiEventQueueManager.swift; sourceTree = "<group>"; };
 		9E853C82244497B800228BEC /* MidiEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidiEventType.swift; sourceTree = "<group>"; };
@@ -153,6 +158,7 @@
 		9EEA670623E3826A005BB492 /* Collection+safeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+safeIndex.swift"; sourceTree = "<group>"; };
 		9EECA51523E8C60500D84914 /* AUKnobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUKnobView.swift; sourceTree = "<group>"; };
 		9EECA51723E8C66900D84914 /* AUValue+clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AUValue+clamped.swift"; sourceTree = "<group>"; };
+		9EF919FB244D8B2200265458 /* MinimoogCompactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MinimoogCompactView.xib; sourceTree = "<group>"; };
 		9EF974C8233507BF00A8C25C /* Minimoog.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Minimoog.storyboard; sourceTree = "<group>"; };
 		9EF974CC233512B500A8C25C /* MinimoogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimoogViewController.swift; sourceTree = "<group>"; };
 		9EF974D32338B9BB00A8C25C /* AUControls.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AUControls.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -372,6 +378,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		9E77E978244B1B2200355281 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9EB737BF23E07C460067B357 /* Instrument.swift */,
+				9E77E979244B1B4100355281 /* InstruemtnVisualPresentation.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		9E853C812444973100228BEC /* MidiEventQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,7 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				9E91AB3C23E07B6000AF506B /* AudioUnitBase.h */,
-				9EB737BF23E07C460067B357 /* Instrument.swift */,
+				9E77E978244B1B2200355281 /* Protocols */,
 				9EB737C023E07C460067B357 /* AudioUnit */,
 				9EDB17B82440A272004CCCF3 /* AudioUnitModule */,
 				9E853C812444973100228BEC /* MidiEventQueue */,
@@ -496,6 +511,8 @@
 				9E523DE123FC9FB5007DEFA3 /* AUAudioUnitFactoryError.swift */,
 				9EFC94CC23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift */,
 				9EFC94CE23F55CCB00AB4DAB /* OscillatorViewController.swift */,
+				9E77E97F244CFBB500355281 /* MinimoogCompactView.swift */,
+				9EF919FB244D8B2200265458 /* MinimoogCompactView.xib */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -724,6 +741,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EF974C9233507BF00A8C25C /* Minimoog.storyboard in Resources */,
+				9EF919FC244D8B2200265458 /* MinimoogCompactView.xib in Resources */,
 				9E6734F223E8E2FF0099B342 /* Assets.xcassets in Resources */,
 				9E89EE5B23E43DBC00E98627 /* FactoryPresets.json in Resources */,
 			);
@@ -771,6 +789,7 @@
 				9E57A4B524471729006F1231 /* LfoAudioModule.swift in Sources */,
 				9E523DE223FC9FB5007DEFA3 /* AUAudioUnitFactoryError.swift in Sources */,
 				9EF974CD233512B500A8C25C /* MinimoogViewController.swift in Sources */,
+				9E77E980244CFBB500355281 /* MinimoogCompactView.swift in Sources */,
 				9E5C387023F5797E007B8CFB /* UIResponder+parentViewController.swift in Sources */,
 				9EFC94CF23F55CCB00AB4DAB /* OscillatorViewController.swift in Sources */,
 				9EFC94CD23F55C6F00AB4DAB /* ParameterTreeConfigurable.swift in Sources */,
@@ -791,6 +810,7 @@
 				9EDB17BF2440A378004CCCF3 /* Buffer.swift in Sources */,
 				9E853C7E244496CA00228BEC /* MidiEventQueue.swift in Sources */,
 				9EDB17B72440A26B004CCCF3 /* AudioUnitModule.swift in Sources */,
+				9E77E97A244B1B4100355281 /* InstruemtnVisualPresentation.swift in Sources */,
 				9EDB17BD2440A340004CCCF3 /* AudioUnitModule+connectionOperators.swift in Sources */,
 				9EDB17BA2440A295004CCCF3 /* Weak.swift in Sources */,
 				9E853C80244496E500228BEC /* MidiEventQueueManager.swift in Sources */,
